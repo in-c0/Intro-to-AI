@@ -4,6 +4,8 @@ Welcome to the **Intro-to-AI** repository! This repository is crafted for self-l
 
 The content is inspired by my personal notes and learnings from the course COMP9814: Extended Artificial Intelligence at UNSW (24T3). It assumes readers have a basic understanding of Python and mathematics at a sophomore university level, as well as a solid grasp of fundamental data structures and algorithms.
 
+⚠️ Site is currently under active development, frequent changes are expected
+
 ## Resources
 
 For a deeper understanding of the topics covered, the following textbooks are recommended:
