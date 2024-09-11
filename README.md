@@ -169,13 +169,13 @@ More recent notable events in the history of AI include:
 ### 1.2 Agents
 
 
-Types of Agents
-• Reactive Agent
-• Model-Based Agent
-• Planning Agent
-• Utility-based agent
-• Game Playing Agent
-• Learning Agent
+#### Types of Agents
+* Reactive Agent
+* Model-Based Agent
+* Planning Agent
+* Utility-based agent
+* Game Playing Agent
+* Learning Agent
 
 
 
