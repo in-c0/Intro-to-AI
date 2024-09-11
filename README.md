@@ -126,7 +126,97 @@ Frege's formal system took a huge step beyond Boolean logic by introducing the c
 
 ![image](https://github.com/user-attachments/assets/b8ff5830-17db-47c9-9c5b-c3833b40f8eb)[3]
 
+Examples of formal logic (proportional calculus):
+
+![image](https://github.com/user-attachments/assets/ccc15b01-28d7-4d5e-8691-4f8b605cd206)
+![image](https://github.com/user-attachments/assets/875f0f60-55a2-4a58-87f9-ce941fc007b0) [4]
 
 
 [2](https://en.wikipedia.org/wiki/Boolean_algebra#/media/File:Vennandornot.svg)
 [3](https://en.wikipedia.org/wiki/Logic#/media/File:First-order_logic.png)
+[4](https://www.britannica.com/topic/formal-logic/Interdefinability-of-operators)
+
+
+### 1.2 Agents
+
+
+Types of Agents
+• Reactive Agent
+• Model-Based Agent
+• Planning Agent
+• Utility-based agent
+• Game Playing Agent
+• Learning Agent
+
+
+
+**Reactive Agent:**
+"If condition, then action".
+The Reactive agent is based on the condition-action rule. It has no memory or "state". 
+
+![image](https://github.com/user-attachments/assets/fe8894d6-6833-42e3-825d-8b41389e4f8c) [1]
+
+**Model-based Agent**
+aka Model-based "reflex" agents 
+
+handle partially observable environments. Percept history and impact of action on the environment can be determined by using the internal model. It then chooses an action in the same way as reflex agent. Can look into the past, but not into the future. Therefore performs poorly at tasks that require multiple steps of reasoning.
+
+![image](https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5) [2]
+
+**Planning Agent**
+aka "Goal-based" agent (expands on the capabilities of the model-based agents)
+"What will happen if I do such and such?" "Will that make me happy?"
+
+![image](https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb) [3]
+
+**Utility-based Agent**
+(Also expands on the capabilities of the model-based agents)
+"How happy will I be in such a state?"
+Tries to maximise expected 'happiness'.
+![image](https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0)[4]
+
+**Game Playing Agent**
+( not to be confused with a General Game Playing (GGP) Agent )
+ These agents are often fine-tuned and optimized for a single game. Examples of game playing agents include:
+
+* Chess AI like Stockfish or AlphaZero (for Chess).
+* Go AI like AlphaGo.
+* Poker AI like Libratus.
+
+The diagram of Game Playing Agent would be similar to the Utility-based Agent, with an additional step of modeling the opponent and evaluating moves with the goal of winning. The focus is more on minimizing opponent advantage or maximizing its chance of winning (via adversarial search like Minimax, or alpha beta pruning).
+![chrome_LxrkTHZIFE](https://github.com/user-attachments/assets/9c1bd7e7-1fa8-46be-ba58-5ee5cfa53c61)
+
+**Learning Agent**
+
+A typical learning agent has four components:
+
+   - **Learning Element**:
+uses feedback from critic to makes adjustments for future actions. It refines its decision-making processes, often using algorithms like reinforcement learning, supervised learning, or unsupervised learning.
+   - **Performance Element**:
+a.k.a. actor, an element that takes actions; uses the current knowledge to make decisions and take actions.
+   - **Critic**:
+evaluates the performance of the agent by comparing the actual outcomes of its actions to the desired outcomes (i.e., its goals).
+The feedback from the critic helps the learning element understand which actions were successful and which need improvement.
+   - **Problem Generator**:
+creates new tasks to provide new challenges, or to gain information from new experiences.
+It generates new scenarios or tasks for the agent to tackle, encouraging the agent to explore new solutions and learn from them. This part is critical for expanding the agent’s understanding beyond routine tasks.
+
+
+![image](https://github.com/user-attachments/assets/eac69188-2c93-4144-b4d1-4502a0228aea) [5]
+
+Wikipedia and the original source of the classification ([Russel & Norvig (2003) pp.46-54](https://aima.cs.berkeley.edu/)) provides a great overview of these different types of agents.[6]
+
+
+
+**Representation and Search**
+
+The world model must be represented in a way that makes reasoning easy
+Reasoning in AI (i.e. problem solving and planning) almost always involves some kind of search among possible solutions.
+
+
+[1] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Simple_reflex_agent.png
+[2] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_reflex_agent.png
+[3] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_goal_based_agent.png
+[4] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_utility_based.png
+[5] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:IntelligentAgent-Learning.png
+[6] https://en.wikipedia.org/wiki/Intelligent_agent
