@@ -239,10 +239,94 @@ Wikipedia and the original source of the classification ([Russel & Norvig (2003)
 
 
 
+### 1.3 Knowledge Representation
+
 **Representation and Search**
 
 The world model must be represented in a way that makes reasoning easy
-Reasoning in AI (i.e. problem solving and planning) almost always involves some kind of search among possible solutions.
+Reasoning in AI (i.e. problem solving and planning) almost always involves some kind of search among possible solutions
+
+
+
+
+
+Here’s a hierarchical framework used to control a robot (soccer robot), moving from sensor data gathering (low-level) to game strategy (high-level).
+
+![image](https://github.com/user-attachments/assets/b98b869f-7f7f-4eb7-9256-5449f7f1c7a4)
+
+
+
+ Note how abstraction transforms raw numerical data into higher-level, qualitative information.
+
+![image](https://github.com/user-attachments/assets/ea756f01-e72c-436d-9dbe-ee36e18a7d02)
+
+
+
+#### 1.3.1 Feature-based vs Iconic Representations  
+
+**Iconic Representations (Low-level):**
+* Analogous to the real world
+  * Pixel representations like the first layer of ANN
+  * Maps 
+* Fast, but difficult to generalize
+* Numeric/statistical, offering a detailed representation
+* No relational information, making reasoning difficult
+* Memory-intensive
+* Suited for tasks like vision and processing sequential data
+* Difficult to perform inferences beyond pattern-response
+
+**Feature-based (Symbolic) Representations (High-level):**
+* State represented by a set of abstract features and relations
+  * Logical expressions
+  * Entity-relation graphs
+* Can do complex reasoning over **knowledge base**
+* Contains relational information, making it easier to reason about
+* Facilitates generalizations, and is memory efficient
+* Not well-suited for "low-level" tasks like perception
+
+**Knowledge Base?**
+
+A knowledge base is an explicit set of sentences about some domain expressed in a suitable **formal representation language**.
+Sentences express facts or non-facts (true or false) e.g. "Q1 revenue was $10 million."
+
+The knowledge base may use rules as a mechanism for reasoning (i.e. It is a **Rule-based** system):
+e.g. "If <...> then <...>, If a patient has a fever and a headache, then the patient can potentially benefit from malaria testing."
+
+Rules can define a network (aka "Inference" network) which shows the interdependencies among the rules.
+Inference network shows which facts can be logically combined to form new facs or conclusions. The facts can be combined using "and", "or", "not"
+**Inference**: Deriving new information or conclusions from the facts and rules, e.g. "Given a drop in sales and increased competition, product prices should be lowered to maintain market share."
+
+![image](https://github.com/user-attachments/assets/1fc3efc7-1e25-446a-9d71-220f4192e722)
+
+There are three reasoning processes to make inferences or draw conclusions from a set of premises or observations:
+ 1. **Deduction**: based on concrete facts, the process of reasoning from general principles or rules to specific conclusions. If the premises are true, the conclusion must be true.
+    "If _<rule> and <cause>_, then _<effect>_" e.g. "If _Joe Bloggs works for ACME_ and _is in a stable relationship_, then _he is happy_."
+ 3. **Abduction**: hypothesis-driven, 'flipped' version of deduction, starts with observations or facts and infer the most likely rule that could explain the observation.
+    "Given _<rule> and <effect>_, infer by abduction _<cause>_" e.g. "If _Joe Bloggs is happy_, infer by abduction _Joe Bloggs enjoys domestic bliss and professional contentment_"
+    (Scientists develop medicines using abduction)
+ 5. **Induction**: probabilistic, pattern-based, generilizing from repeated observations, but the conclusion might not always be true:
+    "If _<cause> and <effect>_ then _<rule>_" e.g. "If _every crow I have seen is blue_, _all crows are blue_"
+
+( Later in chapter 9 we will explore different ways to deal with uncertainty in rules, e.g.:
+ - **Vague rule**: Fuzzy logic, where truth values range between 0 and 1, representing the degree to which a statement is true.
+ - **Uncertain link between evidence and conclusion**: Bayesian inference, which relates the conditional probability of a hypothesis given some observed data to the likelihood of the data under that hypothesis.
+ - **Uncertain evidence**: 🤷 )
+
+**Fundamental questions:**
+- How do we write down knowledge about a domain/problem?
+- How do we automate reasoning to deduce new facts or ensure consistency of a knowledge base?
+
+
+
+#### 1.3.2 Logic  
+
+Propositional and first-order logic
+
+#### 1.3.3 Learning Rules  
+
+Oncological engineering
+
+
 
 
 [1] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Simple_reflex_agent.png
