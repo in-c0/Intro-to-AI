@@ -320,11 +320,69 @@ There are three reasoning processes to make inferences or draw conclusions from 
 
 #### 1.3.2 Logic  
 
-Propositional and first-order logic
+**Propositional Logic
+ - Letters stand for "basic" propositions
+ - Combine into more complex sentences using AND, OR, NOT, IFF, ... 
+ - e.g.
+    - P = "It rains", Q = "I will bring an umbrella"
+    - P → Q "If it rains, I will bring an umbrella."
+
+**First-order logic**
+ - An extension of Propositional Logic for a more expressive representation (including relations and ontologies)
+ - Terms: constants, variables, functions applied to terms
+    - e.g. a, f(a), motherOf(Mary), ...
+ - Atomic Formulae: predicates applied to tuples of terms
+    - e.g. likes(Mary, motherOf(Mary)), likes(x, a), ...
+ - Quantified formulae:
+    - e.g. ∀x Animal(x) → HasHeart(x), ∃x loves(x, Mary)
+      - "For all x, if x is an animal, then x has a heart"
+      - "There exists at least one person who loves Mary"
 
 #### 1.3.3 Learning Rules  
 
-Oncological engineering
+**Oncological engineering** 
+
+An **Ontology** is, in a simple term, information mapping. It is a formal representation of knowledge that describes concepts, categories, and relationships within a particular domain. 
+Like OOP, child concept is a specialisation of parent concept. Also, child inherits property of parent. 
+Ontology includes not just the hierarchy of concepts (aka Taxonomic hierarchy), but also the properties and relationships between them, enabling reasoning and inference.
+e.g. Dog is a subclass of Mammal. Thus, dogs can have diseases. Diseases can be trated by medication.
+
+
+![image](https://github.com/user-attachments/assets/4cbbeb64-ff39-48dc-8a77-910a363c8108)
+
+We can infer the type of object from its attributes, e.g.
+
+Guess what this object is:
+
+- Fruit category
+- Green and yellow mottled skin
+- 30cm diameter
+- Ovoid shape
+- Red flesh, black seeds
+  
+= Watermelon
+
+
+
+
+**Reasoning System for categories**
+
+
+Two closely related families of systems:
+
+- **Semantic networks** aka. Associative network
+   - A graph-based representation of knowledge that emphasizes the relationships between entities (concepts)
+   - Models Facts, Objects, Attributes, Relationships
+   - Its application includes Natural Language Processing (NLP), Knowledge Graphs
+
+![image](https://github.com/user-attachments/assets/cb1ad1c3-32b6-4046-a808-20f5b362cddb)
+
+
+- **Description logics**
+   - A more formal and rigorous knowledge representation system than semantic networks
+   - provides precise mathematical definitions for Facts, Objects, Attributes, Relationships
+   - e.g. defines "Parent" as "someone who has at least one child" or "a mammal is an animal with fur and gives live birth."
+   - a foundation for ontology-based systems
 
 
 
