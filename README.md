@@ -27,11 +27,10 @@ For a deeper understanding of the topics covered, the following textbooks are re
 
 ### 2. [Search](#2-search)
 - State, Action, Transition Function
-- Types of states
-- Search Space
-- 2.1 Uninformed Search  
-- 2.2 Informed Search  
-- 2.3 Informed vs Uninformed Search  
+- 2.2 Search Space
+- 2.3 Uninformed Search vs Informed Search
+- 2.4 Uninformed Search  
+- 2.5 Informed Search  
 
 ### 3. Neural Networks
 - 3.1 Neurons - Biological and Artificial  
@@ -509,15 +508,122 @@ A node is said to be Expanded* when the algorithm has examined all their neighbo
 
 **4 Types of Nodes in Uninformed Search Tree:**
 1. Root Node = Where the search begins. contains the initial state of the algorithm.
-![image](https://github.com/user-attachments/assets/32a686c4-93a9-45af-858e-25845f6b2757)
 
 2. Expanded* Nodes (Black)
-![image](https://github.com/user-attachments/assets/6fc5411e-6661-4a96-b57a-f46b99f65d9d)
 
 4. Generated Nodes (Black and Red) = Nodes that the algorithm has already visited (i.e. the algorithm has either already expanded* or is about to expand the node.) 
-![image](https://github.com/user-attachments/assets/b0426c4e-5a53-499a-a26d-655563284b11)
 
 5. Frontier (Red): Nodes that have been generated but not yet expanded*. In other words, the algorithm will explore these next by expanding them and looking at their neighbors.
 
+
+### 2.4.1 BFS
+
+BFS explores all nodes at each depth level before going deeper
+
+BFS treats the frontier as a queue
+
+It selects the first element in the queue to explore next
+If the list of paths on the frontier is [p1, p2, ..., pr]
+p1 is selected. Its children are added to the end of the queue, after pr. Then p2 is selected next.
+
+All nodes are expanded at a same depth in the tree before any nodes at the next level are expanded.
+Can be implemented by using a queue to store frontier nodes.
+
+**Example of BFS in AI:**
+
+![35765050-f46564cc-08ff-11e8-98b2-e093ba83a66e](https://github.com/user-attachments/assets/9b344547-6550-47b9-b3ce-0ec093ae1d1e)
+source: https://gist.github.com/kira924age/c14ec7424a966d1e48a9b601289907f0
+
+![Breadth-First-Tree-Traversal](https://github.com/user-attachments/assets/31603d83-42a7-40cd-af63-d83b23e5936d)
+source: https://www.codecademy.com/article/tree-traversal
+
+![image](https://github.com/user-attachments/assets/0101c080-e049-4d8f-9e76-3f2bc82c2558)
+
+**Pros:**
+- Complete (guaranteed to find a path to the solution, even if the graph is cyclic)
+- Optimal (guaranteed to find the shortest path (if the graph is unweighted or has uniform edge weight))
+
+**Cons:**
+- Exponential memory usage (has O(b^d) space complexity where b is the 'branching factor' (= number of child nodes for each node) and d is the depth of the search tree)
+
+### 2.4.2 DFS 
+
+
+![35765045-e1ef0078-08ff-11e8-91af-30ce1cc22767](https://github.com/user-attachments/assets/92bb8acd-599a-43bb-842f-292c4326a6c9)
+source: https://gist.github.com/kira924age/c14ec7424a966d1e48a9b601289907f0
+
+
+
+iterative psudocode
+![image](https://github.com/user-attachments/assets/abc56fa8-20b7-4d8c-8d25-8e400f412a69)
+
+
+recursive approach can sometimes be more efficient. depends on the tree structure.
+![image](https://github.com/user-attachments/assets/e07fb86a-6521-4859-a71f-80e0d4daa3c5)
+
+- Uses stack (Call stack if recursive)
+
+ 
+**Pros**
+- Low memory usage = more space efficient, since it only needs to store the nodes in the current path (has O(d), where d is the depth of the tree)
+
+**Cons**
+- Not optimal (Not guaranteed to find the shortest path to the goal, as it may go down very deep paths and miss shorter paths.)
+- Not complete (Not guaranteed to find a path to the goal, as it may get stuck in an infinite loop in cyclic graphs)
+
+### 2.4.3 Depth Limited Search
+
+Same as DFS, except it doesnt search beyond nodes at a set depth limit. Nodes at this depth limit are treated as if they had no successors.
+
+IDS (Iterative deepening Depth-first Search, aka IDDFS) takes this one step further; it repeats DLS with increasing depth limits until the goal is found.  If it starts with a depth limit of 1, it is essentially the same as BFS, except that it incrementally increases the limit in subsequent iterations. essentailly BFS + DFS
+
+Good explaination: https://ai-master.gitbooks.io/classic-search/content/what-is-depth-limited-search.html
+
+
+**Pros:**
+- Memory-efficient like DFS, O(d) space complexity
+- Finds the shortest path like BFS. Optimal and complete
+- Avoids the disadvantages of DFS (like getting stuck in cycles or deep branches)
+
+**Cons**:
+- Not time-efficient. It repeatedly searches the same nodes at shallow depths, leading to redundant work
+- Can be inefficient if branching factor is large
+
+In general, IDS is the preferred search strategy for a large search space with solution that has unknown depth. 
+
+
+**Bidirectional Search**
+
+ runs two simultaneous searches: one forward from the starting node and one backward from the goal node. The searches meet in the middle, reducing the search space significantly. hence both time and space complexity to O(b^(d/2))
+
+ Requires both the start and goal states to be known.
+
+
+**Uniform Cost Search**
+
+Similar to BFS, but orders nodes by cost -> useful for weighted graph
+
+ Uses a priority queue to expand the lowest-cost node first
+
+  
+
+### 2.5 Informed Search
+
+Heuristics
+Greedy Search
+A* search
+
+Finding Heuristic function
+Dominance
+
+
+### 2.6 Solving Problems using Search
+
+Exercise -
+1. Define the states, actions and transition function
+2. Convert above definition into a machine readable format
+3. Choose a search strategy, considering the context & problem
+   
+ (give ~5 problems .. what did you choose? why?)
 
 
