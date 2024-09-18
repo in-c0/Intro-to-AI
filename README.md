@@ -25,7 +25,10 @@ For a deeper understanding of the topics covered, the following textbooks are re
   - 1.3.2 Logic  
   - 1.3.3 Learning Rules  
 
-### 2. Search
+### 2. [Search](#2-search)
+- State, Action, Transition Function
+- Types of states
+- Search Space
 - 2.1 Uninformed Search  
 - 2.2 Informed Search  
 - 2.3 Informed vs Uninformed Search  
@@ -93,7 +96,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 
 
-## 1. Introduction
+## 1. [Introduction](#1-introduction)
 Artificial intelligence is, well, intelligence that is **artificial**. Artificial just means it is machine-based. But what does *Integllience* mean? We throw the word around, but defining it is surprisingly tricky.
 
 Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?Humans are intelligent because we can navigate a complex world, learn from experience, solve problems, create art, etc. We've seen machines could do this too at least to some extent. (Some may argue that it's merely "copying" the original works of humans, but let's put that discussion aside for now). 
@@ -393,3 +396,128 @@ Two closely related families of systems:
 [4] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_utility_based.png
 [5] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:IntelligentAgent-Learning.png
 [6] https://en.wikipedia.org/wiki/Intelligent_agent
+
+
+(Add Mountain Car problem, Sudoku, simple webGL based simulation to test viewer's understanding of KRR)
+
+
+---
+
+## 2 [Search](#2-search)
+
+You will learn:
+- the theory behind search in AI
+- to develop a smart agent with search capability to solve interesting problem
+
+
+
+
+A problem can be described by
+- State
+- Action
+- Transition Function
+
+State: variable, e.g. position on the grid, (x,y)
+Action: function, e.g. "move up" "move down"
+Transition Function: The function that determines how the action changes the state. T(s,a) = s'
+(where s is state, a is action, s' is the new state) This is deterministic transition function, where next state is predictable.
+If the next state is probabilistic, use Stochastic transition function:
+ T(s,a,s') = P(s'|s,a)
+(where P(s'|s,a) is the probability of transitioning to new state s', given state and action)
+
+
+Types of states:
+- Initial state
+- Goal state
+- Terminal state
+- Intermediate state
+- Deadend state
+
+
+State space
+= set of all possible states a system can be in
+
+e.g. Chess
+**State**: The configuration of the chessboard at any given time, including the positions of all pieces.
+**State Space**: All the possible ways the chessboard can be arranged, which is finite but very large (approximately 10^43 possible positions)
+
+State space could be infinite, e.g. robot navigation:
+**State**: position (x, y) and direction the robot could occupy,
+**State Space**:  finite (if the space is discretized) or infinite (if the space is continuous)
+
+
+(Assuming Graph Theory knowledge)
+State space can be represented as a graph
+
+Node = State
+Edge = Action
+
+(0,0) --move right--> (1,0) --move right--> (2,0)
+   |                      |                       |
+ move down            move down          move down
+   |                      |                       |
+(0,1) --move right--> (1,1) --move right--> (2,1)
+   |                      |                       |
+ move down            move down          move down
+   |                      |                       |
+(0,2) --move right--> (1,2) --move right--> (2,2)
+
+If the environment is deterministic, each action leads to one specific new state, corresponding to one edge between two nodes. 
+In a stochastic environment, edges could represent probabilistic transitions.
+
+move up (0.7)
+   (0,0)
+     | 
+   (0,1) ------> (1,1) move right (0.15)
+     |
+   (0,2) 
+move down (0.15)
+
+70% chance the robot moves up 
+15% chance the robot moves right
+15% chance the robot moves down
+
+In some cases, the graph edges are weighted, meaning each edge has a cost or value associated with the transition between two states. 
+The weights can represent things like the cost of an action (time, energy, or distance)
+The goal is often to find the path from the initial state to the goal state that minimizes this cost. (Shortest path search, e.g. Dijkstra's algorithm or A* search) Covered more later
+
+## 2.3 Uninformed vs Informed Search
+
+Uninformed = No info about which path to explore next. No clue how to get to the goal state faster
+Example:
+Breadth-First Search (BFS): Explores all possible nodes at the present depth level before moving deeper into the search tree.
+Depth-First Search (DFS): Explores as far down a path as possible before backtracking to explore other paths.
+
+
+Uninformed means "No heuristic knowledge"
+A "heuristic" is a function that estimates how close a given state is to the goal, helping the algorithm prioritize which paths to explore.
+More on that later.
+
+Informed search uses domain-specific knowledge and heuristics to determine which options to explore next often leading to faster solutions.
+Example:
+A* search, Greedy Best-First Search
+
+
+## 2.4 Uninformed Search
+
+Tree is often used to represent Uninformed Search algorithms, since we dont have to worry about revisiting nodes (since there are no cycles).
+
+
+![image](https://github.com/user-attachments/assets/519e3fc9-0139-4211-8967-2d9ebf454f19)
+
+A node is said to be Expanded* when the algorithm has examined all their neighboring nodes and added them to the search space.
+
+**4 Types of Nodes in Uninformed Search Tree:**
+1. Root Node = Where the search begins. contains the initial state of the algorithm.
+![image](https://github.com/user-attachments/assets/32a686c4-93a9-45af-858e-25845f6b2757)
+
+2. Expanded* Nodes (Black)
+![image](https://github.com/user-attachments/assets/6fc5411e-6661-4a96-b57a-f46b99f65d9d)
+
+4. Generated Nodes (Black and Red) = Nodes that the algorithm has already visited (i.e. the algorithm has either already expanded* or is about to expand the node.) 
+![image](https://github.com/user-attachments/assets/b0426c4e-5a53-499a-a26d-655563284b11)
+
+5. Frontier (Red): Nodes that have been generated but not yet expanded*. In other words, the algorithm will explore these next by expanding them and looking at their neighbors.
+
+
+
