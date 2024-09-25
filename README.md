@@ -627,3 +627,227 @@ Exercise -
  (give ~5 problems .. what did you choose? why?)
 
 
+
+
+## 3. Artificial Neural Networks
+
+Humans can perform complex tasks: Shape recognition, Speech processing, Image processing ... 
+To emulate these behaviours, a branch of artifficial intelligence formed inspired by [neural circuitry](https://en.wikipedia.org/wiki/Neural_circuit):
+[**ANN (ARtificial Neural Networks)**](https://developer.nvidia.com/discover/artificial-neural-network)
+
+**High Connectivity**
+ANNs are composed of layers of nodes (neurons). Each node in one layer connects to nodes in the next layer, forming a network, where it learns patterns from the relationships and make prediction. 
+
+**Parallelism**
+Neurons process multiple tasks simultaneously rather than sequentially
+![KY2I87](https://github.com/user-attachments/assets/13c40609-a1dd-4043-af65-aa20f2219453)
+
+
+ANN:
+- excels at Pattern recognition and Forecasting
+- uses a newer, non-algorithmic paradigm to process information through learning, adaptation, and parallel processing
+- is essentially a black box; you can observe the inputs and outputs transformed through multiple layers, but the inner workings are unknown
+
+![image](https://github.com/user-attachments/assets/ad86256f-31e1-4479-87cc-2c429eacd291)
+(image source: https://developer.nvidia.com/discover/artificial-neural-network)
+
+
+
+**How does ANN learn?**
+- uses **Generalization** to perform well on unseen data that has not been encountered before
+- uses **Function Approximation** to estimate a function that maps intputs to outputs based on a set of observed data points.
+  The aim is to find a function that closely represents the relationship between the input features and output targets.
+  Even if the exact function is unknown.
+
+
+
+**Function Approximation**
+ can either be:
+  - used on an entity (=a set of input variables, either continuous or discrete) to output discrete values that represents which class the entity belongs to (=membership) -> **Classification**  (e.g. character recognition, cats vs dogs from image)
+  - used to predict continuous outcomes based on input variables. -> **Regression** (e.g. predicting the house price based on location, number of bedrooms, etc)
+
+
+### 3.1  Biological Neurons vs Artificial Neurons
+The brain is made up of [neurons (nerve cells)](https://en.wikipedia.org/wiki/Neuron) which have
+• a cell body (soma)
+• dendrites (inputs)
+• an axon (outputs)
+• synapses (connections between cells)
+
+![image](https://github.com/user-attachments/assets/5a27c3e2-5319-4f66-8569-4e98e90e7a17)
+(Image: [Alan Woodruff ; De Roo et al / CC BY-SA 3.0 via Commons](https://qbi.uq.edu.au/brain/brain-anatomy/what-neuron))
+
+(Kinda looks similar to a tree; it receives energy through its leaves (dendrites, inputs), the energy goes through the body (soma), and reaches the root (axon, outputs). The axon is connected to other neurons and transfers electrical signals to them through synapse. When the inputs reach some threshold, an action potential (electrical pulse) is sent along the axon to the outputs.
+This threshhold may change over time, depending on how **excitatory** (promoting the firing) or **inhibitory** (reducing the likelihood of firing) the synapse is.
+
+We call this **synaptic plasticity**, which is crucial for learning and memory.
+The strength of a connection between two neurons is called **synaptic weight**; it corresponds to how much influence the firing of a neuron has on another.
+
+
+The synaptic weight is changed by using a learning rule, the most basic of which is Hebb's rule, which is usually stated in biological terms as
+```
+ Neurons that fire together, wire together.
+```
+**Hebbian learning (1949)**
+"When a neuron A persistently activates another nearby neuron B, the connection between the two neurons becomes stronger. Specifically, a growth process occurs that increases how effective neuron A is in activating neuron B. As a result, the connection between those two neurons is strengthened over time"
+
+
+More reading: https://en.wikipedia.org/wiki/Synaptic_weight
+
+**Artificial Neurons** 
+
+The first computational model of a neuron() was proposed by Warren MuCulloch (neuroscientist) and Walter Pitts (logician) in 1943.
+
+
+More reading: https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1
+
+It has 4 components:
+- Inputs
+- Weights
+- Transfer Function
+- Activation Function
+
+![image](https://github.com/user-attachments/assets/187c34da-d4a8-47e1-8843-aa1e842329a9)
+(Image: https://en.wikipedia.org/wiki/Artificial_neuron)
+
+vs.
+
+![image](https://github.com/user-attachments/assets/0dd12d34-d844-4bdc-9e20-7c13c1fb5263)
+Image source: https://en.wikipedia.org/wiki/File:Neuron3.svg
+
+The inputs, after being multiplied by their respective **weights**, which reflect the importance or influence of that input to the node, are summed and then passed through an activation function to produce the final activation level.
+
+The activation function has a **threshhold** to determine whether the neuron has fired or not. ( 0 or 1 activation value )
+
+
+![image](https://github.com/user-attachments/assets/b328bc3d-005c-447b-a8bd-0cf9aeca87ac)
+
+- x_i  = input values
+- w_ij = weights corrresponding to the inputs
+- g(s_j) = the activation function applied to the weighted sum
+
+![image](https://github.com/user-attachments/assets/76b45693-b9da-4e49-84fd-119c69b7be1f)
+
+Activation Functions:
+- Sign (Step) function
+- Semi-linear (piecewise linear) function  
+- Sigmoid: Smooth and non-linear
+
+
+![image](https://github.com/user-attachments/assets/d46c4613-dc64-4e40-b5c3-11b66375b37c)
+
+Examples of Non-linear Activation Functions:
+- Sigmoid
+- ReLU (Rectified Linear Unit)
+-  Tanh (Hyperbolic Tangent)
+
+Non-linear functions enable the network to stack multiple layers and allow each layer to capture increasingly abstract and complex features from the data
+
+
+The activation level is the result of the node's internal computation, which is usually a non-linear function of the inputs. 
+
+Some limitations of MP artificial neuron:
+(1) it only works with binary inputs and outputs; not with real numbers
+(2) it does not evolve or learn.  its functionality is limited to problems that can be derived by the modeler
+
+More reading: https://jontysinai.github.io/jekyll/update/2017/09/24/the-mcp-neuron.html
+https://com-cog-book.github.io/com-cog-book/features/mp-artificial-neuron.html
+
+
+### 3.2 Single Layer Perceptron
+
+
+Frank Rosenblatt, an American psychologist, proposed the classical **Perception** model in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.
+
+Early ideas on how information is stored and processed in artificial intelligence and cognitive science was divided into two approaches: **coded representations** and **connectionist approaches**. Let's say you perceived a triangle, then, the former states that a triangle-shaped image would be "carved" in the memory space. Once the shape is carved, you would be able to precisely retrieve the information stored in a particular location in the brain. 
+
+The latter states that memories are stored as preferences for a particular "response" rather than "topographic representations". Instead of a unique cluster of neurons wired in an invariant manner, that "code" the memory of a triangle, what we have instead is a series of associations among a set of neurons that "tend to react" to the stimulus that may remind you of a trinagle.
+
+
+Rosenblatt took elements from the works of Hebb and summarized the nature of the cognition as the problems of (1) detection, (2) storage, and (3) the effect of the stored information.
+```
+1. The physical connections participating in learning and recognizing a stimulus can vary from organism to organism.
+2. The cells involved in learning and recognition are flexible, meaning that the probability of activation, when exposed to a stimulus, can change over time.
+3. Similar stimuli will tend to trigger similar response patterns in the brain.
+4. When memory is forming, the application of a positive and/or a negative reinforcement may facilitate or hinder the process.
+5. Similarity is not determined by the perceptual properties of the stimuli, but by a combination of the perceiving system, the stimuli, the context, and the history of interactions between those elements. This last principle indicates that you can't decouple perception and representation from the perceiving system (the organism itself).
+```
+
+
+**Perceptron** is an algorithm used to classify inputs into one of two possible categories.
+
+The perceptron makes the classification decision by applying its discriminant function to the input. 
+This function is typically linear and divides the input space into two regions, one for each class.
+
+The perceptron draws a hyperplane in the input space. Any input that falls on one side of the hyperplane is classified as one class, and inputs on the other side are classified as the other class.
+
+![image](https://github.com/user-attachments/assets/b48fe94d-1f06-4462-aae9-1bd06e3fe4c2)
+
+
+![image](https://github.com/user-attachments/assets/bddf10c1-ffea-489e-a297-f12032fe5e42)
+
+The perceptron is able to solve only linearly separable functions,  (or hyperplane in higher dimensions)
+
+e.g. 
+AND Gate
+![image](https://github.com/user-attachments/assets/23db5e67-addd-4f64-a051-2d94a05d5de5)
+
+(0, 0) → 0
+(0, 1) → 0
+(1, 0) → 0
+(1, 1) → 1
+
+When plotted, only the point (1,1) is activated.
+Can be divided into two classes by a single straight line (linear decision boundary)
+
+XOR Gate
+
+![image](https://github.com/user-attachments/assets/a8055a9b-bccd-4c3c-92e3-64941b22257a)
+
+(0, 0) → 0
+(0, 1) → 1
+(1, 0) → 1
+(1, 1) → 0
+
+When plotted, the points (0,1) and (1,0) are situated diagonally opposite.
+= Cannot be divided into two classes by a single straight line (linear decision boundary)
+= the XOR gate is non-linearly separable: it needs something more than just a single line to classify the points correctly.
+
+
+**Learning Rule**
+
+A learning rule is a set of instructions that governs how a model's weights are adjusted during the training process to improve its performance.
+The goal is to minimize errors in its predictions by modifying its internal parameters (weights) based on the input data and corresponding outputs (labels).
+
+If the perceptron makes a correct prediction, the weights remain the same.
+If the perceptron underpredicts (i.e., it predicts -1, but the correct label is 1), the weights are increased.
+If the perceptron overpredicts (i.e., it predicts 1, but the correct label is -1), the weights are decreased.
+
+This process is repeated until the perceptron can correctly classify all training examples (or until it hits the max attempt)
+
+![image](https://github.com/user-attachments/assets/12234fd3-d1ee-43e4-83fd-8ebbbbc82d7f)
+
+
+
+### 3.3 Multilayer Perceptron (MLP)
+
+While the single-layer perceptron is simple and efficient for binary classification, it can only separate linearly separable data. 
+To solve non-linearly separable data such as XOR, you need a multi-layer perceptron (MLP)
+
+MLP (Multi-Layer Perceptron) consists of multiple layers of neurons organized in such a way that it can model complex relationships. 
+It is one of the foundational architectures in deep learning and machine learning.
+
+MLP is a **Feedforward** network:
+- Data flows through the network in one direction, from the input layer to the hidden layers and finally to the output layer. (No feedback loops or backward connection)
+- Each neuron in a layer is connected to every neuron in the next layer (this is called a fully connected layer).
+- At each neuron, the input is multiplied by weights, summed up, and passed through an activation function (e.g., sigmoid, ReLU).
+
+MLP neural network architecture
+![image](https://github.com/user-attachments/assets/65e7fbf1-0070-4ae5-ab9a-629e8d73281e)
+
+
+### 3.4 Neural Network Design
+
+### Neural Network Architectures
+
+
