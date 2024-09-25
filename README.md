@@ -843,11 +843,46 @@ MLP is a **Feedforward** network:
 - At each neuron, the input is multiplied by weights, summed up, and passed through an activation function (e.g., sigmoid, ReLU).
 
 MLP neural network architecture
-![image](https://github.com/user-attachments/assets/65e7fbf1-0070-4ae5-ab9a-629e8d73281e)
+
+![image](https://github.com/user-attachments/assets/d1bac3c3-4286-4562-99dd-d7d23328675b)
+
+
+**Backpropagation**
+If there is an error between the actual output and the target, we calculate the error (difference between the target and actual output) and propagate errors back through the network to update the weights.
+
+![image](https://github.com/user-attachments/assets/4a86d578-86cd-43df-b4bf-203be18c0536)
+
+
+Backpropagation is typically paired with **gradient descent** (or its variants, such as stochastic gradient descent) to minimize the loss function by adjusting the weights in the direction that reduces the error.
+
+![image](https://github.com/user-attachments/assets/480c03e8-8149-4bb8-a365-85bc0f5faa7c)
+
+**Error function (Loss function)**
+-> measures how well or poorly the neural network is performing
+![image](https://github.com/user-attachments/assets/d411e107-2580-4ae4-9264-4a9e83bbebaa)
+
+
+**Gradient descent**
+-> aims to minimize the error function by adjusting the weights
+![image](https://github.com/user-attachments/assets/356b24c5-a999-4329-8a5d-d2503452a018)
+
+
+**Backpropagation Diagram**
+![image](https://github.com/user-attachments/assets/4755d9fa-0141-43e5-b21c-6b0c4d035cb1)
+
+The error (E(t)) is computed as the difference between the predicted output Y(t) and the target value.
+The error is then propagated backward through the network, and gradients are calculated for each weight.
+The weights (W_o, W_i) are updated using gradient descent to reduce the error based on the computed gradients.
+
+![image](https://github.com/user-attachments/assets/ded640c1-17b2-41b9-a037-671c27ba339a)
+
+![image](https://github.com/user-attachments/assets/c6430ad2-afec-4e61-91d0-88c6d14fda5a)
+
+
 
 
 ### 3.4 Neural Network Design
 
-### Neural Network Architectures
+### 3.5 Neural Network Architectures
 
 
