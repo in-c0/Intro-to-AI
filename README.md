@@ -878,11 +878,169 @@ The weights (W_o, W_i) are updated using gradient descent to reduce the error ba
 
 ![image](https://github.com/user-attachments/assets/c6430ad2-afec-4e61-91d0-88c6d14fda5a)
 
+More reading: https://en.wikipedia.org/wiki/Multilayer_perceptron
 
+https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 
 
 ### 3.4 Neural Network Design
 
-### 3.5 Neural Network Architectures
+## Step 1: Exhaustive System Analysis
+
+Before choosing a neural network, you should consider other traditional models (e.g. phenomelogical models) that might be more appropriate for the problem. Neural networks are powerful but also more complex, resource-intensive, and data-hungry. Simpler models may be easier to work with and could perform just as well depending on the problem.
+
+Phenomenological Models: models based on domain-specific knowledge and physical laws, often used in scientific and engineering fields. e.g In physics, models based on Newton's laws to describe motion, or in biology, models to describe population growth.
+
+Neural networks are powerful and flexible but should be considered a "second best solution" when classic models cannot perform well. It's a good idea to try simpler models first to save time and resource.
+Many traditional models work well even with small datasets. Neural networks, on the other hand, perform better as the amount of data increases, while simpler models may struggle to scale. 
+
+The **preprocessing** step in the development of a neural network or any machine learning model, involves identifying the most relevant features (input variables) and ensuring that unnecessary variables are removed. 
+The output should also be clearly defined so that the neural network can be properly structured to predict the desired outcome.
+- In classification tasks, the output might be a category or label (e.g., is the email spam or not?)
+- In regression tasks, the output might be a continuous value (e.g., the position of Y over period X)
+
+**Example:**
+Let’s say you’re building a neural network to predict whether a person will buy a product based on the following features:
+
+Age
+Gender
+Income
+City
+Favorite Color
+Education Level
+Number of Children
+Marital Status
+Temperature on the day of purchase
+
+In this scenario:
+
+Step 1 would involve identifying which variables (inputs) are truly important. For example, "Favorite Color" and "Temperature" might not be very important or relevant in predicting whether someone will buy a product, so you could remove those variables. You could also find that "Income" and "Education Level" are highly correlated, so you might only keep one of them in the model. The goal is to simplify the model by only keeping the most important features that are directly related to the prediction task.
+
+### Step 2: Preprocessing
+
+When designing and training a neural network:
+- Ensure that your data is representative of the problem you’re trying to solve
+- Obtain high quality data, e.g. properly designed survey/experimental plan
+- Make sure you have enough data to train the network
+- Visualise and examine the data to eliminate any outliers, null values, and redundant variables (if two variables are highly correlated, it might indicate redundancy)
+  
+ Neural networks are **empirical** model (i.e. learns from experience and observation rather than logic) for **interpolation**, not **extrapolation**— meaning it is not suitable for making predictions outside the range of the data they were trained on. For example, if a neural network is trained on data within a certain range (e.g., temperatures between 50°F and 100°F), it may perform poorly if asked to predict temperatures outside that range (e.g., 120°F).
+
+ **Normalization** of input variables on different scales or in different units is essential. 
+ Example normalization of variables so that they lie within a similar range (e.g., [0, 1] or [-1, 1]):
+ ![image](https://github.com/user-attachments/assets/731753db-36b9-476a-8c57-5aceb12ffb0e)
+
+ 
+### Step 3: Neural Model Design
+
+The number of input neurons and output neurons depends on the results from Steps 1 and 2. 
+But deciding on the number of neurons in the hidden layer (Nh) is not straightforward and often requires experimentation or following certain heuristics.
+Adding too many neurons can lead to overfitting (the model memorizes the training data rather than learning general patterns)
+
+The rule of thumb is to carefully choose Nh to keep the number of parameters/weights (Nw) below 10% of the total number of samples in the training dataset.
+```
+Nw < (Number of samples) / 10
+```
+This rule helps ensure that the model has enough training data relative to its complexity (number of parameters) to learn general patterns rather than overfitting.
+
+Formula for the number of parameters (weights) for an MLP:
+![image](https://github.com/user-attachments/assets/5cceb768-8f86-48ae-8085-ccd61ba95fcc)
+
+e.g. Let's say it is a binary classification problem, and you have 1000 samples in your dataset,
+
+you have 5 input neurons, [ 10 ] neurons in the hidden layer, 2 output neurons,
+Then the total number of weights Nw in the network would be: (5+1)*10 + (10+1)*2 = 82, which is smaller than the 10% of the samples (100), which makes it an adequate size relative to the dataset. 
 
 
+[Universal Approximation Theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem) states that an MLP with one hidden layer and a sufficient number of neurons can approximate any non-linear function to any desired degree of accuracy, though in practice, deeper networks are often preferred for better performance.
+
+ReLU and Sigmoid functions are commonly used in hidden layers to introduce non-linearity and allow the network to learn complex patterns.
+In the output layer, the choice of activation function depends on the task:
+- Linear activation for regression tasks
+- Sigmoid for binary classification
+- Softmax for multi-class classification
+
+
+### Step 4: Training
+
+The process of training involves finding the set of weights that minimize the loss function (=the error function that represents how far off the model’s predictions are from the actual values).
+However, this process can be difficult due to the complexity of the error function's landscape (solution space).
+
+The error function solution space is often highly complex, meaning it can have many:
+**Local minima**: Points where the error is lower than the surrounding points but is not the global minimum (the true lowest point in the solution space). Gradient descent may get stuck in these local minima.
+**Saddle points** (minimax points): Points where the gradient is zero, but they are neither a maximum nor a minimum. These points can slow down training since the model might get stuck in flat areas of the solution space.
+
+Local minima are points in the error (or loss) function where the gradient (slope) is zero, but they are not the global minimum (the best possible solution). During training, neural networks use optimization techniques like gradient descent to minimize the error function, but the error surface is often very complex with many local minima. Due to this complexity, depending on the starting point (initial weights), the network might settle into a local minimum instead of the global minimum, resulting in a suboptimal solution.
+
+**Solution**: To increase the chance of finding the global minimum, run the training processes multiple times (20+) with different random initial weights. 
+
+• **Bias**
+= the error introduced by assuming that the underlying relationship between the inputs (features) and outputs (target) is simpler than it actually is, aka the model "underfitting" the data
+![image](https://github.com/user-attachments/assets/939bb0a5-7374-4362-b395-907ddd3225c3)
+
+On the other hand, we can also overdo the training and induce:
+• Overparameterization (High variance)
+• Overfitting (High variance)
+
+where the model learns from too much noise and specific details around the underlying patterns.
+
+**High variance** (of the model'sperformance depending on the dataset, i.e. performs well on the training set but poorly on new, unseen set), aka "overfitting"
+![image](https://github.com/user-attachments/assets/700a8836-183d-4b78-8530-f059eccaf5bd)
+
+#### Data Splitting 
+
+To avoid overfitting, we use two sets for training: the **Training Set** and **Test Set** (plus optional **Validation Set**) 
+
+**Training Set**
+=> the model tries to fit the training data as closely as possible. (i.e. the model computes and minimizes the error function based on the training set)
+
+**Test Set**
+=> the model cannot see the test set during training. It is used to evaluate the model's performance after training, as a a simulated real-world check using unseen data
+
+A common practice is to split the data into 80% training set and 20% test set. This allows the model to learn from a majority of the data while still having enough data to evaluate its performance.
+
+**Simultaneously visualizing the error function** on both the training set and test set is a useful practice to understand how well your model is performing over time.
+
+You can plot the training error and test error as a function of the training iterations. This allows you to observe patterns such as:
+- If the training error continues to decrease but the test error starts increasing, the model is likely overfitting. This is because it is memorizing the training data while failing to generalize to the unseen test data.
+- If both the training and test errors decrease and converge, the model is learning well and generalizing appropriately
+
+![image](https://github.com/user-attachments/assets/7a5642e6-c920-4412-bb72-03d9db7810c5)
+
+As training progresses, (as the number of **epochs** increases = the number of iterations of all the training data in one cycle for training the model increases)
+you can monitor both training and test errors and stop the training process once you reach the minimum test error. This is called early stopping and is a common technique to prevent overfitting.
+
+You can determine the optimal number of epochs as the point at which the test error curve (dotted line) is at its minimum (i.e., right where the graph marks "Minimum test error").
+
+Both the training and test sets should be large enough to be statistically representative of the entire dataset.
+
+More reading: https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets
+
+#### Cross-Validation
+
+A more advanced technique is **k-fold** cross-validation, where the dataset is divided into k subsets. The model is trained k times, each time using a different subset as the test set and the remaining k−1 subsets as the training set. 
+The results can be averaged to produce a more reliable estimate of the model's performance.
+Or, sometimes, different neural network models are developed using the available data, splitting the training and test sets in different ways. The model that achieves the minimum error on the test set is chosen.
+
+
+### Step 5: Generalisation
+
+To test the generalisation capability of the network, that is, its performance on a different (never seen) set of data, a small (but representative) third set might be reserved, the generalisation set
+
+## 3.5 Neural Network Architectures
+
+FNN: [Feed-forward network](https://en.wikipedia.org/wiki/Feedforward_neural_network)
+-  connections between the nodes do not form cycles/loops
+-  single-direction
+-  fully connected (every node receives input from upstream nodes and delivers output to downstream nodes) = makes it prone to overfitting
+-  no feedback
+
+RNN: [Recurrent network](https://en.wikipedia.org/wiki/Recurrent_neural_network)
+-  feeds outputs back into its own inputs
+-  may react a stable state, or exhibit oscilations or even chaotic behaviour
+-  can support short-term memory
+
+CNN: [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network)
+- deep learning network (de-facto standard for computer vision and image processing)
+- inspired by animal visual cortex
+- regularized FNN to prevent overfitting
