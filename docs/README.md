@@ -1,6 +1,5 @@
-# Intro-to-AI
+# Introduction to Artificial Intelligence
 
-Welcome to the **Intro-to-AI** repository! This repository is crafted for self-learners who want to develop a solid foundation in Artificial Intelligence (AI). It covers a wide array of essential AI topics including neural networks, reinforcement learning, computer vision, and natural language processing.
 
 The content is inspired by my personal notes and learnings from the course COMP9814: Extended Artificial Intelligence at UNSW (24T3). It assumes readers have a basic understanding of Python and mathematics at a sophomore university level, as well as a solid grasp of fundamental data structures and algorithms.
 
@@ -16,6 +15,7 @@ For a deeper understanding of the topics covered, the following textbooks are re
 * Jurafsky, D. & Martin, J. H. [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/). Stanford, 2023.
 
 ## Content Structure
+<a id="top"></a>
 
 ### 1. [Introduction](#1-introduction)
 - 1.1 [History of AI](#11-history-of-ai)
@@ -32,13 +32,13 @@ For a deeper understanding of the topics covered, the following textbooks are re
 - 2.4 [Uninformed Search](#24-uninformed-search)
   - 2.4.1 [Breadth-First Search (BFS)](#241-breadth-first-search-bfs)
   - 2.4.2 [Depth-First Search (DFS)](#242-depth-first-search-dfs)
-  - 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search--iterative-deepening)
+  - 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search-iterative-deepening)
 - 2.5 [Informed Search](#25-informed-search)
 - 2.6 [Solving Problems Using Search](#26-solving-problems-using-search)
 
 
 ### 3. [Artificial Neural Networks](#3-artificial-neural-networks)
-- 3.1 [Neurons - Biological and Artificial](#31-neurons---biological-and-artificial)  
+- 3.1 [Neurons - Biological and Artificial](#31-neurons-biological-and-artificial)  
 - 3.2 [Single-layer Perceptron](#32-single-layer-perceptron)  
 - 3.3 [Multilayer Perceptron (MLP)](#33-multilayer-perceptron-mlp)  
 - 3.4 [Neural Network Design](#34-neural-network-design)  
@@ -100,20 +100,20 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 
 ## 1. [Introduction](#1-introduction)
-Artificial intelligence is, well, intelligence that is **artificial**. Artificial just means it is machine-based. But what does *Integllience* mean? We throw the word around, but defining it is surprisingly tricky.
 
-Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?Humans are intelligent because we can navigate a complex world, learn from experience, solve problems, create art, etc. We've seen machines could do this too at least to some extent. (Some may argue that it's merely "copying" the original works of humans, but let's put that discussion aside for now). 
+Artificial intelligence is, well, intelligence that is artificial. Artificial just means it is machine-based. But what does *Integllience* mean? We throw the word around, but defining it is surprisingly tricky. Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?
+
+Humans are intelligent because we can navigate a complex world, learn from experience, solve problems, create art, etc. We've seen machines could do this too at least to some extent. (Some may argue that it's merely "copying" the original works of humans, but let's put that discussion aside for now). 
 Take for instance, a chess AI, which is a "narrow" AI — it’s designed to do one thing, but do it really well. But is it truly intelligent? That machine doesn’t actually “understand” what it’s doing—at least not in the way humans do—but it’s performing tasks we’d consider intelligent.
 
-A good umbrella definition of the term Intellgence might be:
- "the ability to perceive or infer information, and to retain it as knowledge to be applied towards adaptive behaviours within an environment or context"
-... or to put it simply,
- "the ability to take in information, process it, and then make decisions based on it."
+ Here is a good umbrella definition (still abstract, but it suggests a direction):
+  > Intelligence is the ability to perceive information, and to retain it as knowledge to be applied towards adaptive behaviours within an environment or context.
 
-In fact, AI isn't just a product of modern times. The history of AI goes back thousands of years—long before computers or even electricity.
+ So how did we even begin to come up with the concept of artificial intelligence? In fact, it goes back thousands of years—long before computers or even electricity.
 
 ### 1.1 [History of AI](#11-history-of-ai)
- Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.
+
+  Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.
 
 > I think, therefore I am
 > – René Descartes
@@ -176,71 +176,107 @@ More recent notable events in the history of AI include:
 
 ### 1.2 [Agents](#12-agents)
 
+ Agents in AI are entities that perceive their environment and act upon it, aiming to achieve specific goals. Different types of agents vary in complexity, decision-making abilities, and adaptability. 
+
 #### Types of Agents
-* Reactive Agent
-* Model-Based Agent
-* Planning Agent
-* Utility-based agent
-* Game Playing Agent
-* Learning Agent
+* [Reactive Agent](#reactive-agents)
+* [Model-Based Agent](#model-based-agent)
+* [Planning Agent](#planning-agent)
+* [Utility-based agent](#utility-based-agent)
+* [Game Playing Agent](#game-playing-agent)
+* [Learning Agent](#learning-agent)
 
 
 
-**Reactive Agent:**
-"If condition, then action".
-The Reactive agent is based on the condition-action rule. It has no memory or "state". 
+##### [Reactive Agents](#reactive-agents)
 
-![image](https://github.com/user-attachments/assets/fe8894d6-6833-42e3-825d-8b41389e4f8c) [1]
+At the most basic level, we have the Reactive Agent, a simple yet effective problem-solver. Think of it as the AI version of a reflex action: "If this condition is met, perform this action." There’s no deliberation, no contemplation of past actions or future consequences—just action based on the current environment.
 
-**Model-based Agent**
-aka Model-based "reflex" agents 
+For instance, imagine a thermostat that turns on the air conditioning when the temperature hits 75°F. It doesn't remember what happened yesterday or predict the weather tomorrow—it reacts purely to the present moment.
 
-handle partially observable environments. Percept history and impact of action on the environment can be determined by using the internal model. It then chooses an action in the same way as reflex agent. Can look into the past, but not into the future. Therefore performs poorly at tasks that require multiple steps of reasoning.
+While this simplicity is useful in fast, real-time systems, reactive agents are limited. Without memory or state, they can’t learn or improve over time. They can only react.
 
-![image](https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5) [2]
 
-**Planning Agent**
-aka "Goal-based" agent (expands on the capabilities of the model-based agents)
-"What will happen if I do such and such?" "Will that make me happy?"
+> "If condition, then action".
 
-![image](https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb) [3]
+It is simply following the rule, without memory or state.
 
-**Utility-based Agent**
-(Also expands on the capabilities of the model-based agents)
-"How happy will I be in such a state?"
-Tries to maximise expected 'happiness'.
-![image](https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0)[4]
+![image](https://github.com/user-attachments/assets/fe8894d6-6833-42e3-825d-8b41389e4f8c)
 
-**Game Playing Agent**
-( not to be confused with a General Game Playing (GGP) Agent )
- These agents are often fine-tuned and optimized for a single game. Examples of game playing agents include:
+ 
 
-* Chess AI like Stockfish or AlphaZero (for Chess).
-* Go AI like AlphaGo.
-* Poker AI like Libratus.
+##### [Model-based Agent](#model-based-agent) or Model-based "Reflex" Agent 
 
-The diagram of Game Playing Agent would be similar to the Utility-based Agent, with an additional step of modeling the opponent and evaluating moves with the goal of winning. The focus is more on minimizing opponent advantage or maximizing its chance of winning (via adversarial search like Minimax, or alpha beta pruning).
+
+Now, let’s add a layer of sophistication. Unlike the reactive agent, this type of agent has an internal **model** of the world, allowing it to handle *partially* observable environments. It takes into account not just the current input, but also a history of past actions and their outcomes, allowing for a more informed decision-making process.
+
+Consider a robot navigating a maze. It doesn’t just rely on what it currently sees but remembers where it has already been. This memory helps it avoid dead ends and make smarter choices moving forward. However, despite this extra capability, model-based agents are still "reflex" agents in a sense—they *respond* based on the past but does not have any capability to predict the future based on learning. Tasks requiring multiple steps of reasoning can stump them.
+
+> "If condition, then action. ...wait, I've been here before."
+
+![image](https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5)
+
+##### [Planning Agent](#planning-agent) or "Goal-based" agent
+
+The Planning Agent expands upon the model-based agent by contemplating future consequences. It doesn’t just react to the past or present—it actively plans ahead, asking itself whether a given action will help achieve a specific goal.
+
+This forward-thinking ability allows the planning agent to tackle complex tasks that require multiple steps, such as navigating a city using a map or solving a puzzle. By simulating possible actions and outcomes, it determines the best path to success.
+
+> "What will happen if I take this action?"
+> "Will that make me happy?"
+
+![image](https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb)
+
+##### [Utility-based Agent](#utility-based-agent)
+
+While planning agents focus on reaching a goal, Utility-Based Agents aim for something even more nuanced, that is, **maximizing happiness**. They evaluate each potential action, not just based on whether it achieves a goal, but on how "happy" it will make them in the end. In other words, they assign a utility or value to each possible state and then pursue the path that promises the highest utility.
+
+Take, for example, an autonomous car deciding between two routes. One route might be faster but more dangerous, while the other is slower but safer. A utility-based agent would weigh the pros and cons of each option, taking into account not only the time saved but the overall satisfaction of avoiding risk.
+
+> "What will happen if I take this action?"
+> "*How happy* will I be in such a state?"
+
+![image](https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0)
+
+##### [Game Playing Agent](#game-playing-agent)
+(not to be confused with the concept of [General Game Playing (GGP)](https://en.wikipedia.org/wiki/General_game_playing))
+
+Game-playing agents take these ideas of planning and utility to a competitive level. These agents are specifically designed to excel at a specific game or domain. They’re not just interested in their own happiness—they’re actively working to minimize their opponent’s advantage (via adversarial search like [Minimax](https://en.wikipedia.org/wiki/Minimax), or [Alpha Beta Pruning](#https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)).
+
+Examples of game playing agents include:
+
+* Chess AI like Stockfish or AlphaZero (for Chess)
+* Go AI like AlphaGo
+* Poker AI like Libratus
+
+They usually excel in their domains, but their expertise doesn't easily transfer to other areas.
+
+
+> "What will happen if I take this action?"
+> "*How happy* will I be in such a state?"
+> "Will my enemy be happier?"
+
 ![chrome_LxrkTHZIFE](https://github.com/user-attachments/assets/9c1bd7e7-1fa8-46be-ba58-5ee5cfa53c61)
 
-**Learning Agent**
+##### [Learning Agent](#learning-agent)
 
-A typical learning agent has four components:
+At the cutting edge of AI is the Learning Agent. This type of agent doesn’t just act based on predefined rules or models—it learns from its experiences and continually improves over time. 
 
-   - **Learning Element**:
-uses feedback from critic to makes adjustments for future actions. It refines its decision-making processes, often using algorithms like reinforcement learning, supervised learning, or unsupervised learning.
-   - **Performance Element**:
-a.k.a. actor, an element that takes actions; uses the current knowledge to make decisions and take actions.
-   - **Critic**:
-evaluates the performance of the agent by comparing the actual outcomes of its actions to the desired outcomes (i.e., its goals).
-The feedback from the critic helps the learning element understand which actions were successful and which need improvement.
+ The learning agent is the closest thing we have to an agent that grows in intelligence, and it has several key components:
+   - **Learner**
+The agent receives feedback on its actions and adjusts its future decisions based on this feedback. Techniques like reinforcement learning and supervised learning are commonly used here.
+   - **Actor**
+This is the part of the agent that actually takes action. It uses the knowledge and strategies it has learned to make decisions.
+   - **Critic**
+Acting as an internal evaluator, the critic compares the outcomes of the agent’s actions against the desired results. This feedback is essential for the learning process, helping the agent understand which actions are beneficial and which are not.
    - **Problem Generator**:
-creates new tasks to provide new challenges, or to gain information from new experiences.
-It generates new scenarios or tasks for the agent to tackle, encouraging the agent to explore new solutions and learn from them. This part is critical for expanding the agent’s understanding beyond routine tasks.
+To grow smarter, an agent must explore new challenges. The problem generator encourages the agent to tackle new tasks, forcing it to learn and adapt to unfamiliar situations. 
 
+Initially, it may be slow and make mistakes. But as it learns from feedback, it optimizes its tasks and becomes more reliable and efficient.
 
-![image](https://github.com/user-attachments/assets/eac69188-2c93-4144-b4d1-4502a0228aea) [5]
+![image](https://github.com/user-attachments/assets/eac69188-2c93-4144-b4d1-4502a0228aea)
 
-Wikipedia and the original source of the classification ([Russel & Norvig (2003) pp.46-54](https://aima.cs.berkeley.edu/)) provides a great overview of these different types of agents.[6]
+The original source of the classification ([Russel & Norvig (2003)](https://aima.cs.berkeley.edu/)) provides a holistic overview of these different types of agents.
 
 
 
@@ -586,7 +622,7 @@ recursive approach can sometimes be more efficient. depends on the tree structur
 - Not complete (Not guaranteed to find a path to the goal, as it may get stuck in an infinite loop in cyclic graphs)
 
 
-#### 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search--iterative-deepening)
+#### 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search-iterative-deepening)
 
 Same as DFS, except it doesnt search beyond nodes at a set depth limit. Nodes at this depth limit are treated as if they had no successors.
 
@@ -683,7 +719,7 @@ ANN:
   - used to predict continuous outcomes based on input variables. -> **Regression** (e.g. predicting the house price based on location, number of bedrooms, etc)
 
 
-### 3.1 [Neurons - Biological and Artificial](#31-neurons---biological-and-artificial)
+### 3.1 [Neurons - Biological and Artificial](#31-neurons-biological-and-artificial)
 
 The brain is made up of [neurons (nerve cells)](https://en.wikipedia.org/wiki/Neuron) which have
 • a cell body (soma)
@@ -904,7 +940,7 @@ https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 
 ### 3.4 [Neural Network Design](#34-neural-network-design)
 
-## Step 1: Exhaustive System Analysis
+#### Step 1: Exhaustive System Analysis
 
 Before choosing a neural network, you should consider other traditional models (e.g. phenomelogical models) that might be more appropriate for the problem. Neural networks are powerful but also more complex, resource-intensive, and data-hungry. Simpler models may be easier to work with and could perform just as well depending on the problem.
 
@@ -935,7 +971,7 @@ In this scenario:
 
 Step 1 would involve identifying which variables (inputs) are truly important. For example, "Favorite Color" and "Temperature" might not be very important or relevant in predicting whether someone will buy a product, so you could remove those variables. You could also find that "Income" and "Education Level" are highly correlated, so you might only keep one of them in the model. The goal is to simplify the model by only keeping the most important features that are directly related to the prediction task.
 
-### Step 2: Preprocessing
+#### Step 2: Preprocessing
 
 When designing and training a neural network:
 - Ensure that your data is representative of the problem you’re trying to solve
@@ -950,7 +986,7 @@ When designing and training a neural network:
  ![image](https://github.com/user-attachments/assets/731753db-36b9-476a-8c57-5aceb12ffb0e)
 
  
-### Step 3: Neural Model Design
+#### Step 3: Neural Model Design
 
 The number of input neurons and output neurons depends on the results from Steps 1 and 2. 
 But deciding on the number of neurons in the hidden layer (Nh) is not straightforward and often requires experimentation or following certain heuristics.
@@ -980,7 +1016,7 @@ In the output layer, the choice of activation function depends on the task:
 - Softmax for multi-class classification
 
 
-### Step 4: Training
+#### Step 4: Training
 
 The process of training involves finding the set of weights that minimize the loss function (=the error function that represents how far off the model’s predictions are from the actual values).
 However, this process can be difficult due to the complexity of the error function's landscape (solution space).
@@ -1006,7 +1042,7 @@ where the model learns from too much noise and specific details around the under
 **High variance** (of the model'sperformance depending on the dataset, i.e. performs well on the training set but poorly on new, unseen set), aka "overfitting"
 ![image](https://github.com/user-attachments/assets/700a8836-183d-4b78-8530-f059eccaf5bd)
 
-#### Data Splitting 
+##### Data Splitting 
 
 To avoid overfitting, we use two sets for training: the **Training Set** and **Test Set** (plus optional **Validation Set**) 
 
@@ -1035,14 +1071,14 @@ Both the training and test sets should be large enough to be statistically repre
 
 More reading: https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets
 
-#### Cross-Validation
+##### Cross-Validation
 
 A more advanced technique is **k-fold** cross-validation, where the dataset is divided into k subsets. The model is trained k times, each time using a different subset as the test set and the remaining k−1 subsets as the training set. 
 The results can be averaged to produce a more reliable estimate of the model's performance.
 Or, sometimes, different neural network models are developed using the available data, splitting the training and test sets in different ways. The model that achieves the minimum error on the test set is chosen.
 
 
-### Step 5: Generalisation
+#### Step 5: Generalisation
 
 To test the generalisation capability of the network, that is, its performance on a different (never seen) set of data, a small (but representative) third set might be reserved, the generalisation set
 
@@ -1064,3 +1100,9 @@ CNN: [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_
 - deep learning network (de-facto standard for computer vision and image processing)
 - inspired by animal visual cortex
 - regularized FNN to prevent overfitting
+
+
+
+[To be continued]
+
+⚠️ Site is currently under active development, frequent changes are expected

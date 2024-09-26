@@ -1,0 +1,7 @@
+site_name: Introduction to Artificial Intelligence
+site_url: https://in_c0.github.io
+site_author: ba
+site_description: Made for self-learners who want to develop a solid foundation in Artificial Intelligence (AI). It covers a wide array of essential AI topics including neural networks, reinforcement learning, computer vision, and natural language processing. The content is inspired by my personal notes and learnings from the postgraduate course COMP9814 Extended Artificial Intelligence at UNSW (24T3).
+
+nav:
+  - About: README.md
