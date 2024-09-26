@@ -18,27 +18,31 @@ For a deeper understanding of the topics covered, the following textbooks are re
 ## Content Structure
 
 ### 1. [Introduction](#1-introduction)
-- 1.1 History of AI  
-- 1.2 Agents  
-- 1.3 Knowledge Representation  
-  - 1.3.1 Feature-based vs Iconic Representations  
-  - 1.3.2 Logic  
-  - 1.3.3 Learning Rules  
+- 1.1 [History of AI](#11-history-of-ai)
+- 1.2 [Agents](#12-agents)
+- 1.3 [Knowledge Representation](#13-knowledge-representation)
+  - 1.3.1 [Feature-based vs Iconic Representations](#131-feature-based-vs-iconic-representations)
+  - 1.3.2 [Logic](#132-logic)
+  - 1.3.3 [Learning Rules](#133-learning-rules)
 
 ### 2. [Search](#2-search)
-- State, Action, Transition Function
-- 2.2 Search Space
-- 2.3 Uninformed Search vs Informed Search
-- 2.4 Uninformed Search  
-- 2.5 Informed Search  
+- 2.1 [State, Action, Transition Function](#21-state-action-transition-function)
+- 2.2 [Search Space](#22-search-space)
+- 2.3 [Uninformed Search vs Informed Search](#23-uninformed-search-vs-informed-search)
+- 2.4 [Uninformed Search](#24-uninformed-search)
+  - 2.4.1 [Breadth-First Search (BFS)](#241-breadth-first-search-bfs)
+  - 2.4.2 [Depth-First Search (DFS)](#242-depth-first-search-dfs)
+  - 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search--iterative-deepening)
+- 2.5 [Informed Search](#25-informed-search)
+- 2.6 [Solving Problems Using Search](#26-solving-problems-using-search)
 
-### 3. Neural Networks
-- 3.1 Neurons - Biological and Artificial  
-- 3.2 Single-layer Perceptron  
-- 3.3 Linear Separability  
-- 3.4 Multi-layer Networks  
-- 3.5 Backpropagation  
-- 3.6 Neural Engineering Methodology  
+
+### 3. [Artificial Neural Networks](#3-artificial-neural-networks)
+- 3.1 [Neurons - Biological and Artificial](#31-neurons---biological-and-artificial)  
+- 3.2 [Single-layer Perceptron](#32-single-layer-perceptron)  
+- 3.3 [Multilayer Perceptron (MLP)](#33-multilayer-perceptron-mlp)  
+- 3.4 [Neural Network Design](#34-neural-network-design)  
+- 3.5 [Neural Network Architectures](#35-neural-network-architectures)
 
 ### 4. Rewards Instead of Goals
 - 4.1 Elements of Reinforcement Learning  
@@ -108,7 +112,7 @@ A good umbrella definition of the term Intellgence might be:
 
 In fact, AI isn't just a product of modern times. The history of AI goes back thousands of years—long before computers or even electricity.
 
-### 1.1 History of AI
+### 1.1 [History of AI](#11-history-of-ai)
  Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.
 
 > I think, therefore I am
@@ -170,8 +174,7 @@ More recent notable events in the history of AI include:
 [7] https://www.holloway.com/g/making-things-think/sections/the-second-ai-winter-19871993
 
 
-### 1.2 Agents
-
+### 1.2 [Agents](#12-agents)
 
 #### Types of Agents
 * Reactive Agent
@@ -241,7 +244,7 @@ Wikipedia and the original source of the classification ([Russel & Norvig (2003)
 
 
 
-### 1.3 Knowledge Representation
+### 1.3 [Knowledge Representation](#13-knowledge-representation)
 
 **Representation and Search**
 
@@ -264,7 +267,9 @@ Here’s a hierarchical framework used to control a robot (soccer robot), moving
 
 
 
-#### 1.3.1 Feature-based vs Iconic Representations  
+
+#### 1.3.1 [Feature-based vs Iconic Representations](#131-feature-based-vs-iconic-representations)
+
 
 **Iconic Representations (Low-level):**
 * Analogous to the real world
@@ -320,9 +325,10 @@ There are three reasoning processes to make inferences or draw conclusions from 
 
 
 
-#### 1.3.2 Logic  
 
-**Propositional Logic
+#### 1.3.2 [Logic](#132-logic)
+
+**Propositional Logic**
  - Letters stand for "basic" propositions
  - Combine into more complex sentences using AND, OR, NOT, IFF, ... 
  - e.g.
@@ -340,11 +346,14 @@ There are three reasoning processes to make inferences or draw conclusions from 
       - "For all x, if x is an animal, then x has a heart"
       - "There exists at least one person who loves Mary"
 
-#### 1.3.3 Learning Rules  
 
-**Oncological engineering** 
+#### 1.3.3 [Learning Rules](#133-learning-rules)
 
-An **Ontology** is, in a simple term, information mapping. It is a formal representation of knowledge that describes concepts, categories, and relationships within a particular domain. 
+
+**Ontology**  
+
+An ontology is a formal structure that defines the relationships between different concepts in a domain. It’s often used in AI to infer new facts from known data.
+
 Like OOP, child concept is a specialisation of parent concept. Also, child inherits property of parent. 
 Ontology includes not just the hierarchy of concepts (aka Taxonomic hierarchy), but also the properties and relationships between them, enabling reasoning and inference.
 e.g. Dog is a subclass of Mammal. Thus, dogs can have diseases. Diseases can be trated by medication.
@@ -410,6 +419,7 @@ You will learn:
 
 
 
+### 2.1 [State, Action, Transition Function](#21-state-action-transition-function)
 
 A problem can be described by
 - State
@@ -424,7 +434,6 @@ If the next state is probabilistic, use Stochastic transition function:
  T(s,a,s') = P(s'|s,a)
 (where P(s'|s,a) is the probability of transitioning to new state s', given state and action)
 
-
 Types of states:
 - Initial state
 - Goal state
@@ -432,8 +441,9 @@ Types of states:
 - Intermediate state
 - Deadend state
 
+### 2.2 [Search Space](#22-search-space)
 
-State space
+Search space
 = set of all possible states a system can be in
 
 e.g. Chess
@@ -480,7 +490,7 @@ In some cases, the graph edges are weighted, meaning each edge has a cost or val
 The weights can represent things like the cost of an action (time, energy, or distance)
 The goal is often to find the path from the initial state to the goal state that minimizes this cost. (Shortest path search, e.g. Dijkstra's algorithm or A* search) Covered more later
 
-## 2.3 Uninformed vs Informed Search
+### 2.3 [Uninformed Search vs Informed Search](#23-uninformed-search-vs-informed-search)
 
 Uninformed = No info about which path to explore next. No clue how to get to the goal state faster
 Example:
@@ -497,7 +507,8 @@ Example:
 A* search, Greedy Best-First Search
 
 
-## 2.4 Uninformed Search
+
+### 2.4 [Uninformed Search](#24-uninformed-search)
 
 Tree is often used to represent Uninformed Search algorithms, since we dont have to worry about revisiting nodes (since there are no cycles).
 
@@ -507,6 +518,7 @@ Tree is often used to represent Uninformed Search algorithms, since we dont have
 A node is said to be Expanded* when the algorithm has examined all their neighboring nodes and added them to the search space.
 
 **4 Types of Nodes in Uninformed Search Tree:**
+
 1. Root Node = Where the search begins. contains the initial state of the algorithm.
 
 2. Expanded* Nodes (Black)
@@ -516,7 +528,8 @@ A node is said to be Expanded* when the algorithm has examined all their neighbo
 5. Frontier (Red): Nodes that have been generated but not yet expanded*. In other words, the algorithm will explore these next by expanding them and looking at their neighbors.
 
 
-### 2.4.1 BFS
+
+#### 2.4.1 [Breadth-First Search (BFS)](#241-breadth-first-search-bfs)
 
 BFS explores all nodes at each depth level before going deeper
 
@@ -546,7 +559,8 @@ source: https://www.codecademy.com/article/tree-traversal
 **Cons:**
 - Exponential memory usage (has O(b^d) space complexity where b is the 'branching factor' (= number of child nodes for each node) and d is the depth of the search tree)
 
-### 2.4.2 DFS 
+
+#### 2.4.2 [Depth-First Search (DFS)](#242-depth-first-search-dfs)
 
 
 ![35765045-e1ef0078-08ff-11e8-91af-30ce1cc22767](https://github.com/user-attachments/assets/92bb8acd-599a-43bb-842f-292c4326a6c9)
@@ -571,7 +585,8 @@ recursive approach can sometimes be more efficient. depends on the tree structur
 - Not optimal (Not guaranteed to find the shortest path to the goal, as it may go down very deep paths and miss shorter paths.)
 - Not complete (Not guaranteed to find a path to the goal, as it may get stuck in an infinite loop in cyclic graphs)
 
-### 2.4.3 Depth Limited Search
+
+#### 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search--iterative-deepening)
 
 Same as DFS, except it doesnt search beyond nodes at a set depth limit. Nodes at this depth limit are treated as if they had no successors.
 
@@ -607,7 +622,7 @@ Similar to BFS, but orders nodes by cost -> useful for weighted graph
 
   
 
-### 2.5 Informed Search
+### 2.5 [Informed Search](#25-informed-search)
 
 Heuristics
 Greedy Search
@@ -617,7 +632,8 @@ Finding Heuristic function
 Dominance
 
 
-### 2.6 Solving Problems using Search
+
+### 2.6 [Solving Problems Using Search](#26-solving-problems-using-search)
 
 Exercise -
 1. Define the states, actions and transition function
@@ -629,7 +645,7 @@ Exercise -
 
 
 
-## 3. Artificial Neural Networks
+## [3. Artificial Neural Networks](#3-artificial-neural-networks)
 
 Humans can perform complex tasks: Shape recognition, Speech processing, Image processing ... 
 To emulate these behaviours, a branch of artifficial intelligence formed inspired by [neural circuitry](https://en.wikipedia.org/wiki/Neural_circuit):
@@ -667,7 +683,8 @@ ANN:
   - used to predict continuous outcomes based on input variables. -> **Regression** (e.g. predicting the house price based on location, number of bedrooms, etc)
 
 
-### 3.1  Biological Neurons vs Artificial Neurons
+### 3.1 [Neurons - Biological and Artificial](#31-neurons---biological-and-artificial)
+
 The brain is made up of [neurons (nerve cells)](https://en.wikipedia.org/wiki/Neuron) which have
 • a cell body (soma)
 • dendrites (inputs)
@@ -754,7 +771,7 @@ More reading: https://jontysinai.github.io/jekyll/update/2017/09/24/the-mcp-neur
 https://com-cog-book.github.io/com-cog-book/features/mp-artificial-neuron.html
 
 
-### 3.2 Single Layer Perceptron
+### 3.2 [Single-Layer Perceptron](#32-single-layer-perceptron)
 
 
 Frank Rosenblatt, an American psychologist, proposed the classical **Perception** model in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.
@@ -829,7 +846,8 @@ This process is repeated until the perceptron can correctly classify all trainin
 
 
 
-### 3.3 Multilayer Perceptron (MLP)
+### 3.3 [Multilayer Perceptron (MLP)](#33-multilayer-perceptron-mlp)
+
 
 While the single-layer perceptron is simple and efficient for binary classification, it can only separate linearly separable data. 
 To solve non-linearly separable data such as XOR, you need a multi-layer perceptron (MLP)
@@ -883,7 +901,8 @@ More reading: https://en.wikipedia.org/wiki/Multilayer_perceptron
 https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 
 
-### 3.4 Neural Network Design
+
+### 3.4 [Neural Network Design](#34-neural-network-design)
 
 ## Step 1: Exhaustive System Analysis
 
@@ -1027,7 +1046,8 @@ Or, sometimes, different neural network models are developed using the available
 
 To test the generalisation capability of the network, that is, its performance on a different (never seen) set of data, a small (but representative) third set might be reserved, the generalisation set
 
-## 3.5 Neural Network Architectures
+
+### 3.5 [Neural Network Architectures](#35-neural-network-architectures)
 
 FNN: [Feed-forward network](https://en.wikipedia.org/wiki/Feedforward_neural_network)
 -  connections between the nodes do not form cycles/loops
