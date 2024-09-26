@@ -1,7 +1,7 @@
 # Introduction to Artificial Intelligence
 
 
-The content is inspired by my personal notes and learnings from the course COMP9814: Extended Artificial Intelligence at UNSW (24T3). It assumes readers have a basic understanding of Python and mathematics at a sophomore university level, as well as a solid grasp of fundamental data structures and algorithms.
+The content is inspired by my personal notes and learnings from the course [COMP9814: Extended Artificial Intelligence at UNSW (24T3)](https://www.unsw.edu.au/course-outlines/course-outline#year=2024&term=Term%203&deliveryMode=In%20Person&deliveryFormat=Standard&teachingPeriod=T3&deliveryLocation=Kensington&courseCode=COMP9814&activityGroupId=1). It assumes readers have a basic understanding of Python and mathematics at a sophomore university level, as well as a solid grasp of fundamental data structures and algorithms.
 
 ⚠️ Site is currently under active development, frequent changes are expected
 
