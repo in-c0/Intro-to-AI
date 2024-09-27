@@ -8,7 +8,7 @@
         <meta name="author" content="ba">
         <link rel="canonical" href="https://in_c0.github.io/gym/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Projects - Introduction to Artificial Intelligence</title>
+        <title>Gym - Introduction to Artificial Intelligence</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -37,8 +37,14 @@
                             <li class="nav-item">
                                 <a href=".." class="nav-link">About</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">Projects</a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Projects</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Gym</a>
+</li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -113,10 +119,12 @@
 The car's engine is too weak to drive directly up, so it must build momentum by driving back and forth.</p>
 <p>The terminology used here applies to any rule-based system for decision-making: <strong>Agent, Action, State</strong>.</p>
 <p>In our case, the <strong>Agent</strong> is the car.</p>
-<p>At each step of the simulation, the agent can take one of three <strong>Actions</strong>:
-- Push left (action 0)
-- Do nothing (action 1)
-- Push right (action 2)</p>
+<p>At each step of the simulation, the agent can take one of three <strong>Actions</strong>:</p>
+<ul>
+<li>Push left (action 0)</li>
+<li>Do nothing (action 1)</li>
+<li>Push right (action 2)</li>
+</ul>
 <hr />
 <p>Note: The number associated with the actions (0,1,2) comes from the <strong>Action Space</strong> defined by the <a href="https://gymnasium.farama.org/environments/classic_control/mountain_car/">Gym API</a>.</p>
 <hr />
@@ -125,11 +133,31 @@ The car's engine is too weak to drive directly up, so it must build momentum by 
 <p><em>Observation = [position, velocity]</em></p>
 </blockquote>
 <p>where <code>position</code> is the car’s horizontal position and <code>velocity</code> is its current speed.</p>
-<p><strong>Observation Space</strong>:
-|Num | Observation | Min | Max |
-| :--: | :--: | :--: | :--: | 
-|0 | position of the car along the x-axis |-1.2 | 0.6 |
-|1 | velocity of the car |-0.07 | 0.07 |</p>
+<p><strong>Observation Space</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Num</th>
+<th style="text-align: center;">Observation</th>
+<th style="text-align: center;">Min</th>
+<th style="text-align: center;">Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">position of the car along the x-axis</td>
+<td style="text-align: center;">-1.2</td>
+<td style="text-align: center;">0.6</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">velocity of the car</td>
+<td style="text-align: center;">-0.07</td>
+<td style="text-align: center;">0.07</td>
+</tr>
+</tbody>
+</table>
 <p>Now, let's simulate different strategies for moving the car up the hill using Gym.</p>
 <h4 id="importing-libraries">Importing Libraries</h4>
 <p>Here are the libraries we will be using in this exercise:</p>
@@ -137,9 +165,11 @@ The car's engine is too weak to drive directly up, so it must build momentum by 
 import matplotlib.pyplot as plt
 import gymnasium as gym
 </code></pre>
-<p><code>NumPy</code> -&gt; <a href="https://numpy.org/">NumPy</a> module, widely used for numerical operations, especially for handling arrays
-<code>matplotlib.pyplot</code> -&gt; <a href="https://matplotlib.org/">Matplotlib</a>'s pyplot module, which is used to create visualizations like the boxplot later in the code
-<code>gymnasium</code> -&gt; <a href="https://gymnasium.farama.org/index.html">Gymnasium</a> (formerly Gym) is a toolkit for developing and comparing reinforcement learning algorithms. It's used to simulate the MountainCar-v0 environment.</p>
+<ul>
+<li><code>NumPy</code> -&gt; <a href="https://numpy.org/">NumPy</a> module, widely used for numerical operations, especially for handling arrays</li>
+<li><code>matplotlib.pyplot</code> -&gt; <a href="https://matplotlib.org/">Matplotlib</a>'s pyplot module, which is used to create visualizations like the boxplot later in the code</li>
+<li><code>gymnasium</code> -&gt; <a href="https://gymnasium.farama.org/index.html">Gymnasium</a> (formerly Gym) is a toolkit for developing and comparing reinforcement learning algorithms. It's used to simulate the MountainCar-v0 environment.</li>
+</ul>
 <p>Depending on your setup, you may need to install the following packages:</p>
 <pre><code class="language-bash">pip install gymnasium
 pip install swig
@@ -297,7 +327,8 @@ def plot_results(steps_taken):
     plt.grid(True)
     plt.show()
 </code></pre>
-<p>The <code>plot_results()</code> function will generate a boxplot that shows how many steps each agent took for each strategy. You’ll be able to compare the performance of the different strategies based on this visualization.</p></div>
+<p>The <code>plot_results()</code> function will generate a boxplot that shows how many steps each agent took for each strategy. You’ll be able to compare the performance of the different strategies based on this visualization.</p>
+<p><a href="../gym.py">Complete Code</a></p></div>
             </div>
         </div>
 
