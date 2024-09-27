@@ -25,9 +25,10 @@ The car's engine is too weak to drive directly up, so it must build momentum by 
 In our case, the **Agent** is the car.
 
 At each step of the simulation, the agent can take one of three **Actions**:
-- Push left (action 0)
-- Do nothing (action 1)
-- Push right (action 2)
+
+ - Push left (action 0)
+ - Do nothing (action 1)
+ - Push right (action 2)
 
 ---
 
@@ -42,10 +43,11 @@ where `position` is the car’s horizontal position and `velocity` is its curren
 
 
 **Observation Space**:
-|Num | Observation | Min | Max |
+ 
+| Num | Observation | Min | Max |
 | :--: | :--: | :--: | :--: | 
-|0 | position of the car along the x-axis |-1.2 | 0.6 |
-|1 | velocity of the car |-0.07 | 0.07 |
+| 0 | position of the car along the x-axis |-1.2 | 0.6 |
+| 1 | velocity of the car | -0.07 | 0.07 |
 
 
 Now, let's simulate different strategies for moving the car up the hill using Gym.
@@ -61,9 +63,9 @@ import matplotlib.pyplot as plt
 import gymnasium as gym
 ```
 
-`NumPy` -> [NumPy](https://numpy.org/) module, widely used for numerical operations, especially for handling arrays
-`matplotlib.pyplot` -> [Matplotlib](https://matplotlib.org/)'s pyplot module, which is used to create visualizations like the boxplot later in the code
-`gymnasium` -> [Gymnasium](https://gymnasium.farama.org/index.html) (formerly Gym) is a toolkit for developing and comparing reinforcement learning algorithms. It's used to simulate the MountainCar-v0 environment.
+- `NumPy` -> [NumPy](https://numpy.org/) module, widely used for numerical operations, especially for handling arrays
+- `matplotlib.pyplot` -> [Matplotlib](https://matplotlib.org/)'s pyplot module, which is used to create visualizations like the boxplot later in the code
+- `gymnasium` -> [Gymnasium](https://gymnasium.farama.org/index.html) (formerly Gym) is a toolkit for developing and comparing reinforcement learning algorithms. It's used to simulate the MountainCar-v0 environment.
 
 Depending on your setup, you may need to install the following packages:
 ```bash
@@ -246,3 +248,5 @@ def plot_results(steps_taken):
 ```
 
 The `plot_results()` function will generate a boxplot that shows how many steps each agent took for each strategy. You’ll be able to compare the performance of the different strategies based on this visualization.
+
+[Complete Code](gym.py)

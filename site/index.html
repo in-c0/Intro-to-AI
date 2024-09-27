@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Made for self-learners who want to develop a solid foundation in Artificial Intelligence (AI). It covers a wide array of essential AI topics including neural networks, reinforcement learning, computer vision, and natural language processing. The content is inspired by my personal notes and learnings from the postgraduate course COMP9814 Extended Artificial Intelligence at UNSW (24T3).">
+        <meta name="author" content="ba">
+        <link rel="canonical" href="https://in_c0.github.io/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Introduction to Artificial Intelligence</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Introduction to Artificial Intelligence</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gym/" class="nav-link">Projects</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="gym/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#introduction-to-artificial-intelligence" class="nav-link">Introduction to Artificial Intelligence</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#resources" class="nav-link">Resources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#content-structure" class="nav-link">Content Structure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#contribution" class="nav-link">Contribution</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#license" class="nav-link">License</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#1-introduction_1" class="nav-link">1. Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-search_1" class="nav-link">2 Search</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-artificial-neural-networks_1" class="nav-link">3. Artificial Neural Networks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="introduction-to-artificial-intelligence">Introduction to Artificial Intelligence</h1>
+<p>The content is inspired by my personal notes and learnings from the course <a href="https://www.unsw.edu.au/course-outlines/course-outline#year=2024&amp;term=Term%203&amp;deliveryMode=In%20Person&amp;deliveryFormat=Standard&amp;teachingPeriod=T3&amp;deliveryLocation=Kensington&amp;courseCode=COMP9814&amp;activityGroupId=1">COMP9814: Extended Artificial Intelligence at UNSW (24T3)</a>. It assumes readers have a basic understanding of Python and mathematics at a sophomore university level, as well as a solid grasp of fundamental data structures and algorithms.</p>
+<p>⚠️ Site is currently under active development, frequent changes are expected</p>
+<h2 id="resources">Resources</h2>
+<p>For a deeper understanding of the topics covered, the following textbooks are recommended:</p>
+<ul>
+<li>Poole, D.L. &amp; Mackworth, A. <a href="https://artint.info/3e/html/ArtInt3e.html">Artificial Intelligence: Foundations of Computational Agents</a>. Second Edition. Cambridge University Press, Cambridge, 2017.</li>
+<li>Russell, S.J. &amp; Norvig, P. <strong>Artificial Intelligence: A Modern Approach</strong>. Fourth Edition, Pearson Education, Hoboken, NJ, 2021.</li>
+<li>Sutton, R. &amp; Barto, A. <a href="http://incompleteideas.net/book/the-book-2nd.html">Reinforcement Learning: An Introduction</a>. MIT press, 2018.</li>
+<li>Jurafsky, D. &amp; Martin, J. H. <a href="https://web.stanford.edu/~jurafsky/slp3/">Speech and Language Processing</a>. Stanford, 2023.</li>
+</ul>
+<h2 id="content-structure">Content Structure</h2>
+<p><a id="top"></a></p>
+<h3 id="1-introduction">1. <a href="#1-introduction">Introduction</a></h3>
+<ul>
+<li>1.1 <a href="#11-history-of-ai">History of AI</a></li>
+<li>1.2 <a href="#12-agents">Agents</a></li>
+<li>1.3 <a href="#13-knowledge-representation">Knowledge Representation</a></li>
+<li>1.3.1 <a href="#131-feature-based-vs-iconic-representations">Feature-based vs Iconic Representations</a></li>
+<li>1.3.2 <a href="#132-logic">Logic</a></li>
+<li>1.3.3 <a href="#133-learning-rules">Learning Rules</a></li>
+</ul>
+<h3 id="2-search">2. <a href="#2-search">Search</a></h3>
+<ul>
+<li>2.1 <a href="#21-state-action-transition-function">State, Action, Transition Function</a></li>
+<li>2.2 <a href="#22-search-space">Search Space</a></li>
+<li>2.3 <a href="#23-uninformed-search-vs-informed-search">Uninformed Search vs Informed Search</a></li>
+<li>2.4 <a href="#24-uninformed-search">Uninformed Search</a></li>
+<li>2.4.1 <a href="#241-breadth-first-search-bfs">Breadth-First Search (BFS)</a></li>
+<li>2.4.2 <a href="#242-depth-first-search-dfs">Depth-First Search (DFS)</a></li>
+<li>2.4.3 <a href="#243-depth-limited-search-iterative-deepening">Depth-Limited Search &amp; Iterative Deepening</a></li>
+<li>2.5 <a href="#25-informed-search">Informed Search</a></li>
+<li>2.6 <a href="#26-solving-problems-using-search">Solving Problems Using Search</a></li>
+</ul>
+<h3 id="3-artificial-neural-networks">3. <a href="#3-artificial-neural-networks">Artificial Neural Networks</a></h3>
+<ul>
+<li>3.1 <a href="#31-neurons-biological-and-artificial">Neurons - Biological and Artificial</a>  </li>
+<li>3.2 <a href="#32-single-layer-perceptron">Single-layer Perceptron</a>  </li>
+<li>3.3 <a href="#33-multilayer-perceptron-mlp">Multilayer Perceptron (MLP)</a>  </li>
+<li>3.4 <a href="#34-neural-network-design">Neural Network Design</a>  </li>
+<li>3.5 <a href="#35-neural-network-architectures">Neural Network Architectures</a></li>
+</ul>
+<h3 id="4-rewards-instead-of-goals">4. Rewards Instead of Goals</h3>
+<ul>
+<li>4.1 Elements of Reinforcement Learning  </li>
+<li>4.2 Exploration vs Exploitation  </li>
+<li>4.3 The Agent-Environment Interface  </li>
+<li>4.4 Value Functions  </li>
+<li>4.5 Temporal-Difference Prediction  </li>
+</ul>
+<h3 id="5-metaheuristics">5. Metaheuristics</h3>
+<ul>
+<li>5.1 Asymptotic Complexity  </li>
+<li>5.2 Classes of Problems  </li>
+<li>5.3 Linear Programming  </li>
+<li>5.4 Search Space  </li>
+<li>5.5 Metaheuristics with and without Memory  </li>
+<li>5.6 Population-Based Methods  </li>
+</ul>
+<h3 id="7-computer-vision">7. Computer Vision</h3>
+<ul>
+<li>7.1 Image Processing  </li>
+<li>7.2 Scene Analysis  </li>
+<li>7.3 Cognitive Vision  </li>
+</ul>
+<h3 id="8-language-processing">8. Language Processing</h3>
+<ul>
+<li>8.1 Formal Languages  </li>
+<li>8.1.1 Chomsky’s Hierarchy  </li>
+<li>8.1.2 Grammars  </li>
+<li>8.2 Regular Expressions  </li>
+<li>8.3 Minimum Edit Distance and Words  </li>
+<li>8.4 Natural Languages: N-Gram Models  </li>
+</ul>
+<h3 id="9-reasoning-with-uncertain-information">9. Reasoning with Uncertain Information</h3>
+<ul>
+<li>9.1 Confidence Factors  </li>
+<li>9.2 Probability and Probabilistic Inference  </li>
+<li>9.3 Bayes Nets  </li>
+<li>9.4 Fuzzy Logic  </li>
+</ul>
+<h3 id="10-human-aligned-intelligent-robotics">10. Human-Aligned Intelligent Robotics</h3>
+<ul>
+<li>10.1 Human Interaction and Human-in-the-Loop Robot Learning  </li>
+<li>10.2 Explainability and Interpretability  </li>
+<li>10.3 Safe Robot Exploration  </li>
+<li>10.4 Ethics in AI  </li>
+</ul>
+<h2 id="contribution">Contribution</h2>
+<p>Your feedback and contributions are greatly appreciated! If you'd like to improve this material, correct errors, or add new sections, feel free to fork the repository and submit a pull request.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details. If you find this project helpful, credits and appreciation are always welcome!</p>
+<hr />
+<h2 id="1-introduction_1">1. <a href="#1-introduction">Introduction</a></h2>
+<p>Artificial intelligence is, well, intelligence that is artificial. Artificial just means it is machine-based. But what does <em>Integllience</em> mean? We throw the word around, but defining it is surprisingly tricky. Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?</p>
+<p>Humans are intelligent because we can navigate a complex world, learn from experience, solve problems, create art, etc. We've seen machines could do this too at least to some extent. (Some may argue that it's merely "copying" the original works of humans, but let's put that discussion aside for now). 
+Take for instance, a chess AI, which is a "narrow" AI — it’s designed to do one thing, but do it really well. But is it truly intelligent? That machine doesn’t actually “understand” what it’s doing—at least not in the way humans do—but it’s performing tasks we’d consider intelligent.</p>
+<p>Here is a good umbrella definition (still abstract, but it suggests a direction):</p>
+<blockquote>
+<p>Intelligence is the ability to perceive information, and to retain it as knowledge to be applied towards adaptive behaviours within an environment or context.</p>
+</blockquote>
+<p>So how did we even begin to come up with the concept of artificial intelligence? In fact, it goes back thousands of years—long before computers or even electricity.</p>
+<h3 id="11-history-of-ai">1.1 <a href="#11-history-of-ai">History of AI</a></h3>
+<p>Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.</p>
+<blockquote>
+<p>I think, therefore I am
+– René Descartes</p>
+</blockquote>
+<p>Aristotle's system laid the groundwork for what would later become <strong>Boolean logic</strong>, thanks to George Boole in 1848, and Frege’s work on <strong>Formal logic</strong> in 1879.</p>
+<p><a href="https://en.wikipedia.org/wiki/Boolean_algebra">Boolean Logic</a> is the foundation for modern digital computers, where circuits and operations work using binary (1s and 0s) to perform calculations and make decisions. Boole's work provided the basis for digital logic circuits, which today underpin everything from computer processors to simple calculators.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/503c4304-e28c-4cc1-b563-1f46970d1bb2" />[2]</p>
+<ul>
+<li>AND: Both conditions must be true (e.g., A AND B is true only if both A and B are true).</li>
+<li>OR: At least one condition must be true (e.g., A OR B is true if either A or B is true).</li>
+<li>NOT: A negation of a condition (e.g., NOT A is true if A is false).</li>
+</ul>
+<p>Frege's formal system took a huge step beyond Boolean logic by introducing the concept of quantifiers and variables, which allowed more complex relationships to be expressed in a logical framework. While Boolean logic deals with simple true/false statements, Formal logic translates natural language arguments into a formal language, like first-order logic, to assess whether they are valid using quantifiers such as:</p>
+<ul>
+<li>Universal quantifier (∀): Indicates that a property holds for all elements in a domain (e.g., ∀x: P(x) means "for all x, P(x) is true").</li>
+<li>Existential quantifier (∃): Indicates that there is at least one element in a domain for which a property holds (e.g., ∃x: P(x) means "there exists an x for which P(x) is true").</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b8ff5830-17db-47c9-9c5b-c3833b40f8eb" />[3]</p>
+<p>Examples of formal logic (proportional calculus):</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ccc15b01-28d7-4d5e-8691-4f8b605cd206" />
+<img alt="image" src="https://github.com/user-attachments/assets/875f0f60-55a2-4a58-87f9-ce941fc007b0" /> [4]</p>
+<p>During the 17th–19th century, the invention of formal logic and computational machines took significant steps: 
+ René Descartes (1596–1650) and Thomas Hobbes (1588–1679) began exploring the idea of <a href="https://www.meaningcrisis.co/ep-22-awakening-from-the-meaning-crisis-descartes-vs-hobbes/">mind as a machine</a>.
+ Charles Babbage (1791–1871) and Ada Lovelace (1815–1852) conceptualized the <a href="https://en.wikipedia.org/wiki/Analytical_engine">Analytical Engine</a>, which is considered the first mechanical general-purpose computer.
+ Alan Turing (1912–1954) introduced key concepts foundational to AI in the 1930s and 1940s. His 1936 paper "<a href="https://en.wikipedia.org/wiki/Turing%27s_proof">On Computable Numbers</a>"[5] laid the groundwork for modern computing.</p>
+<p><strong>The Birth of modern AI as a field</strong> is considered to be in the year of 1956, when the term "Artificial Intelligence" was first coined in 1956 by John McCarthy at the <a href="https://en.wikipedia.org/wiki/Dartmouth_workshop">Dartmouth Conference</a>. [6]</p>
+<blockquote>
+<p>"We propose that a 2-month, 10-man study of artificial intelligence be carried out during the summer of 1956 at Dartmouth College in Hanover, New Hampshire. The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it. An attempt will be made to find how to make machines use language, form abstractions and concepts, solve kinds of problems now reserved for humans, and improve themselves. We think that a significant advance can be made in one or more of these problems if a carefully selected group of scientists work on it together for a summer."</p>
+</blockquote>
+<p>Projects like <a href="https://en.wikipedia.org/wiki/ELIZA">ELIZA (a chatbot program by Joseph Weizenbaum, 1966)</a> and <a href="https://en.wikipedia.org/wiki/Shakey_the_robot">Shakey the Robot </a>(the first general-purpose mobile robot, 1969) demonstrated the possibilities of AI.
+However, the ambitious early goals led to disappointment when real-world complexities proved harder to solve than expected. This led to the first AI Winter, a period of reduced funding and interest.
+AI saw a brief resurgence in the 1980s, particularly with the development of <a href="https://en.wikipedia.org/wiki/Expert_system">Expert Systems</a>, which were rule-based systems designed to emulate the decision-making abilities of human experts.
+During this time, machine learning techniques like neural networks began to be explored again after being dormant for decades, following John Hopfield’s work on neural networks in 1982.
+The limitations of expert systems and continued difficulties in scaling AI led to a second AI Winter (late 1980s - mid 1990s)[7].
+Then, as the computer hardware industry advanced, researchers noticed that they could perform more complex calculations and simulations on faster machines. Companies like Intel, IBM, and others continuously pushed the boundaries of chip design and computational power, enabling AI researchers to explore more intensive tasks that were previously impossible. The rise of the Internet, and the notable successes, such as <a href="https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)">IBM’s Deep Blue</a> defeating world chess champion Garry Kasparov in 1997, demonstrated to the broader public that AI was becoming more capable.</p>
+<p>AI since then has been embedded in many aspects of daily life, especially with the development of a <strong>Deep learning</strong> model in 2012 that became a game-changer. </p>
+<p>More recent notable events in the history of AI include:
+   - 2012: The deep learning model <strong><a href="https://en.wikipedia.org/wiki/AlexNet">AlexNet</a></strong> revolutionized image recognition by winning the ImageNet Large Scale Visual Recognition Challenge (ILSVRC)
+   - 2014: Ian Goodfellow introduces <strong><a href="https://en.wikipedia.org/wiki/Generative_adversarial_network">Generative Adversarial Networks (GANs)</a></strong>, a new approach for generating synthetic data (birth of "AI art")
+   - 2016: Google DeepMind’s <strong><a href="https://en.wikipedia.org/wiki/AlphaGo">AlphaGo</a></strong> becomes the first AI to beat a professional Go player, showing AI's ability to master complex, intuitive tasks
+   - 2020: Release of <strong><a href="https://en.wikipedia.org/wiki/GPT-3">GPT-3</a></strong>, a language model with 175 billion parameters, setting a new standard for natural language generation and understanding
+   - 2022: Release of <strong><a href="https://en.wikipedia.org/wiki/DALL-E">DALL·E 2</a></strong>, an AI model capable of generating detailed images from text prompts, marking a significant advancement in AI-driven creativity and image generation</p>
+<p><a href="https://en.wikipedia.org/wiki/Boolean_algebra#/media/File:Vennandornot.svg">2</a>
+<a href="https://en.wikipedia.org/wiki/Logic#/media/File:First-order_logic.png">3</a>
+<a href="https://www.britannica.com/topic/formal-logic/Interdefinability-of-operators">4</a>
+[5] https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+[6] http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf
+[7] https://www.holloway.com/g/making-things-think/sections/the-second-ai-winter-19871993</p>
+<h3 id="12-agents">1.2 <a href="#12-agents">Agents</a></h3>
+<p>Agents in AI are entities that perceive their environment and act upon it, aiming to achieve specific goals. Different types of agents vary in complexity, decision-making abilities, and adaptability. </p>
+<h4 id="types-of-agents">Types of Agents</h4>
+<ul>
+<li><a href="#reactive-agents">Reactive Agent</a></li>
+<li><a href="#model-based-agent">Model-Based Agent</a></li>
+<li><a href="#planning-agent">Planning Agent</a></li>
+<li><a href="#utility-based-agent">Utility-based agent</a></li>
+<li><a href="#game-playing-agent">Game Playing Agent</a></li>
+<li><a href="#learning-agent">Learning Agent</a></li>
+</ul>
+<h5 id="reactive-agents"><a href="#reactive-agents">Reactive Agents</a></h5>
+<p>At the most basic level, we have the Reactive Agent, a simple yet effective problem-solver. Think of it as the AI version of a reflex action: "If this condition is met, perform this action." There’s no deliberation, no contemplation of past actions or future consequences—just action based on the current environment.</p>
+<p>For instance, imagine a thermostat that turns on the air conditioning when the temperature hits 75°F. It doesn't remember what happened yesterday or predict the weather tomorrow—it reacts purely to the present moment.</p>
+<p>While this simplicity is useful in fast, real-time systems, reactive agents are limited. Without memory or state, they can’t learn or improve over time. They can only react.</p>
+<blockquote>
+<p>"If condition, then action".</p>
+</blockquote>
+<p>It is simply following the rule, without memory or state.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/fe8894d6-6833-42e3-825d-8b41389e4f8c" /></p>
+<h5 id="model-based-agent-or-model-based-reflex-agent"><a href="#model-based-agent">Model-based Agent</a> or Model-based "Reflex" Agent</h5>
+<p>Now, let’s add a layer of sophistication. Unlike the reactive agent, this type of agent has an internal <strong>model</strong> of the world, allowing it to handle <em>partially</em> observable environments. It takes into account not just the current input, but also a history of past actions and their outcomes, allowing for a more informed decision-making process.</p>
+<p>Consider a robot navigating a maze. It doesn’t just rely on what it currently sees but remembers where it has already been. This memory helps it avoid dead ends and make smarter choices moving forward. However, despite this extra capability, model-based agents are still "reflex" agents in a sense—they <em>respond</em> based on the past but does not have any capability to predict the future based on learning. Tasks requiring multiple steps of reasoning can stump them.</p>
+<blockquote>
+<p>"If condition, then action. ...wait, I've been here before."</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5" /></p>
+<h5 id="planning-agent-or-goal-based-agent"><a href="#planning-agent">Planning Agent</a> or "Goal-based" agent</h5>
+<p>The Planning Agent expands upon the model-based agent by contemplating future consequences. It doesn’t just react to the past or present—it actively plans ahead, asking itself whether a given action will help achieve a specific goal.</p>
+<p>This forward-thinking ability allows the planning agent to tackle complex tasks that require multiple steps, such as navigating a city using a map or solving a puzzle. By simulating possible actions and outcomes, it determines the best path to success.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"Will that make me happy?"</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb" /></p>
+<h5 id="utility-based-agent"><a href="#utility-based-agent">Utility-based Agent</a></h5>
+<p>While planning agents focus on reaching a goal, Utility-Based Agents aim for something even more nuanced, that is, <strong>maximizing happiness</strong>. They evaluate each potential action, not just based on whether it achieves a goal, but on how "happy" it will make them in the end. In other words, they assign a utility or value to each possible state and then pursue the path that promises the highest utility.</p>
+<p>Take, for example, an autonomous car deciding between two routes. One route might be faster but more dangerous, while the other is slower but safer. A utility-based agent would weigh the pros and cons of each option, taking into account not only the time saved but the overall satisfaction of avoiding risk.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"<em>How happy</em> will I be in such a state?"</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0" /></p>
+<h5 id="game-playing-agent"><a href="#game-playing-agent">Game Playing Agent</a></h5>
+<p>(not to be confused with the concept of <a href="https://en.wikipedia.org/wiki/General_game_playing">General Game Playing (GGP)</a>)</p>
+<p>Game-playing agents take these ideas of planning and utility to a competitive level. These agents are specifically designed to excel at a specific game or domain. They’re not just interested in their own happiness—they’re actively working to minimize their opponent’s advantage (via adversarial search like <a href="https://en.wikipedia.org/wiki/Minimax">Minimax</a>, or <a href="#https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha Beta Pruning</a>).</p>
+<p>Examples of game playing agents include:</p>
+<ul>
+<li>Chess AI like Stockfish or AlphaZero (for Chess)</li>
+<li>Go AI like AlphaGo</li>
+<li>Poker AI like Libratus</li>
+</ul>
+<p>They usually excel in their domains, but their expertise doesn't easily transfer to other areas.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"<em>How happy</em> will I be in such a state?"
+"Will my enemy be happier?"</p>
+</blockquote>
+<p><img alt="chrome_LxrkTHZIFE" src="https://github.com/user-attachments/assets/9c1bd7e7-1fa8-46be-ba58-5ee5cfa53c61" /></p>
+<h5 id="learning-agent"><a href="#learning-agent">Learning Agent</a></h5>
+<p>At the cutting edge of AI is the Learning Agent. This type of agent doesn’t just act based on predefined rules or models—it learns from its experiences and continually improves over time. </p>
+<p>The learning agent is the closest thing we have to an agent that grows in intelligence, and it has several key components:
+   - <strong>Learner</strong>
+The agent receives feedback on its actions and adjusts its future decisions based on this feedback. Techniques like reinforcement learning and supervised learning are commonly used here.
+   - <strong>Actor</strong>
+This is the part of the agent that actually takes action. It uses the knowledge and strategies it has learned to make decisions.
+   - <strong>Critic</strong>
+Acting as an internal evaluator, the critic compares the outcomes of the agent’s actions against the desired results. This feedback is essential for the learning process, helping the agent understand which actions are beneficial and which are not.
+   - <strong>Problem Generator</strong>:
+To grow smarter, an agent must explore new challenges. The problem generator encourages the agent to tackle new tasks, forcing it to learn and adapt to unfamiliar situations. </p>
+<p>Initially, it may be slow and make mistakes. But as it learns from feedback, it optimizes its tasks and becomes more reliable and efficient.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/eac69188-2c93-4144-b4d1-4502a0228aea" /></p>
+<p>The original source of the classification (<a href="https://aima.cs.berkeley.edu/">Russel &amp; Norvig (2003)</a>) provides a holistic overview of these different types of agents.</p>
+<h3 id="13-knowledge-representation">1.3 <a href="#13-knowledge-representation">Knowledge Representation</a></h3>
+<p><strong>Representation and Search</strong></p>
+<p>The world model must be represented in a way that makes reasoning easy
+Reasoning in AI (i.e. problem solving and planning) almost always involves some kind of search among possible solutions</p>
+<p>Here’s a hierarchical framework used to control a robot (soccer robot), moving from sensor data gathering (low-level) to game strategy (high-level).</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b98b869f-7f7f-4eb7-9256-5449f7f1c7a4" /></p>
+<p>Note how abstraction transforms raw numerical data into higher-level, qualitative information.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ea756f01-e72c-436d-9dbe-ee36e18a7d02" /></p>
+<h4 id="131-feature-based-vs-iconic-representations">1.3.1 <a href="#131-feature-based-vs-iconic-representations">Feature-based vs Iconic Representations</a></h4>
+<p><strong>Iconic Representations (Low-level):</strong>
+* Analogous to the real world
+  * Pixel representations like the first layer of ANN
+  * Maps 
+* Fast, but difficult to generalize
+* Numeric/statistical, offering a detailed representation
+* No relational information, making reasoning difficult
+* Memory-intensive
+* Suited for tasks like vision and processing sequential data
+* Difficult to perform inferences beyond pattern-response</p>
+<p><strong>Feature-based (Symbolic) Representations (High-level):</strong>
+* State represented by a set of abstract features and relations
+  * Logical expressions
+  * Entity-relation graphs
+* Can do complex reasoning over <strong>knowledge base</strong>
+* Contains relational information, making it easier to reason about
+* Facilitates generalizations, and is memory efficient
+* Not well-suited for "low-level" tasks like perception</p>
+<p><strong>Knowledge Base?</strong></p>
+<p>A knowledge base is an explicit set of sentences about some domain expressed in a suitable <strong>formal representation language</strong>.
+Sentences express facts or non-facts (true or false) e.g. "Q1 revenue was $10 million."</p>
+<p>The knowledge base may use rules as a mechanism for reasoning (i.e. It is a <strong>Rule-based</strong> system):
+e.g. "If &lt;...&gt; then &lt;...&gt;, If a patient has a fever and a headache, then the patient can potentially benefit from malaria testing."</p>
+<p>Rules can define a network (aka "Inference" network) which shows the interdependencies among the rules.
+Inference network shows which facts can be logically combined to form new facs or conclusions. The facts can be combined using "and", "or", "not"
+<strong>Inference</strong>: Deriving new information or conclusions from the facts and rules, e.g. "Given a drop in sales and increased competition, product prices should be lowered to maintain market share."</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/1fc3efc7-1e25-446a-9d71-220f4192e722" /></p>
+<p>There are three reasoning processes to make inferences or draw conclusions from a set of premises or observations:
+ 1. <strong>Deduction</strong>: based on concrete facts, the process of reasoning from general principles or rules to specific conclusions. If the premises are true, the conclusion must be true.
+    "If <em><rule> and <cause></em>, then <em><effect></em>" e.g. "If <em>Joe Bloggs works for ACME</em> and <em>is in a stable relationship</em>, then <em>he is happy</em>."
+ 3. <strong>Abduction</strong>: hypothesis-driven, 'flipped' version of deduction, starts with observations or facts and infer the most likely rule that could explain the observation.
+    "Given <em><rule> and <effect></em>, infer by abduction <em><cause></em>" e.g. "If <em>Joe Bloggs is happy</em>, infer by abduction <em>Joe Bloggs enjoys domestic bliss and professional contentment</em>"
+    (Scientists develop medicines using abduction)
+ 5. <strong>Induction</strong>: probabilistic, pattern-based, generilizing from repeated observations, but the conclusion might not always be true:
+    "If <em><cause> and <effect></em> then <em><rule></em>" e.g. "If <em>every crow I have seen is blue</em>, <em>all crows are blue</em>"</p>
+<p>( Later in chapter 9 we will explore different ways to deal with uncertainty in rules, e.g.:
+ - <strong>Vague rule</strong>: Fuzzy logic, where truth values range between 0 and 1, representing the degree to which a statement is true.
+ - <strong>Uncertain link between evidence and conclusion</strong>: Bayesian inference, which relates the conditional probability of a hypothesis given some observed data to the likelihood of the data under that hypothesis.
+ - <strong>Uncertain evidence</strong>: 🤷 )</p>
+<p><strong>Fundamental questions:</strong>
+- How do we write down knowledge about a domain/problem?
+- How do we automate reasoning to deduce new facts or ensure consistency of a knowledge base?</p>
+<h4 id="132-logic">1.3.2 <a href="#132-logic">Logic</a></h4>
+<p><strong>Propositional Logic</strong>
+ - Letters stand for "basic" propositions
+ - Combine into more complex sentences using AND, OR, NOT, IFF, ... 
+ - e.g.
+    - P = "It rains", Q = "I will bring an umbrella"
+    - P → Q "If it rains, I will bring an umbrella."</p>
+<p><strong>First-order logic</strong>
+ - An extension of Propositional Logic for a more expressive representation (including relations and ontologies)
+ - Terms: constants, variables, functions applied to terms
+    - e.g. a, f(a), motherOf(Mary), ...
+ - Atomic Formulae: predicates applied to tuples of terms
+    - e.g. likes(Mary, motherOf(Mary)), likes(x, a), ...
+ - Quantified formulae:
+    - e.g. ∀x Animal(x) → HasHeart(x), ∃x loves(x, Mary)
+      - "For all x, if x is an animal, then x has a heart"
+      - "There exists at least one person who loves Mary"</p>
+<h4 id="133-learning-rules">1.3.3 <a href="#133-learning-rules">Learning Rules</a></h4>
+<p><strong>Ontology</strong>  </p>
+<p>An ontology is a formal structure that defines the relationships between different concepts in a domain. It’s often used in AI to infer new facts from known data.</p>
+<p>Like OOP, child concept is a specialisation of parent concept. Also, child inherits property of parent. 
+Ontology includes not just the hierarchy of concepts (aka Taxonomic hierarchy), but also the properties and relationships between them, enabling reasoning and inference.
+e.g. Dog is a subclass of Mammal. Thus, dogs can have diseases. Diseases can be trated by medication.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/4cbbeb64-ff39-48dc-8a77-910a363c8108" /></p>
+<p>We can infer the type of object from its attributes, e.g.</p>
+<p>Guess what this object is:</p>
+<ul>
+<li>Fruit category</li>
+<li>Green and yellow mottled skin</li>
+<li>30cm diameter</li>
+<li>Ovoid shape</li>
+<li>Red flesh, black seeds</li>
+</ul>
+<p>= Watermelon</p>
+<p><strong>Reasoning System for categories</strong></p>
+<p>Two closely related families of systems:</p>
+<ul>
+<li><strong>Semantic networks</strong> aka. Associative network</li>
+<li>A graph-based representation of knowledge that emphasizes the relationships between entities (concepts)</li>
+<li>Models Facts, Objects, Attributes, Relationships</li>
+<li>Its application includes Natural Language Processing (NLP), Knowledge Graphs</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/cb1ad1c3-32b6-4046-a808-20f5b362cddb" /></p>
+<ul>
+<li><strong>Description logics</strong></li>
+<li>A more formal and rigorous knowledge representation system than semantic networks</li>
+<li>provides precise mathematical definitions for Facts, Objects, Attributes, Relationships</li>
+<li>e.g. defines "Parent" as "someone who has at least one child" or "a mammal is an animal with fur and gives live birth."</li>
+<li>a foundation for ontology-based systems</li>
+</ul>
+<p>[1] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Simple_reflex_agent.png
+[2] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_reflex_agent.png
+[3] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_goal_based_agent.png
+[4] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_utility_based.png
+[5] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:IntelligentAgent-Learning.png
+[6] https://en.wikipedia.org/wiki/Intelligent_agent</p>
+<p>(Add Mountain Car problem, Sudoku, simple webGL based simulation to test viewer's understanding of KRR)</p>
+<hr />
+<h2 id="2-search_1">2 <a href="#2-search">Search</a></h2>
+<p>You will learn:
+- the theory behind search in AI
+- to develop a smart agent with search capability to solve interesting problem</p>
+<h3 id="21-state-action-transition-function">2.1 <a href="#21-state-action-transition-function">State, Action, Transition Function</a></h3>
+<p>A problem can be described by
+- State
+- Action
+- Transition Function</p>
+<p>State: variable, e.g. position on the grid, (x,y)
+Action: function, e.g. "move up" "move down"
+Transition Function: The function that determines how the action changes the state. T(s,a) = s'
+(where s is state, a is action, s' is the new state) This is deterministic transition function, where next state is predictable.
+If the next state is probabilistic, use Stochastic transition function:
+ T(s,a,s') = P(s'|s,a)
+(where P(s'|s,a) is the probability of transitioning to new state s', given state and action)</p>
+<p>Types of states:
+- Initial state
+- Goal state
+- Terminal state
+- Intermediate state
+- Deadend state</p>
+<h3 id="22-search-space">2.2 <a href="#22-search-space">Search Space</a></h3>
+<p>Search space
+= set of all possible states a system can be in</p>
+<p>e.g. Chess
+<strong>State</strong>: The configuration of the chessboard at any given time, including the positions of all pieces.
+<strong>State Space</strong>: All the possible ways the chessboard can be arranged, which is finite but very large (approximately 10^43 possible positions)</p>
+<p>State space could be infinite, e.g. robot navigation:
+<strong>State</strong>: position (x, y) and direction the robot could occupy,
+<strong>State Space</strong>:  finite (if the space is discretized) or infinite (if the space is continuous)</p>
+<p>(Assuming Graph Theory knowledge)
+State space can be represented as a graph</p>
+<p>Node = State
+Edge = Action</p>
+<p>(0,0) --move right--&gt; (1,0) --move right--&gt; (2,0)
+   |                      |                       |
+ move down            move down          move down
+   |                      |                       |
+(0,1) --move right--&gt; (1,1) --move right--&gt; (2,1)
+   |                      |                       |
+ move down            move down          move down
+   |                      |                       |
+(0,2) --move right--&gt; (1,2) --move right--&gt; (2,2)</p>
+<p>If the environment is deterministic, each action leads to one specific new state, corresponding to one edge between two nodes. 
+In a stochastic environment, edges could represent probabilistic transitions.</p>
+<p>move up (0.7)
+   (0,0)
+     | 
+   (0,1) ------&gt; (1,1) move right (0.15)
+     |
+   (0,2) 
+move down (0.15)</p>
+<p>70% chance the robot moves up 
+15% chance the robot moves right
+15% chance the robot moves down</p>
+<p>In some cases, the graph edges are weighted, meaning each edge has a cost or value associated with the transition between two states. 
+The weights can represent things like the cost of an action (time, energy, or distance)
+The goal is often to find the path from the initial state to the goal state that minimizes this cost. (Shortest path search, e.g. Dijkstra's algorithm or A* search) Covered more later</p>
+<h3 id="23-uninformed-search-vs-informed-search">2.3 <a href="#23-uninformed-search-vs-informed-search">Uninformed Search vs Informed Search</a></h3>
+<p>Uninformed = No info about which path to explore next. No clue how to get to the goal state faster
+Example:
+Breadth-First Search (BFS): Explores all possible nodes at the present depth level before moving deeper into the search tree.
+Depth-First Search (DFS): Explores as far down a path as possible before backtracking to explore other paths.</p>
+<p>Uninformed means "No heuristic knowledge"
+A "heuristic" is a function that estimates how close a given state is to the goal, helping the algorithm prioritize which paths to explore.
+More on that later.</p>
+<p>Informed search uses domain-specific knowledge and heuristics to determine which options to explore next often leading to faster solutions.
+Example:
+A* search, Greedy Best-First Search</p>
+<h3 id="24-uninformed-search">2.4 <a href="#24-uninformed-search">Uninformed Search</a></h3>
+<p>Tree is often used to represent Uninformed Search algorithms, since we dont have to worry about revisiting nodes (since there are no cycles).</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/519e3fc9-0139-4211-8967-2d9ebf454f19" /></p>
+<p>A node is said to be Expanded* when the algorithm has examined all their neighboring nodes and added them to the search space.</p>
+<p><strong>4 Types of Nodes in Uninformed Search Tree:</strong></p>
+<ol>
+<li>
+<p>Root Node = Where the search begins. contains the initial state of the algorithm.</p>
+</li>
+<li>
+<p>Expanded* Nodes (Black)</p>
+</li>
+<li>
+<p>Generated Nodes (Black and Red) = Nodes that the algorithm has already visited (i.e. the algorithm has either already expanded* or is about to expand the node.) </p>
+</li>
+<li>
+<p>Frontier (Red): Nodes that have been generated but not yet expanded*. In other words, the algorithm will explore these next by expanding them and looking at their neighbors.</p>
+</li>
+</ol>
+<h4 id="241-breadth-first-search-bfs">2.4.1 <a href="#241-breadth-first-search-bfs">Breadth-First Search (BFS)</a></h4>
+<p>BFS explores all nodes at each depth level before going deeper</p>
+<p>BFS treats the frontier as a queue</p>
+<p>It selects the first element in the queue to explore next
+If the list of paths on the frontier is [p1, p2, ..., pr]
+p1 is selected. Its children are added to the end of the queue, after pr. Then p2 is selected next.</p>
+<p>All nodes are expanded at a same depth in the tree before any nodes at the next level are expanded.
+Can be implemented by using a queue to store frontier nodes.</p>
+<p><strong>Example of BFS in AI:</strong></p>
+<p><img alt="35765050-f46564cc-08ff-11e8-98b2-e093ba83a66e" src="https://github.com/user-attachments/assets/9b344547-6550-47b9-b3ce-0ec093ae1d1e" />
+source: https://gist.github.com/kira924age/c14ec7424a966d1e48a9b601289907f0</p>
+<p><img alt="Breadth-First-Tree-Traversal" src="https://github.com/user-attachments/assets/31603d83-42a7-40cd-af63-d83b23e5936d" />
+source: https://www.codecademy.com/article/tree-traversal</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/0101c080-e049-4d8f-9e76-3f2bc82c2558" /></p>
+<p><strong>Pros:</strong>
+- Complete (guaranteed to find a path to the solution, even if the graph is cyclic)
+- Optimal (guaranteed to find the shortest path (if the graph is unweighted or has uniform edge weight))</p>
+<p><strong>Cons:</strong>
+- Exponential memory usage (has O(b^d) space complexity where b is the 'branching factor' (= number of child nodes for each node) and d is the depth of the search tree)</p>
+<h4 id="242-depth-first-search-dfs">2.4.2 <a href="#242-depth-first-search-dfs">Depth-First Search (DFS)</a></h4>
+<p><img alt="35765045-e1ef0078-08ff-11e8-91af-30ce1cc22767" src="https://github.com/user-attachments/assets/92bb8acd-599a-43bb-842f-292c4326a6c9" />
+source: https://gist.github.com/kira924age/c14ec7424a966d1e48a9b601289907f0</p>
+<p>iterative psudocode
+<img alt="image" src="https://github.com/user-attachments/assets/abc56fa8-20b7-4d8c-8d25-8e400f412a69" /></p>
+<p>recursive approach can sometimes be more efficient. depends on the tree structure.
+<img alt="image" src="https://github.com/user-attachments/assets/e07fb86a-6521-4859-a71f-80e0d4daa3c5" /></p>
+<ul>
+<li>Uses stack (Call stack if recursive)</li>
+</ul>
+<p><strong>Pros</strong>
+- Low memory usage = more space efficient, since it only needs to store the nodes in the current path (has O(d), where d is the depth of the tree)</p>
+<p><strong>Cons</strong>
+- Not optimal (Not guaranteed to find the shortest path to the goal, as it may go down very deep paths and miss shorter paths.)
+- Not complete (Not guaranteed to find a path to the goal, as it may get stuck in an infinite loop in cyclic graphs)</p>
+<h4 id="243-depth-limited-search-iterative-deepening">2.4.3 <a href="#243-depth-limited-search-iterative-deepening">Depth-Limited Search &amp; Iterative Deepening</a></h4>
+<p>Same as DFS, except it doesnt search beyond nodes at a set depth limit. Nodes at this depth limit are treated as if they had no successors.</p>
+<p>IDS (Iterative deepening Depth-first Search, aka IDDFS) takes this one step further; it repeats DLS with increasing depth limits until the goal is found.  If it starts with a depth limit of 1, it is essentially the same as BFS, except that it incrementally increases the limit in subsequent iterations. essentailly BFS + DFS</p>
+<p>Good explaination: https://ai-master.gitbooks.io/classic-search/content/what-is-depth-limited-search.html</p>
+<p><strong>Pros:</strong>
+- Memory-efficient like DFS, O(d) space complexity
+- Finds the shortest path like BFS. Optimal and complete
+- Avoids the disadvantages of DFS (like getting stuck in cycles or deep branches)</p>
+<p><strong>Cons</strong>:
+- Not time-efficient. It repeatedly searches the same nodes at shallow depths, leading to redundant work
+- Can be inefficient if branching factor is large</p>
+<p>In general, IDS is the preferred search strategy for a large search space with solution that has unknown depth. </p>
+<p><strong>Bidirectional Search</strong></p>
+<p>runs two simultaneous searches: one forward from the starting node and one backward from the goal node. The searches meet in the middle, reducing the search space significantly. hence both time and space complexity to O(b^(d/2))</p>
+<p>Requires both the start and goal states to be known.</p>
+<p><strong>Uniform Cost Search</strong></p>
+<p>Similar to BFS, but orders nodes by cost -&gt; useful for weighted graph</p>
+<p>Uses a priority queue to expand the lowest-cost node first</p>
+<h3 id="25-informed-search">2.5 <a href="#25-informed-search">Informed Search</a></h3>
+<p>Heuristics
+Greedy Search
+A* search</p>
+<p>Finding Heuristic function
+Dominance</p>
+<h3 id="26-solving-problems-using-search">2.6 <a href="#26-solving-problems-using-search">Solving Problems Using Search</a></h3>
+<p>Exercise -
+1. Define the states, actions and transition function
+2. Convert above definition into a machine readable format
+3. Choose a search strategy, considering the context &amp; problem</p>
+<p>(give ~5 problems .. what did you choose? why?)</p>
+<h2 id="3-artificial-neural-networks_1"><a href="#3-artificial-neural-networks">3. Artificial Neural Networks</a></h2>
+<p>Humans can perform complex tasks: Shape recognition, Speech processing, Image processing ... 
+To emulate these behaviours, a branch of artifficial intelligence formed inspired by <a href="https://en.wikipedia.org/wiki/Neural_circuit">neural circuitry</a>:
+<a href="https://developer.nvidia.com/discover/artificial-neural-network"><strong>ANN (ARtificial Neural Networks)</strong></a></p>
+<p><strong>High Connectivity</strong>
+ANNs are composed of layers of nodes (neurons). Each node in one layer connects to nodes in the next layer, forming a network, where it learns patterns from the relationships and make prediction. </p>
+<p><strong>Parallelism</strong>
+Neurons process multiple tasks simultaneously rather than sequentially
+<img alt="KY2I87" src="https://github.com/user-attachments/assets/13c40609-a1dd-4043-af65-aa20f2219453" /></p>
+<p>ANN:
+- excels at Pattern recognition and Forecasting
+- uses a newer, non-algorithmic paradigm to process information through learning, adaptation, and parallel processing
+- is essentially a black box; you can observe the inputs and outputs transformed through multiple layers, but the inner workings are unknown</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ad86256f-31e1-4479-87cc-2c429eacd291" />
+(image source: https://developer.nvidia.com/discover/artificial-neural-network)</p>
+<p><strong>How does ANN learn?</strong>
+- uses <strong>Generalization</strong> to perform well on unseen data that has not been encountered before
+- uses <strong>Function Approximation</strong> to estimate a function that maps intputs to outputs based on a set of observed data points.
+  The aim is to find a function that closely represents the relationship between the input features and output targets.
+  Even if the exact function is unknown.</p>
+<p><strong>Function Approximation</strong>
+ can either be:
+  - used on an entity (=a set of input variables, either continuous or discrete) to output discrete values that represents which class the entity belongs to (=membership) -&gt; <strong>Classification</strong>  (e.g. character recognition, cats vs dogs from image)
+  - used to predict continuous outcomes based on input variables. -&gt; <strong>Regression</strong> (e.g. predicting the house price based on location, number of bedrooms, etc)</p>
+<h3 id="31-neurons-biological-and-artificial">3.1 <a href="#31-neurons-biological-and-artificial">Neurons - Biological and Artificial</a></h3>
+<p>The brain is made up of <a href="https://en.wikipedia.org/wiki/Neuron">neurons (nerve cells)</a> which have
+• a cell body (soma)
+• dendrites (inputs)
+• an axon (outputs)
+• synapses (connections between cells)</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/5a27c3e2-5319-4f66-8569-4e98e90e7a17" />
+(Image: <a href="https://qbi.uq.edu.au/brain/brain-anatomy/what-neuron">Alan Woodruff ; De Roo et al / CC BY-SA 3.0 via Commons</a>)</p>
+<p>(Kinda looks similar to a tree; it receives energy through its leaves (dendrites, inputs), the energy goes through the body (soma), and reaches the root (axon, outputs). The axon is connected to other neurons and transfers electrical signals to them through synapse. When the inputs reach some threshold, an action potential (electrical pulse) is sent along the axon to the outputs.
+This threshhold may change over time, depending on how <strong>excitatory</strong> (promoting the firing) or <strong>inhibitory</strong> (reducing the likelihood of firing) the synapse is.</p>
+<p>We call this <strong>synaptic plasticity</strong>, which is crucial for learning and memory.
+The strength of a connection between two neurons is called <strong>synaptic weight</strong>; it corresponds to how much influence the firing of a neuron has on another.</p>
+<p>The synaptic weight is changed by using a learning rule, the most basic of which is Hebb's rule, which is usually stated in biological terms as</p>
+<pre><code> Neurons that fire together, wire together.
+</code></pre>
+<p><strong>Hebbian learning (1949)</strong>
+"When a neuron A persistently activates another nearby neuron B, the connection between the two neurons becomes stronger. Specifically, a growth process occurs that increases how effective neuron A is in activating neuron B. As a result, the connection between those two neurons is strengthened over time"</p>
+<p>More reading: https://en.wikipedia.org/wiki/Synaptic_weight</p>
+<p><strong>Artificial Neurons</strong> </p>
+<p>The first computational model of a neuron() was proposed by Warren MuCulloch (neuroscientist) and Walter Pitts (logician) in 1943.</p>
+<p>More reading: https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1</p>
+<p>It has 4 components:
+- Inputs
+- Weights
+- Transfer Function
+- Activation Function</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/187c34da-d4a8-47e1-8843-aa1e842329a9" />
+(Image: https://en.wikipedia.org/wiki/Artificial_neuron)</p>
+<p>vs.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/0dd12d34-d844-4bdc-9e20-7c13c1fb5263" />
+Image source: https://en.wikipedia.org/wiki/File:Neuron3.svg</p>
+<p>The inputs, after being multiplied by their respective <strong>weights</strong>, which reflect the importance or influence of that input to the node, are summed and then passed through an activation function to produce the final activation level.</p>
+<p>The activation function has a <strong>threshhold</strong> to determine whether the neuron has fired or not. ( 0 or 1 activation value )</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b328bc3d-005c-447b-a8bd-0cf9aeca87ac" /></p>
+<ul>
+<li>x_i  = input values</li>
+<li>w_ij = weights corrresponding to the inputs</li>
+<li>g(s_j) = the activation function applied to the weighted sum</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/76b45693-b9da-4e49-84fd-119c69b7be1f" /></p>
+<p>Activation Functions:
+- Sign (Step) function
+- Semi-linear (piecewise linear) function<br />
+- Sigmoid: Smooth and non-linear</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/d46c4613-dc64-4e40-b5c3-11b66375b37c" /></p>
+<p>Examples of Non-linear Activation Functions:
+- Sigmoid
+- ReLU (Rectified Linear Unit)
+-  Tanh (Hyperbolic Tangent)</p>
+<p>Non-linear functions enable the network to stack multiple layers and allow each layer to capture increasingly abstract and complex features from the data</p>
+<p>The activation level is the result of the node's internal computation, which is usually a non-linear function of the inputs. </p>
+<p>Some limitations of MP artificial neuron:
+(1) it only works with binary inputs and outputs; not with real numbers
+(2) it does not evolve or learn.  its functionality is limited to problems that can be derived by the modeler</p>
+<p>More reading: https://jontysinai.github.io/jekyll/update/2017/09/24/the-mcp-neuron.html
+https://com-cog-book.github.io/com-cog-book/features/mp-artificial-neuron.html</p>
+<h3 id="32-single-layer-perceptron">3.2 <a href="#32-single-layer-perceptron">Single-Layer Perceptron</a></h3>
+<p>Frank Rosenblatt, an American psychologist, proposed the classical <strong>Perception</strong> model in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.</p>
+<p>Early ideas on how information is stored and processed in artificial intelligence and cognitive science was divided into two approaches: <strong>coded representations</strong> and <strong>connectionist approaches</strong>. Let's say you perceived a triangle, then, the former states that a triangle-shaped image would be "carved" in the memory space. Once the shape is carved, you would be able to precisely retrieve the information stored in a particular location in the brain. </p>
+<p>The latter states that memories are stored as preferences for a particular "response" rather than "topographic representations". Instead of a unique cluster of neurons wired in an invariant manner, that "code" the memory of a triangle, what we have instead is a series of associations among a set of neurons that "tend to react" to the stimulus that may remind you of a trinagle.</p>
+<p>Rosenblatt took elements from the works of Hebb and summarized the nature of the cognition as the problems of (1) detection, (2) storage, and (3) the effect of the stored information.</p>
+<pre><code>1. The physical connections participating in learning and recognizing a stimulus can vary from organism to organism.
+2. The cells involved in learning and recognition are flexible, meaning that the probability of activation, when exposed to a stimulus, can change over time.
+3. Similar stimuli will tend to trigger similar response patterns in the brain.
+4. When memory is forming, the application of a positive and/or a negative reinforcement may facilitate or hinder the process.
+5. Similarity is not determined by the perceptual properties of the stimuli, but by a combination of the perceiving system, the stimuli, the context, and the history of interactions between those elements. This last principle indicates that you can't decouple perception and representation from the perceiving system (the organism itself).
+</code></pre>
+<p><strong>Perceptron</strong> is an algorithm used to classify inputs into one of two possible categories.</p>
+<p>The perceptron makes the classification decision by applying its discriminant function to the input. 
+This function is typically linear and divides the input space into two regions, one for each class.</p>
+<p>The perceptron draws a hyperplane in the input space. Any input that falls on one side of the hyperplane is classified as one class, and inputs on the other side are classified as the other class.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b48fe94d-1f06-4462-aae9-1bd06e3fe4c2" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/bddf10c1-ffea-489e-a297-f12032fe5e42" /></p>
+<p>The perceptron is able to solve only linearly separable functions,  (or hyperplane in higher dimensions)</p>
+<p>e.g. 
+AND Gate
+<img alt="image" src="https://github.com/user-attachments/assets/23db5e67-addd-4f64-a051-2d94a05d5de5" /></p>
+<p>(0, 0) → 0
+(0, 1) → 0
+(1, 0) → 0
+(1, 1) → 1</p>
+<p>When plotted, only the point (1,1) is activated.
+Can be divided into two classes by a single straight line (linear decision boundary)</p>
+<p>XOR Gate</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/a8055a9b-bccd-4c3c-92e3-64941b22257a" /></p>
+<p>(0, 0) → 0
+(0, 1) → 1
+(1, 0) → 1
+(1, 1) → 0</p>
+<p>When plotted, the points (0,1) and (1,0) are situated diagonally opposite.
+= Cannot be divided into two classes by a single straight line (linear decision boundary)
+= the XOR gate is non-linearly separable: it needs something more than just a single line to classify the points correctly.</p>
+<p><strong>Learning Rule</strong></p>
+<p>A learning rule is a set of instructions that governs how a model's weights are adjusted during the training process to improve its performance.
+The goal is to minimize errors in its predictions by modifying its internal parameters (weights) based on the input data and corresponding outputs (labels).</p>
+<p>If the perceptron makes a correct prediction, the weights remain the same.
+If the perceptron underpredicts (i.e., it predicts -1, but the correct label is 1), the weights are increased.
+If the perceptron overpredicts (i.e., it predicts 1, but the correct label is -1), the weights are decreased.</p>
+<p>This process is repeated until the perceptron can correctly classify all training examples (or until it hits the max attempt)</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/12234fd3-d1ee-43e4-83fd-8ebbbbc82d7f" /></p>
+<h3 id="33-multilayer-perceptron-mlp">3.3 <a href="#33-multilayer-perceptron-mlp">Multilayer Perceptron (MLP)</a></h3>
+<p>While the single-layer perceptron is simple and efficient for binary classification, it can only separate linearly separable data. 
+To solve non-linearly separable data such as XOR, you need a multi-layer perceptron (MLP)</p>
+<p>MLP (Multi-Layer Perceptron) consists of multiple layers of neurons organized in such a way that it can model complex relationships. 
+It is one of the foundational architectures in deep learning and machine learning.</p>
+<p>MLP is a <strong>Feedforward</strong> network:
+- Data flows through the network in one direction, from the input layer to the hidden layers and finally to the output layer. (No feedback loops or backward connection)
+- Each neuron in a layer is connected to every neuron in the next layer (this is called a fully connected layer).
+- At each neuron, the input is multiplied by weights, summed up, and passed through an activation function (e.g., sigmoid, ReLU).</p>
+<p>MLP neural network architecture</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/d1bac3c3-4286-4562-99dd-d7d23328675b" /></p>
+<p><strong>Backpropagation</strong>
+If there is an error between the actual output and the target, we calculate the error (difference between the target and actual output) and propagate errors back through the network to update the weights.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/4a86d578-86cd-43df-b4bf-203be18c0536" /></p>
+<p>Backpropagation is typically paired with <strong>gradient descent</strong> (or its variants, such as stochastic gradient descent) to minimize the loss function by adjusting the weights in the direction that reduces the error.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/480c03e8-8149-4bb8-a365-85bc0f5faa7c" /></p>
+<p><strong>Error function (Loss function)</strong>
+-&gt; measures how well or poorly the neural network is performing
+<img alt="image" src="https://github.com/user-attachments/assets/d411e107-2580-4ae4-9264-4a9e83bbebaa" /></p>
+<p><strong>Gradient descent</strong>
+-&gt; aims to minimize the error function by adjusting the weights
+<img alt="image" src="https://github.com/user-attachments/assets/356b24c5-a999-4329-8a5d-d2503452a018" /></p>
+<p><strong>Backpropagation Diagram</strong>
+<img alt="image" src="https://github.com/user-attachments/assets/4755d9fa-0141-43e5-b21c-6b0c4d035cb1" /></p>
+<p>The error (E(t)) is computed as the difference between the predicted output Y(t) and the target value.
+The error is then propagated backward through the network, and gradients are calculated for each weight.
+The weights (W_o, W_i) are updated using gradient descent to reduce the error based on the computed gradients.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ded640c1-17b2-41b9-a037-671c27ba339a" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/c6430ad2-afec-4e61-91d0-88c6d14fda5a" /></p>
+<p>More reading: https://en.wikipedia.org/wiki/Multilayer_perceptron</p>
+<p>https://scikit-learn.org/stable/modules/neural_networks_supervised.html</p>
+<h3 id="34-neural-network-design">3.4 <a href="#34-neural-network-design">Neural Network Design</a></h3>
+<h4 id="step-1-exhaustive-system-analysis">Step 1: Exhaustive System Analysis</h4>
+<p>Before choosing a neural network, you should consider other traditional models (e.g. phenomelogical models) that might be more appropriate for the problem. Neural networks are powerful but also more complex, resource-intensive, and data-hungry. Simpler models may be easier to work with and could perform just as well depending on the problem.</p>
+<p>Phenomenological Models: models based on domain-specific knowledge and physical laws, often used in scientific and engineering fields. e.g In physics, models based on Newton's laws to describe motion, or in biology, models to describe population growth.</p>
+<p>Neural networks are powerful and flexible but should be considered a "second best solution" when classic models cannot perform well. It's a good idea to try simpler models first to save time and resource.
+Many traditional models work well even with small datasets. Neural networks, on the other hand, perform better as the amount of data increases, while simpler models may struggle to scale. </p>
+<p>The <strong>preprocessing</strong> step in the development of a neural network or any machine learning model, involves identifying the most relevant features (input variables) and ensuring that unnecessary variables are removed. 
+The output should also be clearly defined so that the neural network can be properly structured to predict the desired outcome.
+- In classification tasks, the output might be a category or label (e.g., is the email spam or not?)
+- In regression tasks, the output might be a continuous value (e.g., the position of Y over period X)</p>
+<p><strong>Example:</strong>
+Let’s say you’re building a neural network to predict whether a person will buy a product based on the following features:</p>
+<p>Age
+Gender
+Income
+City
+Favorite Color
+Education Level
+Number of Children
+Marital Status
+Temperature on the day of purchase</p>
+<p>In this scenario:</p>
+<p>Step 1 would involve identifying which variables (inputs) are truly important. For example, "Favorite Color" and "Temperature" might not be very important or relevant in predicting whether someone will buy a product, so you could remove those variables. You could also find that "Income" and "Education Level" are highly correlated, so you might only keep one of them in the model. The goal is to simplify the model by only keeping the most important features that are directly related to the prediction task.</p>
+<h4 id="step-2-preprocessing">Step 2: Preprocessing</h4>
+<p>When designing and training a neural network:
+- Ensure that your data is representative of the problem you’re trying to solve
+- Obtain high quality data, e.g. properly designed survey/experimental plan
+- Make sure you have enough data to train the network
+- Visualise and examine the data to eliminate any outliers, null values, and redundant variables (if two variables are highly correlated, it might indicate redundancy)</p>
+<p>Neural networks are <strong>empirical</strong> model (i.e. learns from experience and observation rather than logic) for <strong>interpolation</strong>, not <strong>extrapolation</strong>— meaning it is not suitable for making predictions outside the range of the data they were trained on. For example, if a neural network is trained on data within a certain range (e.g., temperatures between 50°F and 100°F), it may perform poorly if asked to predict temperatures outside that range (e.g., 120°F).</p>
+<p><strong>Normalization</strong> of input variables on different scales or in different units is essential. 
+ Example normalization of variables so that they lie within a similar range (e.g., [0, 1] or [-1, 1]):
+ <img alt="image" src="https://github.com/user-attachments/assets/731753db-36b9-476a-8c57-5aceb12ffb0e" /></p>
+<h4 id="step-3-neural-model-design">Step 3: Neural Model Design</h4>
+<p>The number of input neurons and output neurons depends on the results from Steps 1 and 2. 
+But deciding on the number of neurons in the hidden layer (Nh) is not straightforward and often requires experimentation or following certain heuristics.
+Adding too many neurons can lead to overfitting (the model memorizes the training data rather than learning general patterns)</p>
+<p>The rule of thumb is to carefully choose Nh to keep the number of parameters/weights (Nw) below 10% of the total number of samples in the training dataset.</p>
+<pre><code>Nw &lt; (Number of samples) / 10
+</code></pre>
+<p>This rule helps ensure that the model has enough training data relative to its complexity (number of parameters) to learn general patterns rather than overfitting.</p>
+<p>Formula for the number of parameters (weights) for an MLP:
+<img alt="image" src="https://github.com/user-attachments/assets/5cceb768-8f86-48ae-8085-ccd61ba95fcc" /></p>
+<p>e.g. Let's say it is a binary classification problem, and you have 1000 samples in your dataset,</p>
+<p>you have 5 input neurons, [ 10 ] neurons in the hidden layer, 2 output neurons,
+Then the total number of weights Nw in the network would be: (5+1)<em>10 + (10+1)</em>2 = 82, which is smaller than the 10% of the samples (100), which makes it an adequate size relative to the dataset. </p>
+<p><a href="https://en.wikipedia.org/wiki/Universal_approximation_theorem">Universal Approximation Theorem</a> states that an MLP with one hidden layer and a sufficient number of neurons can approximate any non-linear function to any desired degree of accuracy, though in practice, deeper networks are often preferred for better performance.</p>
+<p>ReLU and Sigmoid functions are commonly used in hidden layers to introduce non-linearity and allow the network to learn complex patterns.
+In the output layer, the choice of activation function depends on the task:
+- Linear activation for regression tasks
+- Sigmoid for binary classification
+- Softmax for multi-class classification</p>
+<h4 id="step-4-training">Step 4: Training</h4>
+<p>The process of training involves finding the set of weights that minimize the loss function (=the error function that represents how far off the model’s predictions are from the actual values).
+However, this process can be difficult due to the complexity of the error function's landscape (solution space).</p>
+<p>The error function solution space is often highly complex, meaning it can have many:
+<strong>Local minima</strong>: Points where the error is lower than the surrounding points but is not the global minimum (the true lowest point in the solution space). Gradient descent may get stuck in these local minima.
+<strong>Saddle points</strong> (minimax points): Points where the gradient is zero, but they are neither a maximum nor a minimum. These points can slow down training since the model might get stuck in flat areas of the solution space.</p>
+<p>Local minima are points in the error (or loss) function where the gradient (slope) is zero, but they are not the global minimum (the best possible solution). During training, neural networks use optimization techniques like gradient descent to minimize the error function, but the error surface is often very complex with many local minima. Due to this complexity, depending on the starting point (initial weights), the network might settle into a local minimum instead of the global minimum, resulting in a suboptimal solution.</p>
+<p><strong>Solution</strong>: To increase the chance of finding the global minimum, run the training processes multiple times (20+) with different random initial weights. </p>
+<p>• <strong>Bias</strong>
+= the error introduced by assuming that the underlying relationship between the inputs (features) and outputs (target) is simpler than it actually is, aka the model "underfitting" the data
+<img alt="image" src="https://github.com/user-attachments/assets/939bb0a5-7374-4362-b395-907ddd3225c3" /></p>
+<p>On the other hand, we can also overdo the training and induce:
+• Overparameterization (High variance)
+• Overfitting (High variance)</p>
+<p>where the model learns from too much noise and specific details around the underlying patterns.</p>
+<p><strong>High variance</strong> (of the model'sperformance depending on the dataset, i.e. performs well on the training set but poorly on new, unseen set), aka "overfitting"
+<img alt="image" src="https://github.com/user-attachments/assets/700a8836-183d-4b78-8530-f059eccaf5bd" /></p>
+<h5 id="data-splitting">Data Splitting</h5>
+<p>To avoid overfitting, we use two sets for training: the <strong>Training Set</strong> and <strong>Test Set</strong> (plus optional <strong>Validation Set</strong>) </p>
+<p><strong>Training Set</strong>
+=&gt; the model tries to fit the training data as closely as possible. (i.e. the model computes and minimizes the error function based on the training set)</p>
+<p><strong>Test Set</strong>
+=&gt; the model cannot see the test set during training. It is used to evaluate the model's performance after training, as a a simulated real-world check using unseen data</p>
+<p>A common practice is to split the data into 80% training set and 20% test set. This allows the model to learn from a majority of the data while still having enough data to evaluate its performance.</p>
+<p><strong>Simultaneously visualizing the error function</strong> on both the training set and test set is a useful practice to understand how well your model is performing over time.</p>
+<p>You can plot the training error and test error as a function of the training iterations. This allows you to observe patterns such as:
+- If the training error continues to decrease but the test error starts increasing, the model is likely overfitting. This is because it is memorizing the training data while failing to generalize to the unseen test data.
+- If both the training and test errors decrease and converge, the model is learning well and generalizing appropriately</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/7a5642e6-c920-4412-bb72-03d9db7810c5" /></p>
+<p>As training progresses, (as the number of <strong>epochs</strong> increases = the number of iterations of all the training data in one cycle for training the model increases)
+you can monitor both training and test errors and stop the training process once you reach the minimum test error. This is called early stopping and is a common technique to prevent overfitting.</p>
+<p>You can determine the optimal number of epochs as the point at which the test error curve (dotted line) is at its minimum (i.e., right where the graph marks "Minimum test error").</p>
+<p>Both the training and test sets should be large enough to be statistically representative of the entire dataset.</p>
+<p>More reading: https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets</p>
+<h5 id="cross-validation">Cross-Validation</h5>
+<p>A more advanced technique is <strong>k-fold</strong> cross-validation, where the dataset is divided into k subsets. The model is trained k times, each time using a different subset as the test set and the remaining k−1 subsets as the training set. 
+The results can be averaged to produce a more reliable estimate of the model's performance.
+Or, sometimes, different neural network models are developed using the available data, splitting the training and test sets in different ways. The model that achieves the minimum error on the test set is chosen.</p>
+<h4 id="step-5-generalisation">Step 5: Generalisation</h4>
+<p>To test the generalisation capability of the network, that is, its performance on a different (never seen) set of data, a small (but representative) third set might be reserved, the generalisation set</p>
+<h3 id="35-neural-network-architectures">3.5 <a href="#35-neural-network-architectures">Neural Network Architectures</a></h3>
+<p>FNN: <a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">Feed-forward network</a>
+-  connections between the nodes do not form cycles/loops
+-  single-direction
+-  fully connected (every node receives input from upstream nodes and delivers output to downstream nodes) = makes it prone to overfitting
+-  no feedback</p>
+<p>RNN: <a href="https://en.wikipedia.org/wiki/Recurrent_neural_network">Recurrent network</a>
+-  feeds outputs back into its own inputs
+-  may react a stable state, or exhibit oscilations or even chaotic behaviour
+-  can support short-term memory</p>
+<p>CNN: <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolutional Neural Network</a>
+- deep learning network (de-facto standard for computer vision and image processing)
+- inspired by animal visual cortex
+- regularized FNN to prevent overfitting</p>
+<p>[To be continued]</p>
+<p>⚠️ Site is currently under active development, frequent changes are expected</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2024-09-27 09:40:56.752895+00:00
+-->
