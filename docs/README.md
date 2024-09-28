@@ -1090,8 +1090,6 @@ FNN: [Feed-forward network](https://en.wikipedia.org/wiki/Feedforward_neural_net
 -  fully connected (every node receives input from upstream nodes and delivers output to downstream nodes) = makes it prone to overfitting
 -  no feedback
 
-[Implementation of Feed-forward Neural Network]()
-
 RNN: [Recurrent network](https://en.wikipedia.org/wiki/Recurrent_neural_network)
 -  feeds outputs back into its own inputs
 -  may react a stable state, or exhibit oscilations or even chaotic behaviour
@@ -1102,6 +1100,9 @@ CNN: [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_
 - inspired by animal visual cortex
 - regularized FNN to prevent overfitting
 
+
+
+**[Exercise: Build a Feedforward Neural Network](Feedforward-Neural-Network.md)**
 
 
 [To be continued]
