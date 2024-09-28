@@ -6,9 +6,9 @@ extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 markdown_extensions:
   - mdx_math
-  
+
 nav:
   - About: README.md
   - Projects: 
-    - gym.md
-    - Feedforward-Neural-Network.md
+    - Gym: gym.md
+    - Feedforward Neural Network: Feedforward-Neural-Network.md

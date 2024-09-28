@@ -140,12 +140,19 @@ Y(t) = W_o^T f_{NL}(W_i^T X(t) + b_i) + b_o
 Y(t) = W_o^T f_{NL}(W_i^T X(t) + b_i) + b_o
 </script>
 </p>
-<p>Where:
-- <script type="math/tex"> X(t) </script> is the input vector for the <script type="math/tex"> t </script>-th sample.
-- <script type="math/tex"> W_i , W_o </script> is the weight matrix for the input and output layers.
-- <script type="math/tex"> b_i , b_o </script> is the bias vector for the hidden and output layers.
-- <script type="math/tex"> f_{NL} </script> is the non-linear activation function (e.g., Tanh, ReLU)
-- <script type="math/tex"> Y(t) </script> is the predicted output vector for the <script type="math/tex"> t </script>-th sample.</p>
+<p>Where:</p>
+<ul>
+<li>
+<script type="math/tex"> X(t) </script> is the input vector for the <script type="math/tex"> t </script>-th sample.</li>
+<li>
+<script type="math/tex"> W_i , W_o </script> is the weight matrix for the input and output layers.</li>
+<li>
+<script type="math/tex"> b_i , b_o </script> is the bias vector for the hidden and output layers.</li>
+<li>
+<script type="math/tex"> f_{NL} </script> is the non-linear activation function (e.g., Tanh, ReLU)</li>
+<li>
+<script type="math/tex"> Y(t) </script> is the predicted output vector for the <script type="math/tex"> t </script>-th sample.</li>
+</ul>
 <p>The network learns by adjusting these weights and biases based on the error between the predicted output  <script type="math/tex"> Y(t) </script>  and the actual target <script type="math/tex"> T(t) </script>:</p>
 <p>
 <script type="math/tex; mode=display"> E(t) = Y(t) - T(t) </script>
@@ -162,45 +169,54 @@ Y(t) = W_o^T f_{NL}(W_i^T X(t) + b_i) + b_o
   \text{MSE} = \frac{1}{s} \sum_{t=1}^{s} \sum_{k=1}^{m} (y_k(t) - \hat{y}_k(t))^2 = \frac{1}{s} \sum_{t=1}^{s} \| \mathbf{E}(t) \|^2 
   $$
 
-  **Where:**
-  - \( s \) is the total number of samples.
-  - \( m \) is the number of output neurons or dimensions.
-  - \( y_k(t) \) is the observed (actual) value for the \( k \)-th output in the \( t \)-th sample.
-  - \( \hat{y}_k(t) \) is the predicted value for the \( k \)-th output in the \( t \)-th sample.
-  - \( \mathbf{E}(t) \) is the error vector for the \( t \)-th sample, where each component \( e_k(t) = y_k(t) - \hat{y}_k(t) \).
+  <li>
+  \( s \) is the total number of samples.
+  </li>
+  <li>
+  \( m \) is the number of output neurons or dimensions.
+  </li>
+  <li>
+  \( y_k(t) \) is the observed (actual) value for the \( k \)-th output in the \( t \)-th sample.
+  </li>
+  <li>
+  \( \hat{y}_k(t) \) is the predicted value for the \( k \)-th output in the \( t \)-th sample.
+  </li>
+  <li>
+  \( \mathbf{E}(t) \) is the error vector for the \( t \)-th sample, where each component \( e_k(t) = y_k(t) - \hat{y}_k(t) \).
+  </li>
 
   MSE is one of the most popular tools to measure how accurate models are within statistics and machine learning. Within ML, MSE is used as a loss function or part of a loss function that an algorithm minimizes.
 
 </details>
 
 <p>When training a neural network, our goal is to <strong>minimize the MSE</strong>, meaning we want our predictions to be as close as possible to the actual targets.</p>
+<h3 id="backpropagation">Backpropagation</h3>
 <p>To minimize the MSE, we need to adjust the network's weights in the direction that reduces the error. This is achieved through <strong>backpropagation</strong>, which involves computing the gradient of the MSE with respect to each weight in the network.</p>
 <p>Backpropagation can be done by following the four steps:</p>
-<ol>
-<li><strong>Compute the gradient of MSE</strong>
-The gradient of the MSE with respect to each weight in the output layer <script type="math/tex"> W_o </script> is calculated to understand how changes in these weights affect the overall error. The formula for the gradient is:</li>
-</ol>
+<p><strong>1. Compute the gradient of MSE</strong>
+The gradient of the MSE with respect to each weight in the output layer <script type="math/tex"> W_o </script> is calculated to understand how changes in these weights affect the overall error. The formula for the gradient is:</p>
 <p>
 <script type="math/tex; mode=display">
    \frac{\partial \text{MSE}}{\partial W_o} = \frac{2}{s} E(t) \cdot Z^T(t)
    </script>
 </p>
-<p>Where:
-   - <script type="math/tex"> \frac{2}{s} </script>: This scaling factor comes from the derivative of the squared error term and the averaging over all samples in the MSE.
-   - <script type="math/tex"> E(t) </script>: The error vector for the <script type="math/tex"> t </script>-th sample (<script type="math/tex"> E(t) = Y(t) - T(t) </script>).
-   - <script type="math/tex"> Z(t) </script> is the output of the hidden layer. The superscript <script type="math/tex"> T </script> to <script type="math/tex"> Z^T</script> denotes the 'transpose' of <script type="math/tex"> Z(t) </script>, and it ensures that the dimensions of the vectors or matrices involved in the multiplication are compatible. If <script type="math/tex"> Z(t) </script> is a column vector, its transpose <script type="math/tex"> Z^T(t)</script> becomes a row vector (or vice versa), allowing for correct multiplication with the error vector.</p>
-<ol>
-<li><strong>Update the Output Layer Weights (<script type="math/tex"> W_o </script>)</strong>
-Using the computed gradients, we update the weights for the output layer:</li>
-</ol>
+<p>Where:</p>
+<ul>
+<li>
+<script type="math/tex"> \frac{2}{s} </script>: This scaling factor comes from the derivative of the squared error term and the averaging over all samples in the MSE.</li>
+<li>
+<script type="math/tex"> E(t) </script>: The error vector for the <script type="math/tex"> t </script>-th sample (<script type="math/tex"> E(t) = Y(t) - T(t) </script>).</li>
+<li>
+<script type="math/tex"> Z(t) </script> is the output of the hidden layer. The superscript <script type="math/tex"> T </script> to <script type="math/tex"> Z^T</script> denotes the 'transpose' of <script type="math/tex"> Z(t) </script>, and it ensures that the dimensions of the vectors or matrices involved in the multiplication are compatible. If <script type="math/tex"> Z(t) </script> is a column vector, its transpose <script type="math/tex"> Z^T(t)</script> becomes a row vector (or vice versa), allowing for correct multiplication with the error vector.</li>
+</ul>
+<p><strong>2. Update the Output Layer Weights (<script type="math/tex"> W_o </script>)</strong>
+Using the computed gradients, we update the weights for the output layer:</p>
 <p>
 <script type="math/tex; mode=display">
    \Delta W_o = -\alpha \cdot \frac{2}{s} E(t) \cdot Z^T(t)
    </script>
    Here, <script type="math/tex"> \alpha </script> is the learning rate, controlling the step size of each update.</p>
-<ol>
-<li><strong>Compute the Gradient of MSE with Respect to Input Layer Weights (<script type="math/tex"> W_i </script>):</strong></li>
-</ol>
+<p><strong>3. Compute the Gradient of MSE with Respect to Input Layer Weights (<script type="math/tex"> W_i </script>):</strong></p>
 <p>We then compute the gradients for the input layer weights, considering the backpropagated error from the output layer:</p>
 <p>
 <script type="math/tex; mode=display">
@@ -208,15 +224,13 @@ Using the computed gradients, we update the weights for the output layer:</li>
    </script>
 </p>
 <p>Here, <script type="math/tex"> \frac{\partial f_{NL}}{\partial Z_{in}} </script> is the derivative of the non-linear activation function with respect to the input of the hidden layer, and <script type="math/tex"> X^T(t) </script> is the transpose of the input vector for the <script type="math/tex"> t </script>-th sample.</p>
-<ol>
-<li><strong>Update the Input Layer Weights (<script type="math/tex"> W_i </script>):</strong></li>
-</ol>
+<p><strong>4. Update the Input Layer Weights (<script type="math/tex"> W_i </script>):</strong></p>
 <p>Finally, the input layer weights are updated*:</p>
 <p>
 <script type="math/tex; mode=display">
-   W_i = W_i + \Delta W_i
-   </script>
-   *(For clarity, the equal sign = here is for assignment)</p>
+W_i = W_i + \Delta W_i
+</script>
+*(For clarity, the equal sign = here is for assignment)</p>
 <p>This process repeats for multiple epochs until the network converges to a state where the error is minimized.   </p>
 <p>The non-linear function we will use in this exercise is the hyperbolic tangent "Tanh":</p>
 <p>
@@ -226,7 +240,7 @@ Using the computed gradients, we update the weights for the output layer:</li>
 <h2 id="setup">Setup</h2>
 <h5 id="creating-the-neural-network-in-python">Creating the Neural Network in Python</h5>
 <p>We'll start by implementing the feedforward neural network using <strong>NumPy</strong>, a fundamental package for scientific computing in Python.</p>
-<p>We use Numpy because (1) array is much more efficient than lists, and (2) we can easily define the activation function such as tanh(x) with the library.</p>
+<p>Numpy is a popular choice in ML because (1) array is much more efficient than lists, and (2) we can easily define the activation function such as tanh(x) with the library.</p>
 <pre><code class="language-Python">import numpy as np
 </code></pre>
 <p>Let's define our input and target vectors:</p>
@@ -277,9 +291,14 @@ plt.show()
 </code></pre>
 <p><img alt="plot" src="../fnn-plot.png" /></p>
 <h2 id="experiments">Experiments</h2>
-<p>Now it's time to propagate the input through the network.</p>
+<p>Now it's time to propagate the inputs through the network.</p>
+<p>
+<script type="math/tex; mode=display">
+Y(t) = W_o^T f_{NL}(W_i^T X(t) + b_i) + b_o
+</script>
+</p>
 <p>First, we'll pass input data through each layer of the network, applying weights and bias at each neuron. </p>
-<p>Recap of the figure:</p>
+<p>Recap of the concept of FNN:</p>
 <blockquote>
 <p><img alt="MLP-Feed-Forward-Network" src="../fnn-MLP-Feed-Forward-Network-2-1-1.png" /></p>
 </blockquote>
@@ -312,7 +331,15 @@ plt.legend()
 plt.show()
 </code></pre>
 <p><img alt="network_output_without_training" src="../fnn-network_output_without_training.png" /></p>
-<p>As you can see, the output prediction of our untrained neural network (black line) deviates from the target vector (red). Let's start training the network for 500 epochs with 0.01 learning rate and monitor the MSE (Mean Squared Error) over time.</p>
+<p>As you can see, the output prediction of our untrained neural network (black line) deviates from the target vector (red). </p>
+<h3 id="training-the-neural-network">Training the neural network</h3>
+<p>For a better result, we'll start training the network for 500 epochs with 0.01 learning rate and monitor the MSE (Mean Squared Error) over time.</p>
+<p>
+<script type="math/tex; mode=display"> E(t) = Y(t) - T(t) </script>
+</p>
+<p>
+<script type="math/tex; mode=display"> \text{mse} = \frac{1}{s} \sum_{k=1}^{m} \sum_{t=1}^{s} e_k^2(t) </script>
+</p>
 <p>First, we'll initialize the variables for the MSE and errors:</p>
 <pre><code class="language-py"> mse = np.zeros(q) # MSE for each epoch
  e = np.zeros(q)   # Error for each epoch
@@ -339,7 +366,7 @@ plt.show()
     # 2. Compute the error
     # 3. Backpropagate
 </code></pre>
-<p>Then, we will set the error and the MSE. Here is a quick recap of the definition of error:</p>
+<p>Then, we will set the error and the MSE. </p>
 <blockquote>
 <p>The network computes the error between the predicted output <script type="math/tex"> Y(t) </script> and the actual target <script type="math/tex"> T(t) </script>:
 <script type="math/tex; mode=display"> E(t) = Y(t) - T(t) </script>
@@ -362,13 +389,13 @@ plt.show()
 
     # 3. Backpropagate
 </code></pre>
-<p>And we'll follow the formula for MSE. A quick recap of the definition:</p>
+<p>And we'll follow the formula for MSE. </p>
 <blockquote>
 <p>To optimize the network, we aim to minimize the <strong>Mean Squared Error (MSE)</strong>:
 <script type="math/tex; mode=display"> \text{mse} = \frac{1}{s} \sum_{k=1}^{m} \sum_{t=1}^{s} e_k^2(t) </script>
 Where: 
-- <script type="math/tex"> s </script> is the total number of samples,
-- <script type="math/tex"> e_k(t) </script> is the <script type="math/tex"> k </script>-th component of the error vector <script type="math/tex"> E(t) </script>.</p>
+<li> <script type="math/tex"> s </script> is the total number of samples, </li>
+<li> <script type="math/tex"> e_k(t) </script> is the <script type="math/tex"> k </script>-th component of the error vector <script type="math/tex"> E(t) </script>. </li></p>
 </blockquote>
 <pre><code class="language-py">for ep in range(q): # for each epoch 
   zini = np.zeros(s) # zin for each data point
@@ -388,29 +415,41 @@ Where:
 
     # 3. Backpropagate
 </code></pre>
-<p>We are now ready to backpropagate. Let's start with the output layer:</p>
+<p>And there's our MSE - we can plot this and see how the MSE changes over time already:</p>
+<pre><code class="language-py"># Plotting the mean squared error
+plt.semilogy(range(q),mse,'b.', label='MSE')
+plt.title('Mean squared error')
+plt.xlabel('epochs')
+plt.ylabel('performance')
+plt.legend()
+plt.show()
+</code></pre>
+<p>Let's do backpropagate our neural network and see how much better it can get. </p>
+<p>We'll start with the output layer:</p>
 <p>
 <script type="math/tex; mode=display"> \Delta W_o = -\alpha \cdot \frac{2}{s} \cdot E(t) \cdot Z^T(t) </script>
 </p>
-<p>Where:
-- <script type="math/tex"> \alpha </script> is the learning rate,
-- <script type="math/tex"> Z(t) </script> is the output of the hidden layer.
-- The factor <script type="math/tex"> \frac{2}{s} </script>​ is derived from the MSE function</p>
+<ul>
+<li>
+<script type="math/tex"> \alpha </script> is the learning rate,</li>
+<li>
+<script type="math/tex"> Z(t) </script> is the output of the hidden layer.</li>
+<li>The factor <script type="math/tex"> \frac{2}{s} </script>​ is derived from the MSE function</li>
+</ul>
 <p>The key part of this stage is calculating the gradients of the error with respect to the weights and biases to adjust them. Specifically:</p>
 <ul>
-<li>The gradients <script type="math/tex"> ΔW_o </script> and <script type="math/tex"> ​Δb_o </script> are calculated for the weights and bias of the output layer using the error term <script type="math/tex"> e_k </script> and the learning rate <script type="math/tex"> a </script>, and the hidden layer output <script type="math/tex"> z_k </script>.</li>
+<li>The gradient <script type="math/tex"> ΔW_o </script> is calculated for the weights and bias of the output layer using the error term <script type="math/tex"> e_k </script> and the learning rate <script type="math/tex"> a </script>, and the hidden layer output <script type="math/tex"> z_k </script>.</li>
 <li>These gradients are accumulated across all data points to reflect how much each weight and bias contributed to the overall error.</li>
 <li>The calculated gradients will then be used to update the weights and biases, with the goal of reducing the error in the next epoch.</li>
 </ul>
-<p>So, let's get back to our code and convert the formula for backpropagation. 
-Starting with the output layer, first of all, we will initialize the variables. They will need to be reset for every epoch:</p>
+<p>Back to our code, we will first initialize the variables. These will also need to be reset for every epoch along with other variables during training:</p>
 <pre><code class="language-py">for ep in range(q): # for each epoch 
   zini = np.zeros(s) # zin for each data point
   zi = np.zeros(s)   # zi for each data point
   yi = np.zeros(s)   # output without training
   dEdbo = dEdwo = 0 # delta variables for backpropagation
 </code></pre>
-<p>And to backpropagate, we will update the deltaE for every data point. Note that the Z(t) for the output bias is 1 and thus ommitted.</p>
+<p>And to backpropagate, we will follow the formula for <script type="math/tex"> ΔW_o </script> and update the deltaE for every data point. Here, Z(t) for the output bias is 1 and thus ommitted.</p>
 <pre><code class="language-py">for ep in range(q): # for each epoch 
 ...
   for k in range(s): # for every data point
@@ -423,8 +462,8 @@ Starting with the output layer, first of all, we will initialize the variables. 
 <p>
 <script type="math/tex; mode=display"> \Delta W_i^T = -\alpha \cdot \frac{2}{s} \cdot E^T(t) \cdot W_{oj} \cdot \frac{\partial f_{NL}}{\partial Z_{in}} \cdot X^T(t) </script>
 </p>
-<p>(Note 1: <script type="math/tex"> j </script> is for indexing hidden neurons, but it can be ignored in our case)
-(Note 2: The derivative of the hyperbolic tangent, <script type="math/tex"> \frac{\partial f_{NL}}{\partial Z_{in}} </script> needs to be simplified to an <a href="https://www.wolframalpha.com/input/?i=derivative+tanh%28x%29">alternative form</a> )</p>
+<p>(Note 1: <script type="math/tex"> j </script> is for indexing hidden neurons, but it can be ignored in our case since we only have two layers... i.e. input and output layer)</p>
+<p>(Note 2: The derivative of the hyperbolic tangent, <script type="math/tex"> \frac{\partial f_{NL}}{\partial Z_{in}} </script> needs to be simplified to an <a href="https://www.wolframalpha.com/input/?i=derivative+tanh%28x%29">alternative form</a> to be written in Python )</p>
 <p>For the non-linear function we will use the hyperbolic tangent:</p>
 <p>
 <script type="math/tex; mode=display"> f_{NL}(x) = \frac{2}{1+e^{-2x}}-1 </script>
@@ -438,23 +477,43 @@ Starting with the output layer, first of all, we will initialize the variables. 
     dEdbo=dEdbo+a*(2.0/s)*e[k]
     dEdwo=dEdwo+a*(2.0/s)*e[k]*z[k]
 
-    #Computing delta values (gradients) for the hidden layer (using the derivative of the non-linear function)
+    # Computing delta values (gradients) for the hidden layer (using the derivative of the non-linear function)
     dEdbi=dEdbi+a*(2.0/s)*e[k]*wo*(4*np.exp(-2*zin[k])/np.power(1+np.exp(-2*zin[k]),2))
     dEdwi1=dEdwi1+a*(2.0/s)*e[k]*wo*(4*np.exp(-2*zin[k])/(np.power(1+np.exp(-2*zin[k]),2)))*x[0,k]
     dEdwi2=dEdwi2+a*(2.0/s)*e[k]*wo*(4*np.exp(-2*zin[k])/(np.power(1+np.exp(-2*zin[k]),2)))*x[1,k]
 </code></pre>
-<p>And that's it! Now we are ready to recalculate the network output after training with updated weights and biases. If we plot the outputs and the target vector, we should be able to see the output matching with the target more closely than before.</p>
+<p>And that's it! The code for training the neural network is complete. Now we are ready to recalculate the network output with updated weights and biases, the same way we did the initial calculation: </p>
+<pre><code class="language-py"># Recalculate the network output after training with updated weights and biases
+for k in range(s):
+    x0_k = x[0, k]   # kth data point of 1st input
+    x1_k = x[1, k]   # kth data point of 2nd input
+    zini[k] = (wi1 * x0_k + wi2 * x1_k) + bi
+    zi[k] = (2/(1+np.exp(-2*zini[k])))-1 # activation function
+    yi[k] = zi[k] * wo + bo # updated network output
+</code></pre>
+<p>If we plot the outputs and the target vector, we should be able to see the output matching with the target more closely than before.</p>
+<pre><code class="language-py"># Plotting network output after training
+plt.plot(i,t,'r*-',label='Target')
+plt.plot(i,yi,'k+-',label='Output after training')  # Now plotting the updated output
+plt.title('Network output after training')
+plt.legend()
+plt.show()
+</code></pre>
 <p>Before:</p>
 <p><img alt="network_output_without_training" src="../fnn-network_output_without_training.png" /></p>
 <p>After:</p>
 <p><img alt="network_output_after_training" src="../fnn-network_output_after_training.png" /></p>
-<p><strong>Bonus Exercises</strong>
-- Try varying the number of epochs or the learning rate. How does it influence the training?</p>
+<p><strong>Bonus Exercises</strong></p>
 <ul>
-<li>Try varying the initial value of the weights to the following set: wi1 = 0, wi2 = 0, wo = 1, bi = 1, bo = 1. The training is highly dependent of the initial solution, why?</li>
+<li>
+<p>Try varying the number of epochs or the learning rate. How does it influence the training?</p>
+</li>
+<li>
+<p>Try varying the initial value of the weights to the following set: wi1 = 0, wi2 = 0, wo = 1, bi = 1, bo = 1. The training is highly dependent of the initial solution, why?</p>
+</li>
 </ul>
 <h3 id="keras-implementation">Keras Implementation</h3>
-<p>There are libraries that abstracts away the process of creating and training neural networks, like TensorFlow and Keras. Below is an implementation in Keras: </p>
+<p>There are libraries that abstracts away the process of creating and training neural networks, like TensorFlow and Keras. Here is an example implementation in Keras, which yields the same results as above: </p>
 <pre><code class="language-py">import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import Sequential
@@ -483,10 +542,16 @@ nnet.fit(np.array(x), np.array(t), batch_size=4, epochs = 500, verbose=0)
 # Feedforward propagation, i.e. network output without training
 ye = nnet.predict(x)
 </code></pre>
-<p><a href="../fnn-feedforward-neural-network.py">Complete Code (Vanilla)</a>
-<a href="../fnn-feedforward-neural-network-keras.py">Complete Code (Keras)</a></p>
+<p><a href="../fnn-feedforward-neural-network.py">Complete Code (Vanilla Python)</a></p>
+<p><a href="../fnn-feedforward-neural-network-keras.py">Complete Code (Keras)</a></p>
 <h4 id="conclusion">Conclusion</h4>
-<p>Congratulations! You’ve successfully built a Feedforward Neural Network from scratch and explored its inner workings, including forward propagation, backpropagation, and optimization techniques. Hopefully, you’ve gained insights into how neural networks learn from data and how parameters like learning rates and training epochs affect training through this exercise.</p></div>
+<p>In this tutorial, we've built a simple Feedforward Neural Network from scratch. We've explored how forward propagation, backpropagation, and weight updates work in neural networks without relying on pre-built libraries.</p>
+<p>Understanding the core principles behind neural networks is essential for deep learning. The skills learned here will not only help you understand what’s happening under the hood of frameworks like Keras or TensorFlow but also enable you to customize models for unique tasks or research problems.</p>
+<hr />
+<p>Next Steps:</p>
+<p><strong>Larger, real-world Datasets</strong>: Explore more implementations on larger, real-world datasets to understand how the network scales.</p>
+<p><strong>More Optimizers</strong>: Learn about advanced optimizers like Adam or RMSProp, which offer better convergence in complex networks.</p>
+<p>More to be covered in the upcoming exercises!</p></div>
             </div>
         </div>
 
