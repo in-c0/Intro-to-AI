@@ -1072,7 +1072,6 @@ Both the training and test sets should be large enough to be statistically repre
 More reading: https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets
 
 ##### Cross-Validation
-
 A more advanced technique is **k-fold** cross-validation, where the dataset is divided into k subsets. The model is trained k times, each time using a different subset as the test set and the remaining k−1 subsets as the training set. 
 The results can be averaged to produce a more reliable estimate of the model's performance.
 Or, sometimes, different neural network models are developed using the available data, splitting the training and test sets in different ways. The model that achieves the minimum error on the test set is chosen.
@@ -1090,6 +1089,8 @@ FNN: [Feed-forward network](https://en.wikipedia.org/wiki/Feedforward_neural_net
 -  single-direction
 -  fully connected (every node receives input from upstream nodes and delivers output to downstream nodes) = makes it prone to overfitting
 -  no feedback
+
+[Implementation of Feed-forward Neural Network]()
 
 RNN: [Recurrent network](https://en.wikipedia.org/wiki/Recurrent_neural_network)
 -  feeds outputs back into its own inputs
