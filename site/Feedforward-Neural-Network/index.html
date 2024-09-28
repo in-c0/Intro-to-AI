@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="ba">
+        <link rel="canonical" href="https://in_c0.github.io/Feedforward-Neural-Network/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Feedforward Neural Network - Introduction to Artificial Intelligence</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Introduction to Artificial Intelligence</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Projects</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../gym/" class="dropdown-item">Gym</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Feedforward Neural Network</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../gym/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#building-a-feedforward-neural-network" class="nav-link">Building A Feedforward Neural Network</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#theoretical-background" class="nav-link">Theoretical Background</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#setup" class="nav-link">Setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#experiments" class="nav-link">Experiments</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>
+<script type="math/tex; mode=display">
+Y(t) = W_o^T f_{NL}(W_i^T X(t) + b_i) + b_o
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display"> E(t) = Y(t) - T(t) </script>
+</p>
+<p>
+<script type="math/tex; mode=display"> \text{mse} = \frac{1}{s} \sum_{k=1}^{m} \sum_{t=1}^{s} e_k^2(t) </script>
+</p>
+<p>
+<script type="math/tex; mode=display"> \Delta W_o = -\alpha \cdot \frac{2}{s} \cdot E(t) \cdot Z^T(t) </script>
+</p>
+<p>
+<script type="math/tex; mode=display"> \Delta W_i^T = -\alpha \cdot \frac{2}{s} \cdot E^T(t) \cdot W_{oj} \cdot \frac{\partial f_{NL}}{\partial Z_{in}} \cdot X^T(t) </script>
+</p>
+<p><img alt="MLP-Feed-Forward-Network" src="../fnn-MLP-Feed-Forward-Network-2-1-1.png" /></p>
+<h1 id="building-a-feedforward-neural-network">Building A Feedforward Neural Network</h1>
+<p>The goal of this exercise is to build a simple <strong><a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">Feedforward Neural Network</a></strong> in Python from scratch, without relying on existing frameworks like Keras or TensorFlow to gain a better understanding of the underlying mechanism of neural networks. This involves manually implementing forward propagation, activation functions, loss calculations, and backpropagation for weight updates.</p>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<p>A <strong>Feedforward Neural Network (FNN)</strong> consists of layers of neurons, with each layer fully connected to the next one. Unlike other networks, FNNs do not have cycles or loops, and information flows only in one direction: from input to output. The simplest architecture consists of:</p>
+<ul>
+<li><strong>Input Layer</strong>: Receives the input features.</li>
+<li><strong>Hidden Layer(s)</strong>: Processes inputs from the input layer.</li>
+<li><strong>Output Layer</strong>: Produces the final prediction.</li>
+</ul>
+<p>Mathematically, a simple feedforward network with <script type="math/tex"> n </script> inputs, <script type="math/tex"> m </script> outputs, and a hidden layer with <script type="math/tex"> p </script> neurons can be modeled as:</p>
+<p>
+<script type="math/tex; mode=display">
+Y(t) = W_o^T f_{NL}(W_i^T X(t) + b_i) + b_o
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> X(t) </script> is the input vector for the <script type="math/tex"> t </script>-th sample.
+- <script type="math/tex"> W_i , W_o </script> is the weight matrix for the input and output layers.
+- <script type="math/tex"> b_i , b_o </script> is the bias vector for the hidden and output layers.
+- <script type="math/tex"> f_{NL} </script> is the non-linear activation function (e.g., Tanh, ReLU)
+- <script type="math/tex"> Y(t) </script> is the predicted output vector for the <script type="math/tex"> t </script>-th sample.</p>
+<p>The network learns by adjusting these weights and biases based on the error between the predicted output  <script type="math/tex"> Y(t) </script>  and the actual target <script type="math/tex"> T(t) </script>:</p>
+<p>
+<script type="math/tex; mode=display"> E(t) = Y(t) - T(t) </script>
+</p>
+<p>The goal is to minimize this error across all samples by optimizing the weights and biases.</p>
+<details open>
+  <summary>What is <b>Mean Squared Error (MSE)</b>?</summary>
+
+  The Mean Squared Error (MSE) is a common metric for measuring how well a model fits the data. It calculates the average squared difference between the predicted and actual values. It aggregates the errors across all samples to provide a single measure of the network's performance.
+
+  It is the average of the squared differences between the predicted values and the actual target values. As the error rate increases, the MSE penalty grows quadratically, which heavily penalizes larger errors. A downside to MSE is that if applied to a dataset with a few outliers, it can heavily penalize the model.
+
+  $$ 
+  \text{MSE} = \frac{1}{s} \sum_{t=1}^{s} \sum_{k=1}^{m} (y_k(t) - \hat{y}_k(t))^2 = \frac{1}{s} \sum_{t=1}^{s} \| \mathbf{E}(t) \|^2 
+  $$
+
+  **Where:**
+  - \( s \) is the total number of samples.
+  - \( m \) is the number of output neurons or dimensions.
+  - \( y_k(t) \) is the observed (actual) value for the \( k \)-th output in the \( t \)-th sample.
+  - \( \hat{y}_k(t) \) is the predicted value for the \( k \)-th output in the \( t \)-th sample.
+  - \( \mathbf{E}(t) \) is the error vector for the \( t \)-th sample, where each component \( e_k(t) = y_k(t) - \hat{y}_k(t) \).
+
+  MSE is one of the most popular tools to measure how accurate models are within statistics and machine learning. Within ML, MSE is used as a loss function or part of a loss function that an algorithm minimizes.
+
+</details>
+
+<p>When training a neural network, our goal is to <strong>minimize the MSE</strong>, meaning we want our predictions to be as close as possible to the actual targets.</p>
+<p>To minimize the MSE, we need to adjust the network's weights in the direction that reduces the error. This is achieved through <strong>backpropagation</strong>, which involves computing the gradient of the MSE with respect to each weight in the network.</p>
+<p>Backpropagation can be done by following the four steps:</p>
+<ol>
+<li><strong>Compute the gradient of MSE</strong>
+The gradient of the MSE with respect to each weight in the output layer <script type="math/tex"> W_o </script> is calculated to understand how changes in these weights affect the overall error. The formula for the gradient is:</li>
+</ol>
+<p>
+<script type="math/tex; mode=display">
+   \frac{\partial \text{MSE}}{\partial W_o} = \frac{2}{s} E(t) \cdot Z^T(t)
+   </script>
+</p>
+<p>Where:
+   - <script type="math/tex"> \frac{2}{s} </script>: This scaling factor comes from the derivative of the squared error term and the averaging over all samples in the MSE.
+   - <script type="math/tex"> E(t) </script>: The error vector for the <script type="math/tex"> t </script>-th sample (<script type="math/tex"> E(t) = Y(t) - T(t) </script>).
+   - <script type="math/tex"> Z(t) </script> is the output of the hidden layer. The superscript <script type="math/tex"> T </script> to <script type="math/tex"> Z^T</script> denotes the 'transpose' of <script type="math/tex"> Z(t) </script>, and it ensures that the dimensions of the vectors or matrices involved in the multiplication are compatible. If <script type="math/tex"> Z(t) </script> is a column vector, its transpose <script type="math/tex"> Z^T(t)</script> becomes a row vector (or vice versa), allowing for correct multiplication with the error vector.</p>
+<ol>
+<li><strong>Update the Output Layer Weights (<script type="math/tex"> W_o </script>)</strong>
+Using the computed gradients, we update the weights for the output layer:</li>
+</ol>
+<p>
+<script type="math/tex; mode=display">
+   \Delta W_o = -\alpha \cdot \frac{2}{s} E(t) \cdot Z^T(t)
+   </script>
+   Here, <script type="math/tex"> \alpha </script> is the learning rate, controlling the step size of each update.</p>
+<ol>
+<li><strong>Compute the Gradient of MSE with Respect to Input Layer Weights (<script type="math/tex"> W_i </script>):</strong></li>
+</ol>
+<p>We then compute the gradients for the input layer weights, considering the backpropagated error from the output layer:</p>
+<p>
+<script type="math/tex; mode=display">
+   \Delta W_i^T = -\alpha \cdot \frac{2}{s} E^T(t) \cdot W_o \cdot \frac{\partial f_{NL}}{\partial Z_{in}} \cdot X^T(t)
+   </script>
+</p>
+<p>Here, <script type="math/tex"> \frac{\partial f_{NL}}{\partial Z_{in}} </script> is the derivative of the non-linear activation function with respect to the input of the hidden layer, and <script type="math/tex"> X^T(t) </script> is the transpose of the input vector for the <script type="math/tex"> t </script>-th sample.</p>
+<ol>
+<li><strong>Update the Input Layer Weights (<script type="math/tex"> W_i </script>):</strong></li>
+</ol>
+<p>Finally, the input layer weights are updated*:</p>
+<p>
+<script type="math/tex; mode=display">
+   W_i = W_i + \Delta W_i
+   </script>
+   *(For clarity, the equal sign = here is for assignment)</p>
+<p>This process repeats for multiple epochs until the network converges to a state where the error is minimized.   </p>
+<p>The non-linear function we will use in this exercise is the hyperbolic tangent "Tanh":</p>
+<p>
+<script type="math/tex; mode=display"> f_{NL}(x) = \frac{2}{1+e^{-2x}}-1 </script>
+</p>
+<p>Now that we’ve explored the mathematical foundations, let’s see how we can implement a feedforward neural network from scratch in Python. This will give us a deeper understanding of how the forward and backward passes work without the abstraction of higher-level libraries.</p>
+<h2 id="setup">Setup</h2>
+<h5 id="creating-the-neural-network-in-python">Creating the Neural Network in Python</h5>
+<p>We'll start by implementing the feedforward neural network using <strong>NumPy</strong>, a fundamental package for scientific computing in Python.</p>
+<p>We use Numpy because (1) array is much more efficient than lists, and (2) we can easily define the activation function such as tanh(x) with the library.</p>
+<pre><code class="language-Python">import numpy as np
+</code></pre>
+<p>Let's define our input and target vectors:</p>
+<pre><code class="language-Python">import numpy as np
+
+# Define input and target vectors
+x = np.array([[-2, -1, 0, 1],  # input 1
+              [-1,  0, 1, 2]]) # input 2
+
+t = np.array([-1.5, -1, 1, 1.5]) # target
+
+# Display the inputs and corresponding targets
+print(f&quot;This network has {x.shape[1]} inputs:&quot;)
+
+for i in range(x.shape[1]):
+    print(f&quot;    [{x[0, i]}, {x[1, i]}] with target {t[i]}&quot;)
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-Python">This network has 4 inputs:
+    [-2, -1] with target -1.5
+    [-1, 0] with target -1.0
+    [0, 1] with target 1.0
+    [1, 2] with target 1.5
+</code></pre>
+<p>Next, we'll initialize the network parameters. Feel free to try varying these values to test the influence in the algorithm.</p>
+<pre><code class="language-Python">wi1=0.0651    # first weight of the input layer
+wi2=-0.6970   # second weight of the input layer
+wo=-0.1342    # first weight of the output layer
+bi=0          # input bias
+bo=-0.5481    # output bias
+
+q=500         # training epochs
+a=0.01        # learning rate
+</code></pre>
+<p>It is always a good practice to visualize the data distribution by plotting the input values against the targets. If certain inputs are grouped closely and share similar characteristics, it might indicate redundancy in data. It also helps us eliminate any outliers we don't want to include in our training.</p>
+<p>To plot the input and target vectors, we will use <a href="https://matplotlib.org/stable/tutorials/pyplot.html">Matplotlib</a>:</p>
+<pre><code class="language-py">import matplotlib.pyplot as plt
+</code></pre>
+<pre><code class="language-py">i=np.arange(1,s+1)   # x axis for plotting (1 to 4)
+# Refer to matplotlib doc for plt functions: https://matplotlib.org/stable/tutorials/pyplot.html
+
+plt.plot(i, t, 'r*-', label='Target') # red star marker solid line (r*-)
+plt.plot(i,x[0],'bo-',label='Input 1') # blue circle marker solid line (bo-)
+plt.plot(i,x[1],'bs-',label='Input 2') # blue square marker solid line (bs-)
+plt.title('Training data')
+plt.legend()
+plt.show()
+</code></pre>
+<p><img alt="plot" src="../fnn-plot.png" /></p>
+<h2 id="experiments">Experiments</h2>
+<p>Now it's time to propagate the input through the network.</p>
+<p>First, we'll pass input data through each layer of the network, applying weights and bias at each neuron. </p>
+<p>Recap of the figure:</p>
+<blockquote>
+<p><img alt="MLP-Feed-Forward-Network" src="../fnn-MLP-Feed-Forward-Network-2-1-1.png" /></p>
+</blockquote>
+<pre><code class="language-py"># initialize temp variables for forward propagation
+s = x.shape[1]     # number of samples (data points, 4 here)
+zini = np.zeros(s) # zin for each data point
+zi = np.zeros(s)   # zi for each data point
+yi = np.zeros(s)   # output without training
+
+# forward propagation
+for k in range(s):
+  x0_k = x[0, k]   # kth data point of 1st input
+  x1_k = x[1, k]   # kth data point of 2nd input  
+  zini[k] = (wi1 * x0_k + wi2 * x1_k) + bi
+</code></pre>
+<p>Then, we'll transform the data using the activation function <em>tanh</em> and apply the output weight and bias to optain the final output.</p>
+<pre><code class="language-py"># forward propagation
+for k in range(s):
+  x0_k = x[0, k]   # kth data point of 1st input
+  x1_k = x[1, k]   # kth data point of 2nd input
+  zini[k] = (wi1 * x0_k + wi2 * x1_k) + bi
+  zi[k] = (2/(1+np.exp(-2*zini[k])))-1
+  yi[k] = zi[k] * wo + bo
+</code></pre>
+<p>Now we can plot this output using <code>plt.plot</code> as before:</p>
+<pre><code class="language-py">plt.plot(i,t,'r*-',label='Target')
+plt.plot(i,yi,'k+-',label='Output')
+plt.title('Network output without training')
+plt.legend()
+plt.show()
+</code></pre>
+<p><img alt="network_output_without_training" src="../fnn-network_output_without_training.png" /></p>
+<p>As you can see, the output prediction of our untrained neural network (black line) deviates from the target vector (red). Let's start training the network for 500 epochs with 0.01 learning rate and monitor the MSE (Mean Squared Error) over time.</p>
+<p>First, we'll initialize the variables for the MSE and errors:</p>
+<pre><code class="language-py"> mse = np.zeros(q) # MSE for each epoch
+ e = np.zeros(q)   # Error for each epoch
+</code></pre>
+<p>The first part of the training will involve computing the output of the network, which we have done above already.</p>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+  for k in range(s): # for every data point
+    # 1. Compute the output of the network
+    # 2. Compute the error
+    # 3. Backpropagate
+</code></pre>
+<p>So we will simply copy and paste from above. (Note we should reset the variables at the start of each epoch)</p>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+  zini = np.zeros(s) # zin for each data point
+  zi = np.zeros(s)   # zi for each data point
+  yi = np.zeros(s)   # output without training
+
+  for k in range(s): # for every data point
+    # 1. Compute the output of the network      
+    zini[k] = (wi1 * x0_k + wi2 * x1_k) + bi
+    zi[k] = (2/(1+np.exp(-2*zini[k])))-1
+    yi[k] = zi[k] * wo + bo
+
+    # 2. Compute the error
+    # 3. Backpropagate
+</code></pre>
+<p>Then, we will set the error and the MSE. Here is a quick recap of the definition of error:</p>
+<blockquote>
+<p>The network computes the error between the predicted output <script type="math/tex"> Y(t) </script> and the actual target <script type="math/tex"> T(t) </script>:
+<script type="math/tex; mode=display"> E(t) = Y(t) - T(t) </script>
+</p>
+</blockquote>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+  zini = np.zeros(s) # zin for each data point
+  zi = np.zeros(s)   # zi for each data point
+  yi = np.zeros(s)   # output without training
+
+  for k in range(s): # for every data point
+    # 1. Compute the output of the network      
+    zini[k] = (wi1 * x0_k + wi2 * x1_k) + bi
+    zi[k] = (2/(1+np.exp(-2*zini[k])))-1
+    yi[k] = zi[k] * wo + bo
+
+
+    # 2. Compute the error
+    e[k] = yi[k] - t[k]
+
+    # 3. Backpropagate
+</code></pre>
+<p>And we'll follow the formula for MSE. A quick recap of the definition:</p>
+<blockquote>
+<p>To optimize the network, we aim to minimize the <strong>Mean Squared Error (MSE)</strong>:
+<script type="math/tex; mode=display"> \text{mse} = \frac{1}{s} \sum_{k=1}^{m} \sum_{t=1}^{s} e_k^2(t) </script>
+Where: 
+- <script type="math/tex"> s </script> is the total number of samples,
+- <script type="math/tex"> e_k(t) </script> is the <script type="math/tex"> k </script>-th component of the error vector <script type="math/tex"> E(t) </script>.</p>
+</blockquote>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+  zini = np.zeros(s) # zin for each data point
+  zi = np.zeros(s)   # zi for each data point
+  yi = np.zeros(s)   # output without training
+
+  for k in range(s): # for every data point
+    # 1. Compute the output of the network      
+    zini[k] = (wi1 * x0_k + wi2 * x1_k) + bi
+    zi[k] = (2/(1+np.exp(-2*zini[k])))-1
+    yi[k] = zi[k] * wo + bo
+
+
+    # 2. Compute the error
+    e[k] = yi[k] - t[k]
+    mse[ep] = mse[ep] + (1.0/s)*np.power(e[k],2)
+
+    # 3. Backpropagate
+</code></pre>
+<p>We are now ready to backpropagate. Let's start with the output layer:</p>
+<p>
+<script type="math/tex; mode=display"> \Delta W_o = -\alpha \cdot \frac{2}{s} \cdot E(t) \cdot Z^T(t) </script>
+</p>
+<p>Where:
+- <script type="math/tex"> \alpha </script> is the learning rate,
+- <script type="math/tex"> Z(t) </script> is the output of the hidden layer.
+- The factor <script type="math/tex"> \frac{2}{s} </script>​ is derived from the MSE function</p>
+<p>The key part of this stage is calculating the gradients of the error with respect to the weights and biases to adjust them. Specifically:</p>
+<ul>
+<li>The gradients <script type="math/tex"> ΔW_o </script> and <script type="math/tex"> ​Δb_o </script> are calculated for the weights and bias of the output layer using the error term <script type="math/tex"> e_k </script> and the learning rate <script type="math/tex"> a </script>, and the hidden layer output <script type="math/tex"> z_k </script>.</li>
+<li>These gradients are accumulated across all data points to reflect how much each weight and bias contributed to the overall error.</li>
+<li>The calculated gradients will then be used to update the weights and biases, with the goal of reducing the error in the next epoch.</li>
+</ul>
+<p>So, let's get back to our code and convert the formula for backpropagation. 
+Starting with the output layer, first of all, we will initialize the variables. They will need to be reset for every epoch:</p>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+  zini = np.zeros(s) # zin for each data point
+  zi = np.zeros(s)   # zi for each data point
+  yi = np.zeros(s)   # output without training
+  dEdbo = dEdwo = 0 # delta variables for backpropagation
+</code></pre>
+<p>And to backpropagate, we will update the deltaE for every data point. Note that the Z(t) for the output bias is 1 and thus ommitted.</p>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+...
+  for k in range(s): # for every data point
+    ...
+    # 3. Backpropagate
+        dEdbo=dEdbo+a*(2.0/s)*e[k] # delta E with respect to output bias ... Z(t) = 1 is ommitted for output bias
+        dEdwo=dEdwo+a*(2.0/s)*e[k]*z[k] # delta E with respect to output weight ... Z(t) is z[k]
+</code></pre>
+<p>And for the input layer, it will be similar to the output layer except that it has a few more variables: the input bias, and the input weight for each input:</p>
+<p>
+<script type="math/tex; mode=display"> \Delta W_i^T = -\alpha \cdot \frac{2}{s} \cdot E^T(t) \cdot W_{oj} \cdot \frac{\partial f_{NL}}{\partial Z_{in}} \cdot X^T(t) </script>
+</p>
+<p>(Note 1: <script type="math/tex"> j </script> is for indexing hidden neurons, but it can be ignored in our case)
+(Note 2: The derivative of the hyperbolic tangent, <script type="math/tex"> \frac{\partial f_{NL}}{\partial Z_{in}} </script> needs to be simplified to an <a href="https://www.wolframalpha.com/input/?i=derivative+tanh%28x%29">alternative form</a> )</p>
+<p>For the non-linear function we will use the hyperbolic tangent:</p>
+<p>
+<script type="math/tex; mode=display"> f_{NL}(x) = \frac{2}{1+e^{-2x}}-1 </script>
+</p>
+<pre><code class="language-py">for ep in range(q): # for each epoch 
+  ...
+  for k in range(s): # for every data point
+    ...
+    # 3. Backpropagate
+    # Computing delta values (gradients) for the output layer
+    dEdbo=dEdbo+a*(2.0/s)*e[k]
+    dEdwo=dEdwo+a*(2.0/s)*e[k]*z[k]
+
+    #Computing delta values (gradients) for the hidden layer (using the derivative of the non-linear function)
+    dEdbi=dEdbi+a*(2.0/s)*e[k]*wo*(4*np.exp(-2*zin[k])/np.power(1+np.exp(-2*zin[k]),2))
+    dEdwi1=dEdwi1+a*(2.0/s)*e[k]*wo*(4*np.exp(-2*zin[k])/(np.power(1+np.exp(-2*zin[k]),2)))*x[0,k]
+    dEdwi2=dEdwi2+a*(2.0/s)*e[k]*wo*(4*np.exp(-2*zin[k])/(np.power(1+np.exp(-2*zin[k]),2)))*x[1,k]
+</code></pre>
+<p>And that's it! Now we are ready to recalculate the network output after training with updated weights and biases. If we plot the outputs and the target vector, we should be able to see the output matching with the target more closely than before.</p>
+<p>Before:</p>
+<p><img alt="network_output_without_training" src="../fnn-network_output_without_training.png" /></p>
+<p>After:</p>
+<p><img alt="network_output_after_training" src="../fnn-network_output_after_training.png" /></p>
+<p><strong>Bonus Exercises</strong>
+- Try varying the number of epochs or the learning rate. How does it influence the training?</p>
+<ul>
+<li>Try varying the initial value of the weights to the following set: wi1 = 0, wi2 = 0, wo = 1, bi = 1, bo = 1. The training is highly dependent of the initial solution, why?</li>
+</ul>
+<h3 id="keras-implementation">Keras Implementation</h3>
+<p>There are libraries that abstracts away the process of creating and training neural networks, like TensorFlow and Keras. Below is an implementation in Keras: </p>
+<pre><code class="language-py">import numpy as np
+import matplotlib.pyplot as plt
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+from keras.optimizers from SGD
+
+# Inputs and targets
+x = np.array([-2,-1,0,1],[-1,0,1,2]).transpose() # inputs
+t = np.array([-1.5,-1,1,1.5]).transpose() # targets
+
+# Create the neural network with TensorFlow
+nnet = Sequential() # creates FNN
+nnet.add(Dense(1, input_dim=2, activation='tanh'))
+nnet.add(Dense(1, activation='linear'))
+
+# Learning algorithm and learning rate
+nnet.compile(loss='mean_squared_error', optimizer=SGD(learning_rate=0.01))
+
+# Feedforward propagation, i.e. network output without training
+ye = nnet.predict(x)
+
+# Train the neural network
+nnet.fit(np.array(x), np.array(t), batch_size=4, epochs = 500, verbose=0)
+
+# Feedforward propagation, i.e. network output without training
+ye = nnet.predict(x)
+</code></pre>
+<p><a href="../fnn-feedforward-neural-network.py">Complete Code (Vanilla)</a>
+<a href="../fnn-feedforward-neural-network-keras.py">Complete Code (Keras)</a></p>
+<h4 id="conclusion">Conclusion</h4>
+<p>Congratulations! You’ve successfully built a Feedforward Neural Network from scratch and explored its inner workings, including forward propagation, backpropagation, and optimization techniques. Hopefully, you’ve gained insights into how neural networks learn from data and how parameters like learning rates and training epochs affect training through this exercise.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
