@@ -1107,140 +1107,215 @@ CNN: [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_
 
 ## 4. [Reinforcement Learning](#4-reinforcement-learning)
 
-Learning by interaction with the environment
+Reinforcement Learning (RL) is a type of machine learning where an agent learns by **interacting with its environment**. Unlike supervised learning, where the agent learns from labeled data, RL involves learning from the consequences of its actions, without explicit instructions from a teacher. The agent must figure out the best actions to take through trial and error, guided by a system of **rewards** and **punishments**.
 
-without explicit instructor 
-with a direct sensorimotor connection
+#### Key Characteristics:
+- **No explicit instructor**: The agent is not directly told what to do but instead learns by observing the results of its actions.
+- **Direct sensorimotor connection**: The agent directly interacts with the environment, taking actions and observing outcomes through sensors.
+
+#### Agent’s Learning Process:
+1. The agent is in a **state** \( s \).
+2. The agent takes an **action** \( a \).
+3. The agent observes the next **state** of the environment \( s' \).
+4. The agent receives a **reward** \( r' \), which can be positive (as a reward) or negative (as a punishment).
+
+This loop continues as the agent interacts with the environment to maximize the cumulative reward over time.
+
+#### Agent-Environment Interaction:
+- **Agent** takes action \( A_t \), which affects the environment.
+- The **Environment** responds by providing the next state \( S_{t+1} \) and a reward \( R_{t+1} \) to the agent.
+
+\[
+\text{Agent} \overset{A_t}{\longrightarrow} \text{Environment} \quad \overset{S_{t+1}}{\longrightarrow} \overset{R_{t+1}}{\longrightarrow} \text{Agent}
+\]
+
+An example of reinforcement learning in action is the **Pole Balancing** task, which is similar to controlling a rocket's landing, such as what SpaceX does with its reusable rockets. The agent (a controller) learns to balance a pole (or land a rocket) by making adjustments based on the current state (e.g., position and angle) to maximize the reward (successful balance or landing).
+
+#### Different Types of Learning:
+- **Supervised Learning**: The agent learns from labeled data provided by an instructor. It has explicit inputs and corresponding outputs to learn from.
+- **Unsupervised Learning**: The agent learns from patterns in the data without any labels or direct guidance.
+- **Reinforcement Learning**: The agent learns through trial and error by interacting with the environment, receiving feedback in the form of rewards or punishments.
+
+---
+
+## 4.1 Elements of Reinforcement Learning
+Reinforcement learning is built upon several core elements that define how the agent interacts with and learns from the environment:
+
+#### 1. **Policy**:
+- A **policy** defines the agent’s behavior at any given time. It is a mapping from states to actions, telling the agent which action to take in each state. The policy can be deterministic (always taking the same action in a given state) or stochastic (taking actions with certain probabilities).
+- Example: In a game, the policy might dictate whether the agent moves left or right based on its current position.
+
+#### 2. **Reward Function**:
+- The **reward function** defines the goal of the agent by assigning a scalar reward to each action or state. It tells the agent how good or bad an action is based on the immediate outcome.
+- The goal of the agent is to maximize the cumulative reward over time.
+- Example: In a video game, the agent receives a reward for collecting coins or reaching checkpoints.
+
+#### 3. **Value Function**:
+- A **value function** estimates how good a particular state (or state-action pair) is in the long run. It reflects the total expected reward that can be obtained from that state onward.
+- While the reward function gives immediate feedback, the value function provides a broader view of the long-term consequences of actions.
+- Example: In chess, the value of a certain board position might reflect the agent’s likelihood of winning from that position, rather than the immediate score.
+
+#### 4. **Model of the Environment (Optional)**:
+- A **model** allows the agent to predict the next state and the reward it will receive after taking a certain action. If the agent has a model, it can plan ahead by simulating actions and their outcomes without interacting with the actual environment.
+- Model-based RL uses this to improve learning efficiency, while model-free RL learns purely through direct interaction with the environment.
+
+---
+
+### 4.2 Exploration vs Exploitation
+A fundamental challenge in reinforcement learning is the trade-off between **exploration** and **exploitation**:
+
+#### **Exploitation**:
+- **Exploitation** refers to choosing the action that the agent currently believes will yield the highest reward. This is based on its past experience and learned value functions.
+- The downside is that exploitation can lead the agent to get **stuck in a local optimum** because it always chooses the best-known option without exploring potentially better alternatives.
+
+#### **Exploration**:
+- **Exploration** refers to choosing actions that the agent is less certain about, in order to discover new information. By trying different actions, the agent may find a better strategy or higher reward that it didn’t know about before.
+- The downside is that exploration may result in short-term suboptimal rewards as the agent tries less favorable actions.
+
+#### Balancing Exploration and Exploitation:
+- A good RL agent balances **exploration** and **exploitation** to maximize long-term reward. Too much exploitation may prevent the agent from finding better strategies, while too much exploration may prevent it from taking advantage of known good actions.
+- A common technique to balance this is the **epsilon-greedy** strategy, where the agent usually exploits the best-known action but occasionally explores a random action.
 
 
-vs Conditional learning?
-
-
-Agent is in state s
-Agent takes an action a
-Agent observes the next state of the environment s'
-Agent receives reward r'  (can be negative, as a 'punishment')
-
-
-
-Agent --A_t-->  Environment ---R_t+1 --> Agent
-                           ㄴ---S_t+1 -->
-
-
-[Exercise: Pole Balancing] ~= SpaceX
-
-
-
-
-
-Different types of learning
-Supervised vs Unsupervised vs Reinforcement Learning
-
-
-
-- 4.1 Elements of Reinforcement Learning  
-
- a policy, a reward function, a value function, and, optionally, a model of the environmen
-
-- 4.2 Exploration vs Exploitation  
-
-always choose the best -> might get stuck in local optimum
-sometimes need to choose different action
 
 ### Action-value Estimation
 
+- **\( q^*(a) \)**: The **true action value**, which represents the expected return from taking action \( a \) and following the optimal policy thereafter. It is fixed but unknown to the agent.
+- **\( Q_t(a) \)**: The **estimated action value** at time step \( t \), reflecting the agent’s best guess of the action's value based on experience. This estimate improves over time through learning.
 
 
-**True Action Value \( q^*(a) \)**
 
-\( q^*(a) \) is considered the "true" or optimal action value because it represents the theoretical expected return for taking an action in a given state, assuming the agent follows the best possible behavior (optimal policy) afterward. It reflects what the agent would ideally know if it had perfect knowledge of the environment’s dynamics and the rewards. It’s "true" in the sense that it's based on the actual environment and the optimal strategy, but the agent doesn’t have direct access to it. Even though it might not be observed directly, it is a concept that the agent aims to discover and estimate through learning. Hence, it is called the "true" value because it is the ground truth the agent is trying to approximate.
+### True Action Value \( q^*(a) \)
 
-**Estimated Action Value \( Q_t(a) \)**
+The **true action value** \( q^*(a) \) is the **optimal action value** because it represents the **theoretical expected return** for taking action \( a \) in a given state, assuming the agent follows the **best possible behavior (optimal policy)** thereafter. It reflects the value the agent would know if it had perfect knowledge of the environment's dynamics and the associated rewards. 
 
-\( Q_t(a) \) is the current estimate that the agent has at time step \( t \) based on its experience so far. It is the agent's guess or approximation of what the true action value \( q^*(a) \) might be. This value is built incrementally as the agent interacts with the environment. The agent starts with an initial guess and updates this value as it observes more rewards by taking actions and receiving feedback. 
 
-**Simple Estimation**
+While the agent cannot observe \( q^*(a) \) directly, this "true" value serves as the ground truth that the agent seeks to estimate. Hence, \( q^*(a) \) is called the **true value**, as it is the ideal that the agent is trying to approximate through learning.
 
-To average received rewards when action \( a \) has been selected \( K_a \) times:
+
+### Simple Estimation of Action Value
+
+
+The simplest way to estimate \( Q_t(a) \) is by taking the **average of rewards** received from selecting action \( a \) over \( K_a \) times:
 
 \[
 Q_t(a) = \frac{1}{K_a} \sum_{i=1}^{K_a} r_i
 \]
 
+Where:
+- \( K_a \) is the number of times action \( a \) has been selected.
+- \( r_i \) is the reward received on the \( i \)-th selection of action \( a \).
 
-- If \( K_a = 0 \), \( Q_t(a) \) is defined with an arbitrary value, e.g., \( Q_t(a) = 0 \) (not necessarily the best).
-- As \( K_a \rightarrow \infty \), \( Q_t(a) \) converges to \( q^*(a) \).
+Key points:
+- If \( K_a = 0 \), the agent uses an arbitrary value for \( Q_t(a) \), often initialized as \( 0 \).
+- As \( K_a \rightarrow \infty \), \( Q_t(a) \) will converge to the true action value \( q^*(a) \).
 
 
-**Summary**
-- \( q^*(a) \): The real, true action value, which is the expected return for an action following the optimal policy. It is fixed and generally unknown to the agent.
-- \( Q_t(a) \): The estimated action value at time step \( t \), which represents the agent’s current belief about the action’s expected return. This estimate evolves and improves over time through the agent's learning process.
 
+## Action Selection Strategies
 
-How to select an action:
+### Greedy Method
 
-Greedy method : always go for one with the highest estimated value .. search space may be limited
-A_t* where Q_t(A_t*) = max_a Q_t(a)
+In the **greedy method**, the agent always selects the action with the highest estimated value:
 
-e-greedy method :
+\[
+A_t^* = \arg \max_a Q_t(a)
+\]
 
-randomly chooses an action that is not the best 
-Q_t(a) coonverges to q_*(a) with probability 1-epsilon
+- Advantage: The agent always exploits the best-known action.
+- Disadvantage: The agent might get stuck in a **local optimum** and fail to explore better actions.
+
+### Epsilon-Greedy Method
+
+In the **epsilon-greedy method**, the agent mostly selects the best-known action, but with a small probability \( \epsilon \), it chooses a random action to encourage exploration. This prevents the agent from getting stuck in local optima and allows it to explore potentially better options.
+
+- As \( Q_t(a) \) improves, it converges to \( q^*(a) \) with probability \( 1 - \epsilon \).
+  
+Example illustration:
 
 ![greedy-vs-epsilon-greedy](RL-greedy-vs-epsilon-greedy.png)
 
-Softmax method: similar to epsilon-greedy but lower probability of worsrt action 
-high temperature = almost equal probability for all actions
+### Softmax Method
 
-P(a) = exp(Q_t(a)/t) / Sigma_n_i=1(exp(Q_t(i)/t))
+The **softmax method** assigns probabilities to actions based on their estimated values. Actions with higher estimated values are more likely to be selected, but even low-value actions have a chance of being chosen:
 
+\[
+P(a) = \frac{\exp(Q_t(a)/\tau)}{\sum_{i=1}^{n} \exp(Q_t(i)/\tau)}
+\]
 
-** Incremental Implementatino **
+Where \( \tau \) is a **temperature parameter**:
+- High \( \tau \): All actions have nearly equal probability.
+- Low \( \tau \): Higher probability is assigned to the action with the highest value estimate.
 
-Denote Q_k  the estimated reward at timestep k, 
-i.e. the average of the k-1 first rewards, then:
-Q_k+1 = Q_k + 1/k[R_k - Q_k]
+---
+
+## Incremental Implementation of Action-Value Estimation
+
+To update action-value estimates **incrementally**, the agent does not need to keep track of all past rewards. Instead, it can update the estimate based on the difference between the new reward and the current estimate. If \( Q_k \) is the estimate at timestep \( k \), the next estimate \( Q_{k+1} \) is updated as:
+
+\[
+Q_{k+1} = Q_k + \frac{1}{k} \left( R_k - Q_k \right)
+\]
+
+This method efficiently updates the action value without requiring the agent to store all past rewards.
 
 ![RL-incremental-implementation](RL-incremental-implementation.png)
 
-Methods of average are appropriate for stationary problems
-In non-stationary problems, give more weight to more recent rewards than the past ones
-using constant parameter stepsize, 0< a <= 1:
+### Non-Stationary Problems and Step-Size
 
-Q_k+1 = Q_k + a[R_k - Q_k]
+In non-stationary environments, where conditions change over time, the agent should give **more weight to recent rewards** than older ones. This can be achieved by using a **constant step-size parameter** \( \alpha \):
 
-(α is the step-size parameter, which controls how much the new reward influences the updated value estimate. α is typically a small value between 0 and 1)
+\[
+Q_{k+1} = Q_k + \alpha \left( R_k - Q_k \right)
+\]
 
-- 4.3 The Agent-Environment Interface  
+Where:
+- \( \alpha \) is the **step-size parameter** (between 0 and 1), controlling how much the new reward influences the updated value estimate.
+  
+---
 
+## 4.3 The Agent-Environment Interface
 
-**Non-associative tasks**: Actions are chosen without considering the current situation, such as in a basic multi-armed bandit problem.
-**Associative tasks**: The agent must learn to map different situations (states) to actions, such as a bandit problem with changing contexts (e.g., colors).
+### Non-Associative vs Associative Tasks
 
-A **full** RL problem arises when actions influence both the immediate reward and the next situation, requiring the agent to learn how actions affect not just immediate outcomes but also the future state transitions.
+- **Non-Associative Tasks**: Actions are chosen without considering the current situation. An example is a **multi-armed bandit problem**, where the agent chooses from multiple actions without needing to account for the state or context.
+  
+- **Associative Tasks**: The agent must learn to **map different situations (states) to actions**. An example is a **contextual bandit problem**, where the context (such as colors) changes the reward structure for each action.
 
+A **full RL problem** occurs when actions influence both the **immediate reward** and the **next state**, requiring the agent to consider the impact of its actions not just on short-term rewards, but also on future state transitions.
 
-**Episodic vs Non-episodic** tasks
-Has an end or not  ; each episode finishes in the final state. The task starts over with values reset.
-(Insert examples)
+---
 
-**Returns**
-Return G_t is the sum of reward sequence. We want to maximise G_t
+## Episodic vs Non-Episodic Tasks
 
-G_t = R_1 + R_2 + ... R_T
+- **Episodic Tasks**: The task has a clear end, where each episode finishes in a terminal state, and then resets to start over (e.g., games with rounds or levels).
+  
+- **Non-Episodic Tasks**: The task continues indefinitely without a defined end. The agent must learn to maximize long-term rewards in an ongoing environment.
 
-For non-episodic tasks, G_t  could be inifinite as T = inf,
-the agent should maximise the discounted rewards,
-choosing actions to maximise the discounted return
+### Examples:
+- Episodic: A game with rounds where the agent starts over after each round.
+- Non-Episodic: A stock trading system, where decisions are made continuously without a clear end.
 
-G_t = R_t+1 + gamma * R_t+2  +  gamma^2 R_t+3 + ... 
+---
 
-with discount rate  0 <= gamma < 1
+## Returns and Discounting
 
-if gamma = 0, the agent is **myopic**, if gamma -> 1, the agent is **foresighted**.
+The **return** \( G_t \) is the total sum of rewards received by the agent after time step \( t \). The agent aims to maximize this return:
 
+\[
+G_t = R_1 + R_2 + \dots + R_T
+\]
 
-### Discounted Return in Reinforcement Learning
+For **non-episodic tasks**, where the task may continue indefinitely, the return could be infinite. To address this, agents maximize the **discounted return**, which places less emphasis on distant future rewards:
+
+\[
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots
+\]
+
+Where \( \gamma \) is the **discount factor**:
+- \( 0 \leq \gamma < 1 \): Future rewards are discounted exponentially, with more weight given to immediate rewards.
+- \( \gamma = 0 \): The agent is **myopic**, only caring about immediate rewards.
+- \( \gamma \to 1 \): The agent is **foresighted**, giving near-equal importance to future rewards.
 
 
 #### Mathematical Definition
@@ -1305,7 +1380,85 @@ The Markov property is crucial because it allows the agent to focus only on the 
 
 
 
-### 4.4 Value Functions  
+## 4.4 Value Functions  
+
+In reinforcement learning, value functions are used to estimate how good it is for an agent to be in a certain state or to take a certain action. These estimates help the agent make decisions that maximize future rewards.
+
+
+
+### Types of Value Functions:
+
+1. **State-Value Function \( v_\pi(s) \)**:
+   - The state-value function represents the expected return (future cumulative rewards) from being in a state \( s \), following a policy \( \pi \).
+   - It estimates how good it is for the agent to be in a specific state.
+   
+2. **Action-Value Function \( q_\pi(s, a) \)**:
+   - The action-value function represents the expected return from being in a state \( s \), taking an action \( a \), and then following policy \( \pi \).
+   - It estimates how good it is for the agent to take a specific action in a specific state.
+
+
+
+### State-Value Function:
+
+The **state-value function** under a policy \( \pi \), denoted as \( v_\pi(s) \) or \( V^\pi(s) \), is the expected return when starting in state \( s \) and following policy \( \pi \) thereafter.
+
+\[
+v_\pi(s) = \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] = \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid S_t = s \right]
+\]
+
+Where:
+- \( v_\pi(s) \): The value of state \( s \) under policy \( \pi \).
+- \( G_t \): The return (sum of future rewards).
+- \( \gamma \): The **discount factor**, which determines the importance of future rewards compared to immediate rewards.
+- \( R_{t+k+1} \): The reward received at time \( t+k+1 \).
+
+\(V^*(s)\) denotes the **maximum** discounted reward obtainable in state s. i.e. The value of following the optimal policy
+
+This formula calculates the **expected sum of discounted rewards** starting from state \( s \), and following policy \( \pi \).
+
+
+### Action-Value Function (Q-Value Function):
+
+In reinforcement learning, **Q-values** (or **action-value functions**) help the agent decide which action to take in a given state by evaluating both the **immediate reward** and the **long-term value** of the resulting state.
+
+### Q-value Function \( Q(s, a) \):
+
+The Q-value for a state-action pair \( (s, a) \) is defined as:
+
+\[
+Q(s, a) = r(s, a) + \gamma V^*(s')
+\]
+
+Where:
+- \( r(s, a) \) is the **immediate reward** the agent receives for taking action \( a \) in state \( s \),
+- \( \gamma \) is the **discount factor**, which reduces the importance of future rewards,
+- \( V^*(s') \) is the **optimal state-value** of the next state \( s' \), representing the expected return when following the optimal policy from that state.
+
+### Explanation:
+- The Q-value combines the **immediate reward** with the **discounted value** of the next state \( s' \), after the agent takes action \( a \).
+- The agent assumes that it will follow the **optimal policy** \( \pi^* \) from the next state \( s' \) onwards, which is why \( V^*(s') \) is used.
+
+### Components:
+- \( r(s, a) \): The reward received for taking action \( a \) in state \( s \),
+- \( V^*(s') \): The value of the succeeding state \( s' \),
+- \( s' \): The next state, \( s' = \delta(s, a) \), assuming the optimal policy is followed.
+
+### Summary:
+- **Q-values** help the agent choose the action that maximizes the expected return, balancing immediate rewards with future rewards.
+- The **optimal policy** can be derived by selecting the action with the highest Q-value in each state.
+
+### Formula:
+\[
+Q(s, a) = r(s, a) + \gamma V^*(s')
+\]
+
+Where:
+- \( r(s, a) \) is the immediate reward,
+- \( V^*(s') \) is the value of the next state,
+- \( \gamma \) is the discount factor that weighs future rewards.
+
+
+
 
 ### 4.5 Temporal-Difference Prediction  
 
