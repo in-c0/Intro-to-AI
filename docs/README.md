@@ -44,7 +44,7 @@ For a deeper understanding of the topics covered, the following textbooks are re
 - 3.4 [Neural Network Design](#34-neural-network-design)  
 - 3.5 [Neural Network Architectures](#35-neural-network-architectures)
 
-### 4. Rewards Instead of Goals
+### 4. [Reinforcement Learning](#4-reinforcement-learning)
 - 4.1 Elements of Reinforcement Learning  
 - 4.2 Exploration vs Exploitation  
 - 4.3 The Agent-Environment Interface  
@@ -1104,6 +1104,210 @@ CNN: [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_
 
 **[Exercise: Build a Feedforward Neural Network](Feedforward-Neural-Network.md)**
 
+
+## 4. [Reinforcement Learning](#4-reinforcement-learning)
+
+Learning by interaction with the environment
+
+without explicit instructor 
+with a direct sensorimotor connection
+
+
+vs Conditional learning?
+
+
+Agent is in state s
+Agent takes an action a
+Agent observes the next state of the environment s'
+Agent receives reward r'  (can be negative, as a 'punishment')
+
+
+
+Agent --A_t-->  Environment ---R_t+1 --> Agent
+                           ㄴ---S_t+1 -->
+
+
+[Exercise: Pole Balancing] ~= SpaceX
+
+
+
+
+
+Different types of learning
+Supervised vs Unsupervised vs Reinforcement Learning
+
+
+
+- 4.1 Elements of Reinforcement Learning  
+
+ a policy, a reward function, a value function, and, optionally, a model of the environmen
+
+- 4.2 Exploration vs Exploitation  
+
+always choose the best -> might get stuck in local optimum
+sometimes need to choose different action
+
+### Action-value Estimation
+
+
+
+**True Action Value \( q^*(a) \)**
+
+\( q^*(a) \) is considered the "true" or optimal action value because it represents the theoretical expected return for taking an action in a given state, assuming the agent follows the best possible behavior (optimal policy) afterward. It reflects what the agent would ideally know if it had perfect knowledge of the environment’s dynamics and the rewards. It’s "true" in the sense that it's based on the actual environment and the optimal strategy, but the agent doesn’t have direct access to it. Even though it might not be observed directly, it is a concept that the agent aims to discover and estimate through learning. Hence, it is called the "true" value because it is the ground truth the agent is trying to approximate.
+
+**Estimated Action Value \( Q_t(a) \)**
+
+\( Q_t(a) \) is the current estimate that the agent has at time step \( t \) based on its experience so far. It is the agent's guess or approximation of what the true action value \( q^*(a) \) might be. This value is built incrementally as the agent interacts with the environment. The agent starts with an initial guess and updates this value as it observes more rewards by taking actions and receiving feedback. 
+
+**Simple Estimation**
+
+To average received rewards when action \( a \) has been selected \( K_a \) times:
+
+\[
+Q_t(a) = \frac{1}{K_a} \sum_{i=1}^{K_a} r_i
+\]
+
+
+- If \( K_a = 0 \), \( Q_t(a) \) is defined with an arbitrary value, e.g., \( Q_t(a) = 0 \) (not necessarily the best).
+- As \( K_a \rightarrow \infty \), \( Q_t(a) \) converges to \( q^*(a) \).
+
+
+**Summary**
+- \( q^*(a) \): The real, true action value, which is the expected return for an action following the optimal policy. It is fixed and generally unknown to the agent.
+- \( Q_t(a) \): The estimated action value at time step \( t \), which represents the agent’s current belief about the action’s expected return. This estimate evolves and improves over time through the agent's learning process.
+
+
+How to select an action:
+
+Greedy method : always go for one with the highest estimated value .. search space may be limited
+A_t* where Q_t(A_t*) = max_a Q_t(a)
+
+e-greedy method :
+
+randomly chooses an action that is not the best 
+Q_t(a) coonverges to q_*(a) with probability 1-epsilon
+
+![greedy-vs-epsilon-greedy](RL-greedy-vs-epsilon-greedy.png)
+
+Softmax method: similar to epsilon-greedy but lower probability of worsrt action 
+high temperature = almost equal probability for all actions
+
+P(a) = exp(Q_t(a)/t) / Sigma_n_i=1(exp(Q_t(i)/t))
+
+
+** Incremental Implementatino **
+
+Denote Q_k  the estimated reward at timestep k, 
+i.e. the average of the k-1 first rewards, then:
+Q_k+1 = Q_k + 1/k[R_k - Q_k]
+
+![RL-incremental-implementation](RL-incremental-implementation.png)
+
+Methods of average are appropriate for stationary problems
+In non-stationary problems, give more weight to more recent rewards than the past ones
+using constant parameter stepsize, 0< a <= 1:
+
+Q_k+1 = Q_k + a[R_k - Q_k]
+
+(α is the step-size parameter, which controls how much the new reward influences the updated value estimate. α is typically a small value between 0 and 1)
+
+- 4.3 The Agent-Environment Interface  
+
+
+**Non-associative tasks**: Actions are chosen without considering the current situation, such as in a basic multi-armed bandit problem.
+**Associative tasks**: The agent must learn to map different situations (states) to actions, such as a bandit problem with changing contexts (e.g., colors).
+
+A **full** RL problem arises when actions influence both the immediate reward and the next situation, requiring the agent to learn how actions affect not just immediate outcomes but also the future state transitions.
+
+
+**Episodic vs Non-episodic** tasks
+Has an end or not  ; each episode finishes in the final state. The task starts over with values reset.
+(Insert examples)
+
+**Returns**
+Return G_t is the sum of reward sequence. We want to maximise G_t
+
+G_t = R_1 + R_2 + ... R_T
+
+For non-episodic tasks, G_t  could be inifinite as T = inf,
+the agent should maximise the discounted rewards,
+choosing actions to maximise the discounted return
+
+G_t = R_t+1 + gamma * R_t+2  +  gamma^2 R_t+3 + ... 
+
+with discount rate  0 <= gamma < 1
+
+if gamma = 0, the agent is **myopic**, if gamma -> 1, the agent is **foresighted**.
+
+
+### Discounted Return in Reinforcement Learning
+
+
+#### Mathematical Definition
+
+The **discounted return** \( G_t \) from time step \( t \) is defined as:
+
+\[
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
+\]
+
+Where:
+- \( R_{t+1}, R_{t+2}, R_{t+3}, \dots \) are the rewards at time steps \( t+1, t+2, t+3, \dots \).
+- \( \gamma \in [0, 1] \) is the **discount factor**, controlling the importance of future rewards.
+
+#### Explanation
+
+- **Immediate rewards** are valued more than **future rewards**, thanks to the discount factor. A higher \( \gamma \) value (closer to 1) means the agent values future rewards more, while a lower \( \gamma \) (closer to 0) makes the agent focus on short-term rewards.
+- For example, with \( \gamma = 0.9 \), rewards one step in the future are multiplied by 0.9, two steps in the future by \( 0.9^2 = 0.81 \), and so on.
+
+#### Why Use Discounted Returns?
+
+1. **Prevent Infinite Returns**: In continuing tasks without a natural end, rewards could accumulate infinitely. Discounting ensures the total return remains finite.
+2. **Time Preference**: Immediate rewards are often more valuable in real-world problems, and discounting reflects this.
+3. **Handle Uncertainty**: Future rewards may be uncertain, and discounting helps de-emphasize rewards that are far away and possibly unreliable.
+
+### Summary
+
+The **discounted return** is a method of calculating future rewards by giving more importance to immediate rewards than distant ones. The discount factor \( \gamma \) adjusts how much future rewards are devalued. It helps balance short-term and long-term gains while ensuring the return is finite in ongoing tasks.
+
+
+
+**Unified Notation**
+
+![alt text](image-1.png)
+
+- The figure shows an example where the agent reaches a **final absorbing state** (\( S_3 \)) beyond which all rewards are zero (\( R_4 = 0, R_5 = 0, \dots \)).
+- **Absorbing state**: Once reached, the agent remains in this state, and all future rewards are zero.
+- It is noted that **either** \( T = \infty \) (an infinite time horizon) or \( \gamma = 1 \) (no discounting) is possible, but **not both**. Having both would lead to an infinite return.
+- The return \( G_t \) is calculated as the sum of future rewards, discounted by \( \gamma \):
+
+\[
+G_t = \sum_{k=0}^{T-t-1} \gamma^k R_{t+k+1}
+\]
+
+This formula sums the rewards from time \( t \) onward, with each reward being discounted based on how far into the future it occurs.
+
+
+**The Markov Property**
+
+A system satisfies the **Markov property** if the probability of transitioning to the next state depends only on the current state and action, and not on the history of previous states and actions. Mathematically, for state \( S_t \) at time step \( t \):
+
+\[
+P(S_{t+1} \mid S_t, A_t, S_{t-1}, A_{t-1}, \dots, S_0, A_0) = P(S_{t+1} \mid S_t, A_t)
+\]
+
+This means the future state \( S_{t+1} \) depends only on the current state \( S_t \) and action \( A_t \), and not on any prior states or actions.
+
+
+e.g. Chessboard; the next move depends only on the current state of the pieces on the board, not on how the board reached that configuration.
+  
+The Markov property is crucial because it allows the agent to focus only on the **current state** to make decisions, simplifying the learning process. If an environment satisfies the Markov property, the agent doesn't need to remember the full history of states and actions, which makes solving the problem more efficient.
+
+
+
+### 4.4 Value Functions  
+
+### 4.5 Temporal-Difference Prediction  
 
 [To be continued]
 
