@@ -1,0 +1,2330 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Made for self-learners who want to develop a solid foundation in Artificial Intelligence (AI). It covers a wide array of essential AI topics including neural networks, reinforcement learning, computer vision, and natural language processing. The content is inspired by my personal notes and learnings from the postgraduate course COMP9814 Extended Artificial Intelligence at UNSW (24T3).">
+        <meta name="author" content="ba">
+        <link rel="canonical" href="https://in_c0.github.io/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Introduction to Artificial Intelligence</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Introduction to Artificial Intelligence</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">About</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Projects</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="gym/" class="dropdown-item">Gym</a>
+</li>
+                                    
+<li>
+    <a href="Feedforward-Neural-Network/" class="dropdown-item">Feedforward Neural Network</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="gym/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#introduction-to-artificial-intelligence" class="nav-link">Introduction to Artificial Intelligence</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#resources" class="nav-link">Resources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#content-structure" class="nav-link">Content Structure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#contribution" class="nav-link">Contribution</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#license" class="nav-link">License</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#1-introduction_1" class="nav-link">1. Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-search_1" class="nav-link">2 Search</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-artificial-neural-networks_1" class="nav-link">3. Artificial Neural Networks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-reinforcement-learning_1" class="nav-link">4. Reinforcement Learning</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-metaheuristics_1" class="nav-link">5. Metaheuristics</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#54-classes-of-problems" class="nav-link">5.4 Classes of Problems</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#55-population-based-algorithms" class="nav-link">5.5 Population-based Algorithms</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="introduction-to-artificial-intelligence">Introduction to Artificial Intelligence</h1>
+<p>The content is inspired by my personal notes and learnings from the course <a href="https://www.unsw.edu.au/course-outlines/course-outline#year=2024&amp;term=Term%203&amp;deliveryMode=In%20Person&amp;deliveryFormat=Standard&amp;teachingPeriod=T3&amp;deliveryLocation=Kensington&amp;courseCode=COMP9814&amp;activityGroupId=1">COMP9814: Extended Artificial Intelligence at UNSW (24T3)</a>. It assumes readers have a basic understanding of Python and mathematics at a sophomore university level, as well as a solid grasp of fundamental data structures and algorithms.</p>
+<p>⚠️ Site is currently under active development, frequent changes are expected</p>
+<h2 id="resources">Resources</h2>
+<p>For a deeper understanding of the topics covered, the following textbooks are recommended:</p>
+<ul>
+<li>Poole, D.L. &amp; Mackworth, A. <a href="https://artint.info/3e/html/ArtInt3e.html">Artificial Intelligence: Foundations of Computational Agents</a>. Second Edition. Cambridge University Press, Cambridge, 2017.</li>
+<li>Russell, S.J. &amp; Norvig, P. <strong>Artificial Intelligence: A Modern Approach</strong>. Fourth Edition, Pearson Education, Hoboken, NJ, 2021.</li>
+<li>Sutton, R. &amp; Barto, A. <a href="http://incompleteideas.net/book/the-book-2nd.html">Reinforcement Learning: An Introduction</a>. MIT press, 2018.</li>
+<li>Jurafsky, D. &amp; Martin, J. H. <a href="https://web.stanford.edu/~jurafsky/slp3/">Speech and Language Processing</a>. Stanford, 2023.</li>
+</ul>
+<h2 id="content-structure">Content Structure</h2>
+<p><a id="top"></a></p>
+<h3 id="1-introduction">1. <a href="#1-introduction">Introduction</a></h3>
+<ul>
+<li>1.1 <a href="#11-history-of-ai">History of AI</a></li>
+<li>1.2 <a href="#12-agents">Agents</a></li>
+<li>1.3 <a href="#13-knowledge-representation">Knowledge Representation</a></li>
+<li>1.3.1 <a href="#131-feature-based-vs-iconic-representations">Feature-based vs Iconic Representations</a></li>
+<li>1.3.2 <a href="#132-logic">Logic</a></li>
+<li>1.3.3 <a href="#133-learning-rules">Learning Rules</a></li>
+</ul>
+<h3 id="2-search">2. <a href="#2-search">Search</a></h3>
+<ul>
+<li>2.1 <a href="#21-state-action-transition-function">State, Action, Transition Function</a></li>
+<li>2.2 <a href="#22-search-space">Search Space</a></li>
+<li>2.3 <a href="#23-uninformed-search-vs-informed-search">Uninformed Search vs Informed Search</a></li>
+<li>2.4 <a href="#24-uninformed-search">Uninformed Search</a></li>
+<li>2.4.1 <a href="#241-breadth-first-search-bfs">Breadth-First Search (BFS)</a></li>
+<li>2.4.2 <a href="#242-depth-first-search-dfs">Depth-First Search (DFS)</a></li>
+<li>2.4.3 <a href="#243-depth-limited-search-iterative-deepening">Depth-Limited Search &amp; Iterative Deepening</a></li>
+<li>2.5 <a href="#25-informed-search">Informed Search</a></li>
+<li>2.6 <a href="#26-solving-problems-using-search">Solving Problems Using Search</a></li>
+</ul>
+<h3 id="3-artificial-neural-networks">3. <a href="#3-artificial-neural-networks">Artificial Neural Networks</a></h3>
+<ul>
+<li>3.1 <a href="#31-neurons-biological-and-artificial">Neurons - Biological and Artificial</a>  </li>
+<li>3.2 <a href="#32-single-layer-perceptron">Single-layer Perceptron</a>  </li>
+<li>3.3 <a href="#33-multilayer-perceptron-mlp">Multilayer Perceptron (MLP)</a>  </li>
+<li>3.4 <a href="#34-neural-network-design">Neural Network Design</a>  </li>
+<li>3.5 <a href="#35-neural-network-architectures">Neural Network Architectures</a></li>
+</ul>
+<h3 id="4-reinforcement-learning">4. <a href="#4-reinforcement-learning">Reinforcement Learning</a></h3>
+<ul>
+<li>4.1 Elements of Reinforcement Learning  </li>
+<li>4.2 Exploration vs Exploitation  </li>
+<li>4.3 The Agent-Environment Interface  </li>
+<li>4.4 Value Functions  </li>
+<li>4.5 Temporal-Difference Prediction  </li>
+</ul>
+<h3 id="5-metaheuristics">5. Metaheuristics</h3>
+<ul>
+<li>5.1 Asymptotic Complexity  </li>
+<li>5.2 Classes of Problems  </li>
+<li>5.3 Linear Programming  </li>
+<li>5.4 Search Space  </li>
+<li>5.5 Metaheuristics with and without Memory  </li>
+<li>5.6 Population-Based Methods  </li>
+</ul>
+<h3 id="7-computer-vision">7. Computer Vision</h3>
+<ul>
+<li>7.1 Image Processing  </li>
+<li>7.2 Scene Analysis  </li>
+<li>7.3 Cognitive Vision  </li>
+</ul>
+<h3 id="8-language-processing">8. Language Processing</h3>
+<ul>
+<li>8.1 Formal Languages  </li>
+<li>8.1.1 Chomsky’s Hierarchy  </li>
+<li>8.1.2 Grammars  </li>
+<li>8.2 Regular Expressions  </li>
+<li>8.3 Minimum Edit Distance and Words  </li>
+<li>8.4 Natural Languages: N-Gram Models  </li>
+</ul>
+<h3 id="9-reasoning-with-uncertain-information">9. Reasoning with Uncertain Information</h3>
+<ul>
+<li>9.1 Confidence Factors  </li>
+<li>9.2 Probability and Probabilistic Inference  </li>
+<li>9.3 Bayes Nets  </li>
+<li>9.4 Fuzzy Logic  </li>
+</ul>
+<h3 id="10-human-aligned-intelligent-robotics">10. Human-Aligned Intelligent Robotics</h3>
+<ul>
+<li>10.1 Human Interaction and Human-in-the-Loop Robot Learning  </li>
+<li>10.2 Explainability and Interpretability  </li>
+<li>10.3 Safe Robot Exploration  </li>
+<li>10.4 Ethics in AI  </li>
+</ul>
+<h2 id="contribution">Contribution</h2>
+<p>Your feedback and contributions are greatly appreciated! If you'd like to improve this material, correct errors, or add new sections, feel free to fork the repository and submit a pull request.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details. If you find this project helpful, credits and appreciation are always welcome!</p>
+<hr />
+<h2 id="1-introduction_1">1. <a href="#1-introduction">Introduction</a></h2>
+<p>Artificial intelligence is, well, intelligence that is artificial. Artificial just means it is machine-based. But what does <em>Integllience</em> mean? We throw the word around, but defining it is surprisingly tricky. Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?</p>
+<p>Humans are intelligent because we can navigate a complex world, learn from experience, solve problems, create art, etc. We've seen machines could do this too at least to some extent. (Some may argue that it's merely "copying" the original works of humans, but let's put that discussion aside for now). 
+Take for instance, a chess AI, which is a "narrow" AI — it’s designed to do one thing, but do it really well. But is it truly intelligent? That machine doesn’t actually “understand” what it’s doing—at least not in the way humans do—but it’s performing tasks we’d consider intelligent.</p>
+<p>Here is a good umbrella definition (still abstract, but it suggests a direction):</p>
+<blockquote>
+<p>Intelligence is the ability to perceive information, and to retain it as knowledge to be applied towards adaptive behaviours within an environment or context.</p>
+</blockquote>
+<p>So how did we even begin to come up with the concept of artificial intelligence? In fact, it goes back thousands of years—long before computers or even electricity.</p>
+<h3 id="11-history-of-ai">1.1 <a href="#11-history-of-ai">History of AI</a></h3>
+<p>Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.</p>
+<blockquote>
+<p>I think, therefore I am
+– René Descartes</p>
+</blockquote>
+<p>Aristotle's system laid the groundwork for what would later become <strong>Boolean logic</strong>, thanks to George Boole in 1848, and Frege’s work on <strong>Formal logic</strong> in 1879.</p>
+<p><a href="https://en.wikipedia.org/wiki/Boolean_algebra">Boolean Logic</a> is the foundation for modern digital computers, where circuits and operations work using binary (1s and 0s) to perform calculations and make decisions. Boole's work provided the basis for digital logic circuits, which today underpin everything from computer processors to simple calculators.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/503c4304-e28c-4cc1-b563-1f46970d1bb2" />[2]</p>
+<ul>
+<li>AND: Both conditions must be true (e.g., A AND B is true only if both A and B are true).</li>
+<li>OR: At least one condition must be true (e.g., A OR B is true if either A or B is true).</li>
+<li>NOT: A negation of a condition (e.g., NOT A is true if A is false).</li>
+</ul>
+<p>Frege's formal system took a huge step beyond Boolean logic by introducing the concept of quantifiers and variables, which allowed more complex relationships to be expressed in a logical framework. While Boolean logic deals with simple true/false statements, Formal logic translates natural language arguments into a formal language, like first-order logic, to assess whether they are valid using quantifiers such as:</p>
+<ul>
+<li>Universal quantifier (∀): Indicates that a property holds for all elements in a domain (e.g., ∀x: P(x) means "for all x, P(x) is true").</li>
+<li>Existential quantifier (∃): Indicates that there is at least one element in a domain for which a property holds (e.g., ∃x: P(x) means "there exists an x for which P(x) is true").</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b8ff5830-17db-47c9-9c5b-c3833b40f8eb" />[3]</p>
+<p>Examples of formal logic (proportional calculus):</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ccc15b01-28d7-4d5e-8691-4f8b605cd206" />
+<img alt="image" src="https://github.com/user-attachments/assets/875f0f60-55a2-4a58-87f9-ce941fc007b0" /> [4]</p>
+<p>During the 17th–19th century, the invention of formal logic and computational machines took significant steps: 
+ René Descartes (1596–1650) and Thomas Hobbes (1588–1679) began exploring the idea of <a href="https://www.meaningcrisis.co/ep-22-awakening-from-the-meaning-crisis-descartes-vs-hobbes/">mind as a machine</a>.
+ Charles Babbage (1791–1871) and Ada Lovelace (1815–1852) conceptualized the <a href="https://en.wikipedia.org/wiki/Analytical_engine">Analytical Engine</a>, which is considered the first mechanical general-purpose computer.
+ Alan Turing (1912–1954) introduced key concepts foundational to AI in the 1930s and 1940s. His 1936 paper "<a href="https://en.wikipedia.org/wiki/Turing%27s_proof">On Computable Numbers</a>"[5] laid the groundwork for modern computing.</p>
+<p><strong>The Birth of modern AI as a field</strong> is considered to be in the year of 1956, when the term "Artificial Intelligence" was first coined in 1956 by John McCarthy at the <a href="https://en.wikipedia.org/wiki/Dartmouth_workshop">Dartmouth Conference</a>. [6]</p>
+<blockquote>
+<p>"We propose that a 2-month, 10-man study of artificial intelligence be carried out during the summer of 1956 at Dartmouth College in Hanover, New Hampshire. The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it. An attempt will be made to find how to make machines use language, form abstractions and concepts, solve kinds of problems now reserved for humans, and improve themselves. We think that a significant advance can be made in one or more of these problems if a carefully selected group of scientists work on it together for a summer."</p>
+</blockquote>
+<p>Projects like <a href="https://en.wikipedia.org/wiki/ELIZA">ELIZA (a chatbot program by Joseph Weizenbaum, 1966)</a> and <a href="https://en.wikipedia.org/wiki/Shakey_the_robot">Shakey the Robot </a>(the first general-purpose mobile robot, 1969) demonstrated the possibilities of AI.
+However, the ambitious early goals led to disappointment when real-world complexities proved harder to solve than expected. This led to the first AI Winter, a period of reduced funding and interest.
+AI saw a brief resurgence in the 1980s, particularly with the development of <a href="https://en.wikipedia.org/wiki/Expert_system">Expert Systems</a>, which were rule-based systems designed to emulate the decision-making abilities of human experts.
+During this time, machine learning techniques like neural networks began to be explored again after being dormant for decades, following John Hopfield’s work on neural networks in 1982.
+The limitations of expert systems and continued difficulties in scaling AI led to a second AI Winter (late 1980s - mid 1990s)[7].
+Then, as the computer hardware industry advanced, researchers noticed that they could perform more complex calculations and simulations on faster machines. Companies like Intel, IBM, and others continuously pushed the boundaries of chip design and computational power, enabling AI researchers to explore more intensive tasks that were previously impossible. The rise of the Internet, and the notable successes, such as <a href="https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)">IBM’s Deep Blue</a> defeating world chess champion Garry Kasparov in 1997, demonstrated to the broader public that AI was becoming more capable.</p>
+<p>AI since then has been embedded in many aspects of daily life, especially with the development of a <strong>Deep learning</strong> model in 2012 that became a game-changer. </p>
+<p>More recent notable events in the history of AI include:
+   - 2012: The deep learning model <strong><a href="https://en.wikipedia.org/wiki/AlexNet">AlexNet</a></strong> revolutionized image recognition by winning the ImageNet Large Scale Visual Recognition Challenge (ILSVRC)
+   - 2014: Ian Goodfellow introduces <strong><a href="https://en.wikipedia.org/wiki/Generative_adversarial_network">Generative Adversarial Networks (GANs)</a></strong>, a new approach for generating synthetic data (birth of "AI art")
+   - 2016: Google DeepMind’s <strong><a href="https://en.wikipedia.org/wiki/AlphaGo">AlphaGo</a></strong> becomes the first AI to beat a professional Go player, showing AI's ability to master complex, intuitive tasks
+   - 2020: Release of <strong><a href="https://en.wikipedia.org/wiki/GPT-3">GPT-3</a></strong>, a language model with 175 billion parameters, setting a new standard for natural language generation and understanding
+   - 2022: Release of <strong><a href="https://en.wikipedia.org/wiki/DALL-E">DALL·E 2</a></strong>, an AI model capable of generating detailed images from text prompts, marking a significant advancement in AI-driven creativity and image generation</p>
+<p><a href="https://en.wikipedia.org/wiki/Boolean_algebra#/media/File:Vennandornot.svg">2</a>
+<a href="https://en.wikipedia.org/wiki/Logic#/media/File:First-order_logic.png">3</a>
+<a href="https://www.britannica.com/topic/formal-logic/Interdefinability-of-operators">4</a>
+[5] https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+[6] http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf
+[7] https://www.holloway.com/g/making-things-think/sections/the-second-ai-winter-19871993</p>
+<h3 id="12-agents">1.2 <a href="#12-agents">Agents</a></h3>
+<p>Agents in AI are entities that perceive their environment and act upon it, aiming to achieve specific goals. Different types of agents vary in complexity, decision-making abilities, and adaptability. </p>
+<h4 id="types-of-agents">Types of Agents</h4>
+<ul>
+<li><a href="#reactive-agents">Reactive Agent</a></li>
+<li><a href="#model-based-agent">Model-Based Agent</a></li>
+<li><a href="#planning-agent">Planning Agent</a></li>
+<li><a href="#utility-based-agent">Utility-based agent</a></li>
+<li><a href="#game-playing-agent">Game Playing Agent</a></li>
+<li><a href="#learning-agent">Learning Agent</a></li>
+</ul>
+<h5 id="reactive-agents"><a href="#reactive-agents">Reactive Agents</a></h5>
+<p>At the most basic level, we have the Reactive Agent, a simple yet effective problem-solver. Think of it as the AI version of a reflex action: "If this condition is met, perform this action." There’s no deliberation, no contemplation of past actions or future consequences—just action based on the current environment.</p>
+<p>For instance, imagine a thermostat that turns on the air conditioning when the temperature hits 75°F. It doesn't remember what happened yesterday or predict the weather tomorrow—it reacts purely to the present moment.</p>
+<p>While this simplicity is useful in fast, real-time systems, reactive agents are limited. Without memory or state, they can’t learn or improve over time. They can only react.</p>
+<blockquote>
+<p>"If condition, then action".</p>
+</blockquote>
+<p>It is simply following the rule, without memory or state.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/fe8894d6-6833-42e3-825d-8b41389e4f8c" /></p>
+<h5 id="model-based-agent-or-model-based-reflex-agent"><a href="#model-based-agent">Model-based Agent</a> or Model-based "Reflex" Agent</h5>
+<p>Now, let’s add a layer of sophistication. Unlike the reactive agent, this type of agent has an internal <strong>model</strong> of the world, allowing it to handle <em>partially</em> observable environments. It takes into account not just the current input, but also a history of past actions and their outcomes, allowing for a more informed decision-making process.</p>
+<p>Consider a robot navigating a maze. It doesn’t just rely on what it currently sees but remembers where it has already been. This memory helps it avoid dead ends and make smarter choices moving forward. However, despite this extra capability, model-based agents are still "reflex" agents in a sense—they <em>respond</em> based on the past but does not have any capability to predict the future based on learning. Tasks requiring multiple steps of reasoning can stump them.</p>
+<blockquote>
+<p>"If condition, then action. ...wait, I've been here before."</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5" /></p>
+<h5 id="planning-agent-or-goal-based-agent"><a href="#planning-agent">Planning Agent</a> or "Goal-based" agent</h5>
+<p>The Planning Agent expands upon the model-based agent by contemplating future consequences. It doesn’t just react to the past or present—it actively plans ahead, asking itself whether a given action will help achieve a specific goal.</p>
+<p>This forward-thinking ability allows the planning agent to tackle complex tasks that require multiple steps, such as navigating a city using a map or solving a puzzle. By simulating possible actions and outcomes, it determines the best path to success.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"Will that make me happy?"</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb" /></p>
+<h5 id="utility-based-agent"><a href="#utility-based-agent">Utility-based Agent</a></h5>
+<p>While planning agents focus on reaching a goal, Utility-Based Agents aim for something even more nuanced, that is, <strong>maximizing happiness</strong>. They evaluate each potential action, not just based on whether it achieves a goal, but on how "happy" it will make them in the end. In other words, they assign a utility or value to each possible state and then pursue the path that promises the highest utility.</p>
+<p>Take, for example, an autonomous car deciding between two routes. One route might be faster but more dangerous, while the other is slower but safer. A utility-based agent would weigh the pros and cons of each option, taking into account not only the time saved but the overall satisfaction of avoiding risk.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"<em>How happy</em> will I be in such a state?"</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0" /></p>
+<h5 id="game-playing-agent"><a href="#game-playing-agent">Game Playing Agent</a></h5>
+<p>(not to be confused with the concept of <a href="https://en.wikipedia.org/wiki/General_game_playing">General Game Playing (GGP)</a>)</p>
+<p>Game-playing agents take these ideas of planning and utility to a competitive level. These agents are specifically designed to excel at a specific game or domain. They’re not just interested in their own happiness—they’re actively working to minimize their opponent’s advantage (via adversarial search like <a href="https://en.wikipedia.org/wiki/Minimax">Minimax</a>, or <a href="#https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha Beta Pruning</a>).</p>
+<p>Examples of game playing agents include:</p>
+<ul>
+<li>Chess AI like Stockfish or AlphaZero (for Chess)</li>
+<li>Go AI like AlphaGo</li>
+<li>Poker AI like Libratus</li>
+</ul>
+<p>They usually excel in their domains, but their expertise doesn't easily transfer to other areas.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"<em>How happy</em> will I be in such a state?"
+"Will my enemy be happier?"</p>
+</blockquote>
+<p><img alt="chrome_LxrkTHZIFE" src="https://github.com/user-attachments/assets/9c1bd7e7-1fa8-46be-ba58-5ee5cfa53c61" /></p>
+<h5 id="learning-agent"><a href="#learning-agent">Learning Agent</a></h5>
+<p>At the cutting edge of AI is the Learning Agent. This type of agent doesn’t just act based on predefined rules or models—it learns from its experiences and continually improves over time. </p>
+<p>The learning agent is the closest thing we have to an agent that grows in intelligence, and it has several key components:
+   - <strong>Learner</strong>
+The agent receives feedback on its actions and adjusts its future decisions based on this feedback. Techniques like reinforcement learning and supervised learning are commonly used here.
+   - <strong>Actor</strong>
+This is the part of the agent that actually takes action. It uses the knowledge and strategies it has learned to make decisions.
+   - <strong>Critic</strong>
+Acting as an internal evaluator, the critic compares the outcomes of the agent’s actions against the desired results. This feedback is essential for the learning process, helping the agent understand which actions are beneficial and which are not.
+   - <strong>Problem Generator</strong>:
+To grow smarter, an agent must explore new challenges. The problem generator encourages the agent to tackle new tasks, forcing it to learn and adapt to unfamiliar situations. </p>
+<p>Initially, it may be slow and make mistakes. But as it learns from feedback, it optimizes its tasks and becomes more reliable and efficient.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/eac69188-2c93-4144-b4d1-4502a0228aea" /></p>
+<p>The original source of the classification (<a href="https://aima.cs.berkeley.edu/">Russel &amp; Norvig (2003)</a>) provides a holistic overview of these different types of agents.</p>
+<h3 id="13-knowledge-representation">1.3 <a href="#13-knowledge-representation">Knowledge Representation</a></h3>
+<p><strong>Representation and Search</strong></p>
+<p>The world model must be represented in a way that makes reasoning easy
+Reasoning in AI (i.e. problem solving and planning) almost always involves some kind of search among possible solutions</p>
+<p>Here’s a hierarchical framework used to control a robot (soccer robot), moving from sensor data gathering (low-level) to game strategy (high-level).</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b98b869f-7f7f-4eb7-9256-5449f7f1c7a4" /></p>
+<p>Note how abstraction transforms raw numerical data into higher-level, qualitative information.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ea756f01-e72c-436d-9dbe-ee36e18a7d02" /></p>
+<h4 id="131-feature-based-vs-iconic-representations">1.3.1 <a href="#131-feature-based-vs-iconic-representations">Feature-based vs Iconic Representations</a></h4>
+<p><strong>Iconic Representations (Low-level):</strong>
+* Analogous to the real world
+  * Pixel representations like the first layer of ANN
+  * Maps 
+* Fast, but difficult to generalize
+* Numeric/statistical, offering a detailed representation
+* No relational information, making reasoning difficult
+* Memory-intensive
+* Suited for tasks like vision and processing sequential data
+* Difficult to perform inferences beyond pattern-response</p>
+<p><strong>Feature-based (Symbolic) Representations (High-level):</strong>
+* State represented by a set of abstract features and relations
+  * Logical expressions
+  * Entity-relation graphs
+* Can do complex reasoning over <strong>knowledge base</strong>
+* Contains relational information, making it easier to reason about
+* Facilitates generalizations, and is memory efficient
+* Not well-suited for "low-level" tasks like perception</p>
+<p><strong>Knowledge Base?</strong></p>
+<p>A knowledge base is an explicit set of sentences about some domain expressed in a suitable <strong>formal representation language</strong>.
+Sentences express facts or non-facts (true or false) e.g. "Q1 revenue was $10 million."</p>
+<p>The knowledge base may use rules as a mechanism for reasoning (i.e. It is a <strong>Rule-based</strong> system):
+e.g. "If &lt;...&gt; then &lt;...&gt;, If a patient has a fever and a headache, then the patient can potentially benefit from malaria testing."</p>
+<p>Rules can define a network (aka "Inference" network) which shows the interdependencies among the rules.
+Inference network shows which facts can be logically combined to form new facs or conclusions. The facts can be combined using "and", "or", "not"
+<strong>Inference</strong>: Deriving new information or conclusions from the facts and rules, e.g. "Given a drop in sales and increased competition, product prices should be lowered to maintain market share."</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/1fc3efc7-1e25-446a-9d71-220f4192e722" /></p>
+<p>There are three reasoning processes to make inferences or draw conclusions from a set of premises or observations:
+ 1. <strong>Deduction</strong>: based on concrete facts, the process of reasoning from general principles or rules to specific conclusions. If the premises are true, the conclusion must be true.
+    "If <em><rule> and <cause></em>, then <em><effect></em>" e.g. "If <em>Joe Bloggs works for ACME</em> and <em>is in a stable relationship</em>, then <em>he is happy</em>."
+ 3. <strong>Abduction</strong>: hypothesis-driven, 'flipped' version of deduction, starts with observations or facts and infer the most likely rule that could explain the observation.
+    "Given <em><rule> and <effect></em>, infer by abduction <em><cause></em>" e.g. "If <em>Joe Bloggs is happy</em>, infer by abduction <em>Joe Bloggs enjoys domestic bliss and professional contentment</em>"
+    (Scientists develop medicines using abduction)
+ 5. <strong>Induction</strong>: probabilistic, pattern-based, generilizing from repeated observations, but the conclusion might not always be true:
+    "If <em><cause> and <effect></em> then <em><rule></em>" e.g. "If <em>every crow I have seen is blue</em>, <em>all crows are blue</em>"</p>
+<p>( Later in chapter 9 we will explore different ways to deal with uncertainty in rules, e.g.:
+ - <strong>Vague rule</strong>: Fuzzy logic, where truth values range between 0 and 1, representing the degree to which a statement is true.
+ - <strong>Uncertain link between evidence and conclusion</strong>: Bayesian inference, which relates the conditional probability of a hypothesis given some observed data to the likelihood of the data under that hypothesis.
+ - <strong>Uncertain evidence</strong>: 🤷 )</p>
+<p><strong>Fundamental questions:</strong>
+- How do we write down knowledge about a domain/problem?
+- How do we automate reasoning to deduce new facts or ensure consistency of a knowledge base?</p>
+<h4 id="132-logic">1.3.2 <a href="#132-logic">Logic</a></h4>
+<p><strong>Propositional Logic</strong>
+ - Letters stand for "basic" propositions
+ - Combine into more complex sentences using AND, OR, NOT, IFF, ... 
+ - e.g.
+    - P = "It rains", Q = "I will bring an umbrella"
+    - P → Q "If it rains, I will bring an umbrella."</p>
+<p><strong>First-order logic</strong>
+ - An extension of Propositional Logic for a more expressive representation (including relations and ontologies)
+ - Terms: constants, variables, functions applied to terms
+    - e.g. a, f(a), motherOf(Mary), ...
+ - Atomic Formulae: predicates applied to tuples of terms
+    - e.g. likes(Mary, motherOf(Mary)), likes(x, a), ...
+ - Quantified formulae:
+    - e.g. ∀x Animal(x) → HasHeart(x), ∃x loves(x, Mary)
+      - "For all x, if x is an animal, then x has a heart"
+      - "There exists at least one person who loves Mary"</p>
+<h4 id="133-learning-rules">1.3.3 <a href="#133-learning-rules">Learning Rules</a></h4>
+<p><strong>Ontology</strong>  </p>
+<p>An ontology is a formal structure that defines the relationships between different concepts in a domain. It’s often used in AI to infer new facts from known data.</p>
+<p>Like OOP, child concept is a specialisation of parent concept. Also, child inherits property of parent. 
+Ontology includes not just the hierarchy of concepts (aka Taxonomic hierarchy), but also the properties and relationships between them, enabling reasoning and inference.
+e.g. Dog is a subclass of Mammal. Thus, dogs can have diseases. Diseases can be trated by medication.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/4cbbeb64-ff39-48dc-8a77-910a363c8108" /></p>
+<p>We can infer the type of object from its attributes, e.g.</p>
+<p>Guess what this object is:</p>
+<ul>
+<li>Fruit category</li>
+<li>Green and yellow mottled skin</li>
+<li>30cm diameter</li>
+<li>Ovoid shape</li>
+<li>Red flesh, black seeds</li>
+</ul>
+<p>= Watermelon</p>
+<p><strong>Reasoning System for categories</strong></p>
+<p>Two closely related families of systems:</p>
+<ul>
+<li><strong>Semantic networks</strong> aka. Associative network</li>
+<li>A graph-based representation of knowledge that emphasizes the relationships between entities (concepts)</li>
+<li>Models Facts, Objects, Attributes, Relationships</li>
+<li>Its application includes Natural Language Processing (NLP), Knowledge Graphs</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/cb1ad1c3-32b6-4046-a808-20f5b362cddb" /></p>
+<ul>
+<li><strong>Description logics</strong></li>
+<li>A more formal and rigorous knowledge representation system than semantic networks</li>
+<li>provides precise mathematical definitions for Facts, Objects, Attributes, Relationships</li>
+<li>e.g. defines "Parent" as "someone who has at least one child" or "a mammal is an animal with fur and gives live birth."</li>
+<li>a foundation for ontology-based systems</li>
+</ul>
+<p>[1] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Simple_reflex_agent.png
+[2] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_reflex_agent.png
+[3] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_goal_based_agent.png
+[4] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_utility_based.png
+[5] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:IntelligentAgent-Learning.png
+[6] https://en.wikipedia.org/wiki/Intelligent_agent</p>
+<p>(Add Mountain Car problem, Sudoku, simple webGL based simulation to test viewer's understanding of KRR)</p>
+<hr />
+<h2 id="2-search_1">2 <a href="#2-search">Search</a></h2>
+<p>You will learn:
+- the theory behind search in AI
+- to develop a smart agent with search capability to solve interesting problem</p>
+<h3 id="21-state-action-transition-function">2.1 <a href="#21-state-action-transition-function">State, Action, Transition Function</a></h3>
+<p>A problem can be described by
+- State
+- Action
+- Transition Function</p>
+<p>State: variable, e.g. position on the grid, (x,y)
+Action: function, e.g. "move up" "move down"
+Transition Function: The function that determines how the action changes the state. T(s,a) = s'
+(where s is state, a is action, s' is the new state) This is deterministic transition function, where next state is predictable.
+If the next state is probabilistic, use Stochastic transition function:
+ T(s,a,s') = P(s'|s,a)
+(where P(s'|s,a) is the probability of transitioning to new state s', given state and action)</p>
+<p>Types of states:
+- Initial state
+- Goal state
+- Terminal state
+- Intermediate state
+- Deadend state</p>
+<h3 id="22-search-space">2.2 <a href="#22-search-space">Search Space</a></h3>
+<p>Search space
+= set of all possible states a system can be in</p>
+<p>e.g. Chess
+<strong>State</strong>: The configuration of the chessboard at any given time, including the positions of all pieces.
+<strong>State Space</strong>: All the possible ways the chessboard can be arranged, which is finite but very large (approximately 10^43 possible positions)</p>
+<p>State space could be infinite, e.g. robot navigation:
+<strong>State</strong>: position (x, y) and direction the robot could occupy,
+<strong>State Space</strong>:  finite (if the space is discretized) or infinite (if the space is continuous)</p>
+<p>(Assuming Graph Theory knowledge)
+State space can be represented as a graph</p>
+<p>Node = State
+Edge = Action</p>
+<p>(0,0) --move right--&gt; (1,0) --move right--&gt; (2,0)
+   |                      |                       |
+ move down            move down          move down
+   |                      |                       |
+(0,1) --move right--&gt; (1,1) --move right--&gt; (2,1)
+   |                      |                       |
+ move down            move down          move down
+   |                      |                       |
+(0,2) --move right--&gt; (1,2) --move right--&gt; (2,2)</p>
+<p>If the environment is deterministic, each action leads to one specific new state, corresponding to one edge between two nodes. 
+In a stochastic environment, edges could represent probabilistic transitions.</p>
+<p>move up (0.7)
+   (0,0)
+     | 
+   (0,1) ------&gt; (1,1) move right (0.15)
+     |
+   (0,2) 
+move down (0.15)</p>
+<p>70% chance the robot moves up 
+15% chance the robot moves right
+15% chance the robot moves down</p>
+<p>In some cases, the graph edges are weighted, meaning each edge has a cost or value associated with the transition between two states. 
+The weights can represent things like the cost of an action (time, energy, or distance)
+The goal is often to find the path from the initial state to the goal state that minimizes this cost. (Shortest path search, e.g. Dijkstra's algorithm or A* search) Covered more later</p>
+<h3 id="23-uninformed-search-vs-informed-search">2.3 <a href="#23-uninformed-search-vs-informed-search">Uninformed Search vs Informed Search</a></h3>
+<p>Uninformed = No info about which path to explore next. No clue how to get to the goal state faster
+Example:
+Breadth-First Search (BFS): Explores all possible nodes at the present depth level before moving deeper into the search tree.
+Depth-First Search (DFS): Explores as far down a path as possible before backtracking to explore other paths.</p>
+<p>Uninformed means "No heuristic knowledge"
+A "heuristic" is a function that estimates how close a given state is to the goal, helping the algorithm prioritize which paths to explore.
+More on that later.</p>
+<p>Informed search uses domain-specific knowledge and heuristics to determine which options to explore next often leading to faster solutions.
+Example:
+A* search, Greedy Best-First Search</p>
+<h3 id="24-uninformed-search">2.4 <a href="#24-uninformed-search">Uninformed Search</a></h3>
+<p>Tree is often used to represent Uninformed Search algorithms, since we dont have to worry about revisiting nodes (since there are no cycles).</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/519e3fc9-0139-4211-8967-2d9ebf454f19" /></p>
+<p>A node is said to be Expanded* when the algorithm has examined all their neighboring nodes and added them to the search space.</p>
+<p><strong>4 Types of Nodes in Uninformed Search Tree:</strong></p>
+<ol>
+<li>
+<p>Root Node = Where the search begins. contains the initial state of the algorithm.</p>
+</li>
+<li>
+<p>Expanded* Nodes (Black)</p>
+</li>
+<li>
+<p>Generated Nodes (Black and Red) = Nodes that the algorithm has already visited (i.e. the algorithm has either already expanded* or is about to expand the node.) </p>
+</li>
+<li>
+<p>Frontier (Red): Nodes that have been generated but not yet expanded*. In other words, the algorithm will explore these next by expanding them and looking at their neighbors.</p>
+</li>
+</ol>
+<h4 id="241-breadth-first-search-bfs">2.4.1 <a href="#241-breadth-first-search-bfs">Breadth-First Search (BFS)</a></h4>
+<p>BFS explores all nodes at each depth level before going deeper</p>
+<p>BFS treats the frontier as a queue</p>
+<p>It selects the first element in the queue to explore next
+If the list of paths on the frontier is [p1, p2, ..., pr]
+p1 is selected. Its children are added to the end of the queue, after pr. Then p2 is selected next.</p>
+<p>All nodes are expanded at a same depth in the tree before any nodes at the next level are expanded.
+Can be implemented by using a queue to store frontier nodes.</p>
+<p><strong>Example of BFS in AI:</strong></p>
+<p><img alt="35765050-f46564cc-08ff-11e8-98b2-e093ba83a66e" src="https://github.com/user-attachments/assets/9b344547-6550-47b9-b3ce-0ec093ae1d1e" />
+source: https://gist.github.com/kira924age/c14ec7424a966d1e48a9b601289907f0</p>
+<p><img alt="Breadth-First-Tree-Traversal" src="https://github.com/user-attachments/assets/31603d83-42a7-40cd-af63-d83b23e5936d" />
+source: https://www.codecademy.com/article/tree-traversal</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/0101c080-e049-4d8f-9e76-3f2bc82c2558" /></p>
+<p><strong>Pros:</strong>
+- Complete (guaranteed to find a path to the solution, even if the graph is cyclic)
+- Optimal (guaranteed to find the shortest path (if the graph is unweighted or has uniform edge weight))</p>
+<p><strong>Cons:</strong>
+- Exponential memory usage (has O(b^d) space complexity where b is the 'branching factor' (= number of child nodes for each node) and d is the depth of the search tree)</p>
+<h4 id="242-depth-first-search-dfs">2.4.2 <a href="#242-depth-first-search-dfs">Depth-First Search (DFS)</a></h4>
+<p><img alt="35765045-e1ef0078-08ff-11e8-91af-30ce1cc22767" src="https://github.com/user-attachments/assets/92bb8acd-599a-43bb-842f-292c4326a6c9" />
+source: https://gist.github.com/kira924age/c14ec7424a966d1e48a9b601289907f0</p>
+<p>iterative psudocode
+<img alt="image" src="https://github.com/user-attachments/assets/abc56fa8-20b7-4d8c-8d25-8e400f412a69" /></p>
+<p>recursive approach can sometimes be more efficient. depends on the tree structure.
+<img alt="image" src="https://github.com/user-attachments/assets/e07fb86a-6521-4859-a71f-80e0d4daa3c5" /></p>
+<ul>
+<li>Uses stack (Call stack if recursive)</li>
+</ul>
+<p><strong>Pros</strong>
+- Low memory usage = more space efficient, since it only needs to store the nodes in the current path (has O(d), where d is the depth of the tree)</p>
+<p><strong>Cons</strong>
+- Not optimal (Not guaranteed to find the shortest path to the goal, as it may go down very deep paths and miss shorter paths.)
+- Not complete (Not guaranteed to find a path to the goal, as it may get stuck in an infinite loop in cyclic graphs)</p>
+<h4 id="243-depth-limited-search-iterative-deepening">2.4.3 <a href="#243-depth-limited-search-iterative-deepening">Depth-Limited Search &amp; Iterative Deepening</a></h4>
+<p>Same as DFS, except it doesnt search beyond nodes at a set depth limit. Nodes at this depth limit are treated as if they had no successors.</p>
+<p>IDS (Iterative deepening Depth-first Search, aka IDDFS) takes this one step further; it repeats DLS with increasing depth limits until the goal is found.  If it starts with a depth limit of 1, it is essentially the same as BFS, except that it incrementally increases the limit in subsequent iterations. essentailly BFS + DFS</p>
+<p>Good explaination: https://ai-master.gitbooks.io/classic-search/content/what-is-depth-limited-search.html</p>
+<p><strong>Pros:</strong>
+- Memory-efficient like DFS, O(d) space complexity
+- Finds the shortest path like BFS. Optimal and complete
+- Avoids the disadvantages of DFS (like getting stuck in cycles or deep branches)</p>
+<p><strong>Cons</strong>:
+- Not time-efficient. It repeatedly searches the same nodes at shallow depths, leading to redundant work
+- Can be inefficient if branching factor is large</p>
+<p>In general, IDS is the preferred search strategy for a large search space with solution that has unknown depth. </p>
+<p><strong>Bidirectional Search</strong></p>
+<p>runs two simultaneous searches: one forward from the starting node and one backward from the goal node. The searches meet in the middle, reducing the search space significantly. hence both time and space complexity to O(b^(d/2))</p>
+<p>Requires both the start and goal states to be known.</p>
+<p><strong>Uniform Cost Search</strong></p>
+<p>Similar to BFS, but orders nodes by cost -&gt; useful for weighted graph</p>
+<p>Uses a priority queue to expand the lowest-cost node first</p>
+<h3 id="25-informed-search">2.5 <a href="#25-informed-search">Informed Search</a></h3>
+<p>Heuristics
+Greedy Search
+A* search</p>
+<p>Finding Heuristic function
+Dominance</p>
+<h3 id="26-solving-problems-using-search">2.6 <a href="#26-solving-problems-using-search">Solving Problems Using Search</a></h3>
+<p>Exercise -
+1. Define the states, actions and transition function
+2. Convert above definition into a machine readable format
+3. Choose a search strategy, considering the context &amp; problem</p>
+<p>(give ~5 problems .. what did you choose? why?)</p>
+<h2 id="3-artificial-neural-networks_1"><a href="#3-artificial-neural-networks">3. Artificial Neural Networks</a></h2>
+<p>Humans can perform complex tasks: Shape recognition, Speech processing, Image processing ... 
+To emulate these behaviours, a branch of artifficial intelligence formed inspired by <a href="https://en.wikipedia.org/wiki/Neural_circuit">neural circuitry</a>:
+<a href="https://developer.nvidia.com/discover/artificial-neural-network"><strong>ANN (ARtificial Neural Networks)</strong></a></p>
+<p><strong>High Connectivity</strong>
+ANNs are composed of layers of nodes (neurons). Each node in one layer connects to nodes in the next layer, forming a network, where it learns patterns from the relationships and make prediction. </p>
+<p><strong>Parallelism</strong>
+Neurons process multiple tasks simultaneously rather than sequentially
+<img alt="KY2I87" src="https://github.com/user-attachments/assets/13c40609-a1dd-4043-af65-aa20f2219453" /></p>
+<p>ANN:
+- excels at Pattern recognition and Forecasting
+- uses a newer, non-algorithmic paradigm to process information through learning, adaptation, and parallel processing
+- is essentially a black box; you can observe the inputs and outputs transformed through multiple layers, but the inner workings are unknown</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ad86256f-31e1-4479-87cc-2c429eacd291" />
+(image source: https://developer.nvidia.com/discover/artificial-neural-network)</p>
+<p><strong>How does ANN learn?</strong>
+- uses <strong>Generalization</strong> to perform well on unseen data that has not been encountered before
+- uses <strong>Function Approximation</strong> to estimate a function that maps intputs to outputs based on a set of observed data points.
+  The aim is to find a function that closely represents the relationship between the input features and output targets.
+  Even if the exact function is unknown.</p>
+<p><strong>Function Approximation</strong>
+ can either be:
+  - used on an entity (=a set of input variables, either continuous or discrete) to output discrete values that represents which class the entity belongs to (=membership) -&gt; <strong>Classification</strong>  (e.g. character recognition, cats vs dogs from image)
+  - used to predict continuous outcomes based on input variables. -&gt; <strong>Regression</strong> (e.g. predicting the house price based on location, number of bedrooms, etc)</p>
+<h3 id="31-neurons-biological-and-artificial">3.1 <a href="#31-neurons-biological-and-artificial">Neurons - Biological and Artificial</a></h3>
+<p>The brain is made up of <a href="https://en.wikipedia.org/wiki/Neuron">neurons (nerve cells)</a> which have
+• a cell body (soma)
+• dendrites (inputs)
+• an axon (outputs)
+• synapses (connections between cells)</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/5a27c3e2-5319-4f66-8569-4e98e90e7a17" />
+(Image: <a href="https://qbi.uq.edu.au/brain/brain-anatomy/what-neuron">Alan Woodruff ; De Roo et al / CC BY-SA 3.0 via Commons</a>)</p>
+<p>(Kinda looks similar to a tree; it receives energy through its leaves (dendrites, inputs), the energy goes through the body (soma), and reaches the root (axon, outputs). The axon is connected to other neurons and transfers electrical signals to them through synapse. When the inputs reach some threshold, an action potential (electrical pulse) is sent along the axon to the outputs.
+This threshhold may change over time, depending on how <strong>excitatory</strong> (promoting the firing) or <strong>inhibitory</strong> (reducing the likelihood of firing) the synapse is.</p>
+<p>We call this <strong>synaptic plasticity</strong>, which is crucial for learning and memory.
+The strength of a connection between two neurons is called <strong>synaptic weight</strong>; it corresponds to how much influence the firing of a neuron has on another.</p>
+<p>The synaptic weight is changed by using a learning rule, the most basic of which is Hebb's rule, which is usually stated in biological terms as</p>
+<pre><code> Neurons that fire together, wire together.
+</code></pre>
+<p><strong>Hebbian learning (1949)</strong>
+"When a neuron A persistently activates another nearby neuron B, the connection between the two neurons becomes stronger. Specifically, a growth process occurs that increases how effective neuron A is in activating neuron B. As a result, the connection between those two neurons is strengthened over time"</p>
+<p>More reading: https://en.wikipedia.org/wiki/Synaptic_weight</p>
+<p><strong>Artificial Neurons</strong> </p>
+<p>The first computational model of a neuron() was proposed by Warren MuCulloch (neuroscientist) and Walter Pitts (logician) in 1943.</p>
+<p>More reading: https://towardsdatascience.com/mcculloch-pitts-model-5fdf65ac5dd1</p>
+<p>It has 4 components:
+- Inputs
+- Weights
+- Transfer Function
+- Activation Function</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/187c34da-d4a8-47e1-8843-aa1e842329a9" />
+(Image: https://en.wikipedia.org/wiki/Artificial_neuron)</p>
+<p>vs.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/0dd12d34-d844-4bdc-9e20-7c13c1fb5263" />
+Image source: https://en.wikipedia.org/wiki/File:Neuron3.svg</p>
+<p>The inputs, after being multiplied by their respective <strong>weights</strong>, which reflect the importance or influence of that input to the node, are summed and then passed through an activation function to produce the final activation level.</p>
+<p>The activation function has a <strong>threshhold</strong> to determine whether the neuron has fired or not. ( 0 or 1 activation value )</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b328bc3d-005c-447b-a8bd-0cf9aeca87ac" /></p>
+<ul>
+<li>x_i  = input values</li>
+<li>w_ij = weights corrresponding to the inputs</li>
+<li>g(s_j) = the activation function applied to the weighted sum</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/76b45693-b9da-4e49-84fd-119c69b7be1f" /></p>
+<p>Activation Functions:
+- Sign (Step) function
+- Semi-linear (piecewise linear) function<br />
+- Sigmoid: Smooth and non-linear</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/d46c4613-dc64-4e40-b5c3-11b66375b37c" /></p>
+<p>Examples of Non-linear Activation Functions:
+- Sigmoid
+- ReLU (Rectified Linear Unit)
+-  Tanh (Hyperbolic Tangent)</p>
+<p>Non-linear functions enable the network to stack multiple layers and allow each layer to capture increasingly abstract and complex features from the data</p>
+<p>The activation level is the result of the node's internal computation, which is usually a non-linear function of the inputs. </p>
+<p>Some limitations of MP artificial neuron:
+(1) it only works with binary inputs and outputs; not with real numbers
+(2) it does not evolve or learn.  its functionality is limited to problems that can be derived by the modeler</p>
+<p>More reading: https://jontysinai.github.io/jekyll/update/2017/09/24/the-mcp-neuron.html
+https://com-cog-book.github.io/com-cog-book/features/mp-artificial-neuron.html</p>
+<h3 id="32-single-layer-perceptron">3.2 <a href="#32-single-layer-perceptron">Single-Layer Perceptron</a></h3>
+<p>Frank Rosenblatt, an American psychologist, proposed the classical <strong>Perception</strong> model in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.</p>
+<p>Early ideas on how information is stored and processed in artificial intelligence and cognitive science was divided into two approaches: <strong>coded representations</strong> and <strong>connectionist approaches</strong>. Let's say you perceived a triangle, then, the former states that a triangle-shaped image would be "carved" in the memory space. Once the shape is carved, you would be able to precisely retrieve the information stored in a particular location in the brain. </p>
+<p>The latter states that memories are stored as preferences for a particular "response" rather than "topographic representations". Instead of a unique cluster of neurons wired in an invariant manner, that "code" the memory of a triangle, what we have instead is a series of associations among a set of neurons that "tend to react" to the stimulus that may remind you of a trinagle.</p>
+<p>Rosenblatt took elements from the works of Hebb and summarized the nature of the cognition as the problems of (1) detection, (2) storage, and (3) the effect of the stored information.</p>
+<pre><code>1. The physical connections participating in learning and recognizing a stimulus can vary from organism to organism.
+2. The cells involved in learning and recognition are flexible, meaning that the probability of activation, when exposed to a stimulus, can change over time.
+3. Similar stimuli will tend to trigger similar response patterns in the brain.
+4. When memory is forming, the application of a positive and/or a negative reinforcement may facilitate or hinder the process.
+5. Similarity is not determined by the perceptual properties of the stimuli, but by a combination of the perceiving system, the stimuli, the context, and the history of interactions between those elements. This last principle indicates that you can't decouple perception and representation from the perceiving system (the organism itself).
+</code></pre>
+<p><strong>Perceptron</strong> is an algorithm used to classify inputs into one of two possible categories.</p>
+<p>The perceptron makes the classification decision by applying its discriminant function to the input. 
+This function is typically linear and divides the input space into two regions, one for each class.</p>
+<p>The perceptron draws a hyperplane in the input space. Any input that falls on one side of the hyperplane is classified as one class, and inputs on the other side are classified as the other class.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b48fe94d-1f06-4462-aae9-1bd06e3fe4c2" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/bddf10c1-ffea-489e-a297-f12032fe5e42" /></p>
+<p>The perceptron is able to solve only linearly separable functions,  (or hyperplane in higher dimensions)</p>
+<p>e.g. 
+AND Gate
+<img alt="image" src="https://github.com/user-attachments/assets/23db5e67-addd-4f64-a051-2d94a05d5de5" /></p>
+<p>(0, 0) → 0
+(0, 1) → 0
+(1, 0) → 0
+(1, 1) → 1</p>
+<p>When plotted, only the point (1,1) is activated.
+Can be divided into two classes by a single straight line (linear decision boundary)</p>
+<p>XOR Gate</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/a8055a9b-bccd-4c3c-92e3-64941b22257a" /></p>
+<p>(0, 0) → 0
+(0, 1) → 1
+(1, 0) → 1
+(1, 1) → 0</p>
+<p>When plotted, the points (0,1) and (1,0) are situated diagonally opposite.
+= Cannot be divided into two classes by a single straight line (linear decision boundary)
+= the XOR gate is non-linearly separable: it needs something more than just a single line to classify the points correctly.</p>
+<p><strong>Learning Rule</strong></p>
+<p>A learning rule is a set of instructions that governs how a model's weights are adjusted during the training process to improve its performance.
+The goal is to minimize errors in its predictions by modifying its internal parameters (weights) based on the input data and corresponding outputs (labels).</p>
+<p>If the perceptron makes a correct prediction, the weights remain the same.
+If the perceptron underpredicts (i.e., it predicts -1, but the correct label is 1), the weights are increased.
+If the perceptron overpredicts (i.e., it predicts 1, but the correct label is -1), the weights are decreased.</p>
+<p>This process is repeated until the perceptron can correctly classify all training examples (or until it hits the max attempt)</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/12234fd3-d1ee-43e4-83fd-8ebbbbc82d7f" /></p>
+<h3 id="33-multilayer-perceptron-mlp">3.3 <a href="#33-multilayer-perceptron-mlp">Multilayer Perceptron (MLP)</a></h3>
+<p>While the single-layer perceptron is simple and efficient for binary classification, it can only separate linearly separable data. 
+To solve non-linearly separable data such as XOR, you need a multi-layer perceptron (MLP)</p>
+<p>MLP (Multi-Layer Perceptron) consists of multiple layers of neurons organized in such a way that it can model complex relationships. 
+It is one of the foundational architectures in deep learning and machine learning.</p>
+<p>MLP is a <strong>Feedforward</strong> network:
+- Data flows through the network in one direction, from the input layer to the hidden layers and finally to the output layer. (No feedback loops or backward connection)
+- Each neuron in a layer is connected to every neuron in the next layer (this is called a fully connected layer).
+- At each neuron, the input is multiplied by weights, summed up, and passed through an activation function (e.g., sigmoid, ReLU).</p>
+<p>MLP neural network architecture</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/d1bac3c3-4286-4562-99dd-d7d23328675b" /></p>
+<p><strong>Backpropagation</strong>
+If there is an error between the actual output and the target, we calculate the error (difference between the target and actual output) and propagate errors back through the network to update the weights.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/4a86d578-86cd-43df-b4bf-203be18c0536" /></p>
+<p>Backpropagation is typically paired with <strong>gradient descent</strong> (or its variants, such as stochastic gradient descent) to minimize the loss function by adjusting the weights in the direction that reduces the error.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/480c03e8-8149-4bb8-a365-85bc0f5faa7c" /></p>
+<p><strong>Error function (Loss function)</strong>
+-&gt; measures how well or poorly the neural network is performing
+<img alt="image" src="https://github.com/user-attachments/assets/d411e107-2580-4ae4-9264-4a9e83bbebaa" /></p>
+<p><strong>Gradient descent</strong>
+-&gt; aims to minimize the error function by adjusting the weights
+<img alt="image" src="https://github.com/user-attachments/assets/356b24c5-a999-4329-8a5d-d2503452a018" /></p>
+<p><strong>Backpropagation Diagram</strong>
+<img alt="image" src="https://github.com/user-attachments/assets/4755d9fa-0141-43e5-b21c-6b0c4d035cb1" /></p>
+<p>The error (E(t)) is computed as the difference between the predicted output Y(t) and the target value.
+The error is then propagated backward through the network, and gradients are calculated for each weight.
+The weights (W_o, W_i) are updated using gradient descent to reduce the error based on the computed gradients.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ded640c1-17b2-41b9-a037-671c27ba339a" /></p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/c6430ad2-afec-4e61-91d0-88c6d14fda5a" /></p>
+<p>More reading: https://en.wikipedia.org/wiki/Multilayer_perceptron</p>
+<p>https://scikit-learn.org/stable/modules/neural_networks_supervised.html</p>
+<h3 id="34-neural-network-design">3.4 <a href="#34-neural-network-design">Neural Network Design</a></h3>
+<h4 id="step-1-exhaustive-system-analysis">Step 1: Exhaustive System Analysis</h4>
+<p>Before choosing a neural network, you should consider other traditional models (e.g. phenomelogical models) that might be more appropriate for the problem. Neural networks are powerful but also more complex, resource-intensive, and data-hungry. Simpler models may be easier to work with and could perform just as well depending on the problem.</p>
+<p>Phenomenological Models: models based on domain-specific knowledge and physical laws, often used in scientific and engineering fields. e.g In physics, models based on Newton's laws to describe motion, or in biology, models to describe population growth.</p>
+<p>Neural networks are powerful and flexible but should be considered a "second best solution" when classic models cannot perform well. It's a good idea to try simpler models first to save time and resource.
+Many traditional models work well even with small datasets. Neural networks, on the other hand, perform better as the amount of data increases, while simpler models may struggle to scale. </p>
+<p>The <strong>preprocessing</strong> step in the development of a neural network or any machine learning model, involves identifying the most relevant features (input variables) and ensuring that unnecessary variables are removed. 
+The output should also be clearly defined so that the neural network can be properly structured to predict the desired outcome.
+- In classification tasks, the output might be a category or label (e.g., is the email spam or not?)
+- In regression tasks, the output might be a continuous value (e.g., the position of Y over period X)</p>
+<p><strong>Example:</strong>
+Let’s say you’re building a neural network to predict whether a person will buy a product based on the following features:</p>
+<p>Age
+Gender
+Income
+City
+Favorite Color
+Education Level
+Number of Children
+Marital Status
+Temperature on the day of purchase</p>
+<p>In this scenario:</p>
+<p>Step 1 would involve identifying which variables (inputs) are truly important. For example, "Favorite Color" and "Temperature" might not be very important or relevant in predicting whether someone will buy a product, so you could remove those variables. You could also find that "Income" and "Education Level" are highly correlated, so you might only keep one of them in the model. The goal is to simplify the model by only keeping the most important features that are directly related to the prediction task.</p>
+<h4 id="step-2-preprocessing">Step 2: Preprocessing</h4>
+<p>When designing and training a neural network:
+- Ensure that your data is representative of the problem you’re trying to solve
+- Obtain high quality data, e.g. properly designed survey/experimental plan
+- Make sure you have enough data to train the network
+- Visualise and examine the data to eliminate any outliers, null values, and redundant variables (if two variables are highly correlated, it might indicate redundancy)</p>
+<p>Neural networks are <strong>empirical</strong> model (i.e. learns from experience and observation rather than logic) for <strong>interpolation</strong>, not <strong>extrapolation</strong>— meaning it is not suitable for making predictions outside the range of the data they were trained on. For example, if a neural network is trained on data within a certain range (e.g., temperatures between 50°F and 100°F), it may perform poorly if asked to predict temperatures outside that range (e.g., 120°F).</p>
+<p><strong>Normalization</strong> of input variables on different scales or in different units is essential. 
+ Example normalization of variables so that they lie within a similar range (e.g., [0, 1] or [-1, 1]):
+ <img alt="image" src="https://github.com/user-attachments/assets/731753db-36b9-476a-8c57-5aceb12ffb0e" /></p>
+<h4 id="step-3-neural-model-design">Step 3: Neural Model Design</h4>
+<p>The number of input neurons and output neurons depends on the results from Steps 1 and 2. 
+But deciding on the number of neurons in the hidden layer (Nh) is not straightforward and often requires experimentation or following certain heuristics.
+Adding too many neurons can lead to overfitting (the model memorizes the training data rather than learning general patterns)</p>
+<p>The rule of thumb is to carefully choose Nh to keep the number of parameters/weights (Nw) below 10% of the total number of samples in the training dataset.</p>
+<pre><code>Nw &lt; (Number of samples) / 10
+</code></pre>
+<p>This rule helps ensure that the model has enough training data relative to its complexity (number of parameters) to learn general patterns rather than overfitting.</p>
+<p>Formula for the number of parameters (weights) for an MLP:
+<img alt="image" src="https://github.com/user-attachments/assets/5cceb768-8f86-48ae-8085-ccd61ba95fcc" /></p>
+<p>e.g. Let's say it is a binary classification problem, and you have 1000 samples in your dataset,</p>
+<p>you have 5 input neurons, [ 10 ] neurons in the hidden layer, 2 output neurons,
+Then the total number of weights Nw in the network would be: (5+1)<em>10 + (10+1)</em>2 = 82, which is smaller than the 10% of the samples (100), which makes it an adequate size relative to the dataset. </p>
+<p><a href="https://en.wikipedia.org/wiki/Universal_approximation_theorem">Universal Approximation Theorem</a> states that an MLP with one hidden layer and a sufficient number of neurons can approximate any non-linear function to any desired degree of accuracy, though in practice, deeper networks are often preferred for better performance.</p>
+<p>ReLU and Sigmoid functions are commonly used in hidden layers to introduce non-linearity and allow the network to learn complex patterns.
+In the output layer, the choice of activation function depends on the task:
+- Linear activation for regression tasks
+- Sigmoid for binary classification
+- Softmax for multi-class classification</p>
+<h4 id="step-4-training">Step 4: Training</h4>
+<p>The process of training involves finding the set of weights that minimize the loss function (=the error function that represents how far off the model’s predictions are from the actual values).
+However, this process can be difficult due to the complexity of the error function's landscape (solution space).</p>
+<p>The error function solution space is often highly complex, meaning it can have many:
+<strong>Local minima</strong>: Points where the error is lower than the surrounding points but is not the global minimum (the true lowest point in the solution space). Gradient descent may get stuck in these local minima.
+<strong>Saddle points</strong> (minimax points): Points where the gradient is zero, but they are neither a maximum nor a minimum. These points can slow down training since the model might get stuck in flat areas of the solution space.</p>
+<p>Local minima are points in the error (or loss) function where the gradient (slope) is zero, but they are not the global minimum (the best possible solution). During training, neural networks use optimization techniques like gradient descent to minimize the error function, but the error surface is often very complex with many local minima. Due to this complexity, depending on the starting point (initial weights), the network might settle into a local minimum instead of the global minimum, resulting in a suboptimal solution.</p>
+<p><strong>Solution</strong>: To increase the chance of finding the global minimum, run the training processes multiple times (20+) with different random initial weights. </p>
+<p>• <strong>Bias</strong>
+= the error introduced by assuming that the underlying relationship between the inputs (features) and outputs (target) is simpler than it actually is, aka the model "underfitting" the data
+<img alt="image" src="https://github.com/user-attachments/assets/939bb0a5-7374-4362-b395-907ddd3225c3" /></p>
+<p>On the other hand, we can also overdo the training and induce:
+• Overparameterization (High variance)
+• Overfitting (High variance)</p>
+<p>where the model learns from too much noise and specific details around the underlying patterns.</p>
+<p><strong>High variance</strong> (of the model'sperformance depending on the dataset, i.e. performs well on the training set but poorly on new, unseen set), aka "overfitting"
+<img alt="image" src="https://github.com/user-attachments/assets/700a8836-183d-4b78-8530-f059eccaf5bd" /></p>
+<h5 id="data-splitting">Data Splitting</h5>
+<p>To avoid overfitting, we use two sets for training: the <strong>Training Set</strong> and <strong>Test Set</strong> (plus optional <strong>Validation Set</strong>) </p>
+<p><strong>Training Set</strong>
+=&gt; the model tries to fit the training data as closely as possible. (i.e. the model computes and minimizes the error function based on the training set)</p>
+<p><strong>Test Set</strong>
+=&gt; the model cannot see the test set during training. It is used to evaluate the model's performance after training, as a a simulated real-world check using unseen data</p>
+<p>A common practice is to split the data into 80% training set and 20% test set. This allows the model to learn from a majority of the data while still having enough data to evaluate its performance.</p>
+<p><strong>Simultaneously visualizing the error function</strong> on both the training set and test set is a useful practice to understand how well your model is performing over time.</p>
+<p>You can plot the training error and test error as a function of the training iterations. This allows you to observe patterns such as:
+- If the training error continues to decrease but the test error starts increasing, the model is likely overfitting. This is because it is memorizing the training data while failing to generalize to the unseen test data.
+- If both the training and test errors decrease and converge, the model is learning well and generalizing appropriately</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/7a5642e6-c920-4412-bb72-03d9db7810c5" /></p>
+<p>As training progresses, (as the number of <strong>epochs</strong> increases = the number of iterations of all the training data in one cycle for training the model increases)
+you can monitor both training and test errors and stop the training process once you reach the minimum test error. This is called early stopping and is a common technique to prevent overfitting.</p>
+<p>You can determine the optimal number of epochs as the point at which the test error curve (dotted line) is at its minimum (i.e., right where the graph marks "Minimum test error").</p>
+<p>Both the training and test sets should be large enough to be statistically representative of the entire dataset.</p>
+<p>More reading: https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets</p>
+<h5 id="cross-validation">Cross-Validation</h5>
+<p>A more advanced technique is <strong>k-fold</strong> cross-validation, where the dataset is divided into k subsets. The model is trained k times, each time using a different subset as the test set and the remaining k−1 subsets as the training set. 
+The results can be averaged to produce a more reliable estimate of the model's performance.
+Or, sometimes, different neural network models are developed using the available data, splitting the training and test sets in different ways. The model that achieves the minimum error on the test set is chosen.</p>
+<h4 id="step-5-generalisation">Step 5: Generalisation</h4>
+<p>To test the generalisation capability of the network, that is, its performance on a different (never seen) set of data, a small (but representative) third set might be reserved, the generalisation set</p>
+<h3 id="35-neural-network-architectures">3.5 <a href="#35-neural-network-architectures">Neural Network Architectures</a></h3>
+<p>FNN: <a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">Feed-forward network</a>
+-  connections between the nodes do not form cycles/loops
+-  single-direction
+-  fully connected (every node receives input from upstream nodes and delivers output to downstream nodes) = makes it prone to overfitting
+-  no feedback</p>
+<p>RNN: <a href="https://en.wikipedia.org/wiki/Recurrent_neural_network">Recurrent network</a>
+-  feeds outputs back into its own inputs
+-  may react a stable state, or exhibit oscilations or even chaotic behaviour
+-  can support short-term memory</p>
+<p>CNN: <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolutional Neural Network</a>
+- deep learning network (de-facto standard for computer vision and image processing)
+- inspired by animal visual cortex
+- regularized FNN to prevent overfitting</p>
+<p><strong><a href="Feedforward-Neural-Network/">Exercise: Build a Feedforward Neural Network</a></strong></p>
+<h2 id="4-reinforcement-learning_1">4. <a href="#4-reinforcement-learning">Reinforcement Learning</a></h2>
+<p>Reinforcement Learning (RL) is a type of machine learning where an agent learns by <strong>interacting with its environment</strong>. Unlike supervised learning, where the agent learns from labeled data, RL involves learning from the consequences of its actions, without explicit instructions. The agent must figure out the best actions to take through trial and error, guided by a system of <strong>rewards</strong> and <strong>punishments</strong>.</p>
+<h4 id="key-characteristics">Key Characteristics:</h4>
+<ul>
+<li><strong>No explicit instructor</strong>: The agent is not directly told what to do but instead learns by observing the results of its actions.</li>
+<li><strong>Direct sensorimotor connection</strong>: The agent directly interacts with the environment, taking actions and observing outcomes through sensors.</li>
+</ul>
+<h4 id="agents-learning-process">Agent’s Learning Process:</h4>
+<ol>
+<li>The agent is in a <strong>state</strong> <script type="math/tex"> s </script>.</li>
+<li>The agent takes an <strong>action</strong> <script type="math/tex"> a </script>.</li>
+<li>The agent observes the next <strong>state</strong> of the environment <script type="math/tex"> s' </script>.</li>
+<li>The agent receives a <strong>reward</strong> <script type="math/tex"> r' </script>, which can be positive (as a reward) or negative (as a punishment).</li>
+</ol>
+<p>This loop continues as the agent interacts with the environment to maximize the cumulative reward over time.</p>
+<h4 id="agent-environment-interaction">Agent-Environment Interaction:</h4>
+<ul>
+<li><strong>Agent</strong> takes action <script type="math/tex"> A_t </script>, which affects the environment.</li>
+<li>The <strong>Environment</strong> responds by providing the next state <script type="math/tex"> S_{t+1} </script> and a reward <script type="math/tex"> R_{t+1} </script> to the agent.</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+\text{Agent} \overset{A_t}{\longrightarrow} \text{Environment} \quad \overset{S_{t+1}}{\longrightarrow} \overset{R_{t+1}}{\longrightarrow} \text{Agent}
+</script>
+</p>
+<p>An example of reinforcement learning in action is the <strong>Pole Balancing</strong> task, which is similar to controlling a rocket's landing, such as what SpaceX does with its reusable rockets. The agent (a controller) learns to balance a pole (or land a rocket) by making adjustments based on the current state (e.g., position and angle) to maximize the reward (successful balance or landing).</p>
+<h4 id="different-types-of-learning">Different Types of Learning:</h4>
+<ul>
+<li><strong>Supervised Learning</strong>: The agent learns from labeled data provided by an instructor. It has explicit inputs and corresponding outputs to learn from.</li>
+<li><strong>Unsupervised Learning</strong>: The agent learns from patterns in the data without any labels or direct guidance.</li>
+<li><strong>Reinforcement Learning</strong>: The agent learns through trial and error by interacting with the environment, receiving feedback in the form of rewards or punishments.</li>
+</ul>
+<hr />
+<h3 id="41-elements-of-reinforcement-learning">4.1 Elements of Reinforcement Learning</h3>
+<p>Reinforcement learning is built upon several core elements that define how the agent interacts with and learns from the environment:</p>
+<h4 id="1-policy">1. <strong>Policy</strong>:</h4>
+<blockquote>
+<p>"Given this state, take this action"
+(e.g. Be smartly greedy with a bit of exploration)
+- A <strong>policy</strong> defines the agent’s behavior at any given time. It is a mapping from states to actions, telling the agent which action to take in each state. The policy can be deterministic (always taking the same action in a given state) or stochastic (taking actions with certain probabilities).
+- Example: In a game, the policy might dictate whether the agent moves left or right based on its current position.</p>
+</blockquote>
+<h4 id="2-reward-function">2. <strong>Reward Function</strong>:</h4>
+<blockquote>
+<p>"Instant Gratification; Black Wolf"
+- The <strong>reward function</strong> defines the goal of the agent by assigning a scalar reward to each action or state. It tells the agent how good or bad an action is based on the immediate outcome.
+- The goal of the agent is to maximize the cumulative reward over time.
+- Example: In a video game, the agent receives a reward for collecting coins or reaching checkpoints.</p>
+</blockquote>
+<h4 id="3-value-function">3. <strong>Value Function</strong>:</h4>
+<blockquote>
+<p>"Long-term Discipline, White Wolf"
+- A <strong>value function</strong> estimates how good a particular state (or state-action pair) is in the long run. It reflects the total expected reward that can be obtained from that state onward.
+- While the reward function gives immediate feedback, the value function provides a broader view of the long-term consequences of actions.
+- Example: In chess, the value of a certain board position might reflect the agent’s likelihood of winning from that position, rather than the immediate score.</p>
+</blockquote>
+<h4 id="4-optional-model-of-the-environment">4. <strong>(Optional) Model of the Environment</strong>:</h4>
+<ul>
+<li>A <strong>model</strong> allows the agent to predict the next state and the reward it will receive after taking a certain action. If the agent has a model, it can plan ahead by simulating actions and their outcomes without interacting with the actual environment.</li>
+<li>Model-based RL uses this to improve learning efficiency, while model-free RL learns purely through direct interaction with the environment.</li>
+</ul>
+<p>RL typically follows the below process to maximize cumulative rewards over time through <strong>trial and error</strong>:</p>
+<ol>
+<li>
+<p><strong>Agent-Environment Interaction</strong>:</p>
+<ul>
+<li>The agent is placed in an environment where it takes actions and receives feedback in the form of rewards. </li>
+<li>At each time step <script type="math/tex"> t </script>, the agent is in a state <script type="math/tex"> S_t </script>, selects an action <script type="math/tex"> A_t </script>, and receives a reward <script type="math/tex"> R_{t+1} </script>, transitioning to the next state <script type="math/tex"> S_{t+1} </script>.</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+\text{Agent} \overset{A_t}{\longrightarrow} \text{Environment} \quad \overset{S_{t+1}}{\longrightarrow} \overset{R_{t+1}}{\longrightarrow} \text{Agent}
+</script>
+</p>
+</li>
+<li>
+<p><strong>Policy and Action Selection</strong>:</p>
+<ul>
+<li><strong>Policy</strong>: The agent's behavior is determined by a policy <script type="math/tex"> \pi(s) </script>, which maps states to actions. </li>
+<li><strong>Action Selection Strategies</strong>:</li>
+<li><strong>Greedy</strong>: Selects the action with the highest estimated value.</li>
+<li><strong>Epsilon-Greedy</strong>: With probability <script type="math/tex"> \epsilon </script>, selects a random action (exploration); with probability <script type="math/tex"> 1 - \epsilon </script>, selects the greedy action (exploitation).</li>
+<li><strong>Softmax</strong>: Selects actions probabilistically based on their estimated values, allowing both exploration and exploitation.</li>
+</ul>
+<p>Example of the <strong>epsilon-greedy strategy</strong>:
+  - With probability <script type="math/tex"> 1 - \epsilon </script>:
+     <script type="math/tex; mode=display">
+     A_t^* = \arg \max_a Q_t(a)
+     </script>
+    i.e. The agent chooses the action that gives the <strong>highest expected return</strong>.
+  - With probability <script type="math/tex"> \epsilon </script>, select a random action. </p>
+<ul>
+<li>At any time step <script type="math/tex"> t </script>, the agent wants to take the action that maximizes its long-term rewards based on its current estimates of action-values <script type="math/tex"> Q_t(a) </script>. 
+  The agent evaluates all available actions <script type="math/tex"> a </script> and selects the one that has the highest value of <script type="math/tex"> Q_t(a) </script>. In other words:</li>
+<li><strong><script type="math/tex"> A^*_t </script></strong> is the action that <strong>maximizes</strong> the agent’s <strong>expected future rewards</strong> according to its current knowledge.</li>
+<li><strong><script type="math/tex"> Q_t(a) </script></strong> is the <a href="#RL-action-value-estimation">Action-value Estimation</a></li>
+</ul>
+<p>e.g.
+  Suppose at time <script type="math/tex"> t </script>, the agent has the following estimates for <script type="math/tex"> Q_t(a) </script> for three possible actions in a given state:
+  - <script type="math/tex"> Q_t(a_1) = 5 </script>
+  - <script type="math/tex"> Q_t(a_2) = 8 </script>
+  - <script type="math/tex"> Q_t(a_3) = 3 </script>
+</p>
+<p>Using <script type="math/tex"> A^*_t = \arg \max_a Q_t(a) </script>, the agent will select action <script type="math/tex"> a_2 </script>, since it maximizes <script type="math/tex"> Q_t(a_2) = 8 </script>. Therefore:
+  <script type="math/tex; mode=display">
+  A^*_t = a_2
+  </script>
+  This means the agent will take action <script type="math/tex"> a_2 </script> at time <script type="math/tex"> t </script> because it expects to receive the highest long-term reward.</p>
+</li>
+<li>
+<p><strong>Experience Generation</strong>:</p>
+<ul>
+<li>The agent generates experiences by interacting with the environment and observing <strong>state-action-reward transitions</strong>. An episode ends when the agent reaches a terminal state, or after a predefined number of time steps.</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+(S_0, A_0, R_1), (S_1, A_1, R_2), \dots, (S_T, A_T, R_{T+1})
+</script>
+</p>
+</li>
+<li>
+<p><strong>Learning (Value Function Estimation)</strong>:</p>
+<ul>
+<li>(If using Monte Carlo methods) After each episode, the agent updates its <strong>value function</strong> based on the total rewards (returns) obtained.</li>
+<li>i.e. learning happens <strong>after the episode finishes</strong>, using the total return <script type="math/tex"> G_t </script> from a particular state or state-action pair.</li>
+</ul>
+<p>e.g. <a href="#RL-monte-carlo">Monte Carlo Methods</a>:
+<script type="math/tex; mode=display">
+V(S_t) \leftarrow V(S_t) + \alpha \left( G_t - V(S_t) \right)
+</script>
+- Where <script type="math/tex"> G_t </script> is the sum of future rewards from time step <script type="math/tex"> t </script> to the end of the episode:
+  <script type="math/tex; mode=display">
+  G_t = R_{t+1} + R_{t+2} + \dots + R_T
+  </script>
+</p>
+<p>For action-value estimation:
+<script type="math/tex; mode=display">
+Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \left( G_t - Q(S_t, A_t) \right)
+</script>
+</p>
+<p>If using <a href="#RL-temporal-difference">Temporal Difference</a> method, learning happens during the episode. </p>
+</li>
+<li>
+<p><strong>Return Calculation</strong>:</p>
+<ul>
+<li>The <strong>return</strong> <script type="math/tex"> G_t </script> is the cumulative sum of rewards obtained after taking an action in state <script type="math/tex"> S_t </script>. This is the feedback that the agent uses to improve its estimates of future rewards.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the Policy</strong>:</p>
+<ul>
+<li>After the value function has been updated based on the return, the agent can improve its <strong>policy</strong> (action-selection strategy) based on the newly learned values. This step helps the agent refine its action choices, making it more likely to select actions that maximize long-term rewards in the future.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="42-exploration-vs-exploitation">4.2 Exploration vs Exploitation</h3>
+<p>A fundamental challenge in reinforcement learning is the trade-off between <strong>exploration</strong> and <strong>exploitation</strong>:</p>
+<h4 id="exploitation"><strong>Exploitation</strong>:</h4>
+<ul>
+<li><strong>Exploitation</strong> refers to choosing the action that the agent currently believes will yield the highest reward. This is based on its past experience and learned value functions.</li>
+<li>The downside is that exploitation can lead the agent to get <strong>stuck in a local optimum</strong> because it always chooses the best-known option without exploring potentially better alternatives.</li>
+</ul>
+<h4 id="exploration"><strong>Exploration</strong>:</h4>
+<ul>
+<li><strong>Exploration</strong> refers to choosing actions that the agent is less certain about, in order to discover new information. By trying different actions, the agent may find a better strategy or higher reward that it didn’t know about before.</li>
+<li>The downside is that exploration may result in short-term suboptimal rewards as the agent tries less favorable actions.</li>
+</ul>
+<h4 id="balancing-exploration-and-exploitation">Balancing Exploration and Exploitation:</h4>
+<ul>
+<li>A good RL agent balances <strong>exploration</strong> and <strong>exploitation</strong> to maximize long-term reward. Too much exploitation may prevent the agent from finding better strategies, while too much exploration may prevent it from taking advantage of known good actions.</li>
+<li>A common technique to balance this is the <strong>epsilon-greedy</strong> strategy, where the agent usually exploits the best-known action but occasionally explores a random action.</li>
+</ul>
+<h3 id="action-value-estimation"><a href="#RL-action-value-estimation">Action-value Estimation</a></h3>
+<ul>
+<li><strong><script type="math/tex"> q^*(a) </script></strong>: The <strong>true action value</strong>, which represents the expected return from taking action <script type="math/tex"> a </script> and following the optimal policy thereafter. It is fixed but unknown to the agent.</li>
+<li><strong><script type="math/tex"> Q_t(a) </script></strong>: The <strong>estimated action value</strong> at time step <script type="math/tex"> t </script>, reflecting the agent’s best guess of the action's value based on experience. This estimate improves over time through learning.</li>
+</ul>
+<h4 id="true-action-value-qa">True Action Value <script type="math/tex"> q^*(a) </script>
+</h4>
+<p>The <strong>true action value</strong> <script type="math/tex"> q^*(a) </script> is the <strong>optimal action value</strong> because it represents the <strong>theoretical expected return</strong> for taking action <script type="math/tex"> a </script> in a given state, assuming the agent follows the <strong>best possible behavior (optimal policy)</strong> thereafter. It reflects the value the agent would know if it had perfect knowledge of the environment's dynamics and the associated rewards. </p>
+<p>While the agent cannot observe <script type="math/tex"> q^*(a) </script> directly, this "true" value serves as the ground truth that the agent seeks to estimate. Hence, <script type="math/tex"> q^*(a) </script> is called the <strong>true value</strong>, as it is the ideal that the agent is trying to approximate through learning.</p>
+<h4 id="simple-estimation-of-action-value">Simple Estimation of Action Value</h4>
+<p>The simplest way to estimate <script type="math/tex"> Q_t(a) </script> is by taking the <strong>average of rewards</strong> received from selecting action <script type="math/tex"> a </script> over <script type="math/tex"> K_a </script> times:</p>
+<p>
+<script type="math/tex; mode=display">
+Q_t(a) = \frac{1}{K_a} \sum_{i=1}^{K_a} r_i
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> K_a </script> is the number of times action <script type="math/tex"> a </script> has been selected.
+- <script type="math/tex"> r_i </script> is the reward received on the <script type="math/tex"> i </script>-th selection of action <script type="math/tex"> a </script>.</p>
+<p>Key points:
+- If <script type="math/tex"> K_a = 0 </script>, the agent uses an arbitrary value for <script type="math/tex"> Q_t(a) </script>, often initialized as <script type="math/tex"> 0 </script>.
+- As <script type="math/tex"> K_a \rightarrow \infty </script>, <script type="math/tex"> Q_t(a) </script> will converge to the true action value <script type="math/tex"> q^*(a) </script>.</p>
+<h3 id="action-selection-strategies">Action Selection Strategies</h3>
+<h4 id="greedy-method">Greedy Method</h4>
+<p>In the <strong>greedy method</strong>, the agent always selects the action with the highest estimated value:</p>
+<p>
+<script type="math/tex; mode=display">
+A_t^* = \arg \max_a Q_t(a)
+</script>
+</p>
+<ul>
+<li>Advantage: The agent always exploits the best-known action.</li>
+<li>Disadvantage: The agent might get stuck in a <strong>local optimum</strong> and fail to explore better actions.</li>
+</ul>
+<h4 id="epsilon-greedy-method">Epsilon-Greedy Method</h4>
+<p>In the <strong>epsilon-greedy method</strong>, the agent mostly selects the best-known action, but with a small probability <script type="math/tex"> \epsilon </script>, it chooses a random action to encourage exploration. This prevents the agent from getting stuck in local optima and allows it to explore potentially better options.</p>
+<ul>
+<li>As <script type="math/tex"> Q_t(a) </script> improves, it converges to <script type="math/tex"> q^*(a) </script> with probability <script type="math/tex"> 1 - \epsilon </script>.</li>
+</ul>
+<p>Example illustration:</p>
+<p><img alt="greedy-vs-epsilon-greedy" src="RL-greedy-vs-epsilon-greedy.png" /></p>
+<h4 id="softmax-method">Softmax Method</h4>
+<p>The <strong>softmax method</strong> assigns probabilities to actions based on their estimated values. Actions with higher estimated values are more likely to be selected, but even low-value actions have a chance of being chosen:</p>
+<p>
+<script type="math/tex; mode=display">
+P(a) = \frac{\exp(Q_t(a)/\tau)}{\sum_{i=1}^{n} \exp(Q_t(i)/\tau)}
+</script>
+</p>
+<p>Where <script type="math/tex"> \tau </script> is a <strong>temperature parameter</strong>:
+- High <script type="math/tex"> \tau </script>: All actions have nearly equal probability.
+- Low <script type="math/tex"> \tau </script>: Higher probability is assigned to the action with the highest value estimate.</p>
+<hr />
+<h4 id="incremental-implementation-of-action-value-estimation">Incremental Implementation of Action-Value Estimation</h4>
+<p>To update action-value estimates <strong>incrementally</strong>, the agent does not need to keep track of all past rewards. Instead, it can update the estimate based on the difference between the new reward and the current estimate. If <script type="math/tex"> Q_k </script> is the estimate at timestep <script type="math/tex"> k </script>, the next estimate <script type="math/tex"> Q_{k+1} </script> is updated as:</p>
+<p>
+<script type="math/tex; mode=display">
+Q_{k+1} = Q_k + \frac{1}{k} \left( R_k - Q_k \right)
+</script>
+</p>
+<p>This method efficiently updates the action value without requiring the agent to store all past rewards.</p>
+<p><img alt="RL-incremental-implementation" src="RL-incremental-implementation.png" /></p>
+<h4 id="non-stationary-problems-and-step-size">Non-Stationary Problems and Step-Size</h4>
+<p>In non-stationary environments, where conditions change over time, the agent should give <strong>more weight to recent rewards</strong> than older ones. This can be achieved by using a <strong>constant step-size parameter</strong> <script type="math/tex"> \alpha </script>:</p>
+<p>
+<script type="math/tex; mode=display">
+Q_{k+1} = Q_k + \alpha \left( R_k - Q_k \right)
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> \alpha </script> is the <strong>step-size parameter</strong> (between 0 and 1), controlling how much the new reward influences the updated value estimate.</p>
+<hr />
+<h3 id="43-the-agent-environment-interface">4.3 The Agent-Environment Interface</h3>
+<h4 id="non-associative-vs-associative-tasks">Non-Associative vs Associative Tasks</h4>
+<ul>
+<li>
+<p><strong>Non-Associative Tasks</strong>: Actions are chosen without considering the current situation. An example is a <strong>multi-armed bandit problem</strong>, where the agent chooses from multiple actions without needing to account for the state or context.</p>
+</li>
+<li>
+<p><strong>Associative Tasks</strong>: The agent must learn to <strong>map different situations (states) to actions</strong>. An example is a <strong>contextual bandit problem</strong>, where the context (such as colors) changes the reward structure for each action.</p>
+</li>
+</ul>
+<p>A <strong>full RL problem</strong> occurs when actions influence both the <strong>immediate reward</strong> and the <strong>next state</strong>, requiring the agent to consider the impact of its actions not just on short-term rewards, but also on future state transitions.</p>
+<hr />
+<h4 id="episodic-vs-non-episodic-tasks">Episodic vs Non-Episodic Tasks</h4>
+<ul>
+<li>
+<p><strong>Episodic Tasks</strong>: The task has a clear end, where each episode finishes in a terminal state, and then resets to start over (e.g., games with rounds or levels).</p>
+</li>
+<li>
+<p><strong>Non-Episodic Tasks</strong>: The task continues indefinitely without a defined end. The agent must learn to maximize long-term rewards in an ongoing environment.</p>
+</li>
+</ul>
+<h4 id="examples">Examples:</h4>
+<ul>
+<li>Episodic: A game with rounds where the agent starts over after each round.</li>
+<li>Non-Episodic: A stock trading system, where decisions are made continuously without a clear end.</li>
+</ul>
+<hr />
+<h4 id="returns-and-discounting">Returns and Discounting</h4>
+<p>The <strong>return</strong> <script type="math/tex"> G_t </script> is the total sum of rewards received by the agent after time step <script type="math/tex"> t </script>. The agent aims to maximize this return:</p>
+<p>
+<script type="math/tex; mode=display">
+G_t = R_1 + R_2 + \dots + R_T
+</script>
+</p>
+<p>For <strong>non-episodic tasks</strong>, where the task may continue indefinitely, the return could be infinite. To address this, agents maximize the <strong>discounted return</strong>, which places less emphasis on distant future rewards:</p>
+<p>
+<script type="math/tex; mode=display">
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots
+</script>
+</p>
+<p>Where <script type="math/tex"> \gamma </script> is the <strong>discount factor</strong>:
+- <script type="math/tex"> 0 \leq \gamma < 1 </script>: Future rewards are discounted exponentially, with more weight given to immediate rewards.
+- <script type="math/tex"> \gamma = 0 </script>: The agent is <strong>myopic</strong>, only caring about immediate rewards.
+- <script type="math/tex"> \gamma \to 1 </script>: The agent is <strong>foresighted</strong>, giving near-equal importance to future rewards.</p>
+<h4 id="mathematical-definition">Mathematical Definition</h4>
+<p>The <strong>discounted return</strong> <script type="math/tex"> G_t </script> from time step <script type="math/tex"> t </script> is defined as:</p>
+<p>
+<script type="math/tex; mode=display">
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> R_{t+1}, R_{t+2}, R_{t+3}, \dots </script> are the rewards at time steps <script type="math/tex"> t+1, t+2, t+3, \dots </script>.
+- <script type="math/tex"> \gamma \in [0, 1] </script> is the <strong>discount factor</strong>, controlling the importance of future rewards.</p>
+<h4 id="explanation">Explanation</h4>
+<ul>
+<li><strong>Immediate rewards</strong> are valued more than <strong>future rewards</strong>, thanks to the discount factor. A higher <script type="math/tex"> \gamma </script> value (closer to 1) means the agent values future rewards more, while a lower <script type="math/tex"> \gamma </script> (closer to 0) makes the agent focus on short-term rewards.</li>
+<li>For example, with <script type="math/tex"> \gamma = 0.9 </script>, rewards one step in the future are multiplied by 0.9, two steps in the future by <script type="math/tex"> 0.9^2 = 0.81 </script>, and so on.</li>
+</ul>
+<h4 id="why-use-discounted-returns">Why Use Discounted Returns?</h4>
+<ol>
+<li><strong>Prevent Infinite Returns</strong>: In continuing tasks without a natural end, rewards could accumulate infinitely. Discounting ensures the total return remains finite.</li>
+<li><strong>Time Preference</strong>: Immediate rewards are often more valuable in real-world problems, and discounting reflects this.</li>
+<li><strong>Handle Uncertainty</strong>: Future rewards may be uncertain, and discounting helps de-emphasize rewards that are far away and possibly unreliable.</li>
+</ol>
+<h3 id="summary">Summary</h3>
+<p>The <strong>discounted return</strong> is a method of calculating future rewards by giving more importance to immediate rewards than distant ones. The discount factor <script type="math/tex"> \gamma </script> adjusts how much future rewards are devalued. It helps balance short-term and long-term gains while ensuring the return is finite in ongoing tasks.</p>
+<p><strong>Unified Notation</strong></p>
+<p><img alt="alt text" src="image-1.png" /></p>
+<ul>
+<li>The figure shows an example where the agent reaches a <strong>final absorbing state</strong> (<script type="math/tex"> S_3 </script>) beyond which all rewards are zero (<script type="math/tex"> R_4 = 0, R_5 = 0, \dots </script>).</li>
+<li><strong>Absorbing state</strong>: Once reached, the agent remains in this state, and all future rewards are zero.</li>
+<li>It is noted that <strong>either</strong> <script type="math/tex"> T = \infty </script> (an infinite time horizon) or <script type="math/tex"> \gamma = 1 </script> (no discounting) is possible, but <strong>not both</strong>. Having both would lead to an infinite return.</li>
+<li>The return <script type="math/tex"> G_t </script> is calculated as the sum of future rewards, discounted by <script type="math/tex"> \gamma </script>:</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+G_t = \sum_{k=0}^{T-t-1} \gamma^k R_{t+k+1}
+</script>
+</p>
+<p>This formula sums the rewards from time <script type="math/tex"> t </script> onward, with each reward being discounted based on how far into the future it occurs.</p>
+<p><strong>The Markov Property</strong></p>
+<p>In probability theory and statistics, the term <a href="https://en.wikipedia.org/wiki/Markov_property">Markov property</a> refers to the <strong>memoryless</strong> property of a stochastic process, which means that <strong>its future state is independent of its history</strong>. It is named after the Russian mathematician Andrey Markov.</p>
+<p>A Reinforcement Learning system satisfies the <strong>Markov property</strong> if the probability of the future state <script type="math/tex"> S_{t+1} </script> depends only on the current state <script type="math/tex"> S_t </script> and action <script type="math/tex"> A_t </script>, and not on any prior states or actions.</p>
+<p>
+<script type="math/tex; mode=display">
+P(S_{t+1} \mid S_t, A_t, S_{t-1}, A_{t-1}, \dots, S_0, A_0) = P(S_{t+1} \mid S_t, A_t)
+</script>
+</p>
+<p>e.g. In Chess, the next move depends only on the current state of the pieces on the board, not on the history of the session.</p>
+<p>The Markov property is crucial because it allows the agent to focus only on the <strong>current state</strong> to make decisions, simplifying the learning process; the agent doesn't need to remember the full history of states and actions, which makes solving the problem more efficient.</p>
+<h3 id="44-value-functions">4.4 Value Functions</h3>
+<p>Value Functions are used to estimate the value of being in a certain state, or the value of taking a certain action in the given state. These estimates help the agent make decisions that maximize future rewards.</p>
+<h4 id="types-of-value-functions">Types of Value Functions:</h4>
+<ol>
+<li>
+<p><strong>State-Value Function <script type="math/tex"> v_\pi(s) </script></strong>: represents the expected return (future cumulative rewards) from being in a state <script type="math/tex"> s </script>, following a policy <script type="math/tex"> \pi </script>
+</p>
+</li>
+<li>
+<p><strong>Action-Value Function <script type="math/tex"> q_\pi(s, a) </script></strong>: represents the expected return from being in a state <script type="math/tex"> s </script>, taking an action <script type="math/tex"> a </script>, and then following policy <script type="math/tex"> \pi </script>
+</p>
+</li>
+</ol>
+<h4 id="state-value-function">State-Value Function:</h4>
+<p>The <strong>State-value function</strong> under a policy <script type="math/tex"> \pi </script>, denoted as <script type="math/tex"> v_\pi(s) </script> or <script type="math/tex"> V^\pi(s) </script>, is the expected return when starting in state <script type="math/tex"> s </script> and following policy <script type="math/tex"> \pi </script> thereafter.</p>
+<p>
+<script type="math/tex; mode=display">
+v_\pi(s) = \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] = \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid S_t = s \right]
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> v_\pi(s) </script>: The value of state <script type="math/tex"> s </script> under policy <script type="math/tex"> \pi </script>.
+- <script type="math/tex"> G_t </script>: The return (sum of future rewards).
+- <script type="math/tex"> \gamma </script>: The <strong>discount factor</strong>, which determines the importance of future rewards compared to immediate rewards.
+- <script type="math/tex"> R_{t+k+1} </script>: The reward received at time <script type="math/tex"> t+k+1 </script>.
+- <strong><script type="math/tex"> \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] </script></strong>: the <strong>expected</strong> value, or the average of all the returns <script type="math/tex"> G_t </script> that the agent will get (across the episodes), starting from state <script type="math/tex"> s </script>, given the policy <script type="math/tex"> \pi </script>.</p>
+<pre><code>ExpectedValue(policy_pi) {
+    G_t = sum of future rewards starting at t
+    if agent is in state S_t = s {
+        return average(G_t over all action sequences from s, weighted by policy_pi)
+    }
+}
+</code></pre>
+<p>
+<script type="math/tex"> \mathbb{E} </script>, or <a href="https://en.wikipedia.org/wiki/Expected_value">Expected Value</a> is a concept in probability theory.</p>
+<p>
+<script type="math/tex">V^*(s)</script> denotes the <strong>maximum</strong> discounted reward obtainable in state s. i.e. The value of following the optimal policy</p>
+<p>This formula calculates the <strong>expected sum of discounted rewards</strong> starting from state <script type="math/tex"> s </script>, and following policy <script type="math/tex"> \pi </script>.</p>
+<h4 id="action-value-function-q-value-function">Action-Value Function (Q-Value Function):</h4>
+<p>In reinforcement learning, <strong>Q-values</strong> (or <strong>action-value functions</strong>) help the agent decide which action to take in a given state by evaluating both the <strong>immediate reward</strong> and the <strong>long-term value</strong> of the resulting state.</p>
+<h4 id="q-value-function-qs-a">Q-value Function <script type="math/tex"> Q(s, a) </script>:</h4>
+<p>The Q-value for a state-action pair <script type="math/tex"> (s, a) </script> is defined as:</p>
+<p>
+<script type="math/tex; mode=display">
+Q(s, a) = r(s, a) + \gamma V^*(s')
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> r(s, a) </script> is the <strong>immediate reward</strong> the agent receives for taking action <script type="math/tex"> a </script> in state <script type="math/tex"> s </script>,
+- <script type="math/tex"> \gamma </script> is the <strong>discount factor</strong>, which reduces the importance of future rewards,
+- <script type="math/tex"> V^*(s') </script> is the <strong>optimal state-value</strong> of the next state <script type="math/tex"> s' </script>, representing the expected return when following the optimal policy from that state.</p>
+<p><strong>Why "Q"?</strong>: Early work in reinforcement learning used the letter "Q" to refer to the "quality" of a specific action in a state. Over time, this became a widely accepted notation.</p>
+<h4 id="explanation_1">Explanation:</h4>
+<ul>
+<li>The Q-value combines the <strong>immediate reward</strong> with the <strong>discounted value</strong> of the next state <script type="math/tex"> s' </script>, after the agent takes action <script type="math/tex"> a </script>.</li>
+<li>The agent assumes that it will follow the <strong>optimal policy</strong> <script type="math/tex"> \pi^* </script> from the next state <script type="math/tex"> s' </script> onwards, which is why <script type="math/tex"> V^*(s') </script> is used.</li>
+</ul>
+<h4 id="components">Components:</h4>
+<ul>
+<li>
+<script type="math/tex"> r(s, a) </script>: The reward received for taking action <script type="math/tex"> a </script> in state <script type="math/tex"> s </script>,</li>
+<li>
+<script type="math/tex"> V^*(s') </script>: The value of the succeeding state <script type="math/tex"> s' </script>,</li>
+<li>
+<script type="math/tex"> s' </script>: The next state, <script type="math/tex"> s' = \delta(s, a) </script>, assuming the optimal policy is followed.</li>
+</ul>
+<h4 id="summary_1">Summary:</h4>
+<ul>
+<li><strong>Q-values</strong> help the agent choose the action that maximizes the expected return, balancing immediate rewards with future rewards.</li>
+<li>The <strong>optimal policy</strong> can be derived by selecting the action with the highest Q-value in each state.</li>
+</ul>
+<h4 id="formula">Formula:</h4>
+<p>
+<script type="math/tex; mode=display">
+Q(s, a) = r(s, a) + \gamma V^*(s')
+</script>
+</p>
+<p>Where:
+- <script type="math/tex"> r(s, a) </script> is the immediate reward,
+- <script type="math/tex"> V^*(s') </script> is the value of the next state,
+- <script type="math/tex"> \gamma </script> is the discount factor that weighs future rewards.</p>
+<h3 id="45-value-function-estimation-methods">4.5 Value Function Estimation Methods</h3>
+<p>In reinforcement learning, the goal is to learn a value function that estimates the expected cumulative reward (return) the agent will get from a given state (or state-action pair). The below three methods are commonly used for value function estimation:</p>
+<ol>
+<li><strong>Monte Carlo Methods</strong>  </li>
+<li><strong>Temporal Difference (TD) Methods</strong>  </li>
+<li><strong>Dynamic Programming (DP) Methods</strong>  </li>
+</ol>
+<p>Each method has its own approach to updating the value function based on the agent's interactions with the environment.</p>
+<h3 id="monte-carlo-methods"><a href="#RL-monte-carlo">Monte Carlo Methods</a></h3>
+<h4 id="what-are-monte-carlo-methods">What are Monte Carlo Methods?</h4>
+<p>Monte Carlo methods are a class of algorithms that rely on <strong>random sampling</strong> to estimate numerical results. </p>
+<p>The term "Monte Carlo" comes from the Monte Carlo Casino in Monaco, which is famous for gambling and randomness. The association with randomness fits Monte Carlo methods because they rely on random sampling to estimate values and solve problems in RL, much like games of chance in a casino.</p>
+<p>The key idea is that Monte Carlo methods:
+- Accumulate rewards from the complete sequence of states, actions, and rewards (i.e., the <strong>episode</strong>).
+- Use the <strong>total return</strong> after an episode to update the value function for the states or actions experienced in that episode.</p>
+<p>For example, after each episode, the <strong>return</strong> <script type="math/tex"> G_t </script> (sum of rewards from time <script type="math/tex"> t </script> until the end of the episode) is computed, and the value function <script type="math/tex"> V(S_t) </script> is updated based on the average of many such returns.</p>
+<p>
+<script type="math/tex; mode=display">
+G_t = R_{t+1} + R_{t+2} + R_{t+3} + \dots
+</script>
+<script type="math/tex; mode=display">
+V(S_t) \leftarrow V(S_t) + \alpha \left( G_t - V(S_t) \right)
+</script>
+</p>
+<h4 id="key-characteristics-of-monte-carlo-methods">Key Characteristics of Monte Carlo Methods:</h4>
+<ul>
+<li><strong>Model-free</strong>: Monte Carlo methods do not require a model of the environment.</li>
+<li><strong>Episodic</strong>: Monte Carlo methods require that episodes eventually end, since they update the value function based on the total return from the episode.</li>
+<li><strong>Delayed updates</strong>: Unlike Temporal-Difference (TD) methods, Monte Carlo methods update the value function only <strong>after the entire episode is complete</strong>. This makes them less efficient in some cases where immediate updates are preferred.</li>
+</ul>
+<p><a href="#RL-temporal-difference">Temporal-Difference Prediction</a></p>
+<p><strong>Temporal Difference (TD) methods</strong> are a class of value function estimation techniques used in <strong>Reinforcement Learning</strong>. They combine ideas from both <strong>Monte Carlo methods</strong> and <strong>Dynamic Programming (DP)</strong>, allowing the agent to learn from incomplete episodes and without a full model of the environment.</p>
+<h4 id="key-features-of-td-methods">Key Features of TD Methods:</h4>
+<ol>
+<li><strong>Bootstrapping</strong>: </li>
+<li>TD methods update the value of the current state based not only on the immediate reward but also on the estimated value of the next state. This means TD methods <strong>"bootstrap"</strong> their estimates—they update based on other estimates.</li>
+<li>
+<p>Unlike <strong>Monte Carlo</strong> methods, which wait until the end of an episode, TD methods update the value function after every time step.</p>
+</li>
+<li>
+<p><strong>Real-time Learning</strong>:</p>
+</li>
+<li>
+<p>TD methods can learn <strong>in real-time</strong>, during the agent's interaction with the environment. The agent updates its value estimates after each action, not after the entire episode finishes.</p>
+</li>
+<li>
+<p><strong>Model-free</strong>:</p>
+</li>
+<li>Like Monte Carlo methods, TD methods do not require knowledge of the environment’s transition probabilities or rewards, making them <strong>model-free</strong>. They learn solely from the agent's experiences.</li>
+</ol>
+<h4 id="td0-update-rule">TD(0) Update Rule:</h4>
+<p>The simplest TD method is called <strong>TD(0)</strong>, where the agent updates the value of the current state based on the reward received and the estimated value of the next state:</p>
+<p>
+<script type="math/tex; mode=display">
+V(S_t) \leftarrow V(S_t) + \alpha \left( R_{t+1} + \gamma V(S_{t+1}) - V(S_t) \right)
+</script>
+</p>
+<ul>
+<li>
+<script type="math/tex"> V(S_t) </script>: The value of the current state <script type="math/tex"> S_t </script>.</li>
+<li>
+<script type="math/tex"> \alpha </script>: The learning rate, which controls how much we adjust the current estimate based on the new information.</li>
+<li>
+<script type="math/tex"> R_{t+1} </script>: The immediate reward received after taking action in state <script type="math/tex"> S_t </script>.</li>
+<li>
+<script type="math/tex"> \gamma </script>: The discount factor, which weighs future rewards compared to immediate rewards.</li>
+<li>
+<script type="math/tex"> V(S_{t+1}) </script>: The estimated value of the next state <script type="math/tex"> S_{t+1} </script>.</li>
+</ul>
+<p>The term <script type="math/tex"> R_{t+1} + \gamma V(S_{t+1}) - V(S_t) </script> is known as the <strong>TD error</strong>, which represents the difference between the current value estimate <script type="math/tex"> V(S_t) </script> and the newly updated estimate based on <script type="math/tex"> R_{t+1} </script> and <script type="math/tex"> V(S_{t+1}) </script>.</p>
+<h4 id="how-td0-works">How TD(0) Works:</h4>
+<ul>
+<li>After each step in the environment, the agent:</li>
+<li>Takes an action and observes the next state and reward.</li>
+<li>Updates the value of the current state using the TD(0) update rule.</li>
+<li>Repeats this process for each time step, improving its estimates as it gains more experience.</li>
+</ul>
+<h4 id="td0-example">TD(0) Example:</h4>
+<p>Let’s say the agent is in state <script type="math/tex"> S_t </script>, takes an action, and receives a reward <script type="math/tex"> R_{t+1} </script>, transitioning to state <script type="math/tex"> S_{t+1} </script>. The current value estimate of <script type="math/tex"> S_t </script> is <script type="math/tex"> V(S_t) = 5 </script>, and the value estimate of the next state <script type="math/tex"> S_{t+1} </script> is <script type="math/tex"> V(S_{t+1}) = 8 </script>. The reward <script type="math/tex"> R_{t+1} </script> is 3, and the learning rate <script type="math/tex"> \alpha = 0.1 </script>, with a discount factor <script type="math/tex"> \gamma = 0.9 </script>.</p>
+<p>The TD update would be:
+<script type="math/tex; mode=display">
+V(S_t) \leftarrow 5 + 0.1 \left( 3 + 0.9 \times 8 - 5 \right)
+</script>
+<script type="math/tex; mode=display">
+V(S_t) \leftarrow 5 + 0.1 \times (3 + 7.2 - 5) = 5 + 0.1 \times 5.2 = 5 + 0.52 = 5.52
+</script>
+After the update, the new estimate of <script type="math/tex"> V(S_t) </script> becomes <strong>5.52</strong>.</p>
+<h4 id="advantages-of-td-methods">Advantages of TD Methods:</h4>
+<ol>
+<li><strong>Sample Efficiency</strong>: TD methods update values after each action, allowing the agent to learn faster compared to methods like Monte Carlo that wait for the episode to finish.</li>
+<li><strong>Real-Time Updates</strong>: The agent can update its estimates <strong>during an episode</strong>, making it well-suited for both <strong>continuing tasks</strong> (with no clear episode end) and <strong>episodic tasks</strong>.</li>
+<li><strong>No Need for a Full Model</strong>: Like Monte Carlo, TD methods are <strong>model-free</strong>, meaning they don’t require a complete model of the environment’s dynamics.</li>
+</ol>
+<h4 id="extensions-of-td-methods">Extensions of TD Methods:</h4>
+<ol>
+<li><strong>TD(λ)</strong>: A more advanced version of TD, which introduces <strong>eligibility traces</strong> to blend between TD(0) and Monte Carlo methods, allowing the agent to update states visited earlier in the episode.</li>
+<li><strong>SARSA</strong>: An on-policy TD control method, where the agent updates its action-value function <script type="math/tex"> Q(s, a) </script> based on the action it actually takes.</li>
+<li><strong>Q-Learning</strong>: An off-policy TD control method, where the agent learns the optimal action-value function <script type="math/tex"> Q^*(s, a) </script> by updating based on the maximum possible action-value.</li>
+</ol>
+<h4 id="summary_2">Summary:</h4>
+<ul>
+<li><strong>Temporal Difference (TD) methods</strong> combine the strengths of Monte Carlo and Dynamic Programming, allowing value updates during episodes without needing a full environment model.</li>
+<li><strong>TD(0)</strong> updates the value function after each time step based on the immediate reward and the estimated value of the next state.</li>
+<li>TD methods are crucial for <strong>real-time, model-free learning</strong>, enabling an agent to maximize rewards over time by continuously improving its value function.</li>
+</ul>
+<h2 id="5-metaheuristics_1">5. Metaheuristics</h2>
+<p><a href="https://en.wikipedia.org/wiki/Metaheuristic">Metaheuristics</a> and heuristics are both optimization methods, but they differ in scope, flexibility, and application.</p>
+<h4 id="heuristics">Heuristics</h4>
+<ul>
+<li><strong>Problem-specific</strong>: Heuristics are designed to solve a specific problem or class of problems. They incorporate domain-specific knowledge to find a solution quickly but may not work well for other types of problems.</li>
+<li><strong>Greedy approach</strong>: Heuristics often use a greedy strategy to make decisions that seem best at the moment, without considering future consequences. This can lead to suboptimal solutions.</li>
+<li><strong>Limited exploration</strong>: Heuristics typically focus on a small region of the solution space, leading to less exploration.</li>
+<li><strong>Efficiency</strong>: They are generally very fast and simple, often used for real-time applications where finding a good enough solution quickly is more important than finding the optimal solution.</li>
+<li><strong>Example</strong>: In a route-finding problem, the <em>nearest neighbor</em> heuristic chooses the next city based on proximity, aiming for short-term gains but possibly missing the global optimum.</li>
+</ul>
+<h4 id="metaheuristics">Metaheuristics</h4>
+<ul>
+<li><strong>Problem-independent</strong>: Metaheuristics are general frameworks that can be adapted to solve a wide range of problems. They don't rely on domain-specific knowledge, making them more flexible.</li>
+<li><strong>Balancing exploration and exploitation</strong>: Metaheuristics aim to explore the solution space thoroughly (exploration) while refining promising areas (exploitation). This reduces the risk of getting stuck in local optima.</li>
+<li><strong>Memory use</strong>: Some metaheuristics maintain a memory of past solutions (e.g., Tabu Search), which helps guide future decisions and improve search efficiency.</li>
+<li><strong>Trade-off</strong>: Metaheuristics are generally slower than heuristics because they perform a more comprehensive search, but they are more likely to find near-optimal or optimal solutions.</li>
+<li><strong>Example</strong>: Genetic Algorithms and Simulated Annealing are metaheuristics that apply to various types of optimization problems by mimicking natural or physical processes.</li>
+</ul>
+<h4 id="summary-table">Summary Table</h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Heuristics</th>
+<th>Metaheuristics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Problem scope</strong></td>
+<td>Problem-specific</td>
+<td>Problem-independent</td>
+</tr>
+<tr>
+<td><strong>Strategy</strong></td>
+<td>Greedy, localized search</td>
+<td>Balances exploration &amp; exploitation</td>
+</tr>
+<tr>
+<td><strong>Exploration</strong></td>
+<td>Limited</td>
+<td>Wide exploration</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Very fast</td>
+<td>Slower but more thorough</td>
+</tr>
+<tr>
+<td><strong>Memory use</strong></td>
+<td>Typically none</td>
+<td>May use memory (e.g., Tabu Search)</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>Nearest neighbor</td>
+<td>Simulated Annealing, Genetic Algorithms</td>
+</tr>
+</tbody>
+</table>
+<p>In essence, heuristics are quicker and simpler but may miss optimal solutions, while metaheuristics offer a broader, more flexible approach, often yielding better results at the cost of increased computational effort.</p>
+<p><img alt="local-minima" src="metah-local-minima.png" /></p>
+<h3 id="deterministic-vs-stochastic">Deterministic vs Stochastic</h3>
+<h4 id="deterministic-methods">Deterministic Methods</h4>
+<ul>
+<li><strong>Definition</strong>: Deterministic methods are algorithms or processes that will always produce the same output from a given initial condition. There is no randomness involved in these methods, and they follow a specific set of rules.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>The same input always leads to the same output.</li>
+<li>The process is fully predictable and repeatable.</li>
+<li>Often used in algorithms where the problem has a well-defined solution space (e.g., shortest path algorithms).</li>
+<li><strong>Example</strong>: Dijkstra's algorithm for shortest paths in graphs, which always finds the shortest path for a given input.</li>
+</ul>
+<h4 id="stochastic-methods">Stochastic Methods</h4>
+<ul>
+<li><strong>Definition</strong>: Stochastic methods introduce randomness or probability in their processes. The output can vary, even with the same initial input, due to random elements in the algorithm.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>These methods are more exploratory, often used when the search space is too large or complex to explore exhaustively.</li>
+<li>Different runs with the same input can lead to different outputs, potentially discovering better solutions in optimization problems.</li>
+<li><strong>Example</strong>: Simulated Annealing or Genetic Algorithms, which rely on randomness to explore the solution space more widely.</li>
+</ul>
+<h4 id="key-differences">Key Differences</h4>
+<ul>
+<li><strong>Predictability</strong>: Deterministic methods always give the same result, while stochastic methods can give different results on different runs.</li>
+<li><strong>Exploration</strong>: Stochastic methods explore a larger solution space due to randomization, while deterministic methods stick to a fixed path.</li>
+<li><strong>Efficiency</strong>: Deterministic methods can be more efficient but may miss global optima, while stochastic methods can escape local minima but may require more computational effort.</li>
+</ul>
+<hr />
+<h3 id="first-order-gradient-methods">First-order Gradient Methods</h3>
+<ul>
+<li><strong>Definition</strong>: First-order gradient methods are optimization algorithms that use the first derivative (gradient) of the objective function to guide the search for the optimal solution.</li>
+<li><strong>How it works</strong>: These methods follow the steepest descent direction to minimize (or maximize) a function by adjusting the variables in proportion to the negative of the gradient.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>Only the gradient (first derivative) is needed, making them computationally inexpensive.</li>
+<li>They work well for convex problems* but may get stuck in local minima in non-convex problems.</li>
+<li><strong>Example</strong>: <em>Gradient Descent</em>, <em>Stochastic Gradient Descent (SGD)</em>, <em>Momentum</em>, <em>Adam (ADAptive Moment)</em> Estimation</li>
+</ul>
+<h4 id="advantages">Advantages</h4>
+<ul>
+<li>Simplicity and ease of implementation.</li>
+<li>Suitable for large-scale problems and real-time applications due to their efficiency.</li>
+<li>Can be enhanced with momentum or adaptive learning rates (e.g., <em>Adam Optimizer</em>).</li>
+</ul>
+<h4 id="disadvantages">Disadvantages</h4>
+<ul>
+<li>May converge slowly.</li>
+<li>Can get stuck in local minima for non-convex problems.</li>
+<li>Requires careful tuning of the learning rate.</li>
+</ul>
+<p><em>A </em><em>convex problem</em>* is an optimization problem where the objective function and the feasible region exhibit specific convexity properties. Convexity makes these problems easier to solve because local optima are also global optima.
+e.g. Minimizing the quadratic function <script type="math/tex"> f(x) = x^2 </script> is a convex problem because the function is convex, and it has a unique global minimum at <script type="math/tex"> x = 0 </script>.</p>
+<h3 id="1-gradient-descent-gd">1. Gradient Descent (GD)</h3>
+<h3 id="definition">Definition:</h3>
+<p>Gradient Descent (GD) is an optimization algorithm that minimizes a cost function by computing the gradient (first derivative) of the cost function and updating the parameters in the opposite direction of the gradient.</p>
+<h4 id="characteristics">Characteristics:</h4>
+<ul>
+<li><strong>Full-batch Gradient</strong>: It computes the gradient using the entire dataset.</li>
+<li><strong>Update Rule</strong>:
+  <script type="math/tex; mode=display">
+  \theta_{t+1} = \theta_t - \alpha \nabla J(\theta)
+  </script>
+  where <script type="math/tex"> \alpha </script> is the learning rate, <script type="math/tex"> \theta_t </script> is the parameter at time <script type="math/tex"> t </script>, and <script type="math/tex"> \nabla J(\theta) </script> is the gradient of the cost function <script type="math/tex"> J(\theta) </script>.</li>
+</ul>
+<h4 id="advantages_1">Advantages:</h4>
+<ul>
+<li>Guarantees a smooth and stable convergence in convex problems.</li>
+<li>Each step moves towards the optimal solution.</li>
+</ul>
+<h4 id="disadvantages_1">Disadvantages:</h4>
+<ul>
+<li><strong>Computationally Expensive</strong>: Requires computing the gradient on the entire dataset at every step, which can be slow for large datasets.</li>
+<li><strong>Memory-intensive</strong>: Needs to load the entire dataset into memory.</li>
+</ul>
+<hr />
+<h3 id="2-stochastic-gradient-descent-sgd">2. Stochastic Gradient Descent (SGD)</h3>
+<h4 id="definition_1">Definition:</h4>
+<p>Stochastic Gradient Descent (SGD) is a variant of GD that updates the parameters using only one random sample (or a small batch) of the dataset at a time.</p>
+<h4 id="characteristics_1">Characteristics:</h4>
+<ul>
+<li><strong>Mini-batch or Single-sample Gradient</strong>: It computes the gradient using a randomly selected data point or mini-batch at each iteration.</li>
+<li><strong>Update Rule</strong>:
+  <script type="math/tex; mode=display">
+  \theta_{t+1} = \theta_t - \alpha \nabla J(\theta; \text{random sample})
+  </script>
+</li>
+</ul>
+<h4 id="advantages_2">Advantages:</h4>
+<ul>
+<li><strong>Faster Updates</strong>: Since each update only requires a single data point, it can perform updates much more quickly, especially for large datasets.</li>
+<li><strong>Better Generalization</strong>: The noisy updates help prevent overfitting by introducing randomness.</li>
+<li><strong>Escapes Local Minima</strong>: Due to the noisy updates, SGD can jump out of local minima in non-convex problems.</li>
+</ul>
+<h4 id="disadvantages_2">Disadvantages:</h4>
+<ul>
+<li><strong>Noisy Convergence</strong>: The randomness introduces noise, which can cause the parameter updates to overshoot the optimum or oscillate around it.</li>
+<li><strong>Requires Learning Rate Decay</strong>: SGD often needs a decaying learning rate to stabilize the convergence.</li>
+</ul>
+<hr />
+<h3 id="3-momentum">3. Momentum</h3>
+<h4 id="definition_2">Definition:</h4>
+<p>Momentum is an extension of Gradient Descent that adds a velocity vector (or momentum term) to smooth out updates and speed up convergence, especially in directions with small gradients.</p>
+<h4 id="characteristics_2">Characteristics:</h4>
+<ul>
+<li><strong>Momentum-enhanced Gradient Descent</strong>: It builds velocity from past gradients to make larger, more informed steps.</li>
+<li><strong>Update Rule</strong>:
+  <script type="math/tex; mode=display">
+  v_{t+1} = \beta v_t + (1 - \beta) \nabla J(\theta_t)
+  </script>
+<script type="math/tex; mode=display">
+  \theta_{t+1} = \theta_t - \alpha v_{t+1}
+  </script>
+  where <script type="math/tex"> \beta </script> (usually 0.9) is the momentum term and <script type="math/tex"> v </script> is the velocity that builds up over time.</li>
+</ul>
+<h4 id="advantages_3">Advantages:</h4>
+<ul>
+<li><strong>Faster Convergence</strong>: Momentum accelerates movement along directions with consistent gradients, allowing for faster convergence.</li>
+<li><strong>Reduced Oscillations</strong>: It helps reduce oscillations, especially in narrow or steep valleys in the optimization landscape.</li>
+</ul>
+<h4 id="disadvantages_3">Disadvantages:</h4>
+<ul>
+<li><strong>Hyperparameter Tuning</strong>: Momentum requires careful tuning of both the learning rate and the momentum parameter <script type="math/tex"> \beta </script>.</li>
+</ul>
+<hr />
+<h3 id="4-adam-adaptive-moment-estimation">4. Adam (Adaptive Moment Estimation)</h3>
+<h3 id="definition_3">Definition:</h3>
+<p>Adam is an adaptive learning rate optimization algorithm that combines the advantages of both SGD with Momentum and RMSProp (which adapts the learning rate for each parameter).</p>
+<h4 id="characteristics_3">Characteristics:</h4>
+<ul>
+<li><strong>Adaptive Learning Rates</strong>: Adam adjusts the learning rate for each parameter using estimates of the first moment (mean of the gradients) and the second moment (variance of the gradients).</li>
+<li><strong>Update Rule</strong>:</li>
+<li><strong>First Moment Estimate (Mean)</strong>:
+     <script type="math/tex; mode=display">
+     m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t
+     </script>
+</li>
+<li><strong>Second Moment Estimate (Variance)</strong>:
+     <script type="math/tex; mode=display">
+     v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2
+     </script>
+</li>
+<li><strong>Bias Correction</strong>:
+     <script type="math/tex; mode=display">
+     \hat{m_t} = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v_t} = \frac{v_t}{1 - \beta_2^t}
+     </script>
+</li>
+<li><strong>Parameter Update</strong>:
+     <script type="math/tex; mode=display">
+     \theta_{t+1} = \theta_t - \alpha \frac{\hat{m_t}}{\sqrt{\hat{v_t}} + \epsilon}
+     </script>
+     where <script type="math/tex"> \alpha </script> is the learning rate, and <script type="math/tex"> \epsilon </script> is a small constant to avoid division by zero.</li>
+</ul>
+<h4 id="advantages_4">Advantages:</h4>
+<ul>
+<li><strong>Fast Convergence</strong>: Adam converges quickly due to adaptive learning rates and momentum.</li>
+<li><strong>Less Hyperparameter Tuning</strong>: The adaptive nature of Adam makes it easier to tune compared to vanilla GD or Momentum.</li>
+<li><strong>Handles Sparse Data</strong>: Adam works well in scenarios with sparse data or noisy gradients.</li>
+</ul>
+<h4 id="disadvantages_4">Disadvantages:</h4>
+<ul>
+<li><strong>Overfitting</strong>: Adam’s fast convergence can sometimes lead to overfitting if the learning rate is not properly tuned.</li>
+<li><strong>Non-convergence in some cases</strong>: Adam can fail to converge in certain settings compared to simpler methods like SGD.</li>
+</ul>
+<hr />
+<h3 id="summary-table_1">Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Gradient Descent (GD)</th>
+<th>Stochastic Gradient Descent (SGD)</th>
+<th>Momentum</th>
+<th>Adam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gradient Computation</strong></td>
+<td>Full dataset</td>
+<td>Single sample or mini-batch</td>
+<td>Full dataset or mini-batch</td>
+<td>Adaptive (using first and second moments)</td>
+</tr>
+<tr>
+<td><strong>Computational Cost per Update</strong></td>
+<td>High</td>
+<td>Low</td>
+<td>High</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td><strong>Update Frequency</strong></td>
+<td>Once per epoch</td>
+<td>Per sample/mini-batch</td>
+<td>Once per epoch</td>
+<td>Once per sample/mini-batch</td>
+</tr>
+<tr>
+<td><strong>Learning Rate</strong></td>
+<td>Constant</td>
+<td>Constant or decaying</td>
+<td>Constant or decaying</td>
+<td>Adaptive</td>
+</tr>
+<tr>
+<td><strong>Momentum</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Slow on large datasets</td>
+<td>Fast</td>
+<td>Faster than GD</td>
+<td>Fastest</td>
+</tr>
+<tr>
+<td><strong>Convergence Stability</strong></td>
+<td>Stable but slow</td>
+<td>Noisy, oscillates</td>
+<td>More stable than SGD</td>
+<td>Stable, fast, but can overfit</td>
+</tr>
+<tr>
+<td><strong>Best for</strong></td>
+<td>Small datasets, convex problems</td>
+<td>Large datasets, noisy problems</td>
+<td>Convex problems with faster convergence</td>
+<td>Large datasets, non-convex problems</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="second-order-newtons-methods">Second-order Newton’s Methods</h3>
+<ul>
+<li><strong>Definition</strong>: Newton's methods are second-order optimization techniques that use both the first and second derivatives (gradient and Hessian) to guide the search for the optimal solution.</li>
+<li><strong>How it works</strong>: These methods utilize the Hessian matrix (second derivative of the function) to approximate the curvature of the solution space, allowing for faster and more accurate convergence towards the optimal solution.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>Requires computation of the Hessian matrix, which makes it more computationally expensive compared to first-order methods.</li>
+<li>Converges faster than first-order methods, especially near the optimal solution.</li>
+<li><strong>Example</strong>: <em>Newton's Method</em>, <em>Broyden–Fletcher–Goldfarb–Shanno (BFGS)</em> algorithm.</li>
+</ul>
+<h4 id="advantages_5">Advantages</h4>
+<ul>
+<li>Faster convergence, especially near local or global minima.</li>
+<li>More accurate steps due to the use of second-order information.</li>
+</ul>
+<h4 id="disadvantages_5">Disadvantages</h4>
+<ul>
+<li>High computational cost, especially for large problems, due to the need to compute the Hessian matrix.</li>
+<li>May be impractical for very large-scale problems.</li>
+</ul>
+<hr />
+<h3 id="single-solution-metaheuristics">Single-solution Metaheuristics</h3>
+<ul>
+<li><strong>Definition</strong>: Single-solution metaheuristics focus on improving one candidate solution iteratively through local search techniques. These algorithms generally rely on making small modifications to the current solution and evaluating its performance.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>These methods start with an initial solution and modify it iteratively to improve it.</li>
+<li>They often incorporate strategies to escape local optima, such as simulated annealing.</li>
+<li><strong>Example</strong>: <em>Simulated Annealing</em>, <em>Tabu Search</em>.</li>
+</ul>
+<h4 id="advantages_6">Advantages</h4>
+<ul>
+<li>Simple and easy to implement.</li>
+<li>Focuses computational power on improving one solution, potentially leading to fast convergence for small-scale problems.</li>
+<li>Suitable for problems where the neighborhood of a solution is easy to explore.</li>
+</ul>
+<h4 id="disadvantages_6">Disadvantages</h4>
+<ul>
+<li>Can get stuck in local optima if the problem landscape is complex.</li>
+<li>Less diversity in exploration since only one solution is considered at a time.</li>
+</ul>
+<hr />
+<h3 id="population-based-algorithms"><a href="#5-5-population-based-algorithms">Population-based Algorithms</a></h3>
+<hr />
+<h3 id="summary-table_2">Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>First-order Gradient Methods</th>
+<th>Second-order Newton's Methods</th>
+<th>Single-solution Metaheuristics</th>
+<th>Population-based Algorithms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td>First-order (uses gradient)</td>
+<td>Second-order (uses gradient + Hessian)</td>
+<td>Iterative search using one solution</td>
+<td>Operates on a population of solutions</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Fast but may be slow in non-convex</td>
+<td>Slower per step but faster convergence</td>
+<td>Fast but may get stuck in local minima</td>
+<td>Slower but explores larger search space</td>
+</tr>
+<tr>
+<td><strong>Convergence</strong></td>
+<td>Slower, may get stuck in local minima</td>
+<td>Faster convergence near solution</td>
+<td>Moderate, risk of local minima</td>
+<td>Robust, avoids local minima</td>
+</tr>
+<tr>
+<td><strong>Computational Cost</strong></td>
+<td>Low (only first derivative)</td>
+<td>High (requires second derivative)</td>
+<td>Moderate</td>
+<td>High (requires population evaluation)</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>Gradient Descent, SGD</td>
+<td>Newton’s Method, BFGS</td>
+<td>Simulated Annealing, Tabu Search</td>
+<td>Genetic Algorithms, Particle Swarm</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Egg holder?</p>
+</li>
+<li>
+<p>5.1 Asymptotic Complexity  </p>
+</li>
+<li>5.2 Classes of Problems  </li>
+</ul>
+<p>P, NP, NP-complete</p>
+<h2 id="54-classes-of-problems">5.4 Classes of Problems</h2>
+<p>In optimization and computational complexity theory, problems are classified based on the time they take to be solved and the computational resources they require. The classification helps in understanding the difficulty of a problem and the best strategies to solve it.</p>
+<h3 id="1-class-p">1. Class <strong>P</strong></h3>
+<ul>
+<li><strong>Definition</strong>: Problems in class <strong>P</strong> are those that can be solved in <strong>polynomial time</strong> on a deterministic computer.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>Problems in class P are considered "tractable," meaning they can be solved efficiently.</li>
+<li>The time required to solve the problem grows at a polynomial rate relative to the input size.</li>
+<li>These problems have algorithms that run in time complexity such as <script type="math/tex"> O(n) </script>, <script type="math/tex"> O(n^2) </script>, or <script type="math/tex"> O(n^3) </script>, etc.</li>
+<li><strong>Examples</strong>:</li>
+<li>Quicksort</li>
+<li>Binary search</li>
+<li>Matrix multiplication</li>
+</ul>
+<h3 id="2-class-np">2. Class <strong>NP</strong></h3>
+<ul>
+<li><strong>Definition</strong>: Class <strong>NP</strong> contains problems for which a proposed solution can be <strong>verified</strong> in polynomial time on a deterministic computer, but finding the solution may not necessarily be feasible in polynomial time.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>NP problems are known as "intractable" problems because solving them efficiently is difficult.</li>
+<li>If a solution is given, it can be checked quickly (in polynomial time).</li>
+<li><strong>P</strong> is a subset of <strong>NP</strong>: <script type="math/tex"> P \subseteq NP </script>, meaning that if a problem can be solved quickly (in class P), its solution can also be verified quickly (in class NP).</li>
+<li><strong>Examples</strong>:</li>
+<li>Subset sum problem</li>
+<li>Sudoku</li>
+<li>Traveling Salesman Problem (TSP)</li>
+</ul>
+<h3 id="3-class-np-complete">3. Class <strong>NP-Complete</strong></h3>
+<ul>
+<li><strong>Definition</strong>: NP-complete problems are a subset of NP problems that are among the hardest to solve. No polynomial-time algorithms are known for these problems, and it is unknown if any exist.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>If a polynomial-time algorithm is found for any NP-complete problem, it can be used to solve all NP problems in polynomial time, implying <script type="math/tex"> P = NP </script>.</li>
+<li>NP-complete problems require exponential time (or worse) to solve with known algorithms.</li>
+<li>These problems are often solved using heuristics or approximation algorithms.</li>
+<li><strong>Examples</strong>:</li>
+<li>Traveling Salesman Problem (TSP), which has time complexity <script type="math/tex"> O(n^2 2^n) </script>
+</li>
+<li>Subset sum problem</li>
+<li>Boolean satisfiability problem (SAT), which was the first problem proven to be NP-complete (Cook’s theorem, 1971)</li>
+</ul>
+<h3 id="4-p-vs-np-problem">4. <strong>P vs NP Problem</strong></h3>
+<ul>
+<li><strong>The Open Question</strong>: "Is <script type="math/tex"> P = NP </script>?" is one of the biggest unsolved questions in computer science.</li>
+<li><strong>Most Accepted Hypothesis</strong>: It is widely believed that <script type="math/tex"> P \neq NP </script>, meaning that problems that can be verified quickly (NP) cannot always be solved quickly (P).</li>
+</ul>
+<h3 id="5-approaches-to-np-problems">5. Approaches to NP Problems</h3>
+<p>Since NP-complete problems are difficult to solve efficiently, several approaches are typically used:
+- <strong>Approximation Algorithms</strong>: Algorithms that find solutions that may not be optimal but are within a certain range of the optimal solution.
+- <strong>Heuristics and Metaheuristics</strong>: Techniques that provide reasonably good solutions for many cases without guaranteeing optimality. These include methods like genetic algorithms and simulated annealing.
+- <strong>Simplification</strong>: In some cases, simplifying the problem can make it easier to solve. For example, relaxing constraints or working with smaller problem instances.</p>
+<ul>
+<li>5.3 Linear Programming  </li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Linear_programming">Linear Programming</a></p>
+<p>A <strong>feasible solution</strong> is a set of values for the decision variables that satisfies all of the constraints in an optimization problem. The set of all feasible solutions defines the feasible region of the problem. Most optimization algorithms operate by first trying to locate any feasible solution, and then attempting to find another (better) feasible solution that improves the value of the objective function. This process of trying to find improving feasible solutions repeats until either no further improvement is possible or some other stopping criteria is met.</p>
+<p>As shown in the illustration below, a global optimal solution is one where there is no other feasible solution with a better objective function value.  A local optimal solution is one where there is no other feasible solution "in the vicinity" with a better objective function value.</p>
+<p><img alt="metah-feasible-solution" src="metah-feasible-solution.png" /></p>
+<ul>
+<li>5.4 Search Space  </li>
+</ul>
+<p><img alt="Search Space" src="metah-search-space.png" /></p>
+<h4 id="1-solution-space-s-and-objective-function-f">1. Solution Space (S) and Objective Function (f)</h4>
+<ul>
+<li>The <strong>solution space (S)</strong> represents all possible solutions to the optimization problem. Each point in this space is a potential solution.</li>
+<li>The <strong>objective function (f)</strong> evaluates each solution based on how well it satisfies the problem's goal (e.g., maximizing profit or minimizing cost). </li>
+</ul>
+<h4 id="2-optimization-problem">2. Optimization Problem</h4>
+<ul>
+<li>The goal is to solve the optimization problem <script type="math/tex"> O(S, f) </script> by finding the <strong>optimal solution</strong> <script type="math/tex"> x_0 \in S </script>, such that:
+  <script type="math/tex; mode=display">
+  f(x) \leq f(x_0), \forall x \in S
+  </script>
+  This means you are looking for the solution <script type="math/tex"> x_0 </script> that minimizes or maximizes the objective function <script type="math/tex"> f(x) </script> within the solution space <script type="math/tex"> S </script>.</li>
+</ul>
+<h4 id="3-constraints-and-feasible-region">3. Constraints and Feasible Region</h4>
+<ul>
+<li><strong>Constraints</strong> are conditions that limit the solutions in the search space. They reduce the universe of solutions to a <strong>feasible region</strong> (denoted as <script type="math/tex"> X \subseteq U </script>).</li>
+</ul>
+<p>Constraints can either be:
+Strong: These must be satisfied in any valid solution.
+Weak: These are recommended to be satisfied but are not strictly mandatory.</p>
+<ul>
+<li>The feasible region is where all the constraints are satisfied, and only solutions inside this region are considered valid.</li>
+</ul>
+<p>The choice between restricted and complete exploration depends on the problem and the computational resources available. In some cases, focusing on feasible solutions may save time but miss optimal solutions, while a complete search may offer more thorough exploration at the cost of increased computational effort.</p>
+<ul>
+<li>A <strong>penalty function</strong> is added to the original objective function to handle constraint violations. This allows the algorithm to explore infeasible regions but imposes penalties on solutions that violate the constraints.</li>
+</ul>
+<h4 id="objective-function-with-penalty">Objective Function with Penalty:</h4>
+<p>
+<script type="math/tex; mode=display">
+\text{Minimize } f'(x) = f(x) + w \cdot P(x)
+</script>
+where:
+- <script type="math/tex"> f(x) </script>: The original objective function.
+- <script type="math/tex"> P(x) </script>: The penalty function, which penalizes violations of the constraints.
+- <script type="math/tex"> w </script>: A weighting coefficient that determines the trade-off between minimizing the objective function and penalizing constraint violations.</p>
+<ul>
+<li><strong>When the solution <script type="math/tex"> x </script> is feasible</strong>, <script type="math/tex"> P(x) = 0 </script>, meaning there is no penalty applied.</li>
+<li><strong>When the solution <script type="math/tex"> x </script> violates constraints</strong>, <script type="math/tex"> P(x) </script> increases based on the degree of violation. The more the violation, the larger the penalty, discouraging the algorithm from accepting infeasible solutions.</li>
+</ul>
+<h4 id="4-graphical-representation">4. Graphical Representation</h4>
+<ul>
+<li>On the left side of the image:</li>
+<li>The <strong>search space</strong> is shown as a large area with possible solutions scattered within it. The gray and shaded regions illustrate where solutions are feasible or infeasible.</li>
+<li>On the right side of the image:</li>
+<li>The <strong>search space</strong> is mapped to the <strong>objective space</strong>.</li>
+<li>The points <script type="math/tex"> x^1, x^2, x^3, x^4 </script> in the search space correspond to values in the objective space, which are evaluated by the objective function <script type="math/tex"> f(x) </script>.</li>
+<li>The arrows show how the solutions in the search space map to the objective values, where you are trying to find the point that optimizes <script type="math/tex"> f(x) </script>.</li>
+</ul>
+<h4 id="5-key-insights">5. Key Insights</h4>
+<ul>
+<li>The <strong>feasible region</strong> reduces the set of all possible solutions to those that satisfy the problem’s constraints.</li>
+<li>The goal of the optimization is to search within the feasible region for the point that maximizes or minimizes the objective function <script type="math/tex"> f(x) </script>.</li>
+<li>The mapping from the search space to the objective space helps visualize how each solution performs according to the objective function.</li>
+</ul>
+<p>https://en.wikipedia.org/wiki/Local_search_(optimization)</p>
+<p>A local search algorithm starts from a candidate solution and then iteratively moves to a neighboring solution; a neighborhood being the set of all potential solutions that differ from the current solution by the minimal possible extent. This requires a neighborhood relation to be defined on the search space. As an example, the neighborhood of vertex cover is another vertex cover only differing by one node. For Boolean satisfiability, the neighbors of a Boolean assignment are those that have a single variable in an opposite state. The same problem may have multiple distinct neighborhoods defined on it; local optimization with neighborhoods that involve changing up to k components of the solution is often referred to as k-opt.</p>
+<p>Typically, every candidate solution has more than one neighbor solution; the choice of which one to select is taken using only information about the solutions in the neighborhood of the current assignment, hence the name local search. When the choice of the neighbor solution is done by taking the one locally maximizing the criterion, i.e.: a greedy search, the metaheuristic takes the name hill climbing. When no improving neighbors are present, local search is stuck at a locally optimal point. This local-optima problem can be cured by using restarts (repeated local search with different initial conditions), randomization, or more complex schemes based on iterations, like iterated local search, on memory, like reactive search optimization, on memory-less stochastic modifications, like simulated annealing.</p>
+<p>Local search does not provide a guarantee that any given solution is optimal. The search can terminate after a given time bound or when the best solution found thus far has not improved in a given number of steps. Local search is an anytime algorithm; it can return a valid solution even if it's interrupted at any time after finding the first valid solution. Local search is typically an approximation or incomplete algorithm because the search may stop even if the current best solution found is not optimal. This can happen even if termination happens because the current best solution could not be improved, as the optimal solution can lie far from the neighborhood of the solutions crossed by the algorithm.</p>
+<h3 id="55-memoryless-vs-memory-based">5.5 Memoryless vs Memory-based</h3>
+<p>Metaheuristics are optimization algorithms used to solve complex problems where traditional methods may be inefficient. They are generally categorized into two types: <strong>memoryless</strong> and <strong>memory-based</strong> metaheuristics.</p>
+<h4 id="1-memoryless-metaheuristics">1. <strong>Memoryless Metaheuristics</strong></h4>
+<ul>
+<li><strong>Definition</strong>: Memoryless metaheuristics do not retain information about past solutions or the search history. Each decision made during the search process is based solely on the current solution or state, with no influence from previous iterations.
+  (Most memoryless metaheuristics can be modified to become memory-based)</li>
+</ul>
+<h5 id="characteristics_4">Characteristics:</h5>
+<ul>
+<li><strong>No Memory</strong>: The algorithm only uses the current solution and its immediate neighbors to decide the next move. It does not store or leverage past solutions.</li>
+<li><strong>Focus on Exploration</strong>: These metaheuristics often rely on randomization or stochastic processes to explore the search space.</li>
+<li><strong>Suitable for Large Problems</strong>: Since no memory is stored, these methods can be computationally efficient in problems where storing or accessing past information is impractical.</li>
+</ul>
+<h5 id="examples_1">Examples:</h5>
+<ul>
+<li><strong>Simulated Annealing</strong>: It uses random sampling to explore new solutions without retaining memory of past solutions.</li>
+<li><strong>Randomized Local Search</strong>: It evaluates the neighbors of the current solution without considering previous states.</li>
+</ul>
+<h3 id="2-memory-based-metaheuristics">2. <strong>Memory-Based Metaheuristics</strong></h3>
+<ul>
+<li><strong>Definition</strong>: Memory-based metaheuristics retain and use information from previous solutions to guide the search process. These algorithms leverage the search history to avoid revisiting poor solutions and to focus on promising areas of the search space.</li>
+</ul>
+<h4 id="characteristics_5">Characteristics:</h4>
+<ul>
+<li><strong>Use of Memory</strong>: These algorithms store past information, such as the best solutions, the frequency of solution features, or areas to avoid (e.g., Tabu List).</li>
+<li><strong>Guided Search</strong>: By remembering previous moves and results, the algorithm can make more informed decisions and adapt the search strategy.</li>
+<li><strong>Balancing Exploration and Exploitation</strong>: The use of memory helps in balancing between exploring new areas of the solution space and exploiting known good areas.</li>
+</ul>
+<h4 id="examples_2">Examples:</h4>
+<ul>
+<li><strong>Tabu Search</strong>: Uses a memory structure called a "tabu list" to store recently visited solutions and avoid cycling back to them.</li>
+<li>
+<p><strong>Genetic Algorithms</strong>: Store and evolve a population of solutions over iterations by keeping track of "genetic material" (solutions) and using operators like crossover and mutation.</p>
+</li>
+<li>
+<p><strong>Memoryless metaheuristics</strong> are simpler, faster, and require less computational overhead, making them suitable for problems where memory is limited or where fast exploration is needed.</p>
+</li>
+<li><strong>Memory-based metaheuristics</strong> use memory to avoid revisiting poor solutions, resulting in a more informed and potentially more effective search, though at the cost of increased complexity and memory usage.</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Simulated_annealing">Simulated annealing</a> is a probabilistic optimisation algorithm inspired by the annealing process in material science. 
+It is used to find a near-optimal solution among an extremely large (but finite) set of potential solutions. It is particularly useful for combinatorial optimization problems defined by complex objective functions that rely on external data.</p>
+<p>The process involves:</p>
+<ol>
+<li>Randomly move or alter the state</li>
+<li>Assess the energy of the new state using an objective function</li>
+<li>Compare the energy to the previous state and decide whether to accept the new solution or reject it based on the current temperature.</li>
+<li>Repeat until you have converged on an acceptable answer</li>
+<li>For a move to be accepted, it must meet one of two requirements:</li>
+</ol>
+<p>The move causes a decrease in state energy (i.e. an improvement in the objective function)
+The move increases the state energy (i.e. a slightly worse solution) but is within the bounds of the temperature. The temperature exponetially decreases as the algorithm progresses. In this way, we avoid getting trapped by local minima early in the process but start to hone in on a viable solution by the end.</p>
+<p><img alt="metah-simulated-annealing" src="metah-simulated-annealing.png" /></p>
+<p>The cooling temperature <script type="math/tex">T(t)</script> (aka Temperature Descent) defines how the temperature decreases over time
+As the temperature 𝑡 decreases, the probability of accepting worse solutions (as defined by the probability function <script type="math/tex">𝑒^{−(E(ω ′ )−E(ω))/t }</script>) reduces, making the algorithm focus more on local improvements and less on random exploration.</p>
+<p>--</p>
+<h2 id="_1"><img alt="metah-simulated-annealing-2" src="metah-simulated-annealing-2.png" /></h2>
+<h4 id="game-balancing-example-using-simulated-annealing">Game Balancing Example Using Simulated Annealing</h4>
+<p>Let's consider a scenario where <strong>Simulated Annealing (SA)</strong> is used to balance a <strong>role-playing game (RPG)</strong> where different <strong>character classes</strong> (e.g., warrior, mage, archer) need to be balanced in terms of their <strong>damage output</strong>, <strong>defense</strong>, and <strong>abilities</strong>. The goal is to ensure no class is overpowered or too weak, providing a fair and enjoyable gameplay experience.</p>
+<h5 id="scenario">Scenario:</h5>
+<p>In a multiplayer RPG, players can choose different classes (e.g., warrior, mage, archer). Each class has the following attributes:
+- <strong>Health Points (HP)</strong>: Durability or survivability of the class.
+- <strong>Attack Damage (AD)</strong>: Damage the class deals per attack.
+- <strong>Defense (DEF)</strong>: Reduces the incoming damage.
+- <strong>Special Abilities</strong>: Each class has unique abilities that affect gameplay.</p>
+<p>The current state of the game is imbalanced:
+- The <strong>mage</strong> deals too much damage, making it overpowered.
+- The <strong>warrior</strong> has too much health and defense, making it hard to defeat.</p>
+<p>Our goal is to balance the classes by adjusting their stats and abilities.</p>
+<h5 id="problem-definition">Problem Definition:</h5>
+<p>The problem is framed as an <strong>optimization problem</strong> where we aim to adjust the stat values (HP, AD, DEF) and abilities to minimize an <strong>imbalance score</strong> — a measure of how unbalanced the game is.</p>
+<ul>
+<li><strong>Objective</strong>: Minimize the imbalance score across all classes.</li>
+<li><strong>Constraints</strong>: Each class must retain its distinct playstyle (e.g., the mage focuses on damage but can't be overpowered).</li>
+</ul>
+<h4 id="steps-using-simulated-annealing">Steps Using Simulated Annealing:</h4>
+<h5 id="1-define-the-solution-space">1. Define the Solution Space:</h5>
+<p>Each possible <strong>combination of stat values</strong> (HP, AD, DEF) and <strong>ability strength</strong> for the classes represents a point in the solution space. For example:
+- <strong>Warrior</strong>: HP = 3000, AD = 100, DEF = 200.
+- <strong>Mage</strong>: HP = 1500, AD = 300, DEF = 50.
+- <strong>Archer</strong>: HP = 2000, AD = 200, DEF = 100.</p>
+<h5 id="2-define-the-objective-function-imbalance-score">2. Define the Objective Function (Imbalance Score):</h5>
+<p>The <strong>imbalance score</strong> <script type="math/tex"> f(x) </script> measures how unbalanced the game is. The goal is to minimize this score, which can be based on:
+- <strong>Win/loss ratios</strong> between classes.
+- <strong>Damage per second (DPS)</strong> and survivability.</p>
+<p>A simple imbalance score can be:
+<script type="math/tex; mode=display">
+f(x) = | \text{DPS}_{\text{warrior}} - \text{DPS}_{\text{mage}} | + | \text{DPS}_{\text{warrior}} - \text{DPS}_{\text{archer}} | + \ldots
+</script>
+Where <script type="math/tex"> \text{DPS}_{\text{class}} </script> represents the damage per second for each class.</p>
+<h5 id="3-generate-an-initial-solution">3. Generate an Initial Solution:</h5>
+<p>Start with an initial configuration of stats, which could be the current unbalanced state:
+- <strong>Warrior</strong>: HP = 3500, AD = 100, DEF = 250.
+- <strong>Mage</strong>: HP = 1200, AD = 350, DEF = 50.
+- <strong>Archer</strong>: HP = 2200, AD = 220, DEF = 150.</p>
+<h5 id="4-iteratively-explore-neighboring-solutions">4. Iteratively Explore Neighboring Solutions:</h5>
+<ul>
+<li><strong>Transformations</strong>: Adjust the stats of one or more classes slightly (e.g., reduce the mage’s AD, increase the warrior’s AD, adjust the HP of the archer).</li>
+<li><strong>Evaluate the new imbalance score</strong> for the adjusted configuration. Accept the new solution if the score improves, or accept it with some probability if the score worsens to allow exploration.</li>
+</ul>
+<h5 id="5-simulate-battles-evaluate-objective-function">5. Simulate Battles (Evaluate Objective Function):</h5>
+<p>Simulate battles between the classes (e.g., warrior vs. mage, mage vs. archer) and record the win/loss ratios, DPS, and survivability. Use these results to compute the new imbalance score.</p>
+<h5 id="6-cooling-schedule-temperature-descent">6. Cooling Schedule (Temperature Descent):</h5>
+<p>Use a cooling schedule to gradually reduce the temperature, transitioning from exploration to exploitation. A common cooling schedule:
+<script type="math/tex; mode=display">
+t = t_0 \times \alpha^k
+</script>
+Where <script type="math/tex"> \alpha </script> is a cooling factor (e.g., 0.95) and <script type="math/tex"> k </script> is the current iteration.</p>
+<h5 id="7-convergence">7. Convergence:</h5>
+<p>The algorithm continues to adjust the stats until it converges to a balanced configuration where the imbalance score is minimized. A final balanced solution might look like:
+- <strong>Warrior</strong>: HP = 3000, AD = 110, DEF = 200.
+- <strong>Mage</strong>: HP = 1500, AD = 290, DEF = 60.
+- <strong>Archer</strong>: HP = 2000, AD = 200, DEF = 120.</p>
+<p>This configuration ensures that no class is too weak or too strong while maintaining their unique playstyles.</p>
+<h5 id="summary-of-balanced-solution">Summary of Balanced Solution:</h5>
+<p>After running Simulated Annealing, the algorithm finds a balanced set of stats and abilities for the classes:
+- <strong>Warrior</strong>: High defense and moderate attack, designed to be a tank.
+- <strong>Mage</strong>: High damage with low defense, focusing on powerful spells.
+- <strong>Archer</strong>: Balanced between attack and defense, specializing in ranged attacks.</p>
+<h4 id="tabu-search">Tabu Search</h4>
+<p>https://en.wikipedia.org/wiki/Tabu_search</p>
+<p><img alt="metah-tabu-search" src="metah-tabu-search.png" /></p>
+<p>At each step, the algorithm evaluates a set of neighboring solutions to decide the next move. These neighboring solutions are generated by making small changes (called moves) to the current solution.
+Before a move is accepted, the algorithm checks the Tabu List to ensure the move isn't "tabu" (forbidden). If the move is in the Tabu List, it is typically not considered, unless an aspiration criterion is met (e.g., the move produces a new global best solution).
+Once a move is made and a new solution is reached, the move or solution is added to the Tabu List for a fixed number of iterations (the Tabu Tenure), preventing the algorithm from reversing the move or re-exploring that solution in the near future.</p>
+<h4 id="main-characteristics">Main Characteristics:</h4>
+<ul>
+<li><strong>Memory-based</strong>: The <strong>Tabu List</strong> prevents cycling and revisiting the same solution.</li>
+<li><strong>Flexible exploration</strong>: The algorithm can explore worse solutions to escape local minima.</li>
+<li><strong>Aspiration criteria</strong>: Allows overriding the tabu status if the move leads to a solution that is significantly better than any found before.</li>
+</ul>
+<h4 id="tabu-search-algorithm-pseudocode">Tabu Search Algorithm (Pseudocode)</h4>
+<ol>
+<li><strong>Initialization</strong>:</li>
+<li>
+<script type="math/tex"> s_0 \leftarrow \text{generate initial solution} </script>: Generate an initial solution <script type="math/tex"> s_0 </script>.</li>
+<li>
+<script type="math/tex"> s_{\text{best}} \leftarrow s_0 </script>: Set the best solution <script type="math/tex"> s_{\text{best}} </script> to the initial solution.</li>
+<li>
+<p><strong>Tabu List</strong> <script type="math/tex"> \leftarrow \{ s_0 \} </script>: Initialize the Tabu List with the starting solution <script type="math/tex"> s_0 </script>.</p>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+</li>
+<li>
+<p><strong>Repeat until a termination criterion is met</strong>:</p>
+<ul>
+<li><strong>Neighborhood Generation</strong>: Generate a set of neighboring solutions <script type="math/tex"> \{ s_1, s_2, \dots, s_n \} </script> from the current solution <script type="math/tex"> s_0 </script>.</li>
+<li><strong>Select a Candidate</strong>: </li>
+<li>Set the candidate solution <script type="math/tex"> s_{\text{candidate}} \leftarrow s_1 </script>.</li>
+<li><strong>Evaluate each neighbor</strong> <script type="math/tex"> s_i </script>:<ul>
+<li>Compute the change in the objective function: <script type="math/tex"> \delta \leftarrow f(s_i) - f(s_{\text{candidate}}) </script>.</li>
+<li>If the neighbor <script type="math/tex"> s_i </script> is not in the Tabu List and <script type="math/tex"> \delta < 0 </script> (i.e., it's a better solution), update <script type="math/tex"> s_{\text{candidate}} \leftarrow s_i </script>.</li>
+</ul>
+</li>
+<li><strong>Update Current Best</strong>:</li>
+<li>If <script type="math/tex"> s_{\text{candidate}} </script> is better than <script type="math/tex"> s_{\text{best}} </script>, update <script type="math/tex"> s_{\text{best}} \leftarrow s_{\text{candidate}} </script>.</li>
+<li><strong>Update Tabu List</strong>:</li>
+<li>Add the new <script type="math/tex"> s_{\text{candidate}} </script> to the Tabu List to prevent immediate revisiting.</li>
+<li>Remove old entries from the Tabu List when they exceed a certain length (Tabu Tenure).</li>
+</ul>
+</li>
+<li>
+<p><strong>End Condition</strong>: The algorithm repeats the process until a stopping criterion is met (e.g., a fixed number of iterations, or no improvement in a set number of iterations).</p>
+</li>
+<li>
+<p><strong>Return</strong>: The best solution <script type="math/tex"> s_{\text{best}} </script> found during the search.</p>
+</li>
+</ol>
+<h4 id="example-steps">Example Steps:</h4>
+<ul>
+<li><strong>Initial Solution</strong>: Begin with an initial solution (e.g., a specific configuration in a combinatorial problem).</li>
+<li><strong>Neighborhood Exploration</strong>: Generate nearby solutions by making small changes (e.g., swapping elements).</li>
+<li><strong>Tabu List</strong>: If a move has already been explored recently, mark it as "tabu" to prevent cycling.</li>
+<li><strong>Aspiration Criteria</strong>: Even if a solution is on the Tabu List, allow it if it represents a significant improvement over the current best solution.</li>
+</ul>
+<h4 id="summary_3">Summary:</h4>
+<p><strong>Tabu Search</strong> enhances local search by:
+- Using memory to avoid cycling through previously visited solutions.
+- Exploring new areas of the search space by accepting worse solutions temporarily.
+- Providing a mechanism (Tabu List) to remember recent moves and guide the search process effectively.</p>
+<p>--</p>
+<h2 id="55-population-based-algorithms"><a href="5-5-population-based-algorithms">5.5 Population-based Algorithms</a></h2>
+<p>Population-based algorithms operate on a population of candidate solutions rather than a single solution.
+ The population is typically initialized randomly or using heuristic techniques. Multiple solutions are evaluated simultaneously, allowing for the exploration of the search space more efficiently.</p>
+<p>• Advantages: ability to simultaneously explore multiple regions of the search space, promoting diversity and preventing premature convergence to suboptimal solutions.
+• Disadvantages: it may require careful parameter tuning and can be computationally demanding due to the population size and iterative nature of the algorithms.
+• Examples of bio-inspired population-based methods include ant colony optimisation, black hole algorithm, particle swarm optimisation, and genetic algorithms.</p>
+<h5 id="genetic-algorithms">Genetic Algorithms</h5>
+<p><a href="https://en.wikipedia.org/wiki/Genetic_algorithm">Genetic Algorithm</a> is a metaheuristic based on Darwin’s evolution theory</p>
+<p>which models the process of evolution in nature by applying evolutionary operators (like mutation, crossover, and selection) to a population of candidate solutions, which are analogous to chromosomes.
+The goal of GA is to optimize a given objective (fitness) function by iteratively evolving a population of solutions.</p>
+<p>https://www.youtube.com/watch?v=XP2sFzp2Rig&amp;t=23s</p>
+<p>• “One general law, leading to the advancement of all organic beings, namely,
+multiply, vary, let the strongest live and the weakest die.” Charles Darwin.
+• Stochastic search technique based on the mechanisms of natural selection and
+natural genetics.
+• Use analogies of natural selection to develop better solutions.
+• Widely used in problems of nonlinear and high-dimensional optimisation.</p>
+<p><img alt="metah-genetic-algorithm" src="metah-genetic-algorithm.png" /></p>
+<p>The diagram illustrates the 5 steps in a genetic algorithm:</p>
+<ol>
+<li>Generate Initial Population: Start by randomly generating an initial population of candidate solutions.</li>
+<li>Evaluate Fitness Function: Each candidate solution is evaluated based on a fitness function that measures its quality or how well it solves the problem.</li>
+<li>Check Termination Criteria: If the termination criteria (e.g., a set number of iterations or reaching an optimal solution) are met, the algorithm ends, and the best individual is returned as the solution.</li>
+<li>Crossover and Mutation: If the termination criteria are not satisfied, the algorithm proceeds to apply crossover and mutation to create new offspring, which will form the population for the next generation.</li>
+<li>Selection: The best-performing individuals are selected for reproduction in the next generation, promoting the survival of the fittest.</li>
+</ol>
+<h5 id="terminology">Terminology</h5>
+<p>The <strong>chromosome</strong> represents a possible solution to the problem, composed of genes (bits) with specific <strong>alleles</strong> at particular loci.
+The <strong>genotype</strong> is the internal structure (how the solution is represented), while the <strong>phenotype</strong> is the external interpretation or output of the solution.</p>
+<p><img alt="metah-terminology" src="metah-terminology.png" /></p>
+<p>The search space is explored by applying transformations to candidate solutions,
+just as observed in living organisms: crossover, mutation, and selection.</p>
+<p>GA has 3 core operators: Crossover, Mutation, and Selection:
+- Selection: Select individuals based on their fitness scores. Fitter individuals are more likely to be selected for reproduction.
+- Crossover: Combine parts of two parent solutions to create offspring (new solutions).
+- Mutation: Introduce small random changes to individuals to maintain diversity.</p>
+<p><strong>Selectvie Pressure</strong> describes how strongly the algorithm favors better-performing solutions over weaker ones during the selection process.
+• High pressure: Can speed up the algorithm by quickly focusing on the best solutions but the search may end prematurely (intensification, premature convergence where diversity is lost, and the algorithm might get stuck in local optima.)
+• Low pressure: Increases diversity in the population and reduces the risk of premature convergence but progress is slower than necessary.
+• The ideal approach is to maintain low pressure at the beginning for broad
+exploration, and high pressure towards the end to exploit more promising areas.</p>
+<p>Chromosome commonly represented as strings of bits or binary representation.
+• Parameters include population size and probability of applying the genetic operators</p>
+<p><img alt="metah-genetic-algorithm" src="metah-genetic-algorithm.png" /></p>
+<p><img alt="metah-genetic-algorithm-structure" src="metah-genetic-algorithm-structure.png" /></p>
+<p><img alt="metah-genetic-algorithm-pseudocode" src="metah-genetic-algorithm-pseudocode.png" /></p>
+<p>This pseudocode describes the steps followed by a <strong>Genetic Algorithm (GA)</strong> to evolve solutions over generations, ultimately aiming to optimize a given problem.</p>
+<ol>
+<li>
+<p><strong>t ← 0</strong><br />
+   Initialize the generation counter <code>t</code> to 0.</p>
+</li>
+<li>
+<p><strong>Initialize P(t)</strong><br />
+   Generate an initial population <script type="math/tex"> P(t) </script>, a collection of randomly generated candidate solutions.</p>
+</li>
+<li>
+<p><strong>Evaluate P(t)</strong><br />
+   Calculate the fitness of each individual in the population <script type="math/tex"> P(t) </script>. The fitness function determines how good each solution is in solving the problem.</p>
+</li>
+<li>
+<p><strong>repeat</strong><br />
+   The algorithm repeatedly performs the following steps until a termination criterion is met (such as a maximum number of generations or when the solution converges):</p>
+</li>
+<li>
+<p><strong>Generate offspring C(t)</strong><br />
+      Create a new set of candidate solutions (offspring) <script type="math/tex"> C(t) </script> from the current population <script type="math/tex"> P(t) </script> by applying genetic operators:</p>
+<ul>
+<li><strong>Crossover</strong>: Combine pairs of parent solutions to produce offspring.</li>
+<li><strong>Mutation</strong>: Introduce random changes to offspring to maintain diversity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evaluate C(t)</strong><br />
+      Calculate the fitness of each individual in the new offspring population <script type="math/tex"> C(t) </script>.</p>
+</li>
+<li>
+<p><strong>Select P(t + 1)</strong><br />
+      Create the next generation population <script type="math/tex"> P(t+1) </script> by selecting individuals from both the current population <script type="math/tex"> P(t) </script> and the new offspring <script type="math/tex"> C(t) </script>. This selection favors fitter individuals to ensure that the next generation is more likely to contain better solutions.</p>
+</li>
+<li>
+<p><strong>t ← t + 1</strong><br />
+      Increment the generation counter.</p>
+</li>
+<li>
+<p><strong>until a termination criterion is satisfied</strong><br />
+   The loop continues until a termination criterion is met, such as:</p>
+</li>
+<li>A maximum number of generations has been reached.</li>
+<li>
+<p>The population has converged to a stable solution (no further significant improvement in fitness).</p>
+</li>
+<li>
+<p><strong>Return the best individual found from P</strong><br />
+    Once the algorithm terminates, return the best solution from the final population <script type="math/tex"> P </script>.</p>
+</li>
+</ol>
+<hr />
+<h5 id="summary-of-key-steps">Summary of Key Steps:</h5>
+<ul>
+<li><strong>Initialization</strong>: Start with a random population.</li>
+<li><strong>Evaluation</strong>: Calculate the fitness of each solution.</li>
+<li><strong>Genetic Operators</strong>: Apply crossover and mutation to create new offspring.</li>
+<li><strong>Selection</strong>: Form the next generation by selecting the best individuals.</li>
+<li><strong>Termination</strong>: The process continues until a termination condition is met, and the best solution is returned.</li>
+</ul>
+<h4 id="uniform-vs-expanded-generation-size">Uniform vs Expanded Generation Size:</h4>
+<p><img alt="metah-genetic-algorithm-generation-size" src="metah-genetic-algorithm-generation-size.png" /></p>
+<p>In this approach, the size of the new generation is the same as the previous generation. This ensures that the algorithm maintains a constant population size across iterations.
+The diagram shows the flow:
+- Population (current generation) undergoes crossover and mutation to produce offspring.
+- A selection mechanism picks individuals from both the current population and the offspring to form the new population.</p>
+<p>This ensures the new generation maintains a uniform size and consists of a combination of both newly generated offspring and some retained parents.</p>
+<p>In the traditional version of genetic algorithms, all offspring replace all parents in the next generation.
+However, the approach shown in the diagram allows a mix of all offspring and some parents to form the new population. This helps maintain some level of diversity and allows potentially strong parent solutions to persist into the next generation, preventing premature convergence to suboptimal solutions.</p>
+<p><strong>Expanded generation size</strong> means that the size of the new generation is increased compared to the previous generation.
+<img alt="metah-genetic-algorithm-generation-size-expanded" src="metah-genetic-algorithm-generation-size-expanded.png" />
+- The new generation size is calculated as: New generation size = Previous generation size + Number of offspring
+- This means the new population contains <strong>all parents</strong> and <strong>all offspring</strong> produced through genetic operations like crossover and mutation.</p>
+<ul>
+<li>
+<p><strong>All offspring and parents</strong> are included in the next generation. This method keeps both the existing parents (which may contain well-performing solutions) and all newly generated offspring. By expanding the population, the algorithm increases the diversity of the candidate solutions in each iteration.</p>
+</li>
+<li>
+<p><strong>Parents</strong>: The existing population (current generation).</p>
+</li>
+<li><strong>Offspring</strong>: New solutions generated from parents using <strong>crossover</strong> and <strong>mutation</strong> operations.</li>
+<li><strong>Selection</strong>: A process to choose the new population from both <strong>parents</strong> and <strong>offspring</strong>. This ensures a mixture of both old (parents) and new (offspring) solutions.</li>
+</ul>
+<p>The new population includes both parents and offspring, resulting in an expanded population size. This approach keeps both parents and offspring, which increases the population size over generations. </p>
+<p>It helps maintain diversity by keeping previous solutions while also allowing new solutions to enter the population. However, this approach requires managing a larger population size, which can increase computational complexity.</p>
+<h4 id="stochastic-sampling-vs-deterministic-sampling-in-genetic-algorithms">Stochastic Sampling vs Deterministic Sampling in Genetic Algorithms</h4>
+<p>In genetic algorithms (GA), selection is a crucial process that determines which individuals from the current population are chosen to pass their genes (solutions) to the next generation. Two broad categories of selection methods are stochastic sampling and deterministic sampling. These methods influence how the algorithm balances exploration and exploitation during the evolutionary process.</p>
+<p>Stochastic sampling: prevent super chromosomes. For instance, roulette wheel.</p>
+<p>Deterministic sampling: sort chromosomes according to their fitness and choose
+the best ones. Elitist selection</p>
+<p>⚠️ Site is currently under active development, frequent changes are expected</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2024-10-10 18:45:08.362527+00:00
+-->

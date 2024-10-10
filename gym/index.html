@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="ba">
+        <link rel="canonical" href="https://in_c0.github.io/gym/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Gym - Introduction to Artificial Intelligence</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Introduction to Artificial Intelligence</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Projects</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Gym</a>
+</li>
+                                    
+<li>
+    <a href="../Feedforward-Neural-Network/" class="dropdown-item">Feedforward Neural Network</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../Feedforward-Neural-Network/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#introduction" class="nav-link">Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#creating-a-rule-based-system" class="nav-link">Creating a Rule-Based System</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#running-multiple-agents-with-different-strategies" class="nav-link">Running Multiple Agents with Different Strategies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="introduction">Introduction</h2>
+<p>In this chapter, we will explore how to create and simulate agents in a virtual environment using the <strong>OpenAI Gym</strong> toolkit, specifically the <code>MountainCar-v0</code> environment. We will also build a simple rule-based system for decision-making, guiding our agent toward achieving the goal of the simulation.</p>
+<p>By the end of this chapter, you will understand:</p>
+<ul>
+<li>How to build agents that interact with the environment.</li>
+<li>How to create rule-based systems to control agent behavior.</li>
+<li>How to compare different strategies using data visualization.</li>
+<li>How to use the Gym environment to simulate tasks.</li>
+</ul>
+<p>Gym is a toolkit for developing and comparing reinforcement learning algorithms. It provides a variety of simulated environments (such as games, physics simulations, or robot control tasks), including <code>MountainCar-v0</code>. </p>
+<hr />
+<h4 id="mountain-car-problem">Mountain Car Problem:</h4>
+<p>It is a simple problem where a car must drive up a steep hill:
+<img alt="image" src="https://gymnasium.farama.org/_images/mountain_car.gif" /></p>
+<p>The car sits between two hills, and the goal is to get to the top of the right hill.
+The car's engine is too weak to drive directly up, so it must build momentum by driving back and forth.</p>
+<p>The terminology used here applies to any rule-based system for decision-making: <strong>Agent, Action, State</strong>.</p>
+<p>In our case, the <strong>Agent</strong> is the car.</p>
+<p>At each step of the simulation, the agent can take one of three <strong>Actions</strong>:</p>
+<ul>
+<li>Push left (action 0)</li>
+<li>Do nothing (action 1)</li>
+<li>Push right (action 2)</li>
+</ul>
+<hr />
+<p>Note: The number associated with the actions (0,1,2) comes from the <strong>Action Space</strong> defined by the <a href="https://gymnasium.farama.org/environments/classic_control/mountain_car/">Gym API</a>.</p>
+<hr />
+<p>The <strong>State</strong> of the agent is represented as an array:</p>
+<blockquote>
+<p><em>Observation = [position, velocity]</em></p>
+</blockquote>
+<p>where <code>position</code> is the car’s horizontal position and <code>velocity</code> is its current speed.</p>
+<p><strong>Observation Space</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Num</th>
+<th style="text-align: center;">Observation</th>
+<th style="text-align: center;">Min</th>
+<th style="text-align: center;">Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">position of the car along the x-axis</td>
+<td style="text-align: center;">-1.2</td>
+<td style="text-align: center;">0.6</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">velocity of the car</td>
+<td style="text-align: center;">-0.07</td>
+<td style="text-align: center;">0.07</td>
+</tr>
+</tbody>
+</table>
+<p>Now, let's simulate different strategies for moving the car up the hill using Gym.</p>
+<h4 id="importing-libraries">Importing Libraries</h4>
+<p>Here are the libraries we will be using in this exercise:</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import gymnasium as gym
+</code></pre>
+<ul>
+<li><code>NumPy</code> -&gt; <a href="https://numpy.org/">NumPy</a> module, widely used for numerical operations, especially for handling arrays</li>
+<li><code>matplotlib.pyplot</code> -&gt; <a href="https://matplotlib.org/">Matplotlib</a>'s pyplot module, which is used to create visualizations like the boxplot later in the code</li>
+<li><code>gymnasium</code> -&gt; <a href="https://gymnasium.farama.org/index.html">Gymnasium</a> (formerly Gym) is a toolkit for developing and comparing reinforcement learning algorithms. It's used to simulate the MountainCar-v0 environment.</li>
+</ul>
+<p>Depending on your setup, you may need to install the following packages:</p>
+<pre><code class="language-bash">pip install gymnasium
+pip install swig
+</code></pre>
+<p>or alternatively, use the Python distribution like <a href="https://www.anaconda.com/">Anaconda</a>, which comes with the packages pre-installed.</p>
+<h4 id="simulation-configuration">Simulation Configuration</h4>
+<p>Next, we will set up the environment using <code>gym.make()</code>. (Refer to <a href="https://gymnasium.farama.org/content/basic_usage/">Gym API doc</a> for more details)</p>
+<pre><code class="language-python">
+import gymnasium as gym
+env = gym.make(&quot;MountainCar-v0&quot;, render_mode=&quot;human&quot;)
+observation, info = env.reset()
+
+for _ in range(1000):
+    action = env.action_space.sample()  # agent policy that uses the observation and info
+    observation, reward, terminated, truncated, info = env.step(action)
+
+    if terminated or truncated:
+        observation, info = env.reset()
+
+env.close()
+
+</code></pre>
+<p>You should now be able to run the program and see the simulation.</p>
+<p>e.g. run the simulation:</p>
+<pre><code>python gym.py
+</code></pre>
+<p>The car should be moving back and forth, but struggling to reach the top.</p>
+<h2 id="creating-a-rule-based-system">Creating a Rule-Based System</h2>
+<p>Let's now guide our agent to drive up the hill using a rule-based system.</p>
+<p>A quick recap:</p>
+<blockquote>
+<p>A rule-based system is a set of rules that dictate what action to take depending on the current state of the environment. Unlike learning-based approaches, our system uses fixed rules that we define in advance.</p>
+</blockquote>
+<p>Here are some possible strategies for action selection:</p>
+<ol>
+<li><strong>Random Action</strong>: The agent selects actions randomly from the available options.</li>
+<li><strong>Always Push Right</strong>: The agent always pushes to the right, regardless of the situation.</li>
+<li><strong>Two-Rule System</strong>: The agent uses a simple rule based on position and velocity to decide whether to push left, right, or do nothing.</li>
+<li><strong>Four-Rule System</strong>: A more complex set of rules based on position and velocity to make more refined decisions.</li>
+</ol>
+<p>Let’s define the function to select actions based on the strategy.</p>
+<pre><code class="language-python">def select_action(action_selection_code, observation):
+    &quot;&quot;&quot;
+    Selects an action based on the action_selection_code and current observation.
+
+    Parameters:
+        action_selection_code (int): Strategy to choose an action (0, 1, 2, or 3).
+        observation (array): Current state observation [position, velocity].
+
+    Returns:
+        action (int): The selected action.
+    &quot;&quot;&quot;
+    position, velocity = observation[0], observation[1]
+
+    if action_selection_code == 0:
+        # Random action
+        return env.action_space.sample()
+
+    if action_selection_code == 1:
+        # Always push to the right
+        return 2
+
+    if action_selection_code == 2:
+        # Two-rule system
+        if position &gt; POSITION_CENTRE and velocity &gt; 0:
+            return 2  # Push right
+        elif position &lt; POSITION_CENTRE and velocity &lt; 0:
+            return 0  # Push left
+        else:
+            return 1  # Do nothing
+
+    if action_selection_code == 3:
+        # Four-rule system
+        if position &gt; POSITION_CENTRE and velocity &gt; 0:
+            return 2  # Push right
+        elif position &lt; POSITION_CENTRE and velocity &lt; 0:
+            return 0  # Push left
+        elif position &lt; POSITION_CENTRE and velocity &gt; 0:
+            return 2  # Push right
+        elif position &gt; POSITION_CENTRE and velocity &lt; 0:
+            return 0  # Push left
+        else:
+            return 1  # Do nothing
+
+    # Default action
+    return 1
+</code></pre>
+<h2 id="running-multiple-agents-with-different-strategies">Running Multiple Agents with Different Strategies</h2>
+<p>To observe how well each strategy performs, we can simulate multiple agents, each using one of the four strategies. Here, we will simulate 100 agents. For each agent, we allow up to 200 iterations (steps) to complete the task.</p>
+<h3 id="simulating-agents">Simulating Agents</h3>
+<pre><code class="language-python"># Constants for simulation configuration
+MAX_ITERATIONS = 200  # Maximum number of steps per episode
+NUM_AGENTS = 100      # Number of agents to test each strategy
+NUM_STRATEGIES = 4    # Number of action-selection strategies
+
+def simulate_mountain_car():
+    &quot;&quot;&quot;
+    Simulates the MountainCar-v0 environment with multiple agents and strategies.
+
+    This function compares the performance of different action-selection strategies
+    and plots the number of steps each strategy takes to complete the task.
+    &quot;&quot;&quot;
+    print(&quot;Starting Mountain Car Simulation&quot;)
+
+    # Initialize the MountainCar environment
+    env = gym.make(&quot;MountainCar-v0&quot;, render_mode=&quot;human&quot;)
+    observation, info = env.reset()
+
+    # Array to store the number of steps taken by each agent for each strategy
+    steps_taken = np.zeros((NUM_AGENTS, NUM_STRATEGIES))
+
+    # Loop over all strategies
+    for strategy in range(NUM_STRATEGIES):
+        # Test each agent with the current strategy
+        for agent in range(NUM_AGENTS):
+            for step in range(MAX_ITERATIONS):
+                # Select action based on the strategy and current observation
+                action = select_action(strategy, observation)
+
+                # Take a step in the environment
+                observation, reward, terminated, truncated, info = env.step(action)
+
+                # If the episode ends (goal reached or time limit exceeded), reset the environment
+                if terminated or truncated:
+                    observation, info = env.reset()
+                    break
+
+            # Store the number of steps taken by the agent for the current strategy
+            steps_taken[agent][strategy] = step
+
+    # Plot the results using a boxplot
+    plot_results(steps_taken)
+
+    print(&quot;Closing the environment&quot;)
+    env.close()
+</code></pre>
+<h4 id="visualization">Visualization</h4>
+<p>Finally, let's visualize the results. We’ll use a boxplot to compare how many steps each strategy takes to complete the task.</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+
+def plot_results(steps_taken):
+    &quot;&quot;&quot;
+    Plots the number of steps taken for each strategy using a boxplot.
+
+    Parameters:
+        steps_taken (ndarray): A 2D array where each row corresponds to the steps
+                               taken by an agent for a particular strategy.
+    &quot;&quot;&quot;
+    plt.figure(figsize=(8, 6))
+    plt.boxplot(steps_taken, showmeans=True)
+    plt.title(&quot;Number of Steps to Complete the Task by Strategy&quot;)
+    plt.xlabel(&quot;Strategy&quot;)
+    plt.ylabel(&quot;Number of Steps&quot;)
+    plt.xticks(np.arange(1, NUM_STRATEGIES + 1), ['Random', 'Always Right', 'Two Rules', 'Four Rules'])
+    plt.grid(True)
+    plt.show()
+</code></pre>
+<p>The <code>plot_results()</code> function will generate a boxplot that shows how many steps each agent took for each strategy. You’ll be able to compare the performance of the different strategies based on this visualization.</p>
+<p><a href="../gym.py">Complete Code</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
