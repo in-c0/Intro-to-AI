@@ -1660,5 +1660,355 @@ After the update, the new estimate of \( V(S_t) \) becomes **5.52**.
 
 
 
+## 5. Metaheuristics
+
+
+[Metaheuristics](https://en.wikipedia.org/wiki/Metaheuristic) and heuristics are both optimization methods, but they differ in scope, flexibility, and application.
+
+#### Heuristics
+- **Problem-specific**: Heuristics are designed to solve a specific problem or class of problems. They incorporate domain-specific knowledge to find a solution quickly but may not work well for other types of problems.
+- **Greedy approach**: Heuristics often use a greedy strategy to make decisions that seem best at the moment, without considering future consequences. This can lead to suboptimal solutions.
+- **Limited exploration**: Heuristics typically focus on a small region of the solution space, leading to less exploration.
+- **Efficiency**: They are generally very fast and simple, often used for real-time applications where finding a good enough solution quickly is more important than finding the optimal solution.
+- **Example**: In a route-finding problem, the *nearest neighbor* heuristic chooses the next city based on proximity, aiming for short-term gains but possibly missing the global optimum.
+
+#### Metaheuristics
+- **Problem-independent**: Metaheuristics are general frameworks that can be adapted to solve a wide range of problems. They don't rely on domain-specific knowledge, making them more flexible.
+- **Balancing exploration and exploitation**: Metaheuristics aim to explore the solution space thoroughly (exploration) while refining promising areas (exploitation). This reduces the risk of getting stuck in local optima.
+- **Memory use**: Some metaheuristics maintain a memory of past solutions (e.g., Tabu Search), which helps guide future decisions and improve search efficiency.
+- **Trade-off**: Metaheuristics are generally slower than heuristics because they perform a more comprehensive search, but they are more likely to find near-optimal or optimal solutions.
+- **Example**: Genetic Algorithms and Simulated Annealing are metaheuristics that apply to various types of optimization problems by mimicking natural or physical processes.
+
+#### Summary Table
+
+| Feature                 | Heuristics                    | Metaheuristics               |
+|-------------------------|-------------------------------|------------------------------|
+| **Problem scope**        | Problem-specific              | Problem-independent           |
+| **Strategy**             | Greedy, localized search      | Balances exploration & exploitation |
+| **Exploration**          | Limited                       | Wide exploration              |
+| **Speed**                | Very fast                     | Slower but more thorough      |
+| **Memory use**           | Typically none                | May use memory (e.g., Tabu Search) |
+| **Example**              | Nearest neighbor              | Simulated Annealing, Genetic Algorithms |
+
+In essence, heuristics are quicker and simpler but may miss optimal solutions, while metaheuristics offer a broader, more flexible approach, often yielding better results at the cost of increased computational effort.
+
+
+![local-minima](metah-local-minima.png)
+
+### Deterministic vs Stochastic
+
+#### Deterministic Methods
+- **Definition**: Deterministic methods are algorithms or processes that will always produce the same output from a given initial condition. There is no randomness involved in these methods, and they follow a specific set of rules.
+- **Characteristics**:
+  - The same input always leads to the same output.
+  - The process is fully predictable and repeatable.
+  - Often used in algorithms where the problem has a well-defined solution space (e.g., shortest path algorithms).
+  - **Example**: Dijkstra's algorithm for shortest paths in graphs, which always finds the shortest path for a given input.
+
+#### Stochastic Methods
+- **Definition**: Stochastic methods introduce randomness or probability in their processes. The output can vary, even with the same initial input, due to random elements in the algorithm.
+- **Characteristics**:
+  - These methods are more exploratory, often used when the search space is too large or complex to explore exhaustively.
+  - Different runs with the same input can lead to different outputs, potentially discovering better solutions in optimization problems.
+  - **Example**: Simulated Annealing or Genetic Algorithms, which rely on randomness to explore the solution space more widely.
+
+#### Key Differences
+- **Predictability**: Deterministic methods always give the same result, while stochastic methods can give different results on different runs.
+- **Exploration**: Stochastic methods explore a larger solution space due to randomization, while deterministic methods stick to a fixed path.
+- **Efficiency**: Deterministic methods can be more efficient but may miss global optima, while stochastic methods can escape local minima but may require more computational effort.
+
+---
+
+### First-order Gradient Methods
+
+- **Definition**: First-order gradient methods are optimization algorithms that use the first derivative (gradient) of the objective function to guide the search for the optimal solution.
+- **How it works**: These methods follow the steepest descent direction to minimize (or maximize) a function by adjusting the variables in proportion to the negative of the gradient.
+- **Characteristics**:
+  - Only the gradient (first derivative) is needed, making them computationally inexpensive.
+  - They work well for convex problems* but may get stuck in local minima in non-convex problems.
+  - **Example**: *Gradient Descent*, *Stochastic Gradient Descent (SGD)*, *Momentum*, *Adam (ADAptive Moment)* Estimation
+
+#### Advantages
+- Simplicity and ease of implementation.
+- Suitable for large-scale problems and real-time applications due to their efficiency.
+- Can be enhanced with momentum or adaptive learning rates (e.g., *Adam Optimizer*).
+
+#### Disadvantages
+- May converge slowly.
+- Can get stuck in local minima for non-convex problems.
+- Requires careful tuning of the learning rate.
+
+*A **convex problem** is an optimization problem where the objective function and the feasible region exhibit specific convexity properties. Convexity makes these problems easier to solve because local optima are also global optima.
+e.g. Minimizing the quadratic function \( f(x) = x^2 \) is a convex problem because the function is convex, and it has a unique global minimum at \( x = 0 \).
+
+
+
+### 1. Gradient Descent (GD)
+### Definition:
+Gradient Descent (GD) is an optimization algorithm that minimizes a cost function by computing the gradient (first derivative) of the cost function and updating the parameters in the opposite direction of the gradient.
+
+#### Characteristics:
+- **Full-batch Gradient**: It computes the gradient using the entire dataset.
+- **Update Rule**:
+  \[
+  \theta_{t+1} = \theta_t - \alpha \nabla J(\theta)
+  \]
+  where \( \alpha \) is the learning rate, \( \theta_t \) is the parameter at time \( t \), and \( \nabla J(\theta) \) is the gradient of the cost function \( J(\theta) \).
+  
+#### Advantages:
+- Guarantees a smooth and stable convergence in convex problems.
+- Each step moves towards the optimal solution.
+
+#### Disadvantages:
+- **Computationally Expensive**: Requires computing the gradient on the entire dataset at every step, which can be slow for large datasets.
+- **Memory-intensive**: Needs to load the entire dataset into memory.
+
+---
+
+### 2. Stochastic Gradient Descent (SGD)
+#### Definition:
+Stochastic Gradient Descent (SGD) is a variant of GD that updates the parameters using only one random sample (or a small batch) of the dataset at a time.
+
+#### Characteristics:
+- **Mini-batch or Single-sample Gradient**: It computes the gradient using a randomly selected data point or mini-batch at each iteration.
+- **Update Rule**:
+  \[
+  \theta_{t+1} = \theta_t - \alpha \nabla J(\theta; \text{random sample})
+  \]
+
+#### Advantages:
+- **Faster Updates**: Since each update only requires a single data point, it can perform updates much more quickly, especially for large datasets.
+- **Better Generalization**: The noisy updates help prevent overfitting by introducing randomness.
+- **Escapes Local Minima**: Due to the noisy updates, SGD can jump out of local minima in non-convex problems.
+
+#### Disadvantages:
+- **Noisy Convergence**: The randomness introduces noise, which can cause the parameter updates to overshoot the optimum or oscillate around it.
+- **Requires Learning Rate Decay**: SGD often needs a decaying learning rate to stabilize the convergence.
+
+---
+
+### 3. Momentum
+#### Definition:
+Momentum is an extension of Gradient Descent that adds a velocity vector (or momentum term) to smooth out updates and speed up convergence, especially in directions with small gradients.
+
+#### Characteristics:
+- **Momentum-enhanced Gradient Descent**: It builds velocity from past gradients to make larger, more informed steps.
+- **Update Rule**:
+  \[
+  v_{t+1} = \beta v_t + (1 - \beta) \nabla J(\theta_t)
+  \]
+  \[
+  \theta_{t+1} = \theta_t - \alpha v_{t+1}
+  \]
+  where \( \beta \) (usually 0.9) is the momentum term and \( v \) is the velocity that builds up over time.
+
+#### Advantages:
+- **Faster Convergence**: Momentum accelerates movement along directions with consistent gradients, allowing for faster convergence.
+- **Reduced Oscillations**: It helps reduce oscillations, especially in narrow or steep valleys in the optimization landscape.
+
+#### Disadvantages:
+- **Hyperparameter Tuning**: Momentum requires careful tuning of both the learning rate and the momentum parameter \( \beta \).
+
+---
+
+### 4. Adam (Adaptive Moment Estimation)
+### Definition:
+Adam is an adaptive learning rate optimization algorithm that combines the advantages of both SGD with Momentum and RMSProp (which adapts the learning rate for each parameter).
+
+#### Characteristics:
+- **Adaptive Learning Rates**: Adam adjusts the learning rate for each parameter using estimates of the first moment (mean of the gradients) and the second moment (variance of the gradients).
+- **Update Rule**:
+  1. **First Moment Estimate (Mean)**:
+     \[
+     m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t
+     \]
+  2. **Second Moment Estimate (Variance)**:
+     \[
+     v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2
+     \]
+  3. **Bias Correction**:
+     \[
+     \hat{m_t} = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v_t} = \frac{v_t}{1 - \beta_2^t}
+     \]
+  4. **Parameter Update**:
+     \[
+     \theta_{t+1} = \theta_t - \alpha \frac{\hat{m_t}}{\sqrt{\hat{v_t}} + \epsilon}
+     \]
+     where \( \alpha \) is the learning rate, and \( \epsilon \) is a small constant to avoid division by zero.
+
+#### Advantages:
+- **Fast Convergence**: Adam converges quickly due to adaptive learning rates and momentum.
+- **Less Hyperparameter Tuning**: The adaptive nature of Adam makes it easier to tune compared to vanilla GD or Momentum.
+- **Handles Sparse Data**: Adam works well in scenarios with sparse data or noisy gradients.
+
+#### Disadvantages:
+- **Overfitting**: Adam’s fast convergence can sometimes lead to overfitting if the learning rate is not properly tuned.
+- **Non-convergence in some cases**: Adam can fail to converge in certain settings compared to simpler methods like SGD.
+
+---
+
+### Summary Table
+
+| Feature                           | Gradient Descent (GD)       | Stochastic Gradient Descent (SGD)  | Momentum                         | Adam                              |
+|------------------------------------|-----------------------------|------------------------------------|-----------------------------------|-----------------------------------|
+| **Gradient Computation**           | Full dataset                | Single sample or mini-batch        | Full dataset or mini-batch        | Adaptive (using first and second moments) |
+| **Computational Cost per Update**  | High                        | Low                               | High                             | Moderate                          |
+| **Update Frequency**              | Once per epoch              | Per sample/mini-batch             | Once per epoch                   | Once per sample/mini-batch        |
+| **Learning Rate**                  | Constant                    | Constant or decaying              | Constant or decaying             | Adaptive                          |
+| **Momentum**                       | No                          | No                                | Yes                              | Yes                              |
+| **Speed**                          | Slow on large datasets      | Fast                              | Faster than GD                   | Fastest                           |
+| **Convergence Stability**          | Stable but slow             | Noisy, oscillates                 | More stable than SGD             | Stable, fast, but can overfit     |
+| **Best for**                       | Small datasets, convex problems | Large datasets, noisy problems    | Convex problems with faster convergence | Large datasets, non-convex problems |
+
+
+
+---
+
+### Second-order Newton’s Methods
+
+- **Definition**: Newton's methods are second-order optimization techniques that use both the first and second derivatives (gradient and Hessian) to guide the search for the optimal solution.
+- **How it works**: These methods utilize the Hessian matrix (second derivative of the function) to approximate the curvature of the solution space, allowing for faster and more accurate convergence towards the optimal solution.
+- **Characteristics**:
+  - Requires computation of the Hessian matrix, which makes it more computationally expensive compared to first-order methods.
+  - Converges faster than first-order methods, especially near the optimal solution.
+  - **Example**: *Newton's Method*, *Broyden–Fletcher–Goldfarb–Shanno (BFGS)* algorithm.
+
+#### Advantages
+- Faster convergence, especially near local or global minima.
+- More accurate steps due to the use of second-order information.
+
+#### Disadvantages
+- High computational cost, especially for large problems, due to the need to compute the Hessian matrix.
+- May be impractical for very large-scale problems.
+
+---
+
+### Single-solution Metaheuristics
+
+- **Definition**: Single-solution metaheuristics focus on improving one candidate solution iteratively through local search techniques. These algorithms generally rely on making small modifications to the current solution and evaluating its performance.
+- **Characteristics**:
+  - These methods start with an initial solution and modify it iteratively to improve it.
+  - They often incorporate strategies to escape local optima, such as simulated annealing.
+  - **Example**: *Simulated Annealing*, *Tabu Search*.
+
+#### Advantages
+- Simple and easy to implement.
+- Focuses computational power on improving one solution, potentially leading to fast convergence for small-scale problems.
+- Suitable for problems where the neighborhood of a solution is easy to explore.
+
+#### Disadvantages
+- Can get stuck in local optima if the problem landscape is complex.
+- Less diversity in exploration since only one solution is considered at a time.
+
+---
+
+### Population-based Algorithms
+
+- **Definition**: Population-based algorithms maintain a population of candidate solutions and explore the solution space by updating the entire population at each iteration. These methods often mimic natural processes such as evolution or social behavior.
+- **How it works**: Instead of working with a single solution, these algorithms work with a population of solutions, applying genetic-like operations (e.g., crossover, mutation) or collective behavior (e.g., swarm intelligence) to evolve better solutions.
+- **Characteristics**:
+  - Maintain a diverse set of solutions, which helps in exploring multiple regions of the solution space simultaneously.
+  - They tend to avoid local optima by maintaining diversity among the population.
+  - **Examples**: *Genetic Algorithms*, *Particle Swarm Optimization*, *Ant Colony Optimization*.
+
+#### Advantages
+- Capable of exploring a wide search space due to population diversity.
+- Can avoid local optima better than single-solution approaches.
+- Highly adaptable to a wide range of optimization problems.
+
+#### Disadvantages
+- Computationally more expensive due to the evaluation of multiple candidate solutions at each iteration.
+- Requires careful parameter tuning (e.g., population size, mutation rate, etc.).
+
+---
+
+### Summary Table
+
+| Feature                          | First-order Gradient Methods         | Second-order Newton's Methods        | Single-solution Metaheuristics       | Population-based Algorithms          |
+|-----------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|
+| **Type**                          | First-order (uses gradient)          | Second-order (uses gradient + Hessian)| Iterative search using one solution  | Operates on a population of solutions|
+| **Speed**                         | Fast but may be slow in non-convex   | Slower per step but faster convergence| Fast but may get stuck in local minima| Slower but explores larger search space|
+| **Convergence**                   | Slower, may get stuck in local minima| Faster convergence near solution     | Moderate, risk of local minima       | Robust, avoids local minima          |
+| **Computational Cost**            | Low (only first derivative)          | High (requires second derivative)    | Moderate                            | High (requires population evaluation)|
+| **Example**                       | Gradient Descent, SGD                | Newton’s Method, BFGS                | Simulated Annealing, Tabu Search     | Genetic Algorithms, Particle Swarm   |
+
+
+- Egg holder?
+
+- 5.1 Asymptotic Complexity  
+- 5.2 Classes of Problems  
+
+P, NP, NP-complete
+
+## Classes of Problems
+
+In optimization and computational complexity theory, problems are classified based on the time they take to be solved and the computational resources they require. The classification helps in understanding the difficulty of a problem and the best strategies to solve it.
+
+### 1. Class **P**
+- **Definition**: Problems in class **P** are those that can be solved in **polynomial time** on a deterministic computer.
+- **Characteristics**:
+  - Problems in class P are considered "tractable," meaning they can be solved efficiently.
+  - The time required to solve the problem grows at a polynomial rate relative to the input size.
+  - These problems have algorithms that run in time complexity such as \( O(n) \), \( O(n^2) \), or \( O(n^3) \), etc.
+- **Examples**:
+  - Quicksort
+  - Binary search
+  - Matrix multiplication
+
+### 2. Class **NP**
+- **Definition**: Class **NP** contains problems for which a proposed solution can be **verified** in polynomial time on a deterministic computer, but finding the solution may not necessarily be feasible in polynomial time.
+- **Characteristics**:
+  - NP problems are known as "intractable" problems because solving them efficiently is difficult.
+  - If a solution is given, it can be checked quickly (in polynomial time).
+  - **P** is a subset of **NP**: \( P \subseteq NP \), meaning that if a problem can be solved quickly (in class P), its solution can also be verified quickly (in class NP).
+- **Examples**:
+  - Subset sum problem
+  - Sudoku
+  - Traveling Salesman Problem (TSP)
+
+### 3. Class **NP-Complete**
+- **Definition**: NP-complete problems are a subset of NP problems that are among the hardest to solve. No polynomial-time algorithms are known for these problems, and it is unknown if any exist.
+- **Characteristics**:
+  - If a polynomial-time algorithm is found for any NP-complete problem, it can be used to solve all NP problems in polynomial time, implying \( P = NP \).
+  - NP-complete problems require exponential time (or worse) to solve with known algorithms.
+  - These problems are often solved using heuristics or approximation algorithms.
+- **Examples**:
+  - Traveling Salesman Problem (TSP), which has time complexity \( O(n^2 2^n) \)
+  - Subset sum problem
+  - Boolean satisfiability problem (SAT), which was the first problem proven to be NP-complete (Cook’s theorem, 1971)
+
+### 4. **P vs NP Problem**
+- **The Open Question**: "Is \( P = NP \)?" is one of the biggest unsolved questions in computer science.
+- **Most Accepted Hypothesis**: It is widely believed that \( P \neq NP \), meaning that problems that can be verified quickly (NP) cannot always be solved quickly (P).
+
+### 5. Approaches to NP Problems
+Since NP-complete problems are difficult to solve efficiently, several approaches are typically used:
+- **Approximation Algorithms**: Algorithms that find solutions that may not be optimal but are within a certain range of the optimal solution.
+- **Heuristics and Metaheuristics**: Techniques that provide reasonably good solutions for many cases without guaranteeing optimality. These include methods like genetic algorithms and simulated annealing.
+- **Simplification**: In some cases, simplifying the problem can make it easier to solve. For example, relaxing constraints or working with smaller problem instances.
+
+
+- 5.3 Linear Programming  
+
+[Linear Programming](https://en.wikipedia.org/wiki/Linear_programming)
+
+
+![metah-feasible-solution](metah-feasible-solution.png)
+A **feasible solution** is a set of values for the decision variables that satisfies all of the constraints in an optimization problem. The set of all feasible solutions defines the feasible region of the problem. Most optimization algorithms operate by first trying to locate any feasible solution, and then attempting to find another (better) feasible solution that improves the value of the objective function. This process of trying to find improving feasible solutions repeats until either no further improvement is possible or some other stopping criteria is met.
+
+As shown in the illustration below, a global optimal solution is one where there is no other feasible solution with a better objective function value.  A local optimal solution is one where there is no other feasible solution "in the vicinity" with a better objective function value.
+
+
+- 5.4 Search Space  
+
+Neighbourhood?
+feasible movement, feasible solution
+
+Constraints
+
+
+- 5.5 Memoryless vs Memory-based
+- 5.6 Population-Based Methods  
+
 
 ⚠️ Site is currently under active development, frequent changes are expected
