@@ -1,0 +1,2239 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Gradient methods, complexity classes, simulated annealing, tabu search, genetic algorithms.">
+      
+      
+        <meta name="author" content="ba">
+      
+      
+        <link rel="canonical" href="https://in-c0.github.io/Intro-to-AI/05-metaheuristics/">
+      
+      
+        <link rel="prev" href="../04-reinforcement-learning/">
+      
+      
+        <link rel="next" href="../gym/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>5. Metaheuristics - Introduction to AI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sec-5-metaheuristics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to AI" class="md-header__button md-logo" aria-label="Introduction to AI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to AI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Metaheuristics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/in-c0/Intro-to-AI" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in-c0/Intro-to-AI
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to AI" class="md-nav__button md-logo" aria-label="Introduction to AI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    Introduction to AI
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/in-c0/Intro-to-AI" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in-c0/Intro-to-AI
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-reinforcement-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Metaheuristics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Metaheuristics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deterministic-vs-stochastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deterministic vs Stochastic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-order-gradient-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First-order Gradient Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-1-gradient-descent-gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Gradient Descent (GD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-2-stochastic-gradient-descent-sgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Stochastic Gradient Descent (SGD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-3-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Momentum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-4-adam-adaptive-moment-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Adam (Adaptive Moment Estimation)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#second-order-newtons-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Second-order Newton’s Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-solution-metaheuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-solution Metaheuristics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#population-based-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Population-based Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-54-classes-of-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Classes of Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 Classes of Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sec-1-class-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Class P
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-2-class-np" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Class NP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-3-class-np-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Class NP-Complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-4-p-vs-np-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. P vs NP Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-5-approaches-to-np-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Approaches to NP Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-55-memoryless-vs-memory-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Memoryless vs Memory-based
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-2-memory-based-metaheuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Memory-Based Metaheuristics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-55-population-based-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Population-based Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gym/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mountain Car (Gym)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Feedforward-Neural-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feedforward Neural Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deterministic-vs-stochastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deterministic vs Stochastic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-order-gradient-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First-order Gradient Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-1-gradient-descent-gd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Gradient Descent (GD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-2-stochastic-gradient-descent-sgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Stochastic Gradient Descent (SGD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-3-momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Momentum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-4-adam-adaptive-moment-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Adam (Adaptive Moment Estimation)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#second-order-newtons-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Second-order Newton’s Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single-solution-metaheuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-solution Metaheuristics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#population-based-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Population-based Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-54-classes-of-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Classes of Problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 Classes of Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sec-1-class-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Class P
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-2-class-np" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Class NP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-3-class-np-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Class NP-Complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-4-p-vs-np-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. P vs NP Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-5-approaches-to-np-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Approaches to NP Problems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-55-memoryless-vs-memory-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Memoryless vs Memory-based
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec-2-memory-based-metaheuristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Memory-Based Metaheuristics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-55-population-based-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Population-based Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Start here
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../01-introduction/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/in-c0/Intro-to-AI/edit/main/docs/05-metaheuristics.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="sec-5-metaheuristics">5. Metaheuristics<a class="headerlink" href="#sec-5-metaheuristics" title="Permanent link">&para;</a></h1>
+<p class="chapter-meta">Chapter 5 of 5 · ~31 min read</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Metaheuristic">Metaheuristics</a> and heuristics are both optimization methods, but they differ in scope, flexibility, and application.</p>
+<h4 id="heuristics">Heuristics<a class="headerlink" href="#heuristics" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Problem-specific</strong>: Heuristics are designed to solve a specific problem or class of problems. They incorporate domain-specific knowledge to find a solution quickly but may not work well for other types of problems.</li>
+<li><strong>Greedy approach</strong>: Heuristics often use a greedy strategy to make decisions that seem best at the moment, without considering future consequences. This can lead to suboptimal solutions.</li>
+<li><strong>Limited exploration</strong>: Heuristics typically focus on a small region of the solution space, leading to less exploration.</li>
+<li><strong>Efficiency</strong>: They are generally very fast and simple, often used for real-time applications where finding a good enough solution quickly is more important than finding the optimal solution.</li>
+<li><strong>Example</strong>: In a route-finding problem, the <em>nearest neighbor</em> heuristic chooses the next city based on proximity, aiming for short-term gains but possibly missing the global optimum.</li>
+</ul>
+<h4 id="metaheuristics">Metaheuristics<a class="headerlink" href="#metaheuristics" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Problem-independent</strong>: Metaheuristics are general frameworks that can be adapted to solve a wide range of problems. They don't rely on domain-specific knowledge, making them more flexible.</li>
+<li><strong>Balancing exploration and exploitation</strong>: Metaheuristics aim to explore the solution space thoroughly (exploration) while refining promising areas (exploitation). This reduces the risk of getting stuck in local optima.</li>
+<li><strong>Memory use</strong>: Some metaheuristics maintain a memory of past solutions (e.g., Tabu Search), which helps guide future decisions and improve search efficiency.</li>
+<li><strong>Trade-off</strong>: Metaheuristics are generally slower than heuristics because they perform a more comprehensive search, but they are more likely to find near-optimal or optimal solutions.</li>
+<li><strong>Example</strong>: Genetic Algorithms and Simulated Annealing are metaheuristics that apply to various types of optimization problems by mimicking natural or physical processes.</li>
+</ul>
+<h4 id="summary-table">Summary Table<a class="headerlink" href="#summary-table" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Heuristics</th>
+<th>Metaheuristics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Problem scope</strong></td>
+<td>Problem-specific</td>
+<td>Problem-independent</td>
+</tr>
+<tr>
+<td><strong>Strategy</strong></td>
+<td>Greedy, localized search</td>
+<td>Balances exploration &amp; exploitation</td>
+</tr>
+<tr>
+<td><strong>Exploration</strong></td>
+<td>Limited</td>
+<td>Wide exploration</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Very fast</td>
+<td>Slower but more thorough</td>
+</tr>
+<tr>
+<td><strong>Memory use</strong></td>
+<td>Typically none</td>
+<td>May use memory (e.g., Tabu Search)</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>Nearest neighbor</td>
+<td>Simulated Annealing, Genetic Algorithms</td>
+</tr>
+</tbody>
+</table>
+<p>In essence, heuristics are quicker and simpler but may miss optimal solutions, while metaheuristics offer a broader, more flexible approach, often yielding better results at the cost of increased computational effort.</p>
+<p><img alt="local-minima" src="../metah-local-minima.png" /></p>
+<h3 id="deterministic-vs-stochastic">Deterministic vs Stochastic<a class="headerlink" href="#deterministic-vs-stochastic" title="Permanent link">&para;</a></h3>
+<h4 id="deterministic-methods">Deterministic Methods<a class="headerlink" href="#deterministic-methods" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Definition</strong>: Deterministic methods are algorithms or processes that will always produce the same output from a given initial condition. There is no randomness involved in these methods, and they follow a specific set of rules.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>The same input always leads to the same output.</li>
+<li>The process is fully predictable and repeatable.</li>
+<li>Often used in algorithms where the problem has a well-defined solution space (e.g., shortest path algorithms).</li>
+<li><strong>Example</strong>: Dijkstra's algorithm for shortest paths in graphs, which always finds the shortest path for a given input.</li>
+</ul>
+<h4 id="stochastic-methods">Stochastic Methods<a class="headerlink" href="#stochastic-methods" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Definition</strong>: Stochastic methods introduce randomness or probability in their processes. The output can vary, even with the same initial input, due to random elements in the algorithm.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>These methods are more exploratory, often used when the search space is too large or complex to explore exhaustively.</li>
+<li>Different runs with the same input can lead to different outputs, potentially discovering better solutions in optimization problems.</li>
+<li><strong>Example</strong>: Simulated Annealing or Genetic Algorithms, which rely on randomness to explore the solution space more widely.</li>
+</ul>
+<h4 id="key-differences">Key Differences<a class="headerlink" href="#key-differences" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Predictability</strong>: Deterministic methods always give the same result, while stochastic methods can give different results on different runs.</li>
+<li><strong>Exploration</strong>: Stochastic methods explore a larger solution space due to randomization, while deterministic methods stick to a fixed path.</li>
+<li><strong>Efficiency</strong>: Deterministic methods can be more efficient but may miss global optima, while stochastic methods can escape local minima but may require more computational effort.</li>
+</ul>
+<hr />
+<h3 id="first-order-gradient-methods">First-order Gradient Methods<a class="headerlink" href="#first-order-gradient-methods" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: First-order gradient methods are optimization algorithms that use the first derivative (gradient) of the objective function to guide the search for the optimal solution.</li>
+<li><strong>How it works</strong>: These methods follow the steepest descent direction to minimize (or maximize) a function by adjusting the variables in proportion to the negative of the gradient.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>Only the gradient (first derivative) is needed, making them computationally inexpensive.</li>
+<li>They work well for convex problems* but may get stuck in local minima in non-convex problems.</li>
+<li><strong>Example</strong>: <em>Gradient Descent</em>, <em>Stochastic Gradient Descent (SGD)</em>, <em>Momentum</em>, <em>Adam (ADAptive Moment)</em> Estimation</li>
+</ul>
+<h4 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Simplicity and ease of implementation.</li>
+<li>Suitable for large-scale problems and real-time applications due to their efficiency.</li>
+<li>Can be enhanced with momentum or adaptive learning rates (e.g., <em>Adam Optimizer</em>).</li>
+</ul>
+<h4 id="disadvantages">Disadvantages<a class="headerlink" href="#disadvantages" title="Permanent link">&para;</a></h4>
+<ul>
+<li>May converge slowly.</li>
+<li>Can get stuck in local minima for non-convex problems.</li>
+<li>Requires careful tuning of the learning rate.</li>
+</ul>
+<p>*A <strong>convex problem</strong> is an optimization problem where the objective function and the feasible region exhibit specific convexity properties. Convexity makes these problems easier to solve because local optima are also global optima.
+e.g. Minimizing the quadratic function <span class="arithmatex">\( f(x) = x^2 \)</span> is a convex problem because the function is convex, and it has a unique global minimum at <span class="arithmatex">\( x = 0 \)</span>.</p>
+<h3 id="sec-1-gradient-descent-gd">1. Gradient Descent (GD)<a class="headerlink" href="#sec-1-gradient-descent-gd" title="Permanent link">&para;</a></h3>
+<h3 id="definition">Definition:<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h3>
+<p>Gradient Descent (GD) is an optimization algorithm that minimizes a cost function by computing the gradient (first derivative) of the cost function and updating the parameters in the opposite direction of the gradient.</p>
+<h4 id="characteristics">Characteristics:<a class="headerlink" href="#characteristics" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Full-batch Gradient</strong>: It computes the gradient using the entire dataset.</li>
+<li><strong>Update Rule</strong>:
+  [
+  \theta_{t+1} = \theta_t - \alpha \nabla J(\theta)
+  ]
+  where <span class="arithmatex">\( \alpha \)</span> is the learning rate, <span class="arithmatex">\( \theta_t \)</span> is the parameter at time <span class="arithmatex">\( t \)</span>, and <span class="arithmatex">\( \nabla J(\theta) \)</span> is the gradient of the cost function <span class="arithmatex">\( J(\theta) \)</span>.</li>
+</ul>
+<h4 id="advantages_1">Advantages:<a class="headerlink" href="#advantages_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Guarantees a smooth and stable convergence in convex problems.</li>
+<li>Each step moves towards the optimal solution.</li>
+</ul>
+<h4 id="disadvantages_1">Disadvantages:<a class="headerlink" href="#disadvantages_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Computationally Expensive</strong>: Requires computing the gradient on the entire dataset at every step, which can be slow for large datasets.</li>
+<li><strong>Memory-intensive</strong>: Needs to load the entire dataset into memory.</li>
+</ul>
+<hr />
+<h3 id="sec-2-stochastic-gradient-descent-sgd">2. Stochastic Gradient Descent (SGD)<a class="headerlink" href="#sec-2-stochastic-gradient-descent-sgd" title="Permanent link">&para;</a></h3>
+<h4 id="definition_1">Definition:<a class="headerlink" href="#definition_1" title="Permanent link">&para;</a></h4>
+<p>Stochastic Gradient Descent (SGD) is a variant of GD that updates the parameters using only one random sample (or a small batch) of the dataset at a time.</p>
+<h4 id="characteristics_1">Characteristics:<a class="headerlink" href="#characteristics_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Mini-batch or Single-sample Gradient</strong>: It computes the gradient using a randomly selected data point or mini-batch at each iteration.</li>
+<li><strong>Update Rule</strong>:
+  [
+  \theta_{t+1} = \theta_t - \alpha \nabla J(\theta; \text{random sample})
+  ]</li>
+</ul>
+<h4 id="advantages_2">Advantages:<a class="headerlink" href="#advantages_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Faster Updates</strong>: Since each update only requires a single data point, it can perform updates much more quickly, especially for large datasets.</li>
+<li><strong>Better Generalization</strong>: The noisy updates help prevent overfitting by introducing randomness.</li>
+<li><strong>Escapes Local Minima</strong>: Due to the noisy updates, SGD can jump out of local minima in non-convex problems.</li>
+</ul>
+<h4 id="disadvantages_2">Disadvantages:<a class="headerlink" href="#disadvantages_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Noisy Convergence</strong>: The randomness introduces noise, which can cause the parameter updates to overshoot the optimum or oscillate around it.</li>
+<li><strong>Requires Learning Rate Decay</strong>: SGD often needs a decaying learning rate to stabilize the convergence.</li>
+</ul>
+<hr />
+<h3 id="sec-3-momentum">3. Momentum<a class="headerlink" href="#sec-3-momentum" title="Permanent link">&para;</a></h3>
+<h4 id="definition_2">Definition:<a class="headerlink" href="#definition_2" title="Permanent link">&para;</a></h4>
+<p>Momentum is an extension of Gradient Descent that adds a velocity vector (or momentum term) to smooth out updates and speed up convergence, especially in directions with small gradients.</p>
+<h4 id="characteristics_2">Characteristics:<a class="headerlink" href="#characteristics_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Momentum-enhanced Gradient Descent</strong>: It builds velocity from past gradients to make larger, more informed steps.</li>
+<li><strong>Update Rule</strong>:
+  [
+  v_{t+1} = \beta v_t + (1 - \beta) \nabla J(\theta_t)
+  ]
+  [
+  \theta_{t+1} = \theta_t - \alpha v_{t+1}
+  ]
+  where <span class="arithmatex">\( \beta \)</span> (usually 0.9) is the momentum term and <span class="arithmatex">\( v \)</span> is the velocity that builds up over time.</li>
+</ul>
+<h4 id="advantages_3">Advantages:<a class="headerlink" href="#advantages_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Faster Convergence</strong>: Momentum accelerates movement along directions with consistent gradients, allowing for faster convergence.</li>
+<li><strong>Reduced Oscillations</strong>: It helps reduce oscillations, especially in narrow or steep valleys in the optimization landscape.</li>
+</ul>
+<h4 id="disadvantages_3">Disadvantages:<a class="headerlink" href="#disadvantages_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Hyperparameter Tuning</strong>: Momentum requires careful tuning of both the learning rate and the momentum parameter <span class="arithmatex">\( \beta \)</span>.</li>
+</ul>
+<hr />
+<h3 id="sec-4-adam-adaptive-moment-estimation">4. Adam (Adaptive Moment Estimation)<a class="headerlink" href="#sec-4-adam-adaptive-moment-estimation" title="Permanent link">&para;</a></h3>
+<h3 id="definition_3">Definition:<a class="headerlink" href="#definition_3" title="Permanent link">&para;</a></h3>
+<p>Adam is an adaptive learning rate optimization algorithm that combines the advantages of both SGD with Momentum and RMSProp (which adapts the learning rate for each parameter).</p>
+<h4 id="characteristics_3">Characteristics:<a class="headerlink" href="#characteristics_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Adaptive Learning Rates</strong>: Adam adjusts the learning rate for each parameter using estimates of the first moment (mean of the gradients) and the second moment (variance of the gradients).</li>
+<li><strong>Update Rule</strong>:</li>
+<li><strong>First Moment Estimate (Mean)</strong>:
+     [
+     m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t
+     ]</li>
+<li><strong>Second Moment Estimate (Variance)</strong>:
+     [
+     v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2
+     ]</li>
+<li><strong>Bias Correction</strong>:
+     [
+     \hat{m_t} = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v_t} = \frac{v_t}{1 - \beta_2^t}
+     ]</li>
+<li><strong>Parameter Update</strong>:
+     [
+     \theta_{t+1} = \theta_t - \alpha \frac{\hat{m_t}}{\sqrt{\hat{v_t}} + \epsilon}
+     ]
+     where <span class="arithmatex">\( \alpha \)</span> is the learning rate, and <span class="arithmatex">\( \epsilon \)</span> is a small constant to avoid division by zero.</li>
+</ul>
+<h4 id="advantages_4">Advantages:<a class="headerlink" href="#advantages_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Fast Convergence</strong>: Adam converges quickly due to adaptive learning rates and momentum.</li>
+<li><strong>Less Hyperparameter Tuning</strong>: The adaptive nature of Adam makes it easier to tune compared to vanilla GD or Momentum.</li>
+<li><strong>Handles Sparse Data</strong>: Adam works well in scenarios with sparse data or noisy gradients.</li>
+</ul>
+<h4 id="disadvantages_4">Disadvantages:<a class="headerlink" href="#disadvantages_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Overfitting</strong>: Adam’s fast convergence can sometimes lead to overfitting if the learning rate is not properly tuned.</li>
+<li><strong>Non-convergence in some cases</strong>: Adam can fail to converge in certain settings compared to simpler methods like SGD.</li>
+</ul>
+<hr />
+<h3 id="summary-table_1">Summary Table<a class="headerlink" href="#summary-table_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Gradient Descent (GD)</th>
+<th>Stochastic Gradient Descent (SGD)</th>
+<th>Momentum</th>
+<th>Adam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gradient Computation</strong></td>
+<td>Full dataset</td>
+<td>Single sample or mini-batch</td>
+<td>Full dataset or mini-batch</td>
+<td>Adaptive (using first and second moments)</td>
+</tr>
+<tr>
+<td><strong>Computational Cost per Update</strong></td>
+<td>High</td>
+<td>Low</td>
+<td>High</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td><strong>Update Frequency</strong></td>
+<td>Once per epoch</td>
+<td>Per sample/mini-batch</td>
+<td>Once per epoch</td>
+<td>Once per sample/mini-batch</td>
+</tr>
+<tr>
+<td><strong>Learning Rate</strong></td>
+<td>Constant</td>
+<td>Constant or decaying</td>
+<td>Constant or decaying</td>
+<td>Adaptive</td>
+</tr>
+<tr>
+<td><strong>Momentum</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Slow on large datasets</td>
+<td>Fast</td>
+<td>Faster than GD</td>
+<td>Fastest</td>
+</tr>
+<tr>
+<td><strong>Convergence Stability</strong></td>
+<td>Stable but slow</td>
+<td>Noisy, oscillates</td>
+<td>More stable than SGD</td>
+<td>Stable, fast, but can overfit</td>
+</tr>
+<tr>
+<td><strong>Best for</strong></td>
+<td>Small datasets, convex problems</td>
+<td>Large datasets, noisy problems</td>
+<td>Convex problems with faster convergence</td>
+<td>Large datasets, non-convex problems</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="second-order-newtons-methods">Second-order Newton’s Methods<a class="headerlink" href="#second-order-newtons-methods" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: Newton's methods are second-order optimization techniques that use both the first and second derivatives (gradient and Hessian) to guide the search for the optimal solution.</li>
+<li><strong>How it works</strong>: These methods utilize the Hessian matrix (second derivative of the function) to approximate the curvature of the solution space, allowing for faster and more accurate convergence towards the optimal solution.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>Requires computation of the Hessian matrix, which makes it more computationally expensive compared to first-order methods.</li>
+<li>Converges faster than first-order methods, especially near the optimal solution.</li>
+<li><strong>Example</strong>: <em>Newton's Method</em>, <em>Broyden–Fletcher–Goldfarb–Shanno (BFGS)</em> algorithm.</li>
+</ul>
+<h4 id="advantages_5">Advantages<a class="headerlink" href="#advantages_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Faster convergence, especially near local or global minima.</li>
+<li>More accurate steps due to the use of second-order information.</li>
+</ul>
+<h4 id="disadvantages_5">Disadvantages<a class="headerlink" href="#disadvantages_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>High computational cost, especially for large problems, due to the need to compute the Hessian matrix.</li>
+<li>May be impractical for very large-scale problems.</li>
+</ul>
+<hr />
+<h3 id="single-solution-metaheuristics">Single-solution Metaheuristics<a class="headerlink" href="#single-solution-metaheuristics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: Single-solution metaheuristics focus on improving one candidate solution iteratively through local search techniques. These algorithms generally rely on making small modifications to the current solution and evaluating its performance.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>These methods start with an initial solution and modify it iteratively to improve it.</li>
+<li>They often incorporate strategies to escape local optima, such as simulated annealing.</li>
+<li><strong>Example</strong>: <em>Simulated Annealing</em>, <em>Tabu Search</em>.</li>
+</ul>
+<h4 id="advantages_6">Advantages<a class="headerlink" href="#advantages_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Simple and easy to implement.</li>
+<li>Focuses computational power on improving one solution, potentially leading to fast convergence for small-scale problems.</li>
+<li>Suitable for problems where the neighborhood of a solution is easy to explore.</li>
+</ul>
+<h4 id="disadvantages_6">Disadvantages<a class="headerlink" href="#disadvantages_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Can get stuck in local optima if the problem landscape is complex.</li>
+<li>Less diversity in exploration since only one solution is considered at a time.</li>
+</ul>
+<hr />
+<h3 id="population-based-algorithms">Population-based Algorithms<a class="headerlink" href="#population-based-algorithms" title="Permanent link">&para;</a></h3>
+<p>Covered in detail in <a href="#sec-55-population-based-algorithms">5.5 Population-based Algorithms</a>.</p>
+<hr />
+<h3 id="summary-table_2">Summary Table<a class="headerlink" href="#summary-table_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>First-order Gradient Methods</th>
+<th>Second-order Newton's Methods</th>
+<th>Single-solution Metaheuristics</th>
+<th>Population-based Algorithms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td>First-order (uses gradient)</td>
+<td>Second-order (uses gradient + Hessian)</td>
+<td>Iterative search using one solution</td>
+<td>Operates on a population of solutions</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Fast but may be slow in non-convex</td>
+<td>Slower per step but faster convergence</td>
+<td>Fast but may get stuck in local minima</td>
+<td>Slower but explores larger search space</td>
+</tr>
+<tr>
+<td><strong>Convergence</strong></td>
+<td>Slower, may get stuck in local minima</td>
+<td>Faster convergence near solution</td>
+<td>Moderate, risk of local minima</td>
+<td>Robust, avoids local minima</td>
+</tr>
+<tr>
+<td><strong>Computational Cost</strong></td>
+<td>Low (only first derivative)</td>
+<td>High (requires second derivative)</td>
+<td>Moderate</td>
+<td>High (requires population evaluation)</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>Gradient Descent, SGD</td>
+<td>Newton’s Method, BFGS</td>
+<td>Simulated Annealing, Tabu Search</td>
+<td>Genetic Algorithms, Particle Swarm</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Egg holder?</p>
+</li>
+<li>
+<p>5.1 Asymptotic Complexity  </p>
+</li>
+<li>5.2 Classes of Problems  </li>
+</ul>
+<p>P, NP, NP-complete</p>
+<h2 id="sec-54-classes-of-problems">5.4 Classes of Problems<a class="headerlink" href="#sec-54-classes-of-problems" title="Permanent link">&para;</a></h2>
+<p>In optimization and computational complexity theory, problems are classified based on the time they take to be solved and the computational resources they require. The classification helps in understanding the difficulty of a problem and the best strategies to solve it.</p>
+<h3 id="sec-1-class-p">1. Class <strong>P</strong><a class="headerlink" href="#sec-1-class-p" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: Problems in class <strong>P</strong> are those that can be solved in <strong>polynomial time</strong> on a deterministic computer.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>Problems in class P are considered "tractable," meaning they can be solved efficiently.</li>
+<li>The time required to solve the problem grows at a polynomial rate relative to the input size.</li>
+<li>These problems have algorithms that run in time complexity such as <span class="arithmatex">\( O(n) \)</span>, <span class="arithmatex">\( O(n^2) \)</span>, or <span class="arithmatex">\( O(n^3) \)</span>, etc.</li>
+<li><strong>Examples</strong>:</li>
+<li>Quicksort</li>
+<li>Binary search</li>
+<li>Matrix multiplication</li>
+</ul>
+<h3 id="sec-2-class-np">2. Class <strong>NP</strong><a class="headerlink" href="#sec-2-class-np" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: Class <strong>NP</strong> contains problems for which a proposed solution can be <strong>verified</strong> in polynomial time on a deterministic computer, but finding the solution may not necessarily be feasible in polynomial time.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>NP problems are known as "intractable" problems because solving them efficiently is difficult.</li>
+<li>If a solution is given, it can be checked quickly (in polynomial time).</li>
+<li><strong>P</strong> is a subset of <strong>NP</strong>: <span class="arithmatex">\( P \subseteq NP \)</span>, meaning that if a problem can be solved quickly (in class P), its solution can also be verified quickly (in class NP).</li>
+<li><strong>Examples</strong>:</li>
+<li>Subset sum problem</li>
+<li>Sudoku</li>
+<li>Traveling Salesman Problem (TSP)</li>
+</ul>
+<h3 id="sec-3-class-np-complete">3. Class <strong>NP-Complete</strong><a class="headerlink" href="#sec-3-class-np-complete" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: NP-complete problems are a subset of NP problems that are among the hardest to solve. No polynomial-time algorithms are known for these problems, and it is unknown if any exist.</li>
+<li><strong>Characteristics</strong>:</li>
+<li>If a polynomial-time algorithm is found for any NP-complete problem, it can be used to solve all NP problems in polynomial time, implying <span class="arithmatex">\( P = NP \)</span>.</li>
+<li>NP-complete problems require exponential time (or worse) to solve with known algorithms.</li>
+<li>These problems are often solved using heuristics or approximation algorithms.</li>
+<li><strong>Examples</strong>:</li>
+<li>Traveling Salesman Problem (TSP), which has time complexity <span class="arithmatex">\( O(n^2 2^n) \)</span></li>
+<li>Subset sum problem</li>
+<li>Boolean satisfiability problem (SAT), which was the first problem proven to be NP-complete (Cook’s theorem, 1971)</li>
+</ul>
+<h3 id="sec-4-p-vs-np-problem">4. <strong>P vs NP Problem</strong><a class="headerlink" href="#sec-4-p-vs-np-problem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>The Open Question</strong>: "Is <span class="arithmatex">\( P = NP \)</span>?" is one of the biggest unsolved questions in computer science.</li>
+<li><strong>Most Accepted Hypothesis</strong>: It is widely believed that <span class="arithmatex">\( P \neq NP \)</span>, meaning that problems that can be verified quickly (NP) cannot always be solved quickly (P).</li>
+</ul>
+<h3 id="sec-5-approaches-to-np-problems">5. Approaches to NP Problems<a class="headerlink" href="#sec-5-approaches-to-np-problems" title="Permanent link">&para;</a></h3>
+<p>Since NP-complete problems are difficult to solve efficiently, several approaches are typically used:
+- <strong>Approximation Algorithms</strong>: Algorithms that find solutions that may not be optimal but are within a certain range of the optimal solution.
+- <strong>Heuristics and Metaheuristics</strong>: Techniques that provide reasonably good solutions for many cases without guaranteeing optimality. These include methods like genetic algorithms and simulated annealing.
+- <strong>Simplification</strong>: In some cases, simplifying the problem can make it easier to solve. For example, relaxing constraints or working with smaller problem instances.</p>
+<ul>
+<li>5.3 Linear Programming  </li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Linear_programming">Linear Programming</a></p>
+<p>A <strong>feasible solution</strong> is a set of values for the decision variables that satisfies all of the constraints in an optimization problem. The set of all feasible solutions defines the feasible region of the problem. Most optimization algorithms operate by first trying to locate any feasible solution, and then attempting to find another (better) feasible solution that improves the value of the objective function. This process of trying to find improving feasible solutions repeats until either no further improvement is possible or some other stopping criteria is met.</p>
+<p>As shown in the illustration below, a global optimal solution is one where there is no other feasible solution with a better objective function value.  A local optimal solution is one where there is no other feasible solution "in the vicinity" with a better objective function value.</p>
+<p><img alt="metah-feasible-solution" src="../metah-feasible-solution.png" /></p>
+<ul>
+<li>5.4 Search Space  </li>
+</ul>
+<p><img alt="Search Space" src="../metah-search-space.png" /></p>
+<h4 id="sec-1-solution-space-s-and-objective-function-f">1. Solution Space (S) and Objective Function (f)<a class="headerlink" href="#sec-1-solution-space-s-and-objective-function-f" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The <strong>solution space (S)</strong> represents all possible solutions to the optimization problem. Each point in this space is a potential solution.</li>
+<li>The <strong>objective function (f)</strong> evaluates each solution based on how well it satisfies the problem's goal (e.g., maximizing profit or minimizing cost). </li>
+</ul>
+<h4 id="sec-2-optimization-problem">2. Optimization Problem<a class="headerlink" href="#sec-2-optimization-problem" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The goal is to solve the optimization problem <span class="arithmatex">\( O(S, f) \)</span> by finding the <strong>optimal solution</strong> <span class="arithmatex">\( x_0 \in S \)</span>, such that:
+  [
+  f(x) \leq f(x_0), \forall x \in S
+  ]
+  This means you are looking for the solution <span class="arithmatex">\( x_0 \)</span> that minimizes or maximizes the objective function <span class="arithmatex">\( f(x) \)</span> within the solution space <span class="arithmatex">\( S \)</span>.</li>
+</ul>
+<h4 id="sec-3-constraints-and-feasible-region">3. Constraints and Feasible Region<a class="headerlink" href="#sec-3-constraints-and-feasible-region" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Constraints</strong> are conditions that limit the solutions in the search space. They reduce the universe of solutions to a <strong>feasible region</strong> (denoted as <span class="arithmatex">\( X \subseteq U \)</span>).</li>
+</ul>
+<p>Constraints can either be:
+Strong: These must be satisfied in any valid solution.
+Weak: These are recommended to be satisfied but are not strictly mandatory.</p>
+<ul>
+<li>The feasible region is where all the constraints are satisfied, and only solutions inside this region are considered valid.</li>
+</ul>
+<p>The choice between restricted and complete exploration depends on the problem and the computational resources available. In some cases, focusing on feasible solutions may save time but miss optimal solutions, while a complete search may offer more thorough exploration at the cost of increased computational effort.</p>
+<ul>
+<li>A <strong>penalty function</strong> is added to the original objective function to handle constraint violations. This allows the algorithm to explore infeasible regions but imposes penalties on solutions that violate the constraints.</li>
+</ul>
+<h4 id="objective-function-with-penalty">Objective Function with Penalty:<a class="headerlink" href="#objective-function-with-penalty" title="Permanent link">&para;</a></h4>
+<p>[
+\text{Minimize } f'(x) = f(x) + w \cdot P(x)
+]
+where:
+- <span class="arithmatex">\( f(x) \)</span>: The original objective function.
+- <span class="arithmatex">\( P(x) \)</span>: The penalty function, which penalizes violations of the constraints.
+- <span class="arithmatex">\( w \)</span>: A weighting coefficient that determines the trade-off between minimizing the objective function and penalizing constraint violations.</p>
+<ul>
+<li><strong>When the solution <span class="arithmatex">\( x \)</span> is feasible</strong>, <span class="arithmatex">\( P(x) = 0 \)</span>, meaning there is no penalty applied.</li>
+<li><strong>When the solution <span class="arithmatex">\( x \)</span> violates constraints</strong>, <span class="arithmatex">\( P(x) \)</span> increases based on the degree of violation. The more the violation, the larger the penalty, discouraging the algorithm from accepting infeasible solutions.</li>
+</ul>
+<h4 id="sec-4-graphical-representation">4. Graphical Representation<a class="headerlink" href="#sec-4-graphical-representation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>On the left side of the image:</li>
+<li>The <strong>search space</strong> is shown as a large area with possible solutions scattered within it. The gray and shaded regions illustrate where solutions are feasible or infeasible.</li>
+<li>On the right side of the image:</li>
+<li>The <strong>search space</strong> is mapped to the <strong>objective space</strong>.</li>
+<li>The points <span class="arithmatex">\( x^1, x^2, x^3, x^4 \)</span> in the search space correspond to values in the objective space, which are evaluated by the objective function <span class="arithmatex">\( f(x) \)</span>.</li>
+<li>The arrows show how the solutions in the search space map to the objective values, where you are trying to find the point that optimizes <span class="arithmatex">\( f(x) \)</span>.</li>
+</ul>
+<h4 id="sec-5-key-insights">5. Key Insights<a class="headerlink" href="#sec-5-key-insights" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The <strong>feasible region</strong> reduces the set of all possible solutions to those that satisfy the problem’s constraints.</li>
+<li>The goal of the optimization is to search within the feasible region for the point that maximizes or minimizes the objective function <span class="arithmatex">\( f(x) \)</span>.</li>
+<li>The mapping from the search space to the objective space helps visualize how each solution performs according to the objective function.</li>
+</ul>
+<p>https://en.wikipedia.org/wiki/Local_search_(optimization)</p>
+<p>A local search algorithm starts from a candidate solution and then iteratively moves to a neighboring solution; a neighborhood being the set of all potential solutions that differ from the current solution by the minimal possible extent. This requires a neighborhood relation to be defined on the search space. As an example, the neighborhood of vertex cover is another vertex cover only differing by one node. For Boolean satisfiability, the neighbors of a Boolean assignment are those that have a single variable in an opposite state. The same problem may have multiple distinct neighborhoods defined on it; local optimization with neighborhoods that involve changing up to k components of the solution is often referred to as k-opt.</p>
+<p>Typically, every candidate solution has more than one neighbor solution; the choice of which one to select is taken using only information about the solutions in the neighborhood of the current assignment, hence the name local search. When the choice of the neighbor solution is done by taking the one locally maximizing the criterion, i.e.: a greedy search, the metaheuristic takes the name hill climbing. When no improving neighbors are present, local search is stuck at a locally optimal point. This local-optima problem can be cured by using restarts (repeated local search with different initial conditions), randomization, or more complex schemes based on iterations, like iterated local search, on memory, like reactive search optimization, on memory-less stochastic modifications, like simulated annealing.</p>
+<p>Local search does not provide a guarantee that any given solution is optimal. The search can terminate after a given time bound or when the best solution found thus far has not improved in a given number of steps. Local search is an anytime algorithm; it can return a valid solution even if it's interrupted at any time after finding the first valid solution. Local search is typically an approximation or incomplete algorithm because the search may stop even if the current best solution found is not optimal. This can happen even if termination happens because the current best solution could not be improved, as the optimal solution can lie far from the neighborhood of the solutions crossed by the algorithm.</p>
+<h3 id="sec-55-memoryless-vs-memory-based">5.5 Memoryless vs Memory-based<a class="headerlink" href="#sec-55-memoryless-vs-memory-based" title="Permanent link">&para;</a></h3>
+<p>Metaheuristics are optimization algorithms used to solve complex problems where traditional methods may be inefficient. They are generally categorized into two types: <strong>memoryless</strong> and <strong>memory-based</strong> metaheuristics.</p>
+<h4 id="sec-1-memoryless-metaheuristics">1. <strong>Memoryless Metaheuristics</strong><a class="headerlink" href="#sec-1-memoryless-metaheuristics" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Definition</strong>: Memoryless metaheuristics do not retain information about past solutions or the search history. Each decision made during the search process is based solely on the current solution or state, with no influence from previous iterations.
+  (Most memoryless metaheuristics can be modified to become memory-based)</li>
+</ul>
+<h5 id="characteristics_4">Characteristics:<a class="headerlink" href="#characteristics_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>No Memory</strong>: The algorithm only uses the current solution and its immediate neighbors to decide the next move. It does not store or leverage past solutions.</li>
+<li><strong>Focus on Exploration</strong>: These metaheuristics often rely on randomization or stochastic processes to explore the search space.</li>
+<li><strong>Suitable for Large Problems</strong>: Since no memory is stored, these methods can be computationally efficient in problems where storing or accessing past information is impractical.</li>
+</ul>
+<h5 id="examples">Examples:<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>Simulated Annealing</strong>: It uses random sampling to explore new solutions without retaining memory of past solutions.</li>
+<li><strong>Randomized Local Search</strong>: It evaluates the neighbors of the current solution without considering previous states.</li>
+</ul>
+<h3 id="sec-2-memory-based-metaheuristics">2. <strong>Memory-Based Metaheuristics</strong><a class="headerlink" href="#sec-2-memory-based-metaheuristics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Definition</strong>: Memory-based metaheuristics retain and use information from previous solutions to guide the search process. These algorithms leverage the search history to avoid revisiting poor solutions and to focus on promising areas of the search space.</li>
+</ul>
+<h4 id="characteristics_5">Characteristics:<a class="headerlink" href="#characteristics_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Use of Memory</strong>: These algorithms store past information, such as the best solutions, the frequency of solution features, or areas to avoid (e.g., Tabu List).</li>
+<li><strong>Guided Search</strong>: By remembering previous moves and results, the algorithm can make more informed decisions and adapt the search strategy.</li>
+<li><strong>Balancing Exploration and Exploitation</strong>: The use of memory helps in balancing between exploring new areas of the solution space and exploiting known good areas.</li>
+</ul>
+<h4 id="examples_1">Examples:<a class="headerlink" href="#examples_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Tabu Search</strong>: Uses a memory structure called a "tabu list" to store recently visited solutions and avoid cycling back to them.</li>
+<li>
+<p><strong>Genetic Algorithms</strong>: Store and evolve a population of solutions over iterations by keeping track of "genetic material" (solutions) and using operators like crossover and mutation.</p>
+</li>
+<li>
+<p><strong>Memoryless metaheuristics</strong> are simpler, faster, and require less computational overhead, making them suitable for problems where memory is limited or where fast exploration is needed.</p>
+</li>
+<li><strong>Memory-based metaheuristics</strong> use memory to avoid revisiting poor solutions, resulting in a more informed and potentially more effective search, though at the cost of increased complexity and memory usage.</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Simulated_annealing">Simulated annealing</a> is a probabilistic optimisation algorithm inspired by the annealing process in material science. 
+It is used to find a near-optimal solution among an extremely large (but finite) set of potential solutions. It is particularly useful for combinatorial optimization problems defined by complex objective functions that rely on external data.</p>
+<p>The process involves:</p>
+<ol>
+<li>Randomly move or alter the state</li>
+<li>Assess the energy of the new state using an objective function</li>
+<li>Compare the energy to the previous state and decide whether to accept the new solution or reject it based on the current temperature.</li>
+<li>Repeat until you have converged on an acceptable answer</li>
+<li>For a move to be accepted, it must meet one of two requirements:</li>
+</ol>
+<p>The move causes a decrease in state energy (i.e. an improvement in the objective function)
+The move increases the state energy (i.e. a slightly worse solution) but is within the bounds of the temperature. The temperature exponetially decreases as the algorithm progresses. In this way, we avoid getting trapped by local minima early in the process but start to hone in on a viable solution by the end.</p>
+<p><img alt="metah-simulated-annealing" src="../metah-simulated-annealing.png" /></p>
+<p>The cooling temperature <span class="arithmatex">\(T(t)\)</span> (aka Temperature Descent) defines how the temperature decreases over time
+As the temperature 𝑡 decreases, the probability of accepting worse solutions (as defined by the probability function <span class="arithmatex">\(𝑒^{−(E(ω ′ )−E(ω))/t }\)</span>) reduces, making the algorithm focus more on local improvements and less on random exploration.</p>
+<p>--</p>
+<h2 id="_1"><img alt="metah-simulated-annealing-2" src="../metah-simulated-annealing-2.png" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h4 id="game-balancing-example-using-simulated-annealing">Game Balancing Example Using Simulated Annealing<a class="headerlink" href="#game-balancing-example-using-simulated-annealing" title="Permanent link">&para;</a></h4>
+<p>Let's consider a scenario where <strong>Simulated Annealing (SA)</strong> is used to balance a <strong>role-playing game (RPG)</strong> where different <strong>character classes</strong> (e.g., warrior, mage, archer) need to be balanced in terms of their <strong>damage output</strong>, <strong>defense</strong>, and <strong>abilities</strong>. The goal is to ensure no class is overpowered or too weak, providing a fair and enjoyable gameplay experience.</p>
+<h5 id="scenario">Scenario:<a class="headerlink" href="#scenario" title="Permanent link">&para;</a></h5>
+<p>In a multiplayer RPG, players can choose different classes (e.g., warrior, mage, archer). Each class has the following attributes:
+- <strong>Health Points (HP)</strong>: Durability or survivability of the class.
+- <strong>Attack Damage (AD)</strong>: Damage the class deals per attack.
+- <strong>Defense (DEF)</strong>: Reduces the incoming damage.
+- <strong>Special Abilities</strong>: Each class has unique abilities that affect gameplay.</p>
+<p>The current state of the game is imbalanced:
+- The <strong>mage</strong> deals too much damage, making it overpowered.
+- The <strong>warrior</strong> has too much health and defense, making it hard to defeat.</p>
+<p>Our goal is to balance the classes by adjusting their stats and abilities.</p>
+<h5 id="problem-definition">Problem Definition:<a class="headerlink" href="#problem-definition" title="Permanent link">&para;</a></h5>
+<p>The problem is framed as an <strong>optimization problem</strong> where we aim to adjust the stat values (HP, AD, DEF) and abilities to minimize an <strong>imbalance score</strong> — a measure of how unbalanced the game is.</p>
+<ul>
+<li><strong>Objective</strong>: Minimize the imbalance score across all classes.</li>
+<li><strong>Constraints</strong>: Each class must retain its distinct playstyle (e.g., the mage focuses on damage but can't be overpowered).</li>
+</ul>
+<h4 id="steps-using-simulated-annealing">Steps Using Simulated Annealing:<a class="headerlink" href="#steps-using-simulated-annealing" title="Permanent link">&para;</a></h4>
+<h5 id="sec-1-define-the-solution-space">1. Define the Solution Space:<a class="headerlink" href="#sec-1-define-the-solution-space" title="Permanent link">&para;</a></h5>
+<p>Each possible <strong>combination of stat values</strong> (HP, AD, DEF) and <strong>ability strength</strong> for the classes represents a point in the solution space. For example:
+- <strong>Warrior</strong>: HP = 3000, AD = 100, DEF = 200.
+- <strong>Mage</strong>: HP = 1500, AD = 300, DEF = 50.
+- <strong>Archer</strong>: HP = 2000, AD = 200, DEF = 100.</p>
+<h5 id="sec-2-define-the-objective-function-imbalance-score">2. Define the Objective Function (Imbalance Score):<a class="headerlink" href="#sec-2-define-the-objective-function-imbalance-score" title="Permanent link">&para;</a></h5>
+<p>The <strong>imbalance score</strong> <span class="arithmatex">\( f(x) \)</span> measures how unbalanced the game is. The goal is to minimize this score, which can be based on:
+- <strong>Win/loss ratios</strong> between classes.
+- <strong>Damage per second (DPS)</strong> and survivability.</p>
+<p>A simple imbalance score can be:
+[
+f(x) = | \text{DPS}<em _text_mage="\text{mage">{\text{warrior}} - \text{DPS}</em>}} | + | \text{DPS<em _text_archer="\text{archer">{\text{warrior}} - \text{DPS}</em> | + \ldots
+]
+Where }<span class="arithmatex">\( \text{DPS}_{\text{class}} \)</span> represents the damage per second for each class.</p>
+<h5 id="sec-3-generate-an-initial-solution">3. Generate an Initial Solution:<a class="headerlink" href="#sec-3-generate-an-initial-solution" title="Permanent link">&para;</a></h5>
+<p>Start with an initial configuration of stats, which could be the current unbalanced state:
+- <strong>Warrior</strong>: HP = 3500, AD = 100, DEF = 250.
+- <strong>Mage</strong>: HP = 1200, AD = 350, DEF = 50.
+- <strong>Archer</strong>: HP = 2200, AD = 220, DEF = 150.</p>
+<h5 id="sec-4-iteratively-explore-neighboring-solutions">4. Iteratively Explore Neighboring Solutions:<a class="headerlink" href="#sec-4-iteratively-explore-neighboring-solutions" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>Transformations</strong>: Adjust the stats of one or more classes slightly (e.g., reduce the mage’s AD, increase the warrior’s AD, adjust the HP of the archer).</li>
+<li><strong>Evaluate the new imbalance score</strong> for the adjusted configuration. Accept the new solution if the score improves, or accept it with some probability if the score worsens to allow exploration.</li>
+</ul>
+<h5 id="sec-5-simulate-battles-evaluate-objective-function">5. Simulate Battles (Evaluate Objective Function):<a class="headerlink" href="#sec-5-simulate-battles-evaluate-objective-function" title="Permanent link">&para;</a></h5>
+<p>Simulate battles between the classes (e.g., warrior vs. mage, mage vs. archer) and record the win/loss ratios, DPS, and survivability. Use these results to compute the new imbalance score.</p>
+<h5 id="sec-6-cooling-schedule-temperature-descent">6. Cooling Schedule (Temperature Descent):<a class="headerlink" href="#sec-6-cooling-schedule-temperature-descent" title="Permanent link">&para;</a></h5>
+<p>Use a cooling schedule to gradually reduce the temperature, transitioning from exploration to exploitation. A common cooling schedule:
+[
+t = t_0 \times \alpha^k
+]
+Where <span class="arithmatex">\( \alpha \)</span> is a cooling factor (e.g., 0.95) and <span class="arithmatex">\( k \)</span> is the current iteration.</p>
+<h5 id="sec-7-convergence">7. Convergence:<a class="headerlink" href="#sec-7-convergence" title="Permanent link">&para;</a></h5>
+<p>The algorithm continues to adjust the stats until it converges to a balanced configuration where the imbalance score is minimized. A final balanced solution might look like:
+- <strong>Warrior</strong>: HP = 3000, AD = 110, DEF = 200.
+- <strong>Mage</strong>: HP = 1500, AD = 290, DEF = 60.
+- <strong>Archer</strong>: HP = 2000, AD = 200, DEF = 120.</p>
+<p>This configuration ensures that no class is too weak or too strong while maintaining their unique playstyles.</p>
+<h5 id="summary-of-balanced-solution">Summary of Balanced Solution:<a class="headerlink" href="#summary-of-balanced-solution" title="Permanent link">&para;</a></h5>
+<p>After running Simulated Annealing, the algorithm finds a balanced set of stats and abilities for the classes:
+- <strong>Warrior</strong>: High defense and moderate attack, designed to be a tank.
+- <strong>Mage</strong>: High damage with low defense, focusing on powerful spells.
+- <strong>Archer</strong>: Balanced between attack and defense, specializing in ranged attacks.</p>
+<h4 id="tabu-search">Tabu Search<a class="headerlink" href="#tabu-search" title="Permanent link">&para;</a></h4>
+<p>https://en.wikipedia.org/wiki/Tabu_search</p>
+<p><img alt="metah-tabu-search" src="../metah-tabu-search.png" /></p>
+<p>At each step, the algorithm evaluates a set of neighboring solutions to decide the next move. These neighboring solutions are generated by making small changes (called moves) to the current solution.
+Before a move is accepted, the algorithm checks the Tabu List to ensure the move isn't "tabu" (forbidden). If the move is in the Tabu List, it is typically not considered, unless an aspiration criterion is met (e.g., the move produces a new global best solution).
+Once a move is made and a new solution is reached, the move or solution is added to the Tabu List for a fixed number of iterations (the Tabu Tenure), preventing the algorithm from reversing the move or re-exploring that solution in the near future.</p>
+<h4 id="main-characteristics">Main Characteristics:<a class="headerlink" href="#main-characteristics" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Memory-based</strong>: The <strong>Tabu List</strong> prevents cycling and revisiting the same solution.</li>
+<li><strong>Flexible exploration</strong>: The algorithm can explore worse solutions to escape local minima.</li>
+<li><strong>Aspiration criteria</strong>: Allows overriding the tabu status if the move leads to a solution that is significantly better than any found before.</li>
+</ul>
+<h4 id="tabu-search-algorithm-pseudocode">Tabu Search Algorithm (Pseudocode)<a class="headerlink" href="#tabu-search-algorithm-pseudocode" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Initialization</strong>:</li>
+<li><span class="arithmatex">\( s_0 \leftarrow \text{generate initial solution} \)</span>: Generate an initial solution <span class="arithmatex">\( s_0 \)</span>.</li>
+<li><span class="arithmatex">\( s_{\text{best}} \leftarrow s_0 \)</span>: Set the best solution <span class="arithmatex">\( s_{\text{best}} \)</span> to the initial solution.</li>
+<li>
+<p><strong>Tabu List</strong> <span class="arithmatex">\( \leftarrow \{ s_0 \} \)</span>: Initialize the Tabu List with the starting solution <span class="arithmatex">\( s_0 \)</span>.</p>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+</li>
+<li>
+<p><strong>Repeat until a termination criterion is met</strong>:</p>
+<ul>
+<li><strong>Neighborhood Generation</strong>: Generate a set of neighboring solutions <span class="arithmatex">\( \{ s_1, s_2, \dots, s_n \} \)</span> from the current solution <span class="arithmatex">\( s_0 \)</span>.</li>
+<li><strong>Select a Candidate</strong>: </li>
+<li>Set the candidate solution <span class="arithmatex">\( s_{\text{candidate}} \leftarrow s_1 \)</span>.</li>
+<li><strong>Evaluate each neighbor</strong> <span class="arithmatex">\( s_i \)</span>:<ul>
+<li>Compute the change in the objective function: <span class="arithmatex">\( \delta \leftarrow f(s_i) - f(s_{\text{candidate}}) \)</span>.</li>
+<li>If the neighbor <span class="arithmatex">\( s_i \)</span> is not in the Tabu List and <span class="arithmatex">\( \delta &lt; 0 \)</span> (i.e., it's a better solution), update <span class="arithmatex">\( s_{\text{candidate}} \leftarrow s_i \)</span>.</li>
+</ul>
+</li>
+<li><strong>Update Current Best</strong>:</li>
+<li>If <span class="arithmatex">\( s_{\text{candidate}} \)</span> is better than <span class="arithmatex">\( s_{\text{best}} \)</span>, update <span class="arithmatex">\( s_{\text{best}} \leftarrow s_{\text{candidate}} \)</span>.</li>
+<li><strong>Update Tabu List</strong>:</li>
+<li>Add the new <span class="arithmatex">\( s_{\text{candidate}} \)</span> to the Tabu List to prevent immediate revisiting.</li>
+<li>Remove old entries from the Tabu List when they exceed a certain length (Tabu Tenure).</li>
+</ul>
+</li>
+<li>
+<p><strong>End Condition</strong>: The algorithm repeats the process until a stopping criterion is met (e.g., a fixed number of iterations, or no improvement in a set number of iterations).</p>
+</li>
+<li>
+<p><strong>Return</strong>: The best solution <span class="arithmatex">\( s_{\text{best}} \)</span> found during the search.</p>
+</li>
+</ol>
+<h4 id="example-steps">Example Steps:<a class="headerlink" href="#example-steps" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Initial Solution</strong>: Begin with an initial solution (e.g., a specific configuration in a combinatorial problem).</li>
+<li><strong>Neighborhood Exploration</strong>: Generate nearby solutions by making small changes (e.g., swapping elements).</li>
+<li><strong>Tabu List</strong>: If a move has already been explored recently, mark it as "tabu" to prevent cycling.</li>
+<li><strong>Aspiration Criteria</strong>: Even if a solution is on the Tabu List, allow it if it represents a significant improvement over the current best solution.</li>
+</ul>
+<h4 id="summary">Summary:<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h4>
+<p><strong>Tabu Search</strong> enhances local search by:
+- Using memory to avoid cycling through previously visited solutions.
+- Exploring new areas of the search space by accepting worse solutions temporarily.
+- Providing a mechanism (Tabu List) to remember recent moves and guide the search process effectively.</p>
+<p>--</p>
+<h2 id="sec-55-population-based-algorithms">5.5 Population-based Algorithms<a class="headerlink" href="#sec-55-population-based-algorithms" title="Permanent link">&para;</a></h2>
+<p>Population-based algorithms operate on a population of candidate solutions rather than a single solution.
+ The population is typically initialized randomly or using heuristic techniques. Multiple solutions are evaluated simultaneously, allowing for the exploration of the search space more efficiently.</p>
+<p>• Advantages: ability to simultaneously explore multiple regions of the search space, promoting diversity and preventing premature convergence to suboptimal solutions.
+• Disadvantages: it may require careful parameter tuning and can be computationally demanding due to the population size and iterative nature of the algorithms.
+• Examples of bio-inspired population-based methods include ant colony optimisation, black hole algorithm, particle swarm optimisation, and genetic algorithms.</p>
+<h5 id="genetic-algorithms">Genetic Algorithms<a class="headerlink" href="#genetic-algorithms" title="Permanent link">&para;</a></h5>
+<p><a href="https://en.wikipedia.org/wiki/Genetic_algorithm">Genetic Algorithm</a> is a metaheuristic based on Darwin’s evolution theory</p>
+<p>which models the process of evolution in nature by applying evolutionary operators (like mutation, crossover, and selection) to a population of candidate solutions, which are analogous to chromosomes.
+The goal of GA is to optimize a given objective (fitness) function by iteratively evolving a population of solutions.</p>
+<p>https://www.youtube.com/watch?v=XP2sFzp2Rig&amp;t=23s</p>
+<p>• “One general law, leading to the advancement of all organic beings, namely,
+multiply, vary, let the strongest live and the weakest die.” Charles Darwin.
+• Stochastic search technique based on the mechanisms of natural selection and
+natural genetics.
+• Use analogies of natural selection to develop better solutions.
+• Widely used in problems of nonlinear and high-dimensional optimisation.</p>
+<p><img alt="metah-genetic-algorithm" src="../metah-genetic-algorithm.png" /></p>
+<p>The diagram illustrates the 5 steps in a genetic algorithm:</p>
+<ol>
+<li>Generate Initial Population: Start by randomly generating an initial population of candidate solutions.</li>
+<li>Evaluate Fitness Function: Each candidate solution is evaluated based on a fitness function that measures its quality or how well it solves the problem.</li>
+<li>Check Termination Criteria: If the termination criteria (e.g., a set number of iterations or reaching an optimal solution) are met, the algorithm ends, and the best individual is returned as the solution.</li>
+<li>Crossover and Mutation: If the termination criteria are not satisfied, the algorithm proceeds to apply crossover and mutation to create new offspring, which will form the population for the next generation.</li>
+<li>Selection: The best-performing individuals are selected for reproduction in the next generation, promoting the survival of the fittest.</li>
+</ol>
+<h5 id="terminology">Terminology<a class="headerlink" href="#terminology" title="Permanent link">&para;</a></h5>
+<p>The <strong>chromosome</strong> represents a possible solution to the problem, composed of genes (bits) with specific <strong>alleles</strong> at particular loci.
+The <strong>genotype</strong> is the internal structure (how the solution is represented), while the <strong>phenotype</strong> is the external interpretation or output of the solution.</p>
+<p><img alt="metah-terminology" src="../metah-terminology.png" /></p>
+<p>The search space is explored by applying transformations to candidate solutions,
+just as observed in living organisms: crossover, mutation, and selection.</p>
+<p>GA has 3 core operators: Crossover, Mutation, and Selection:
+- Selection: Select individuals based on their fitness scores. Fitter individuals are more likely to be selected for reproduction.
+- Crossover: Combine parts of two parent solutions to create offspring (new solutions).
+- Mutation: Introduce small random changes to individuals to maintain diversity.</p>
+<p><strong>Selectvie Pressure</strong> describes how strongly the algorithm favors better-performing solutions over weaker ones during the selection process.
+• High pressure: Can speed up the algorithm by quickly focusing on the best solutions but the search may end prematurely (intensification, premature convergence where diversity is lost, and the algorithm might get stuck in local optima.)
+• Low pressure: Increases diversity in the population and reduces the risk of premature convergence but progress is slower than necessary.
+• The ideal approach is to maintain low pressure at the beginning for broad
+exploration, and high pressure towards the end to exploit more promising areas.</p>
+<p>Chromosome commonly represented as strings of bits or binary representation.
+• Parameters include population size and probability of applying the genetic operators</p>
+<p><img alt="metah-genetic-algorithm" src="../metah-genetic-algorithm.png" /></p>
+<p><img alt="metah-genetic-algorithm-structure" src="../metah-genetic-algorithm-structure.png" /></p>
+<p><img alt="metah-genetic-algorithm-pseudocode" src="../metah-genetic-algorithm-pseudocode.png" /></p>
+<p>This pseudocode describes the steps followed by a <strong>Genetic Algorithm (GA)</strong> to evolve solutions over generations, ultimately aiming to optimize a given problem.</p>
+<ol>
+<li>
+<p><strong>t ← 0</strong><br />
+   Initialize the generation counter <code>t</code> to 0.</p>
+</li>
+<li>
+<p><strong>Initialize P(t)</strong><br />
+   Generate an initial population <span class="arithmatex">\( P(t) \)</span>, a collection of randomly generated candidate solutions.</p>
+</li>
+<li>
+<p><strong>Evaluate P(t)</strong><br />
+   Calculate the fitness of each individual in the population <span class="arithmatex">\( P(t) \)</span>. The fitness function determines how good each solution is in solving the problem.</p>
+</li>
+<li>
+<p><strong>repeat</strong><br />
+   The algorithm repeatedly performs the following steps until a termination criterion is met (such as a maximum number of generations or when the solution converges):</p>
+</li>
+<li>
+<p><strong>Generate offspring C(t)</strong><br />
+      Create a new set of candidate solutions (offspring) <span class="arithmatex">\( C(t) \)</span> from the current population <span class="arithmatex">\( P(t) \)</span> by applying genetic operators:</p>
+<ul>
+<li><strong>Crossover</strong>: Combine pairs of parent solutions to produce offspring.</li>
+<li><strong>Mutation</strong>: Introduce random changes to offspring to maintain diversity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evaluate C(t)</strong><br />
+      Calculate the fitness of each individual in the new offspring population <span class="arithmatex">\( C(t) \)</span>.</p>
+</li>
+<li>
+<p><strong>Select P(t + 1)</strong><br />
+      Create the next generation population <span class="arithmatex">\( P(t+1) \)</span> by selecting individuals from both the current population <span class="arithmatex">\( P(t) \)</span> and the new offspring <span class="arithmatex">\( C(t) \)</span>. This selection favors fitter individuals to ensure that the next generation is more likely to contain better solutions.</p>
+</li>
+<li>
+<p><strong>t ← t + 1</strong><br />
+      Increment the generation counter.</p>
+</li>
+<li>
+<p><strong>until a termination criterion is satisfied</strong><br />
+   The loop continues until a termination criterion is met, such as:</p>
+</li>
+<li>A maximum number of generations has been reached.</li>
+<li>
+<p>The population has converged to a stable solution (no further significant improvement in fitness).</p>
+</li>
+<li>
+<p><strong>Return the best individual found from P</strong><br />
+    Once the algorithm terminates, return the best solution from the final population <span class="arithmatex">\( P \)</span>.</p>
+</li>
+</ol>
+<hr />
+<h5 id="summary-of-key-steps">Summary of Key Steps:<a class="headerlink" href="#summary-of-key-steps" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>Initialization</strong>: Start with a random population.</li>
+<li><strong>Evaluation</strong>: Calculate the fitness of each solution.</li>
+<li><strong>Genetic Operators</strong>: Apply crossover and mutation to create new offspring.</li>
+<li><strong>Selection</strong>: Form the next generation by selecting the best individuals.</li>
+<li><strong>Termination</strong>: The process continues until a termination condition is met, and the best solution is returned.</li>
+</ul>
+<h4 id="uniform-vs-expanded-generation-size">Uniform vs Expanded Generation Size:<a class="headerlink" href="#uniform-vs-expanded-generation-size" title="Permanent link">&para;</a></h4>
+<p><img alt="metah-genetic-algorithm-generation-size" src="../metah-genetic-algorithm-generation-size.png" /></p>
+<p>In this approach, the size of the new generation is the same as the previous generation. This ensures that the algorithm maintains a constant population size across iterations.
+The diagram shows the flow:
+- Population (current generation) undergoes crossover and mutation to produce offspring.
+- A selection mechanism picks individuals from both the current population and the offspring to form the new population.</p>
+<p>This ensures the new generation maintains a uniform size and consists of a combination of both newly generated offspring and some retained parents.</p>
+<p>In the traditional version of genetic algorithms, all offspring replace all parents in the next generation.
+However, the approach shown in the diagram allows a mix of all offspring and some parents to form the new population. This helps maintain some level of diversity and allows potentially strong parent solutions to persist into the next generation, preventing premature convergence to suboptimal solutions.</p>
+<p><strong>Expanded generation size</strong> means that the size of the new generation is increased compared to the previous generation.
+<img alt="metah-genetic-algorithm-generation-size-expanded" src="../metah-genetic-algorithm-generation-size-expanded.png" />
+- The new generation size is calculated as: New generation size = Previous generation size + Number of offspring
+- This means the new population contains <strong>all parents</strong> and <strong>all offspring</strong> produced through genetic operations like crossover and mutation.</p>
+<ul>
+<li>
+<p><strong>All offspring and parents</strong> are included in the next generation. This method keeps both the existing parents (which may contain well-performing solutions) and all newly generated offspring. By expanding the population, the algorithm increases the diversity of the candidate solutions in each iteration.</p>
+</li>
+<li>
+<p><strong>Parents</strong>: The existing population (current generation).</p>
+</li>
+<li><strong>Offspring</strong>: New solutions generated from parents using <strong>crossover</strong> and <strong>mutation</strong> operations.</li>
+<li><strong>Selection</strong>: A process to choose the new population from both <strong>parents</strong> and <strong>offspring</strong>. This ensures a mixture of both old (parents) and new (offspring) solutions.</li>
+</ul>
+<p>The new population includes both parents and offspring, resulting in an expanded population size. This approach keeps both parents and offspring, which increases the population size over generations. </p>
+<p>It helps maintain diversity by keeping previous solutions while also allowing new solutions to enter the population. However, this approach requires managing a larger population size, which can increase computational complexity.</p>
+<h4 id="stochastic-sampling-vs-deterministic-sampling-in-genetic-algorithms">Stochastic Sampling vs Deterministic Sampling in Genetic Algorithms<a class="headerlink" href="#stochastic-sampling-vs-deterministic-sampling-in-genetic-algorithms" title="Permanent link">&para;</a></h4>
+<p>In genetic algorithms (GA), selection is a crucial process that determines which individuals from the current population are chosen to pass their genes (solutions) to the next generation. Two broad categories of selection methods are stochastic sampling and deterministic sampling. These methods influence how the algorithm balances exploration and exploitation during the evolutionary process.</p>
+<p>Stochastic sampling: prevent super chromosomes. For instance, roulette wheel.</p>
+<p>Deterministic sampling: sort chromosomes according to their fitness and choose
+the best ones. Elitist selection</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../04-reinforcement-learning/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4. Reinforcement Learning">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                4. Reinforcement Learning
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../gym/" class="md-footer__link md-footer__link--next" aria-label="Next: Mountain Car (Gym)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Mountain Car (Gym)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../javascripts/legacy-anchors.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
