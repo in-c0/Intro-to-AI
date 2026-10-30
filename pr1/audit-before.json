@@ -1,0 +1,96 @@
+{
+ "pages": {
+  "https://in-c0.github.io/Intro-to-AI/": {
+   "pageerrors": [
+    "Failed to execute 'querySelector' on 'Element': '#1-introduction_1' is not a valid selector.",
+    "Cannot read properties of undefined (reading '191')"
+   ],
+   "console_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "failed_requests": [
+    "404 https://in-c0.github.io/Intro-to-AI/RL-incremental-implementation.png"
+   ]
+  },
+  "https://in-c0.github.io/Intro-to-AI/gym/": {
+   "pageerrors": [],
+   "console_errors": [],
+   "failed_requests": []
+  },
+  "https://in-c0.github.io/Intro-to-AI/Feedforward-Neural-Network/": {
+   "pageerrors": [],
+   "console_errors": [],
+   "failed_requests": []
+  }
+ },
+ "broken": [
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "LICENSE",
+   "resolved": "https://in-c0.github.io/Intro-to-AI/LICENSE",
+   "status": 404
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "RL-incremental-implementation.png",
+   "resolved": "https://in-c0.github.io/Intro-to-AI/RL-incremental-implementation.png",
+   "status": 404
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "5-5-population-based-algorithms",
+   "resolved": "https://in-c0.github.io/Intro-to-AI/5-5-population-based-algorithms",
+   "status": 404
+  }
+ ],
+ "missing_anchors": [
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#model-based-agent"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#planning-agent"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#model-based-agent"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#planning-agent"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#RL-action-value-estimation"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#RL-monte-carlo"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#RL-temporal-difference"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#RL-action-value-estimation"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#RL-monte-carlo"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#RL-temporal-difference"
+  },
+  {
+   "on": "https://in-c0.github.io/Intro-to-AI/",
+   "href": "#5-5-population-based-algorithms"
+  }
+ ]
+}
