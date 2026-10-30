@@ -17,41 +17,41 @@ For a deeper understanding of the topics covered, the following textbooks are re
 ## Content Structure
 <a id="top"></a>
 
-### 1. [Introduction](#1-introduction)
-- 1.1 [History of AI](#11-history-of-ai)
-- 1.2 [Agents](#12-agents)
-- 1.3 [Knowledge Representation](#13-knowledge-representation)
-  - 1.3.1 [Feature-based vs Iconic Representations](#131-feature-based-vs-iconic-representations)
-  - 1.3.2 [Logic](#132-logic)
-  - 1.3.3 [Learning Rules](#133-learning-rules)
+**1. [Introduction](#sec-1-introduction)**
+- 1.1 [History of AI](#sec-11-history-of-ai)
+- 1.2 [Agents](#sec-12-agents)
+- 1.3 [Knowledge Representation](#sec-13-knowledge-representation)
+  - 1.3.1 [Feature-based vs Iconic Representations](#sec-131-feature-based-vs-iconic-representations)
+  - 1.3.2 [Logic](#sec-132-logic)
+  - 1.3.3 [Learning Rules](#sec-133-learning-rules)
 
-### 2. [Search](#2-search)
-- 2.1 [State, Action, Transition Function](#21-state-action-transition-function)
-- 2.2 [Search Space](#22-search-space)
-- 2.3 [Uninformed Search vs Informed Search](#23-uninformed-search-vs-informed-search)
-- 2.4 [Uninformed Search](#24-uninformed-search)
-  - 2.4.1 [Breadth-First Search (BFS)](#241-breadth-first-search-bfs)
-  - 2.4.2 [Depth-First Search (DFS)](#242-depth-first-search-dfs)
-  - 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search-iterative-deepening)
-- 2.5 [Informed Search](#25-informed-search)
-- 2.6 [Solving Problems Using Search](#26-solving-problems-using-search)
+**2. [Search](#sec-2-search)**
+- 2.1 [State, Action, Transition Function](#sec-21-state-action-transition-function)
+- 2.2 [Search Space](#sec-22-search-space)
+- 2.3 [Uninformed Search vs Informed Search](#sec-23-uninformed-search-vs-informed-search)
+- 2.4 [Uninformed Search](#sec-24-uninformed-search)
+  - 2.4.1 [Breadth-First Search (BFS)](#sec-241-breadth-first-search-bfs)
+  - 2.4.2 [Depth-First Search (DFS)](#sec-242-depth-first-search-dfs)
+  - 2.4.3 [Depth-Limited Search & Iterative Deepening](#sec-243-depth-limited-search-iterative-deepening)
+- 2.5 [Informed Search](#sec-25-informed-search)
+- 2.6 [Solving Problems Using Search](#sec-26-solving-problems-using-search)
 
 
-### 3. [Artificial Neural Networks](#3-artificial-neural-networks)
-- 3.1 [Neurons - Biological and Artificial](#31-neurons-biological-and-artificial)  
-- 3.2 [Single-layer Perceptron](#32-single-layer-perceptron)  
-- 3.3 [Multilayer Perceptron (MLP)](#33-multilayer-perceptron-mlp)  
-- 3.4 [Neural Network Design](#34-neural-network-design)  
-- 3.5 [Neural Network Architectures](#35-neural-network-architectures)
+**3. [Artificial Neural Networks](#sec-3-artificial-neural-networks)**
+- 3.1 [Neurons - Biological and Artificial](#sec-31-neurons-biological-and-artificial)  
+- 3.2 [Single-layer Perceptron](#sec-32-single-layer-perceptron)  
+- 3.3 [Multilayer Perceptron (MLP)](#sec-33-multilayer-perceptron-mlp)  
+- 3.4 [Neural Network Design](#sec-34-neural-network-design)  
+- 3.5 [Neural Network Architectures](#sec-35-neural-network-architectures)
 
-### 4. [Reinforcement Learning](#4-reinforcement-learning)
+**4. [Reinforcement Learning](#sec-4-reinforcement-learning)**
 - 4.1 Elements of Reinforcement Learning  
 - 4.2 Exploration vs Exploitation  
 - 4.3 The Agent-Environment Interface  
 - 4.4 Value Functions  
 - 4.5 Temporal-Difference Prediction  
 
-### 5. Metaheuristics
+**5. Metaheuristics**
 - 5.1 Asymptotic Complexity  
 - 5.2 Classes of Problems  
 - 5.3 Linear Programming  
@@ -59,12 +59,12 @@ For a deeper understanding of the topics covered, the following textbooks are re
 - 5.5 Metaheuristics with and without Memory  
 - 5.6 Population-Based Methods  
 
-### 7. Computer Vision
+**7. Computer Vision**
 - 7.1 Image Processing  
 - 7.2 Scene Analysis  
 - 7.3 Cognitive Vision  
 
-### 8. Language Processing
+**8. Language Processing**
 - 8.1 Formal Languages  
   - 8.1.1 Chomsky’s Hierarchy  
   - 8.1.2 Grammars  
@@ -72,13 +72,13 @@ For a deeper understanding of the topics covered, the following textbooks are re
 - 8.3 Minimum Edit Distance and Words  
 - 8.4 Natural Languages: N-Gram Models  
 
-### 9. Reasoning with Uncertain Information
+**9. Reasoning with Uncertain Information**
 - 9.1 Confidence Factors  
 - 9.2 Probability and Probabilistic Inference  
 - 9.3 Bayes Nets  
 - 9.4 Fuzzy Logic  
 
-### 10. Human-Aligned Intelligent Robotics
+**10. Human-Aligned Intelligent Robotics**
 - 10.1 Human Interaction and Human-in-the-Loop Robot Learning  
 - 10.2 Explainability and Interpretability  
 - 10.3 Safe Robot Exploration  
@@ -91,7 +91,7 @@ Your feedback and contributions are greatly appreciated! If you'd like to improv
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. If you find this project helpful, credits and appreciation are always welcome!
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/in-c0/Intro-to-AI/blob/main/LICENSE) file for details. If you find this project helpful, credits and appreciation are always welcome!
 
 
 
@@ -99,7 +99,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 
 
-## 1. [Introduction](#1-introduction)
+## 1. Introduction
 
 Artificial intelligence is, well, intelligence that is artificial. Artificial just means it is machine-based. But what does *Integllience* mean? We throw the word around, but defining it is surprisingly tricky. Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?
 
@@ -111,7 +111,7 @@ Take for instance, a chess AI, which is a "narrow" AI — it’s designed to do 
 
  So how did we even begin to come up with the concept of artificial intelligence? In fact, it goes back thousands of years—long before computers or even electricity.
 
-### 1.1 [History of AI](#11-history-of-ai)
+### 1.1 History of AI
 
   Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.
 
@@ -174,7 +174,7 @@ More recent notable events in the history of AI include:
 [7] https://www.holloway.com/g/making-things-think/sections/the-second-ai-winter-19871993
 
 
-### 1.2 [Agents](#12-agents)
+### 1.2 Agents
 
  Agents in AI are entities that perceive their environment and act upon it, aiming to achieve specific goals. Different types of agents vary in complexity, decision-making abilities, and adaptability. 
 
@@ -188,7 +188,7 @@ More recent notable events in the history of AI include:
 
 
 
-##### [Reactive Agents](#reactive-agents)
+##### Reactive Agents {#reactive-agents}
 
 At the most basic level, we have the Reactive Agent, a simple yet effective problem-solver. Think of it as the AI version of a reflex action: "If this condition is met, perform this action." There’s no deliberation, no contemplation of past actions or future consequences—just action based on the current environment.
 
@@ -205,7 +205,7 @@ It is simply following the rule, without memory or state.
 
  
 
-##### [Model-based Agent](#model-based-agent) or Model-based "Reflex" Agent 
+##### Model-based Agent or Model-based "Reflex" Agent {#model-based-agent}
 
 
 Now, let’s add a layer of sophistication. Unlike the reactive agent, this type of agent has an internal **model** of the world, allowing it to handle *partially* observable environments. It takes into account not just the current input, but also a history of past actions and their outcomes, allowing for a more informed decision-making process.
@@ -216,7 +216,7 @@ Consider a robot navigating a maze. It doesn’t just rely on what it currently 
 
 ![image](https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5)
 
-##### [Planning Agent](#planning-agent) or "Goal-based" agent
+##### Planning Agent or "Goal-based" agent {#planning-agent}
 
 The Planning Agent expands upon the model-based agent by contemplating future consequences. It doesn’t just react to the past or present—it actively plans ahead, asking itself whether a given action will help achieve a specific goal.
 
@@ -227,7 +227,7 @@ This forward-thinking ability allows the planning agent to tackle complex tasks 
 
 ![image](https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb)
 
-##### [Utility-based Agent](#utility-based-agent)
+##### Utility-based Agent {#utility-based-agent}
 
 While planning agents focus on reaching a goal, Utility-Based Agents aim for something even more nuanced, that is, **maximizing happiness**. They evaluate each potential action, not just based on whether it achieves a goal, but on how "happy" it will make them in the end. In other words, they assign a utility or value to each possible state and then pursue the path that promises the highest utility.
 
@@ -238,10 +238,10 @@ Take, for example, an autonomous car deciding between two routes. One route migh
 
 ![image](https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0)
 
-##### [Game Playing Agent](#game-playing-agent)
+##### Game Playing Agent {#game-playing-agent}
 (not to be confused with the concept of [General Game Playing (GGP)](https://en.wikipedia.org/wiki/General_game_playing))
 
-Game-playing agents take these ideas of planning and utility to a competitive level. These agents are specifically designed to excel at a specific game or domain. They’re not just interested in their own happiness—they’re actively working to minimize their opponent’s advantage (via adversarial search like [Minimax](https://en.wikipedia.org/wiki/Minimax), or [Alpha Beta Pruning](#https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)).
+Game-playing agents take these ideas of planning and utility to a competitive level. These agents are specifically designed to excel at a specific game or domain. They’re not just interested in their own happiness—they’re actively working to minimize their opponent’s advantage (via adversarial search like [Minimax](https://en.wikipedia.org/wiki/Minimax), or [Alpha Beta Pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)).
 
 Examples of game playing agents include:
 
@@ -258,7 +258,7 @@ They usually excel in their domains, but their expertise doesn't easily transfer
 
 ![chrome_LxrkTHZIFE](https://github.com/user-attachments/assets/9c1bd7e7-1fa8-46be-ba58-5ee5cfa53c61)
 
-##### [Learning Agent](#learning-agent)
+##### Learning Agent {#learning-agent}
 
 At the cutting edge of AI is the Learning Agent. This type of agent doesn’t just act based on predefined rules or models—it learns from its experiences and continually improves over time. 
 
@@ -280,7 +280,7 @@ The original source of the classification ([Russel & Norvig (2003)](https://aima
 
 
 
-### 1.3 [Knowledge Representation](#13-knowledge-representation)
+### 1.3 Knowledge Representation
 
 **Representation and Search**
 
@@ -304,7 +304,7 @@ Here’s a hierarchical framework used to control a robot (soccer robot), moving
 
 
 
-#### 1.3.1 [Feature-based vs Iconic Representations](#131-feature-based-vs-iconic-representations)
+#### 1.3.1 Feature-based vs Iconic Representations
 
 
 **Iconic Representations (Low-level):**
@@ -362,7 +362,7 @@ There are three reasoning processes to make inferences or draw conclusions from 
 
 
 
-#### 1.3.2 [Logic](#132-logic)
+#### 1.3.2 Logic
 
 **Propositional Logic**
  - Letters stand for "basic" propositions
@@ -383,7 +383,7 @@ There are three reasoning processes to make inferences or draw conclusions from 
       - "There exists at least one person who loves Mary"
 
 
-#### 1.3.3 [Learning Rules](#133-learning-rules)
+#### 1.3.3 Learning Rules
 
 
 **Ontology**  
@@ -447,7 +447,7 @@ Two closely related families of systems:
 
 ---
 
-## 2 [Search](#2-search)
+## 2 Search
 
 You will learn:
 - the theory behind search in AI
@@ -455,7 +455,7 @@ You will learn:
 
 
 
-### 2.1 [State, Action, Transition Function](#21-state-action-transition-function)
+### 2.1 State, Action, Transition Function
 
 A problem can be described by
 - State
@@ -477,7 +477,7 @@ Types of states:
 - Intermediate state
 - Deadend state
 
-### 2.2 [Search Space](#22-search-space)
+### 2.2 Search Space
 
 Search space
 = set of all possible states a system can be in
@@ -526,7 +526,7 @@ In some cases, the graph edges are weighted, meaning each edge has a cost or val
 The weights can represent things like the cost of an action (time, energy, or distance)
 The goal is often to find the path from the initial state to the goal state that minimizes this cost. (Shortest path search, e.g. Dijkstra's algorithm or A* search) Covered more later
 
-### 2.3 [Uninformed Search vs Informed Search](#23-uninformed-search-vs-informed-search)
+### 2.3 Uninformed Search vs Informed Search
 
 Uninformed = No info about which path to explore next. No clue how to get to the goal state faster
 Example:
@@ -544,7 +544,7 @@ A* search, Greedy Best-First Search
 
 
 
-### 2.4 [Uninformed Search](#24-uninformed-search)
+### 2.4 Uninformed Search
 
 Tree is often used to represent Uninformed Search algorithms, since we dont have to worry about revisiting nodes (since there are no cycles).
 
@@ -565,7 +565,7 @@ A node is said to be Expanded* when the algorithm has examined all their neighbo
 
 
 
-#### 2.4.1 [Breadth-First Search (BFS)](#241-breadth-first-search-bfs)
+#### 2.4.1 Breadth-First Search (BFS)
 
 BFS explores all nodes at each depth level before going deeper
 
@@ -596,7 +596,7 @@ source: https://www.codecademy.com/article/tree-traversal
 - Exponential memory usage (has O(b^d) space complexity where b is the 'branching factor' (= number of child nodes for each node) and d is the depth of the search tree)
 
 
-#### 2.4.2 [Depth-First Search (DFS)](#242-depth-first-search-dfs)
+#### 2.4.2 Depth-First Search (DFS)
 
 
 ![35765045-e1ef0078-08ff-11e8-91af-30ce1cc22767](https://github.com/user-attachments/assets/92bb8acd-599a-43bb-842f-292c4326a6c9)
@@ -622,7 +622,7 @@ recursive approach can sometimes be more efficient. depends on the tree structur
 - Not complete (Not guaranteed to find a path to the goal, as it may get stuck in an infinite loop in cyclic graphs)
 
 
-#### 2.4.3 [Depth-Limited Search & Iterative Deepening](#243-depth-limited-search-iterative-deepening)
+#### 2.4.3 Depth-Limited Search & Iterative Deepening
 
 Same as DFS, except it doesnt search beyond nodes at a set depth limit. Nodes at this depth limit are treated as if they had no successors.
 
@@ -658,7 +658,7 @@ Similar to BFS, but orders nodes by cost -> useful for weighted graph
 
   
 
-### 2.5 [Informed Search](#25-informed-search)
+### 2.5 Informed Search
 
 Heuristics
 Greedy Search
@@ -669,7 +669,7 @@ Dominance
 
 
 
-### 2.6 [Solving Problems Using Search](#26-solving-problems-using-search)
+### 2.6 Solving Problems Using Search
 
 Exercise -
 1. Define the states, actions and transition function
@@ -681,7 +681,7 @@ Exercise -
 
 
 
-## [3. Artificial Neural Networks](#3-artificial-neural-networks)
+## 3. Artificial Neural Networks
 
 Humans can perform complex tasks: Shape recognition, Speech processing, Image processing ... 
 To emulate these behaviours, a branch of artifficial intelligence formed inspired by [neural circuitry](https://en.wikipedia.org/wiki/Neural_circuit):
@@ -719,7 +719,7 @@ ANN:
   - used to predict continuous outcomes based on input variables. -> **Regression** (e.g. predicting the house price based on location, number of bedrooms, etc)
 
 
-### 3.1 [Neurons - Biological and Artificial](#31-neurons-biological-and-artificial)
+### 3.1 Neurons - Biological and Artificial
 
 The brain is made up of [neurons (nerve cells)](https://en.wikipedia.org/wiki/Neuron) which have
 • a cell body (soma)
@@ -807,7 +807,7 @@ More reading: https://jontysinai.github.io/jekyll/update/2017/09/24/the-mcp-neur
 https://com-cog-book.github.io/com-cog-book/features/mp-artificial-neuron.html
 
 
-### 3.2 [Single-Layer Perceptron](#32-single-layer-perceptron)
+### 3.2 Single-Layer Perceptron
 
 
 Frank Rosenblatt, an American psychologist, proposed the classical **Perception** model in 1958. It is more generalized computational model than the McCulloch-Pitts neuron where weights and thresholds can be learnt over time.
@@ -882,7 +882,7 @@ This process is repeated until the perceptron can correctly classify all trainin
 
 
 
-### 3.3 [Multilayer Perceptron (MLP)](#33-multilayer-perceptron-mlp)
+### 3.3 Multilayer Perceptron (MLP)
 
 
 While the single-layer perceptron is simple and efficient for binary classification, it can only separate linearly separable data. 
@@ -938,7 +938,7 @@ https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 
 
 
-### 3.4 [Neural Network Design](#34-neural-network-design)
+### 3.4 Neural Network Design
 
 #### Step 1: Exhaustive System Analysis
 
@@ -1082,7 +1082,7 @@ Or, sometimes, different neural network models are developed using the available
 To test the generalisation capability of the network, that is, its performance on a different (never seen) set of data, a small (but representative) third set might be reserved, the generalisation set
 
 
-### 3.5 [Neural Network Architectures](#35-neural-network-architectures)
+### 3.5 Neural Network Architectures
 
 FNN: [Feed-forward network](https://en.wikipedia.org/wiki/Feedforward_neural_network)
 -  connections between the nodes do not form cycles/loops
@@ -1105,7 +1105,7 @@ CNN: [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_
 **[Exercise: Build a Feedforward Neural Network](Feedforward-Neural-Network.md)**
 
 
-## 4. [Reinforcement Learning](#4-reinforcement-learning)
+## 4. Reinforcement Learning
 
 Reinforcement Learning (RL) is a type of machine learning where an agent learns by **interacting with its environment**. Unlike supervised learning, where the agent learns from labeled data, RL involves learning from the consequences of its actions, without explicit instructions. The agent must figure out the best actions to take through trial and error, guided by a system of **rewards** and **punishments**.
 
@@ -1260,7 +1260,7 @@ A fundamental challenge in reinforcement learning is the trade-off between **exp
 
 
 
-### [Action-value Estimation](#RL-action-value-estimation)
+### Action-value Estimation {#RL-action-value-estimation}
 
 - **\( q^*(a) \)**: The **true action value**, which represents the expected return from taking action \( a \) and following the optimal policy thereafter. It is fixed but unknown to the agent.
 - **\( Q_t(a) \)**: The **estimated action value** at time step \( t \), reflecting the agent’s best guess of the action's value based on experience. This estimate improves over time through learning.
@@ -1564,7 +1564,7 @@ Each method has its own approach to updating the value function based on the age
 
 
 
-### [Monte Carlo Methods](#RL-monte-carlo)
+### Monte Carlo Methods {#RL-monte-carlo}
 
 #### What are Monte Carlo Methods?
 Monte Carlo methods are a class of algorithms that rely on **random sampling** to estimate numerical results. 
@@ -1593,7 +1593,7 @@ V(S_t) \leftarrow V(S_t) + \alpha \left( G_t - V(S_t) \right)
 
 
 
-[Temporal-Difference Prediction](#RL-temporal-difference)
+### Temporal-Difference Prediction {#RL-temporal-difference}
 
 
 **Temporal Difference (TD) methods** are a class of value function estimation techniques used in **Reinforcement Learning**. They combine ideas from both **Monte Carlo methods** and **Dynamic Programming (DP)**, allowing the agent to learn from incomplete episodes and without a full model of the environment.
@@ -1902,7 +1902,9 @@ Adam is an adaptive learning rate optimization algorithm that combines the advan
 
 ---
 
-### [Population-based Algorithms](#5-5-population-based-algorithms)
+### Population-based Algorithms
+
+Covered in detail in [5.5 Population-based Algorithms](#sec-55-population-based-algorithms).
 
 
 ---
@@ -2248,7 +2250,7 @@ Once a move is made and a new solution is reached, the move or solution is added
 --
 
 
-## [5.5 Population-based Algorithms](5-5-population-based-algorithms)
+## 5.5 Population-based Algorithms
 
 Population-based algorithms operate on a population of candidate solutions rather than a single solution.
  The population is typically initialized randomly or using heuristic techniques. Multiple solutions are evaluated simultaneously, allowing for the exploration of the search space more efficiently.

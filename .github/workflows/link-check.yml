@@ -1,0 +1,68 @@
+name: link-check
+
+# Blocks PRs (and pushes to main) that introduce broken internal links,
+# missing images or dead in-page anchors on the built site.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 21 * * 0" # weekly, also checks external links
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  internal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install mkdocs-material
+
+      # 1) MkDocs validation: unknown pages, missing files and anchors fail the build.
+      - name: Build (strict)
+        run: mkdocs build --strict --site-dir _site/Intro-to-AI
+
+      # 2) Check the built HTML exactly as it will be deployed, so links to files
+      #    that exist in the repo but are not published (e.g. ../LICENSE) are caught.
+      #    Built under _site/Intro-to-AI/ so root-absolute links (404.html) resolve
+      #    exactly as on GitHub Pages.
+      - name: Check links in built site
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --offline
+            --include-fragments
+            --no-progress
+            --root-dir ${{ github.workspace }}/_site
+            '_site/**/*.html'
+          fail: true
+
+  external:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          pip install -r requirements.txt mkdocs-material
+          mkdocs build --site-dir _site/Intro-to-AI
+      - name: Check external links (report only)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --accept 200,206,403,429
+            '_site/**/*.html'
+          fail: false
