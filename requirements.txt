@@ -1,5 +1,6 @@
 # Site build (CI + GitHub Pages)
 mkdocs==1.6.1
-python-markdown-math==0.8
+mkdocs-material==9.8.0
+pymdown-extensions==12.3
 
 # scripts/make_rl_incremental_figure.py also needs: matplotlib, numpy
