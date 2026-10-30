@@ -1,14 +1,80 @@
-site_name: Introduction to Artificial Intelligence
+site_name: Introduction to AI
 site_url: https://in-c0.github.io/Intro-to-AI/
 site_author: ba
-site_description: Made for self-learners who want to develop a solid foundation in Artificial Intelligence (AI). It covers a wide array of essential AI topics including neural networks, reinforcement learning, computer vision, and natural language processing. The content is inspired by my personal notes and learnings from the postgraduate course COMP9814 Extended Artificial Intelligence at UNSW (24T3).
+site_description: Self-study notes for a solid foundation in Artificial Intelligence — search, neural networks, reinforcement learning and metaheuristics. Inspired by UNSW COMP9814 Extended Artificial Intelligence (24T3).
+repo_url: https://github.com/in-c0/Intro-to-AI
+repo_name: in-c0/Intro-to-AI
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  icon:
+    logo: material/brain
+    repo: fontawesome/brands/github
+  font:
+    text: Inter
+    code: JetBrains Mono
+  # Light/dark switches only when the reader clicks the toggle (no OS auto-switching).
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.sections     # left sidebar = the whole course, grouped
+    - navigation.path         # breadcrumbs above the title
+    - navigation.footer       # previous / next chapter
+    - navigation.top          # back-to-top button
+    - navigation.tracking     # URL follows the section you're reading
+    - navigation.instant
+    - navigation.instant.progress
+    - toc.follow              # right "On this page" highlights where you are
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.action.edit
+
+extra_css:
+  - stylesheets/extra.css
 extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  - javascripts/legacy-anchors.js
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 markdown_extensions:
-  - mdx_math
   - attr_list
+  - md_in_html
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+      toc_depth: 3
+
 hooks:
   - hooks/slugs.py
+  - hooks/learning.py
+
 # Fail `mkdocs build --strict` on any broken internal link or anchor.
 validation:
   omitted_files: warn
@@ -17,7 +83,14 @@ validation:
   anchors: warn
 
 nav:
-  - About: README.md
-  - Projects: 
-    - Gym: gym.md
-    - Feedforward Neural Network: Feedforward-Neural-Network.md
+  - Start here: index.md
+  - Chapters:
+      - 1. Introduction: 01-introduction.md
+      - 2. Search: 02-search.md
+      - 3. Neural Networks: 03-neural-networks.md
+      - 4. Reinforcement Learning: 04-reinforcement-learning.md
+      - 5. Metaheuristics: 05-metaheuristics.md
+  - Projects:
+      - Mountain Car (Gym): gym.md
+      - Feedforward Neural Network: Feedforward-Neural-Network.md
+  - About: about.md
