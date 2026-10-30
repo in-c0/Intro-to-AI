@@ -1,3 +1,5 @@
+# Project: Mountain Car with Gym
+
 ## Introduction
 In this chapter, we will explore how to create and simulate agents in a virtual environment using the **OpenAI Gym** toolkit, specifically the `MountainCar-v0` environment. We will also build a simple rule-based system for decision-making, guiding our agent toward achieving the goal of the simulation.
 

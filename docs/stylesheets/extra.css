@@ -1,0 +1,115 @@
+/* Neutral chrome + one accent (pattern shared by Mintlify, Fumadocs, HF Learn). */
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0f766e;
+  --md-primary-fg-color--light: #14b8a6;
+  --md-primary-fg-color--dark: #115e59;
+  --md-accent-fg-color: #0d9488;
+  --md-typeset-a-color: #0f766e;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2dd4bf;
+  --md-primary-fg-color--light: #5eead4;
+  --md-primary-fg-color--dark: #14b8a6;
+  --md-accent-fg-color: #5eead4;
+  --md-typeset-a-color: #5eead4;
+  --md-default-bg-color: #0d1117;
+}
+
+/* Header: page-coloured with a hairline, not a coloured bar. */
+.md-header,
+.md-tabs {
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  box-shadow: 0 1px 0 var(--md-default-fg-color--lightest);
+}
+.md-header[data-md-state="shadow"],
+.md-header--shadow {
+  box-shadow: 0 1px 0 var(--md-default-fg-color--lightest);
+}
+.md-search__form {
+  background-color: var(--md-default-fg-color--lightest);
+}
+.md-search__input::placeholder,
+.md-search__icon {
+  color: var(--md-default-fg-color--light);
+}
+
+/* Reading column: ~70 characters, 17px / 1.7 on desktop. */
+.md-grid {
+  max-width: 76rem;
+}
+@media screen and (min-width: 76.25em) {
+  /* Only on desktop: keep Material's own phone/tablet gutters intact. */
+  .md-content__inner {
+    max-width: 39rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .md-typeset {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+}
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--md-default-fg-color);
+  margin-bottom: 0.4em;
+}
+.md-typeset h2 {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin-top: 2em;
+}
+.md-typeset h3,
+.md-typeset h4 {
+  font-weight: 600;
+}
+
+/* "Chapter N of 5 · ~M min read" row under chapter titles. */
+.md-typeset .chapter-meta {
+  margin-top: -0.2em;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.75rem;
+}
+
+/* Maths and wide content scroll inside themselves on phones, not the page. */
+.md-typeset div.arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.md-typeset span.arithmatex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+  padding: 0.1em 0;
+}
+.md-typeset img {
+  height: auto;
+  border-radius: 0.3rem;
+}
+
+/* Start-here page */
+.md-typeset .grid.cards {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+}
+.md-typeset .grid.cards > ul > li {
+  border-radius: 0.5rem;
+}
+.md-typeset .md-button {
+  margin: 0 0.4rem 0.6rem 0;
+}
+.md-typeset .chapter-list table:not([class]) {
+  font-size: 0.75rem;
+}
+.md-typeset .chapter-list td:first-child {
+  font-weight: 700;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .chapter-list td:last-child {
+  white-space: nowrap;
+  color: var(--md-default-fg-color--light);
+}
