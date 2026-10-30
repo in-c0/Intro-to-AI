@@ -29,10 +29,12 @@ jobs:
 
       # 1) MkDocs validation: unknown pages, missing files and anchors fail the build.
       - name: Build (strict)
-        run: mkdocs build --strict --site-dir _site
+        run: mkdocs build --strict --site-dir _site/Intro-to-AI
 
       # 2) Check the built HTML exactly as it will be deployed, so links to files
       #    that exist in the repo but are not published (e.g. ../LICENSE) are caught.
+      #    Built under _site/Intro-to-AI/ so root-absolute links (404.html) resolve
+      #    exactly as on GitHub Pages.
       - name: Check links in built site
         uses: lycheeverse/lychee-action@v2
         with:
@@ -54,7 +56,7 @@ jobs:
           python-version: "3.12"
       - run: |
           pip install -r requirements.txt mkdocs-material
-          mkdocs build --site-dir _site
+          mkdocs build --site-dir _site/Intro-to-AI
       - name: Check external links (report only)
         uses: lycheeverse/lychee-action@v2
         with:
