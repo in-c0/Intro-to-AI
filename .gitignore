@@ -1,2 +1,3 @@
-.venv_site/
+.venv
+_site/
 __pycache__/
