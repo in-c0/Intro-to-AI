@@ -1,0 +1,1204 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="What intelligence means, a short history of AI, agent types, knowledge representation.">
+      
+      
+        <meta name="author" content="ba">
+      
+      
+        <link rel="canonical" href="https://in-c0.github.io/Intro-to-AI/01-introduction/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../02-search/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>1. Introduction - Introduction to AI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sec-1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to AI" class="md-header__button md-logo" aria-label="Introduction to AI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to AI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/in-c0/Intro-to-AI" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in-c0/Intro-to-AI
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to AI" class="md-nav__button md-logo" aria-label="Introduction to AI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    Introduction to AI
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/in-c0/Intro-to-AI" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in-c0/Intro-to-AI
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sec-11-history-of-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 History of AI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-12-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-13-knowledge-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Knowledge Representation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-reinforcement-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-metaheuristics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Metaheuristics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gym/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mountain Car (Gym)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Feedforward-Neural-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feedforward Neural Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sec-11-history-of-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 History of AI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-12-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Agents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec-13-knowledge-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Knowledge Representation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Start here
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/in-c0/Intro-to-AI/edit/main/docs/01-introduction.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="sec-1-introduction">1. Introduction<a class="headerlink" href="#sec-1-introduction" title="Permanent link">&para;</a></h1>
+<p class="chapter-meta">Chapter 1 of 5 · ~17 min read</p>
+
+<p>Artificial intelligence is, well, intelligence that is artificial. Artificial just means it is machine-based. But what does <em>Integllience</em> mean? We throw the word around, but defining it is surprisingly tricky. Is intelligence just being really good at math? Or is it creativity? Is it the ability to learn, adapt, or make decisions?</p>
+<p>Humans are intelligent because we can navigate a complex world, learn from experience, solve problems, create art, etc. We've seen machines could do this too at least to some extent. (Some may argue that it's merely "copying" the original works of humans, but let's put that discussion aside for now). 
+Take for instance, a chess AI, which is a "narrow" AI — it’s designed to do one thing, but do it really well. But is it truly intelligent? That machine doesn’t actually “understand” what it’s doing—at least not in the way humans do—but it’s performing tasks we’d consider intelligent.</p>
+<p>Here is a good umbrella definition (still abstract, but it suggests a direction):</p>
+<blockquote>
+<p>Intelligence is the ability to perceive information, and to retain it as knowledge to be applied towards adaptive behaviours within an environment or context.</p>
+</blockquote>
+<p>So how did we even begin to come up with the concept of artificial intelligence? In fact, it goes back thousands of years—long before computers or even electricity.</p>
+<h3 id="sec-11-history-of-ai">1.1 History of AI<a class="headerlink" href="#sec-11-history-of-ai" title="Permanent link">&para;</a></h3>
+<p>Let's rewind the clock—way back to 350 BC. Here we find Aristotle, not just a philosopher, but arguably one of the first minds to engage in what we would today call artificial intelligence. He pioneered logic—deductive reasoning, a way of drawing conclusions from facts, which has become the backbone of problem-solving and decision-making in AI today.</p>
+<blockquote>
+<p>I think, therefore I am
+– René Descartes</p>
+</blockquote>
+<p>Aristotle's system laid the groundwork for what would later become <strong>Boolean logic</strong>, thanks to George Boole in 1848, and Frege’s work on <strong>Formal logic</strong> in 1879.</p>
+<p><a href="https://en.wikipedia.org/wiki/Boolean_algebra">Boolean Logic</a> is the foundation for modern digital computers, where circuits and operations work using binary (1s and 0s) to perform calculations and make decisions. Boole's work provided the basis for digital logic circuits, which today underpin everything from computer processors to simple calculators.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/503c4304-e28c-4cc1-b563-1f46970d1bb2" />[2]</p>
+<ul>
+<li>AND: Both conditions must be true (e.g., A AND B is true only if both A and B are true).</li>
+<li>OR: At least one condition must be true (e.g., A OR B is true if either A or B is true).</li>
+<li>NOT: A negation of a condition (e.g., NOT A is true if A is false).</li>
+</ul>
+<p>Frege's formal system took a huge step beyond Boolean logic by introducing the concept of quantifiers and variables, which allowed more complex relationships to be expressed in a logical framework. While Boolean logic deals with simple true/false statements, Formal logic translates natural language arguments into a formal language, like first-order logic, to assess whether they are valid using quantifiers such as:</p>
+<ul>
+<li>Universal quantifier (∀): Indicates that a property holds for all elements in a domain (e.g., ∀x: P(x) means "for all x, P(x) is true").</li>
+<li>Existential quantifier (∃): Indicates that there is at least one element in a domain for which a property holds (e.g., ∃x: P(x) means "there exists an x for which P(x) is true").</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b8ff5830-17db-47c9-9c5b-c3833b40f8eb" />[3]</p>
+<p>Examples of formal logic (proportional calculus):</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ccc15b01-28d7-4d5e-8691-4f8b605cd206" />
+<img alt="image" src="https://github.com/user-attachments/assets/875f0f60-55a2-4a58-87f9-ce941fc007b0" /> [4]</p>
+<p>During the 17th–19th century, the invention of formal logic and computational machines took significant steps: 
+ René Descartes (1596–1650) and Thomas Hobbes (1588–1679) began exploring the idea of <a href="https://www.meaningcrisis.co/ep-22-awakening-from-the-meaning-crisis-descartes-vs-hobbes/">mind as a machine</a>.
+ Charles Babbage (1791–1871) and Ada Lovelace (1815–1852) conceptualized the <a href="https://en.wikipedia.org/wiki/Analytical_engine">Analytical Engine</a>, which is considered the first mechanical general-purpose computer.
+ Alan Turing (1912–1954) introduced key concepts foundational to AI in the 1930s and 1940s. His 1936 paper "<a href="https://en.wikipedia.org/wiki/Turing%27s_proof">On Computable Numbers</a>"[5] laid the groundwork for modern computing.</p>
+<p><strong>The Birth of modern AI as a field</strong> is considered to be in the year of 1956, when the term "Artificial Intelligence" was first coined in 1956 by John McCarthy at the <a href="https://en.wikipedia.org/wiki/Dartmouth_workshop">Dartmouth Conference</a>. [6]</p>
+<blockquote>
+<p>"We propose that a 2-month, 10-man study of artificial intelligence be carried out during the summer of 1956 at Dartmouth College in Hanover, New Hampshire. The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it. An attempt will be made to find how to make machines use language, form abstractions and concepts, solve kinds of problems now reserved for humans, and improve themselves. We think that a significant advance can be made in one or more of these problems if a carefully selected group of scientists work on it together for a summer."</p>
+</blockquote>
+<p>Projects like <a href="https://en.wikipedia.org/wiki/ELIZA">ELIZA (a chatbot program by Joseph Weizenbaum, 1966)</a> and <a href="https://en.wikipedia.org/wiki/Shakey_the_robot">Shakey the Robot </a>(the first general-purpose mobile robot, 1969) demonstrated the possibilities of AI.
+However, the ambitious early goals led to disappointment when real-world complexities proved harder to solve than expected. This led to the first AI Winter, a period of reduced funding and interest.
+AI saw a brief resurgence in the 1980s, particularly with the development of <a href="https://en.wikipedia.org/wiki/Expert_system">Expert Systems</a>, which were rule-based systems designed to emulate the decision-making abilities of human experts.
+During this time, machine learning techniques like neural networks began to be explored again after being dormant for decades, following John Hopfield’s work on neural networks in 1982.
+The limitations of expert systems and continued difficulties in scaling AI led to a second AI Winter (late 1980s - mid 1990s)[7].
+Then, as the computer hardware industry advanced, researchers noticed that they could perform more complex calculations and simulations on faster machines. Companies like Intel, IBM, and others continuously pushed the boundaries of chip design and computational power, enabling AI researchers to explore more intensive tasks that were previously impossible. The rise of the Internet, and the notable successes, such as <a href="https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)">IBM’s Deep Blue</a> defeating world chess champion Garry Kasparov in 1997, demonstrated to the broader public that AI was becoming more capable.</p>
+<p>AI since then has been embedded in many aspects of daily life, especially with the development of a <strong>Deep learning</strong> model in 2012 that became a game-changer. </p>
+<p>More recent notable events in the history of AI include:
+   - 2012: The deep learning model <strong><a href="https://en.wikipedia.org/wiki/AlexNet">AlexNet</a></strong> revolutionized image recognition by winning the ImageNet Large Scale Visual Recognition Challenge (ILSVRC)
+   - 2014: Ian Goodfellow introduces <strong><a href="https://en.wikipedia.org/wiki/Generative_adversarial_network">Generative Adversarial Networks (GANs)</a></strong>, a new approach for generating synthetic data (birth of "AI art")
+   - 2016: Google DeepMind’s <strong><a href="https://en.wikipedia.org/wiki/AlphaGo">AlphaGo</a></strong> becomes the first AI to beat a professional Go player, showing AI's ability to master complex, intuitive tasks
+   - 2020: Release of <strong><a href="https://en.wikipedia.org/wiki/GPT-3">GPT-3</a></strong>, a language model with 175 billion parameters, setting a new standard for natural language generation and understanding
+   - 2022: Release of <strong><a href="https://en.wikipedia.org/wiki/DALL-E">DALL·E 2</a></strong>, an AI model capable of generating detailed images from text prompts, marking a significant advancement in AI-driven creativity and image generation</p>
+<p><a href="https://en.wikipedia.org/wiki/Boolean_algebra#/media/File:Vennandornot.svg">2</a>
+<a href="https://en.wikipedia.org/wiki/Logic#/media/File:First-order_logic.png">3</a>
+<a href="https://www.britannica.com/topic/formal-logic/Interdefinability-of-operators">4</a>
+[5] https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf
+[6] http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf
+[7] https://www.holloway.com/g/making-things-think/sections/the-second-ai-winter-19871993</p>
+<h3 id="sec-12-agents">1.2 Agents<a class="headerlink" href="#sec-12-agents" title="Permanent link">&para;</a></h3>
+<p>Agents in AI are entities that perceive their environment and act upon it, aiming to achieve specific goals. Different types of agents vary in complexity, decision-making abilities, and adaptability. </p>
+<h4 id="types-of-agents">Types of Agents<a class="headerlink" href="#types-of-agents" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="#reactive-agents">Reactive Agent</a></li>
+<li><a href="#model-based-agent">Model-Based Agent</a></li>
+<li><a href="#planning-agent">Planning Agent</a></li>
+<li><a href="#utility-based-agent">Utility-based agent</a></li>
+<li><a href="#game-playing-agent">Game Playing Agent</a></li>
+<li><a href="#learning-agent">Learning Agent</a></li>
+</ul>
+<h5 id="reactive-agents">Reactive Agents<a class="headerlink" href="#reactive-agents" title="Permanent link">&para;</a></h5>
+<p>At the most basic level, we have the Reactive Agent, a simple yet effective problem-solver. Think of it as the AI version of a reflex action: "If this condition is met, perform this action." There’s no deliberation, no contemplation of past actions or future consequences—just action based on the current environment.</p>
+<p>For instance, imagine a thermostat that turns on the air conditioning when the temperature hits 75°F. It doesn't remember what happened yesterday or predict the weather tomorrow—it reacts purely to the present moment.</p>
+<p>While this simplicity is useful in fast, real-time systems, reactive agents are limited. Without memory or state, they can’t learn or improve over time. They can only react.</p>
+<blockquote>
+<p>"If condition, then action".</p>
+</blockquote>
+<p>It is simply following the rule, without memory or state.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/fe8894d6-6833-42e3-825d-8b41389e4f8c" /></p>
+<h5 id="model-based-agent">Model-based Agent or Model-based "Reflex" Agent<a class="headerlink" href="#model-based-agent" title="Permanent link">&para;</a></h5>
+<p>Now, let’s add a layer of sophistication. Unlike the reactive agent, this type of agent has an internal <strong>model</strong> of the world, allowing it to handle <em>partially</em> observable environments. It takes into account not just the current input, but also a history of past actions and their outcomes, allowing for a more informed decision-making process.</p>
+<p>Consider a robot navigating a maze. It doesn’t just rely on what it currently sees but remembers where it has already been. This memory helps it avoid dead ends and make smarter choices moving forward. However, despite this extra capability, model-based agents are still "reflex" agents in a sense—they <em>respond</em> based on the past but does not have any capability to predict the future based on learning. Tasks requiring multiple steps of reasoning can stump them.</p>
+<blockquote>
+<p>"If condition, then action. ...wait, I've been here before."</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/aae3e015-cb1a-489b-b2b4-e5161f4fbce5" /></p>
+<h5 id="planning-agent">Planning Agent or "Goal-based" agent<a class="headerlink" href="#planning-agent" title="Permanent link">&para;</a></h5>
+<p>The Planning Agent expands upon the model-based agent by contemplating future consequences. It doesn’t just react to the past or present—it actively plans ahead, asking itself whether a given action will help achieve a specific goal.</p>
+<p>This forward-thinking ability allows the planning agent to tackle complex tasks that require multiple steps, such as navigating a city using a map or solving a puzzle. By simulating possible actions and outcomes, it determines the best path to success.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"Will that make me happy?"</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/63e69574-fe3b-451a-97de-593c765fbabb" /></p>
+<h5 id="utility-based-agent">Utility-based Agent<a class="headerlink" href="#utility-based-agent" title="Permanent link">&para;</a></h5>
+<p>While planning agents focus on reaching a goal, Utility-Based Agents aim for something even more nuanced, that is, <strong>maximizing happiness</strong>. They evaluate each potential action, not just based on whether it achieves a goal, but on how "happy" it will make them in the end. In other words, they assign a utility or value to each possible state and then pursue the path that promises the highest utility.</p>
+<p>Take, for example, an autonomous car deciding between two routes. One route might be faster but more dangerous, while the other is slower but safer. A utility-based agent would weigh the pros and cons of each option, taking into account not only the time saved but the overall satisfaction of avoiding risk.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"<em>How happy</em> will I be in such a state?"</p>
+</blockquote>
+<p><img alt="image" src="https://github.com/user-attachments/assets/f49b0bc9-2ad4-4b5e-9dd7-afafd86720a0" /></p>
+<h5 id="game-playing-agent">Game Playing Agent<a class="headerlink" href="#game-playing-agent" title="Permanent link">&para;</a></h5>
+<p>(not to be confused with the concept of <a href="https://en.wikipedia.org/wiki/General_game_playing">General Game Playing (GGP)</a>)</p>
+<p>Game-playing agents take these ideas of planning and utility to a competitive level. These agents are specifically designed to excel at a specific game or domain. They’re not just interested in their own happiness—they’re actively working to minimize their opponent’s advantage (via adversarial search like <a href="https://en.wikipedia.org/wiki/Minimax">Minimax</a>, or <a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha Beta Pruning</a>).</p>
+<p>Examples of game playing agents include:</p>
+<ul>
+<li>Chess AI like Stockfish or AlphaZero (for Chess)</li>
+<li>Go AI like AlphaGo</li>
+<li>Poker AI like Libratus</li>
+</ul>
+<p>They usually excel in their domains, but their expertise doesn't easily transfer to other areas.</p>
+<blockquote>
+<p>"What will happen if I take this action?"
+"<em>How happy</em> will I be in such a state?"
+"Will my enemy be happier?"</p>
+</blockquote>
+<p><img alt="chrome_LxrkTHZIFE" src="https://github.com/user-attachments/assets/9c1bd7e7-1fa8-46be-ba58-5ee5cfa53c61" /></p>
+<h5 id="learning-agent">Learning Agent<a class="headerlink" href="#learning-agent" title="Permanent link">&para;</a></h5>
+<p>At the cutting edge of AI is the Learning Agent. This type of agent doesn’t just act based on predefined rules or models—it learns from its experiences and continually improves over time. </p>
+<p>The learning agent is the closest thing we have to an agent that grows in intelligence, and it has several key components:
+   - <strong>Learner</strong>
+The agent receives feedback on its actions and adjusts its future decisions based on this feedback. Techniques like reinforcement learning and supervised learning are commonly used here.
+   - <strong>Actor</strong>
+This is the part of the agent that actually takes action. It uses the knowledge and strategies it has learned to make decisions.
+   - <strong>Critic</strong>
+Acting as an internal evaluator, the critic compares the outcomes of the agent’s actions against the desired results. This feedback is essential for the learning process, helping the agent understand which actions are beneficial and which are not.
+   - <strong>Problem Generator</strong>:
+To grow smarter, an agent must explore new challenges. The problem generator encourages the agent to tackle new tasks, forcing it to learn and adapt to unfamiliar situations. </p>
+<p>Initially, it may be slow and make mistakes. But as it learns from feedback, it optimizes its tasks and becomes more reliable and efficient.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/eac69188-2c93-4144-b4d1-4502a0228aea" /></p>
+<p>The original source of the classification (<a href="https://aima.cs.berkeley.edu/">Russel &amp; Norvig (2003)</a>) provides a holistic overview of these different types of agents.</p>
+<h3 id="sec-13-knowledge-representation">1.3 Knowledge Representation<a class="headerlink" href="#sec-13-knowledge-representation" title="Permanent link">&para;</a></h3>
+<p><strong>Representation and Search</strong></p>
+<p>The world model must be represented in a way that makes reasoning easy
+Reasoning in AI (i.e. problem solving and planning) almost always involves some kind of search among possible solutions</p>
+<p>Here’s a hierarchical framework used to control a robot (soccer robot), moving from sensor data gathering (low-level) to game strategy (high-level).</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/b98b869f-7f7f-4eb7-9256-5449f7f1c7a4" /></p>
+<p>Note how abstraction transforms raw numerical data into higher-level, qualitative information.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/ea756f01-e72c-436d-9dbe-ee36e18a7d02" /></p>
+<h4 id="sec-131-feature-based-vs-iconic-representations">1.3.1 Feature-based vs Iconic Representations<a class="headerlink" href="#sec-131-feature-based-vs-iconic-representations" title="Permanent link">&para;</a></h4>
+<p><strong>Iconic Representations (Low-level):</strong>
+* Analogous to the real world
+  * Pixel representations like the first layer of ANN
+  * Maps 
+* Fast, but difficult to generalize
+* Numeric/statistical, offering a detailed representation
+* No relational information, making reasoning difficult
+* Memory-intensive
+* Suited for tasks like vision and processing sequential data
+* Difficult to perform inferences beyond pattern-response</p>
+<p><strong>Feature-based (Symbolic) Representations (High-level):</strong>
+* State represented by a set of abstract features and relations
+  * Logical expressions
+  * Entity-relation graphs
+* Can do complex reasoning over <strong>knowledge base</strong>
+* Contains relational information, making it easier to reason about
+* Facilitates generalizations, and is memory efficient
+* Not well-suited for "low-level" tasks like perception</p>
+<p><strong>Knowledge Base?</strong></p>
+<p>A knowledge base is an explicit set of sentences about some domain expressed in a suitable <strong>formal representation language</strong>.
+Sentences express facts or non-facts (true or false) e.g. "Q1 revenue was $10 million."</p>
+<p>The knowledge base may use rules as a mechanism for reasoning (i.e. It is a <strong>Rule-based</strong> system):
+e.g. "If &lt;...&gt; then &lt;...&gt;, If a patient has a fever and a headache, then the patient can potentially benefit from malaria testing."</p>
+<p>Rules can define a network (aka "Inference" network) which shows the interdependencies among the rules.
+Inference network shows which facts can be logically combined to form new facs or conclusions. The facts can be combined using "and", "or", "not"
+<strong>Inference</strong>: Deriving new information or conclusions from the facts and rules, e.g. "Given a drop in sales and increased competition, product prices should be lowered to maintain market share."</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/1fc3efc7-1e25-446a-9d71-220f4192e722" /></p>
+<p>There are three reasoning processes to make inferences or draw conclusions from a set of premises or observations:
+ 1. <strong>Deduction</strong>: based on concrete facts, the process of reasoning from general principles or rules to specific conclusions. If the premises are true, the conclusion must be true.
+    "If <em><rule> and <cause></em>, then <em><effect></em>" e.g. "If <em>Joe Bloggs works for ACME</em> and <em>is in a stable relationship</em>, then <em>he is happy</em>."
+ 3. <strong>Abduction</strong>: hypothesis-driven, 'flipped' version of deduction, starts with observations or facts and infer the most likely rule that could explain the observation.
+    "Given <em><rule> and <effect></em>, infer by abduction <em><cause></em>" e.g. "If <em>Joe Bloggs is happy</em>, infer by abduction <em>Joe Bloggs enjoys domestic bliss and professional contentment</em>"
+    (Scientists develop medicines using abduction)
+ 5. <strong>Induction</strong>: probabilistic, pattern-based, generilizing from repeated observations, but the conclusion might not always be true:
+    "If <em><cause> and <effect></em> then <em><rule></em>" e.g. "If <em>every crow I have seen is blue</em>, <em>all crows are blue</em>"</p>
+<p>( Later in chapter 9 we will explore different ways to deal with uncertainty in rules, e.g.:
+ - <strong>Vague rule</strong>: Fuzzy logic, where truth values range between 0 and 1, representing the degree to which a statement is true.
+ - <strong>Uncertain link between evidence and conclusion</strong>: Bayesian inference, which relates the conditional probability of a hypothesis given some observed data to the likelihood of the data under that hypothesis.
+ - <strong>Uncertain evidence</strong>: 🤷 )</p>
+<p><strong>Fundamental questions:</strong>
+- How do we write down knowledge about a domain/problem?
+- How do we automate reasoning to deduce new facts or ensure consistency of a knowledge base?</p>
+<h4 id="sec-132-logic">1.3.2 Logic<a class="headerlink" href="#sec-132-logic" title="Permanent link">&para;</a></h4>
+<p><strong>Propositional Logic</strong>
+ - Letters stand for "basic" propositions
+ - Combine into more complex sentences using AND, OR, NOT, IFF, ... 
+ - e.g.
+    - P = "It rains", Q = "I will bring an umbrella"
+    - P → Q "If it rains, I will bring an umbrella."</p>
+<p><strong>First-order logic</strong>
+ - An extension of Propositional Logic for a more expressive representation (including relations and ontologies)
+ - Terms: constants, variables, functions applied to terms
+    - e.g. a, f(a), motherOf(Mary), ...
+ - Atomic Formulae: predicates applied to tuples of terms
+    - e.g. likes(Mary, motherOf(Mary)), likes(x, a), ...
+ - Quantified formulae:
+    - e.g. ∀x Animal(x) → HasHeart(x), ∃x loves(x, Mary)
+      - "For all x, if x is an animal, then x has a heart"
+      - "There exists at least one person who loves Mary"</p>
+<h4 id="sec-133-learning-rules">1.3.3 Learning Rules<a class="headerlink" href="#sec-133-learning-rules" title="Permanent link">&para;</a></h4>
+<p><strong>Ontology</strong>  </p>
+<p>An ontology is a formal structure that defines the relationships between different concepts in a domain. It’s often used in AI to infer new facts from known data.</p>
+<p>Like OOP, child concept is a specialisation of parent concept. Also, child inherits property of parent. 
+Ontology includes not just the hierarchy of concepts (aka Taxonomic hierarchy), but also the properties and relationships between them, enabling reasoning and inference.
+e.g. Dog is a subclass of Mammal. Thus, dogs can have diseases. Diseases can be trated by medication.</p>
+<p><img alt="image" src="https://github.com/user-attachments/assets/4cbbeb64-ff39-48dc-8a77-910a363c8108" /></p>
+<p>We can infer the type of object from its attributes, e.g.</p>
+<p>Guess what this object is:</p>
+<ul>
+<li>Fruit category</li>
+<li>Green and yellow mottled skin</li>
+<li>30cm diameter</li>
+<li>Ovoid shape</li>
+<li>Red flesh, black seeds</li>
+</ul>
+<p>= Watermelon</p>
+<p><strong>Reasoning System for categories</strong></p>
+<p>Two closely related families of systems:</p>
+<ul>
+<li><strong>Semantic networks</strong> aka. Associative network</li>
+<li>A graph-based representation of knowledge that emphasizes the relationships between entities (concepts)</li>
+<li>Models Facts, Objects, Attributes, Relationships</li>
+<li>Its application includes Natural Language Processing (NLP), Knowledge Graphs</li>
+</ul>
+<p><img alt="image" src="https://github.com/user-attachments/assets/cb1ad1c3-32b6-4046-a808-20f5b362cddb" /></p>
+<ul>
+<li><strong>Description logics</strong></li>
+<li>A more formal and rigorous knowledge representation system than semantic networks</li>
+<li>provides precise mathematical definitions for Facts, Objects, Attributes, Relationships</li>
+<li>e.g. defines "Parent" as "someone who has at least one child" or "a mammal is an animal with fur and gives live birth."</li>
+<li>a foundation for ontology-based systems</li>
+</ul>
+<p>[1] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Simple_reflex_agent.png
+[2] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_reflex_agent.png
+[3] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_goal_based_agent.png
+[4] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:Model_based_utility_based.png
+[5] https://en.wikipedia.org/wiki/Intelligent_agent#/media/File:IntelligentAgent-Learning.png
+[6] https://en.wikipedia.org/wiki/Intelligent_agent</p>
+<p>(Add Mountain Car problem, Sudoku, simple webGL based simulation to test viewer's understanding of KRR)</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Start here">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Start here
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../02-search/" class="md-footer__link md-footer__link--next" aria-label="Next: 2. Search">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                2. Search
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.path", "navigation.footer", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../javascripts/legacy-anchors.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
